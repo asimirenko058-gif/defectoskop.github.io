@@ -189,10 +189,153 @@ details.sub{scroll-margin-top:96px}
 details > summary{padding-right:44px}
 .fig{margin:0 0 14px}.fig svg{width:100%;max-width:520px;height:auto;display:block}.fig figcaption{font-size:.78rem;color:var(--muted);margin-top:4px}
 .fig-img{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}.fig-img img{max-width:100%;height:auto;max-height:230px;background:#fff;border:1px solid var(--line);border-radius:6px}.fig a{color:var(--accent)}
+
+/* --- Врезка-анимация «Распоряжение 2499р» --- */
+.rb{position:relative;height:clamp(132px,22vw,172px);border-radius:12px;overflow:hidden;margin:0 0 24px;background:#0e1012;color:#f3f1ea;cursor:pointer;container-type:inline-size;isolation:isolate;user-select:none;-webkit-tap-highlight-color:transparent;--or:#ff5a1f;--yl:#ffc400;--st:#c9ced3}
+.rb *{box-sizing:border-box}
+.rb-s{position:absolute;inset:0;opacity:0;transition:opacity .4s ease;pointer-events:none}
+.rb-s.on{opacity:1}
+.rb-t{position:absolute;left:5%;top:50%;transform:translateY(-50%);z-index:3;font-weight:700;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;font-size:clamp(24px,6vw,46px);font-size:clamp(24px,7cqw,46px);text-shadow:0 1px 12px rgba(0,0,0,.6)}
+.rb-t span{display:block;overflow:hidden;padding-bottom:.04em}
+.rb-t i{display:block;font-style:normal;transform:translateY(115%)}
+.rb-s.on .rb-t i{animation:rbRise .55s cubic-bezier(.2,.8,.2,1) forwards}
+.rb-s.on .rb-t span:nth-child(2) i{animation-delay:.12s}
+.rb-or{color:var(--or)}.rb-yl{color:var(--yl)}
+.rb-tag{position:absolute;left:5%;top:12px;z-index:3;font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--st);opacity:0}
+.rb-s.on .rb-tag{animation:rbFade .5s .45s forwards}
+.rb-rail{position:absolute;right:6%;top:46%;height:64%;width:auto;transform:translateY(-50%);z-index:2;overflow:visible}
+.rb-rail .o{fill:rgba(201,206,211,.08);stroke:var(--st);stroke-width:5;stroke-dasharray:900;stroke-dashoffset:900}
+.rb-s.on .rb-rail .o{animation:rbDraw 1.1s .1s ease forwards}
+/* 1: шпалы */
+.rb-ties{position:absolute;left:-10%;right:-10%;bottom:0;height:11%;background:repeating-linear-gradient(90deg,#2a2d31 0 36px,transparent 36px 72px);animation:rbTies 1.4s linear infinite}
+.rb-bar{position:absolute;left:0;right:0;bottom:11%;height:4%;background:linear-gradient(#e5e8eb,#8b9299);transform:scaleX(0);transform-origin:left}
+.rb-s.on .rb-bar{animation:rbGrow .8s cubic-bezier(.2,.8,.2,1) forwards}
+/* 2: зоны (каждая показывается один раз) */
+.rb-w{position:absolute;left:5%;top:50%;margin-top:-.5em;z-index:3;font-weight:700;text-transform:uppercase;letter-spacing:-.01em;line-height:1;font-size:clamp(28px,7vw,54px);font-size:clamp(28px,8.5cqw,54px);color:var(--yl);opacity:0}
+.rb-z{opacity:0;fill:#ffc400}
+.rb-s.on .w1{animation:rbOnce 1s .2s both}
+.rb-s.on .w2{animation:rbOnce 1s 1.2s both}
+.rb-s.on .w3{animation:rbKeep .5s 2.2s both}
+.rb-s.on .z1{animation:rbZone 1s .2s both}
+.rb-s.on .z2{animation:rbZone 1s 1.2s both}
+.rb-s.on .z3{animation:rbZoneKeep .5s 2.2s both}
+/* 3: номер */
+.rb-s.n{background:var(--or);color:#111}
+.rb-num{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-weight:700;font-family:var(--mono);font-size:clamp(40px,12vw,92px);font-size:clamp(40px,14cqw,92px);letter-spacing:-.03em;white-space:nowrap;font-variant-numeric:tabular-nums;z-index:3}
+.rb-st{position:absolute;left:-5%;width:110%;height:9px;background:repeating-linear-gradient(-45deg,#111 0 10px,var(--or) 10px 20px);transform:scaleX(0)}
+.rb-st.a{top:10px}.rb-st.b{bottom:10px;transform-origin:right}
+.rb-s.on .rb-st{animation:rbGrow .7s cubic-bezier(.2,.8,.2,1) forwards}
+.rb-cap{position:absolute;left:0;right:0;bottom:22px;text-align:center;font:500 10px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;z-index:3}
+/* 4: путь — цикл день/ночь */
+.rb-sky{
+  position:absolute;inset:0;
+  background:linear-gradient(#1e4b7a 25%,#8fc3e8);
+  animation:rbSky 7.2s ease-in-out infinite;
+}
+/* Солнце днём */
+.rb-sun{
+  position:absolute;left:62%;bottom:58%;
+  width:38px;height:38px;margin-left:-19px;border-radius:50%;
+  background:radial-gradient(circle,#fff2b0 35%,var(--yl) 70%,#ffb300);
+  box-shadow:0 0 24px 6px color-mix(in srgb,var(--yl) 55%,transparent);
+  transform:scale(0);transform-origin:50% 50%;z-index:4;
+  animation:rbSun 7.2s ease-in-out infinite;
+}
+/* Луна ночью */
+.rb-moon{
+  position:absolute;left:62%;bottom:58%;
+  width:40px;height:40px;margin-left:-20px;
+  transform:scale(0);transform-origin:50% 50%;z-index:4;
+  filter:drop-shadow(0 0 10px color-mix(in srgb,var(--yl) 55%,transparent));
+  animation:rbMoon 7.2s ease-in-out infinite;
+}
+@keyframes rbSky{
+  0%,45%{background:linear-gradient(#1e4b7a 25%,#8fc3e8)}
+  55%,95%{background:linear-gradient(#0b1224 25%,#1b2a4a)}
+  100%{background:linear-gradient(#1e4b7a 25%,#8fc3e8)}
+}
+@keyframes rbSun{
+  0%{transform:scale(0)}
+  8%,38%{transform:scale(1)}
+  50%{transform:scale(0)}
+  100%{transform:scale(0)}
+}
+@keyframes rbMoon{
+  0%,48%{transform:scale(0)}
+  58%,88%{transform:scale(1)}
+  100%{transform:scale(0)}
+}
+.rb-world{position:absolute;inset:0;perspective:240px;perspective-origin:62% 18%}
+.rb-plane{position:absolute;left:62%;bottom:-30%;width:260%;height:190%;margin-left:-130%;transform-origin:50% 100%;transform:rotateX(70deg);background:repeating-linear-gradient(0deg,#3a3d42 0 12px,transparent 12px 60px);animation:rbRun .6s linear infinite}
+.rb-plane::before,.rb-plane::after{content:"";position:absolute;top:0;bottom:0;width:12px;background:linear-gradient(90deg,#8b9299,#e5e8eb,#8b9299)}
+.rb-plane::before{left:calc(50% - 56px)}.rb-plane::after{left:calc(50% + 44px)}
+.rb-d{position:absolute;right:12px;bottom:10px;z-index:6;display:flex;gap:5px}
+.rb-d i{width:14px;height:3px;background:rgba(255,255,255,.3);transition:background .3s,width .3s}
+.rb-d i.on{background:#fff;width:24px}
+@keyframes rbRise{to{transform:none}}
+@keyframes rbFade{to{opacity:1}}
+@keyframes rbDraw{to{stroke-dashoffset:0}}
+@keyframes rbGrow{to{transform:scaleX(1)}}
+@keyframes rbTies{to{transform:translateX(-72px)}}
+@keyframes rbOnce{0%{opacity:0;transform:translateY(12px)}18%,72%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes rbKeep{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes rbZone{0%{opacity:0}20%,72%{opacity:.9}100%{opacity:0}}
+@keyframes rbZoneKeep{from{opacity:0}to{opacity:.9}}
+@keyframes rbPop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes rbRun{to{background-position:0 60px}}
+@media (prefers-reduced-motion:reduce){
+  .rb *{animation:none!important}
+  .rb-t i{transform:none}.rb-rail .o{stroke-dashoffset:0}.rb-tag{opacity:1}.rb-bar{transform:none}
+}
 </style>
 </head>
 <body>
 <main>
+<div class="rb" id="rb" role="img" aria-label="Анимация: дефекты рельсов, распоряжение ОАО «РЖД» № 2499р">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<path id="rb-prof" d="M45 22Q45 8 62 8H138Q155 8 155 22V68Q155 84 118 92V208Q118 218 142 224Q182 228 184 248V264H16V248Q18 228 58 224Q82 218 82 208V92Q45 84 45 68Z"/>
+<clipPath id="rb-pc"><use href="#rb-prof"/></clipPath>
+</defs></svg>
+
+<div class="rb-s on" aria-hidden="true">
+  <div class="rb-tag">Распоряжение № 2499р · 23.10.2014</div>
+  <div class="rb-bar"></div><div class="rb-ties"></div>
+  <div class="rb-t"><span><i>Дефекты</i></span><span><i class="rb-or">рельсов</i></span></div>
+  <svg class="rb-rail" viewBox="0 0 200 272"><use class="o" href="#rb-prof"/></svg>
+</div>
+
+<div class="rb-s" aria-hidden="true">
+  <div class="rb-tag">Классификация · по зонам сечения</div>
+  <div class="rb-w w1">Головка</div><div class="rb-w w2">Шейка</div><div class="rb-w w3">Подошва</div>
+  <svg class="rb-rail" viewBox="0 0 200 272">
+    <use class="o" href="#rb-prof"/>
+    <g clip-path="url(#rb-pc)">
+      <rect class="rb-z z1" x="0" y="0" width="200" height="92"/>
+      <rect class="rb-z z2" x="0" y="92" width="200" height="132"/>
+      <rect class="rb-z z3" x="0" y="224" width="200" height="48"/>
+    </g>
+  </svg>
+</div>
+
+<div class="rb-s n" aria-hidden="true">
+  <div class="rb-st a"></div><div class="rb-st b"></div>
+  <div class="rb-num">№ 2499р</div>
+  <div class="rb-cap">Инструкция «Дефекты рельсов» · от 23.10.2014</div>
+</div>
+
+<div class="rb-s" aria-hidden="true">
+  <div class="rb-sky"></div>
+  <div class="rb-sun"></div>
+  <svg class="rb-moon" viewBox="0 0 40 40" aria-hidden="true">
+    <path d="M27 4a16 16 0 1 0 9 22A13 13 0 0 1 27 4Z" fill="var(--yl)"/>
+  </svg>
+  <div class="rb-world"><div class="rb-plane"></div></div>
+  <div class="rb-t"><span><i>Безопасность</i></span><span><i class="rb-yl">движения.</i></span></div>
+</div>
+
+<div class="rb-d" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
 <h1>Дефекты рельсов: коды и группы</h1>
 <p class="lead">Справочник по инструкции «Дефекты рельсов. Классификация, каталог и параметры дефектных и остродефектных рельсов» (распоряжение ОАО «РЖД» от 23.10.2014 № 2499р).</p>
 <p class="source" style="margin-top:8px">Источник: <a href="https://www.tdesant.ru/info/item/144" target="_blank" rel="noopener">tdesant.ru</a> — схемы из таблицы 2 инструкции 2499р.</p>
@@ -1017,6 +1160,89 @@ el('theme').addEventListener('click',function(){
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initDetails);
   else initDetails();
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('rb'); if(!b) return;
+  var S=[].slice.call(b.querySelectorAll('.rb-s')),
+      D=[].slice.call(b.querySelectorAll('.rb-d i')),
+      num=b.querySelector('.rb-num'),
+      T=[3600,4000,3200,3800], i=0, tm, rl;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function roll(){
+    clearInterval(rl);
+    var t0=Date.now(), tg='2499';
+    rl=setInterval(function(){
+      var p=(Date.now()-t0)/1300, s='';
+      for(var k=0;k<4;k++) s+= p>(k+1)/4.5 ? tg[k] : Math.floor(Math.random()*10);
+      num.textContent='№ '+s+'р';
+      if(p>=1){clearInterval(rl);num.textContent='№ 2499р';}
+    },50);
+  }
+  function go(n){
+    S[i].classList.remove('on'); D[i].classList.remove('on');
+    i=(n+S.length)%S.length;
+    S[i].classList.add('on'); D[i].classList.add('on');
+    if(i===2) roll();
+    clearTimeout(tm);
+    if(!reduce) tm=setTimeout(function(){go(i+1)},T[i]);
+  }
+  b.addEventListener('click',function(){go(i+1)});
+
+  /* Пауза, когда блок не виден на экране или вкладка не активна */
+  var visible = true, pageVisible = !document.hidden;
+
+  function schedule(){
+    clearTimeout(tm);
+    if(reduce) return;
+    if(visible && pageVisible) tm=setTimeout(function(){go(i+1)},T[i]);
+  }
+
+  function stop(){
+    clearTimeout(tm);
+    clearInterval(rl);
+  }
+
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        visible = en.isIntersecting;
+        if(visible) schedule(); else stop();
+      });
+    },{threshold:0.15});
+    io.observe(b);
+  } else {
+    visible = true;
+  }
+
+  document.addEventListener('visibilitychange',function(){
+    pageVisible = !document.hidden;
+    if(pageVisible) schedule(); else stop();
+  });
+
+  if(!reduce) schedule();
+})();
+/* Синхронизация цикла день/ночь с показом 4-го слайда */
+(function(){
+  var b=document.getElementById('rb'); if(!b) return;
+  var slides=[].slice.call(b.querySelectorAll('.rb-s'));
+  var dayNight=slides[3]; if(!dayNight) return;
+  var mo=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function sync(){
+    var isDayNight=dayNight.classList.contains('on');
+    [].slice.call(dayNight.querySelectorAll('.rb-sun,.rb-moon,.rb-sky')).forEach(function(el){
+      el.style.animationPlayState=isDayNight?'running':'paused';
+    });
+  }
+  if(mo){
+    [].slice.call(dayNight.querySelectorAll('.rb-sun,.rb-moon,.rb-sky')).forEach(function(el){
+      el.style.animation='none';
+    });
+  }else{
+    new MutationObserver(sync).observe(dayNight,{attributes:true,attributeFilter:['class']});
+    sync();
+  }
 })();
 </script>
 </body>
