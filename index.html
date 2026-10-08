@@ -128,6 +128,30 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
   details > summary::after{transition:none!important}
 }
 @media (max-width:520px){.row{grid-template-columns:1fr;gap:0}}
+
+/* --- Панель, бейджи, шпаргалка, озвучка --- */
+.toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);padding:10px 0;margin:8px 0 12px;border-bottom:1px solid var(--line)}
+.toolbar input[type=search]{flex:1 1 220px;min-width:0;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.toolbar select{width:auto;background:var(--surface)}
+.chip,.btn{font:500 .85rem var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.chip:hover,.btn:hover{border-color:var(--accent)}
+.chip[aria-pressed=true]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.btn:focus-visible,.chip:focus-visible,.toolbar input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#cnt{font-size:.82rem;color:var(--muted);margin-left:auto}
+#vnote{font-size:.82rem;color:var(--warn);flex-basis:100%;display:none}
+.kb{display:inline-block;font:600 .68rem/1 var(--mono);padding:3px 6px;border-radius:4px;margin:0 8px 0 2px;vertical-align:middle;border:1px solid}
+.k-odr{color:var(--odr);border-color:var(--odr)}.k-dr{color:var(--dr);border-color:var(--dr)}.k-mix{color:var(--c2);border-color:var(--c2)}
+.cheat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;margin:4px 0 14px}
+.cheat-h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cheat-h b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.cr{display:grid;grid-template-columns:8.5rem 1fr;gap:10px;padding:8px 10px;border-left:4px solid var(--rc);border-radius:4px;margin:6px 0;transition:background .25s,box-shadow .25s}
+.cr b{color:var(--rc);font-weight:600;font-size:.9rem}
+.cr.on{background:color-mix(in srgb,var(--rc) 14%,transparent);box-shadow:0 0 0 2px color-mix(in srgb,var(--rc) 35%,transparent)}
+.r1{--rc:var(--c1)}.r2{--rc:var(--c2)}.r3{--rc:var(--c3)}.r4{--rc:var(--odr)}
+.sayb.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.sub-h{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
+@media (max-width:520px){.cr{grid-template-columns:1fr;gap:2px}}
+@media print{.toolbar,.sayb{display:none}}
 </style>
 </head>
 <body>
@@ -168,7 +192,18 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <p class="note" style="margin-top:12px">Если у дефекта несколько мест, их пишут через дефис: 21.1-2 значит 21.1 или 21.2. Буква Н в конце (21.2.Н) — дефект взят в накладки. Если дефект относится к двум кодам, их пишут через дробь: 71.2/21.2 — излом из-за поперечной трещины.</p>
 
 <h2>Группы дефектов</h2>
-<p>Откройте группу, затем нажмите на код дефекта: появятся причины, выявление, устранение и указания по эксплуатации. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
+<p>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа (с озвучкой 🔊), ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
+<div class="toolbar" role="search">
+<input type="search" id="qi" placeholder="Поиск: код, название, причина…" aria-label="Поиск по дефектам">
+<button class="chip" data-f="all" aria-pressed="true">Все</button>
+<button class="chip" data-f="odr" aria-pressed="false">ОДР</button>
+<button class="chip" data-f="dr" aria-pressed="false">ДР</button>
+<select id="rate" aria-label="Скорость озвучки"><option value="0.85">Медленно</option><option value="1" selected>Обычно</option><option value="1.2">Быстро</option></select>
+<button class="btn" id="stopall">⏹ Стоп</button>
+<button class="btn" id="theme" aria-label="Сменить тему">◐ Тема</button>
+<span id="cnt" aria-live="polite"></span>
+<div id="vnote"></div>
+</div>
 <div id="groups"></div>
 
 <h2>Термины и сокращения</h2>
@@ -578,6 +613,141 @@ g[3].map(function(c){
 var keys=expand(c[0]),d=keys.length?MAP[keys[0]]:null;
 if(!d)return '<div class="row"><code>'+c[0]+'</code><span>'+c[1]+'</span></div>';
 return '<details class="sub"><summary><code>'+c[0]+'</code> '+d.t+'</summary><div class="in">'+body(d,keys[0])+'</div></details>';}).join("")+'</div></details>';}).join("");
+</script>
+<script>
+(function(){
+var A="Осмотр, замеры (линейка, штангенциркуль, «измерон»), УЗК ±300 мм; проверить, нет ли поперечной трещины.";
+var F7="Вскрытие излома, осмотр, вырезка пробы.",Z="Замена без промедления.";
+var D=[
+[["10.1-2"],"mix","Заводские пороки (закаты, волосовины, плены), позже — контактная усталость.",A,"Шлифовка, наплавка, замена.","ДР по глубине h и длине l, скорость по таблице. Поперечная трещина — ОДР. Рекламация заводу."],
+[["11.1-2","12.1-2"],"mix","Включения-«строчки» в металле или низкая контактная прочность; чаще наружная нить кривых.",A,"Профильная шлифовка, наплавка, замена.","Критерии как у 10.1-2; поперечная трещина — ОДР. До гарантии при h≥8 мм — ОДР, рекламация обязательна."],
+[["13.1"],"mix","Удары колёс у торца болтового стыка, плохая обработка торцов.",A,"Наплавка конца рельса, плановая замена.","ДР при h>2 мм (l>25 мм); при h>6 мм — ЗПП; скорость по таблице."],
+[["14.1-2"],"mix","Боксование и юз: термомеханический хрупкий слой, трещины.","Осмотр, замер глубины h и выкрашивания h1, УЗК ±300 мм.","Наплавка, шлифовка или фрезерование, плановая замена.","ДР при h>1 мм; поперечная трещина — ОДР. Чаще дефектоскопировать; претензия депо."],
+[["16.3-4","17.3-4"],"mix","Нарушена технология сварки и обработки стыка: мартенсит, неоднородность металла.",A,"Шлифовка, вырезка участка с вваркой вставки, замена.","ДР при h>2 мм (l>25 мм); поперечная трещина — ОДР. Сообщить сварщикам; до гарантии — рекламация."],
+[["18.1-2"],"mix","Плохое сцепление наплавки с основным металлом.",A,"Повторная наплавка, плановая замена.","ДР при h>2 мм; мешает УЗК — код 19; поперечная — ОДР. Рекламация наплавщику."],
+[["19.0-1-2"],"dr","Выкрашивания, рябизна, коррозия мешают УЗК.","Нет донного сигнала в 3+ местах на 12,5 м или срабатывание при минимальной чувствительности.","Наплавка, шлифовка, замена.","ДР. Решение за 5 дней, меры за 14 суток, иначе скорость ≤60 км/ч. «Шумящий» — ЗПП."],
+[["20.1-2"],"odr","Внутренние пороки: флокены, газовые пузыри, засоры.","Ультразвуковой контроль.","Замена рельса.","ОДР, замена без промедления. Рельсы этой плавки изъять; рекламация заводу."],
+[["21.1-2","22.1-2"],"odr","ВПТ от «строчек» включений, от неё растёт поперечная усталостная трещина.","Осмотр, УЗК.","Замена; временно — накладки (21.2.Н).","ОДР. В накладках — ДР с контролем; при выходе трещины на поверхность снова ОДР. До гарантии — рекламация."],
+[["24.1-2"],"odr","Боксование, юз, ползуны: хрупкий слой, от него трещины.","Осмотр, УЗК.","Замена рельса.","ОДР, замена без промедления. Чаще дефектоскопировать участок; претензии депо."],
+[["25.1-2"],"odr","Удары инструментом, рельса о рельс — концентраторы напряжений.","Осмотр, дефектоскопирование.","Замена рельса.","ОДР, замена без промедления. Бережная погрузка и разгрузка."],
+[["26.3-4","27.3-4"],"odr","Нарушена технология сварки: непровары, поры, плохая структура.","Осмотр; УЗК сварных стыков по технологической инструкции.","Вырезка участка с вваркой вставки.","ОДР, замена без промедления. Сообщить сварщикам; до гарантии — рекламация."],
+[["30.1-2"],"odr","Скопления включений вдоль прокатки; трещина глубже 8 мм.","Осмотр, УЗК; убедиться, что нет поперечных трещин.","Замена рельса.","ОДР независимо от длины и места. Рекламация комбинату."],
+[["31.1-2"],"odr","Раздавливание головки: излишнее возвышение в кривой, слабая сталь.","Осмотр, УЗК; особенно рельсы с уширенной головкой.","Замена; согласовать возвышение со скоростями.","ОДР, замена без промедления."],
+[["33.1"],"odr","Удары в болтовом стыке: плохая обработка торцов, износ накладок, просадки.","Осмотр со снятием накладок, УЗК.","Замена рельса.","ОДР, замена без промедления. Грозит изломом 73.1."],
+[["38.1"],"odr","Нарушен режим приварки соединителя: трещины, непровары, поджоги.","Осмотр, УЗК.","Замена рельса.","Трещина в основном металле — ОДР; только в наплавке — наблюдение. Рекламация."],
+[["40.0"],"dr","Вибрация клети при прокатке; в пути растёт; рифли — от проскальзывания колёс.","Линейка 1 м со щупами, «измерон», штангенциркуль.","Шлифовка (рельсошлифовальные поезда), замена.","ДР при глубине волны >1 мм; скорость по таблице; при h>3 мм — ЗПП."],
+[["41.0, 41.2"],"dr","Прочность металла ниже нагрузки; давление на внутреннюю нить кривых.","Осмотр, линейка 1 м, штангенциркуль, «измерон».","Шлифовка, фрезерование, наплавка, плановая замена.","ДР, плановая замена; при h>6 мм — ЗПП. Проверить на трещины 31.1-2."],
+[["43.1"],"dr","Динамика колеса в стыке, износ накладок, просадки.","Линейка 1 м, штангенциркуль; УЗК затруднён.","Шлифовка, наплавка, замена накладок, подбивка шпал.","ДР при глубине >1,5 мм; при h>6 мм — ЗПП."],
+[["44.0"],"dr","Боковое давление гребней в кривых, плохая лубрикация.","Осмотр, штангенциркуль, шаблоны.","Плановая замена или перекладка на путь меньшей категории.","ДР при износе сверх норм таблицы 3; замена планово."],
+[["46.3-4","47.3-4"],"dr","Неоднородность металла при сварке, нет термообработки стыка.","Линейка 1 м, «измерон»; контроль стыков по технологической инструкции.","Шлифовка, вырезка с вваркой вставки, замена.","ДР при смятии >1 мм; при h>4 мм — первоочередная замена. До гарантии — рекламация."],
+[["50.1-2"],"odr","Дефект изготовления: усадка, пористость, ликвация, включения в шейке.","Осмотр, УЗК.","Замена рельса.","ОДР, замена без промедления. Рекламация комбинату."],
+[["53.1"],"odr","Концентрация напряжений у отверстий: задиры, заусенцы, нет фасок; износ накладок.","Осмотр со снятием накладок, УЗК.","Замена рельса.","ОДР, замена без промедления. Грозит изломом 73.1."],
+[["55.1-2"],"odr","Удары, маркировка, отверстия — концентраторы напряжений.","Осмотр, УЗК.","Замена рельса.","ОДР, замена без промедления. Не бить и не маркировать шейку."],
+[["56.3-4","57.3-4"],"odr","Нарушена технология сварки и обработки шва.","Осмотр; УЗК стыков по технологической инструкции.","Замена рельса.","ОДР, замена без промедления. Сообщить сварщикам; до гарантии — рекламация."],
+[["60.1-2"],"odr","Пороки изготовления: волосовины, включения, расслоения в подошве.","Осмотр, УЗК (зона теней за рёбрами).","Замена рельса.","ОДР, замена без промедления. Рекламация заводу."],
+[["64.1-2"],"dr","Трение и давление скреплений, коррозия кромки во влажной среде.","Осмотр, замеры глубины выработок и коррозии.","Плановая замена; защита подошвы смазкой.","ДР: выработка >5 мм или коррозия кромки ≥3 / 4 / 5 мм (Р50 / Р65 / Р75)."],
+[["65.1-2"],"odr","Удары создают концентраторы напряжений в подошве.","Осмотр, УЗК.","Замена рельса.","ОДР, замена без промедления."],
+[["66.3-4","67.3-4"],"odr","Нарушена технология сварки и обработки стыка.","Осмотр; УЗК стыков по технологической инструкции.","Замена рельса.","ОДР, замена без промедления. Сообщить сварщикам; до гарантии — рекламация."],
+[["69.1-2"],"odr","Коррозия плюс циклические нагрузки; сырые, загрязнённые места.","Осмотр, УЗК.","Замена рельса.","ОДР, замена без промедления. Излом от неё — 79.1-2."],
+[["70.1-2"],"odr","Не найденный вовремя заводской порок (20, 60).",F7,Z,"ОДР. Найти фокус трещины и причину; рельсы плавки изъять; рекламация."],
+[["71.1-2","72.1-2"],"odr","Не замеченная вовремя поперечная (21, 22) или вертикальная (31) трещина.",F7,Z,"ОДР. Запись через дробь: излом/исходный дефект. До гарантии — рекламация комбинату."],
+[["73.1"],"odr","Трещина у болтовых отверстий или в переходе к шейке (53, 33).","Вскрытие излома, осмотр со снятием накладок.",Z,"ОДР. Запись 73.1/33.1 или 73.1/53.1."],
+[["74.1-2"],"odr","Хрупкий излом от боксования, юза (24) или выработки подошвы (64); на морозе чаще.",F7,Z,"ОДР. Запись 74.1-2/24.1-2 или /64.1-2; претензии депо."],
+[["75.1-2"],"odr","Трещина от ударов (25, 55, 65).",F7,Z,"ОДР. Запись 75.1-2/25.1-2, /55.1-2 или /65.1-2."],
+[["76.3-4","77.3-4"],"odr","Не найденная трещина у сварного стыка (26, 56, 66 / 27, 57, 67).",F7,"Замена; в плети — вырезка с вваркой вставки.","ОДР. Запись через дробь. Сообщить сварщикам; до гарантии — рекламация."],
+[["79.1-2"],"odr","Коррозионно-усталостные трещины подошвы (69).",F7,Z,"ОДР. Запись 79.1-2/69.1-2."],
+[["85.1-2"],"dr","Небрежная погрузка, выгрузка, перевозка; пропущено при заводском контроле.","Осмотр, измерительные приборы.","Выправка в пути, иначе плановая замена или перекладка на другую категорию.","ДР, если изгиб выше допуска для категории пути. Вина завода — рекламация."],
+[["86.3-4"],"dr","Сварка рельсов с искривлёнными концами, нарушена термообработка стыка.","Осмотр, измерение неровностей, УЗК стыков.","Выправка, шлифовка, вырезка стыка со вставкой.","Критерии как у 85.1-2. Вина сварщиков — рекламация им."],
+[["98.0-1-2-3-4"],"dr","Дефекты вне классификации; 98.0 — общая коррозия.","Осмотр, измерения, УЗК по характеру дефекта.","Плановая замена; защита от коррозии.","ДР или нет — по характеру дефекта в каждом случае."],
+[["99.1-2-3-4"],"odr","Изъятые ОДР: лишние отверстия, вдавленная маркировка, изломы без видимых дефектов.","Осмотр, измерения; изломы — вскрытие и исследование.","Изъятие, исследование, решение об использовании.","Изломы без усталостных трещин — обязательное вскрытие и лабораторный анализ."]
+];
+var S={};D.forEach(function(d){d[0].forEach(function(c){S[c]=d;});});
+var KIND={odr:["ОДР","k-odr"],dr:["ДР","k-dr"],mix:["ДР / ОДР","k-mix"]};
+var ROWS=[["Почему происходит","r1"],["Как выявить","r2"],["Как устранить","r3"],["Как эксплуатировать","r4"]];
+var syn=window.speechSynthesis,voice=null,token=0,activeBtn=null,activeRow=null;
+function el(i){return document.getElementById(i);}
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
+document.querySelectorAll('#groups details.sub').forEach(function(sub){
+  var cd=sub.querySelector('summary code'),d=S[cd.textContent.trim()];
+  if(!d)return;
+  var k=KIND[d[1]],title=sub.querySelector('summary').textContent;
+  cd.insertAdjacentHTML('afterend','<span class="kb '+k[1]+'">'+k[0]+'</span>');
+  sub.dataset.kind=d[1];sub.dataset.q=(title+' '+d.slice(2).join(' ')).toLowerCase();
+  sub.dataset.code=cd.textContent.trim();
+  var rows=ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+d[i+2]+'</span></div>';}).join('');
+  var card='<div class="cheat"><div class="cheat-h"><b>Краткий ответ</b><span>'+(syn?'<button class="btn sayb" type="button">🔊 Озвучить</button>':'')+'</span></div>'+rows+'</div><p class="sub-h">Подробно по инструкции</p>';
+  sub.querySelector('.in').insertAdjacentHTML('afterbegin',card);
+});
+/* озвучка */
+function pick(){if(!syn)return;var v=syn.getVoices();voice=v.filter(function(x){return /^ru/i.test(x.lang);})[0]||null;
+  var n=el('vnote');if(v.length&&!voice){n.style.display='block';n.textContent='В системе не найден русский голос — озвучка может звучать неверно. Установите русский голос в настройках ОС.';}else n.style.display='none';}
+if(syn){pick();syn.onvoiceschanged=pick;}
+function norm(t){
+  return t.replace(/(\d{2})\.(\d)((?:-\d)*)/g,function(m,a,b,c){return a+' точка '+b+c.replace(/-/g,' или ');})
+  .replace(/(^|[^А-ЯЁа-яё])ОДР(?![А-ЯЁа-яё])/g,'$1остродефектный рельс')
+  .replace(/(^|[^А-ЯЁа-яё])ДР(?![А-ЯЁа-яё])/g,'$1дефектный рельс')
+  .replace(/(^|[^А-ЯЁа-яё])ЗПП(?![А-ЯЁа-яё])/g,'$1первоочередная замена')
+  .replace(/(^|[^А-ЯЁа-яё])УЗК(?![А-ЯЁа-яё])/g,'$1ультразвуковой контроль')
+  .replace(/(^|[^А-ЯЁа-яё])ВПТ(?![А-ЯЁа-яё])/g,'$1внутренняя продольная трещина')
+  .replace(/км\/ч/g,'километров в час').replace(/(\d) мм/g,'$1 миллиметров')
+  .replace(/>/g,' больше ').replace(/≥/g,' не менее ').replace(/≤/g,' не более ').replace(/</g,' меньше ').replace(/±/g,' плюс-минус ');
+}
+function clearUI(){if(activeBtn){activeBtn.classList.remove('on');activeBtn.textContent='🔊 Озвучить';activeBtn=null;}
+  if(activeRow){activeRow.classList.remove('on');activeRow=null;}}
+function stop(){token++;if(syn)syn.cancel();clearUI();}
+function speak(sub,btn){
+  var d=S[sub.dataset.code],rows=sub.querySelectorAll('.cheat .cr');
+  var title=sub.querySelector('summary').textContent.replace(/ДР \/ ОДР|ОДР|ДР/,'').replace(sub.dataset.code,'').trim();
+  var parts=[{t:'Дефект '+sub.dataset.code+'. '+title,r:null}];
+  ROWS.forEach(function(r,i){parts.push({t:r[0]+'. '+d[i+2],r:rows[i]});});
+  var was=activeBtn===btn;stop();if(was)return;
+  var tk=token;activeBtn=btn;btn.classList.add('on');btn.textContent='⏹ Стоп';
+  function next(i){
+    if(tk!==token)return;
+    if(i>=parts.length){clearUI();return;}
+    if(activeRow)activeRow.classList.remove('on');
+    activeRow=parts[i].r;if(activeRow)activeRow.classList.add('on');
+    var u=new SpeechSynthesisUtterance(norm(parts[i].t));
+    u.lang='ru-RU';if(voice)u.voice=voice;u.rate=+el('rate').value;
+    u.onend=function(){next(i+1);};u.onerror=function(){if(tk===token)clearUI();};
+    syn.speak(u);
+  }
+  setTimeout(function(){next(0);},80);
+}
+el('groups').addEventListener('click',function(e){
+  var b=e.target.closest('.sayb');if(!b)return;
+  speak(b.closest('details.sub'),b);
+});
+el('stopall').addEventListener('click',stop);
+var r0=ls('rate');if(r0)el('rate').value=r0;
+el('rate').addEventListener('change',function(){ls('rate',this.value);});
+window.addEventListener('pagehide',stop);
+/* поиск и фильтр */
+var kind='all',qi=el('qi');
+function apply(){
+  var q=qi.value.trim().toLowerCase(),total=0,subs=[];
+  document.querySelectorAll('#groups > details').forEach(function(g){
+    var n=0;
+    g.querySelectorAll('details.sub').forEach(function(s){
+      var kk=s.dataset.kind,okK=kind==='all'||kk===kind||kk==='mix';
+      var ok=okK&&(!q||(s.dataset.q.indexOf(q)>=0));
+      s.style.display=ok?'':'none';if(ok){n++;subs.push(s);}
+    });
+    g.style.display=n?'':'none';total+=n;
+    if((q||kind!=='all')&&n){g.setAttribute('open','');g.classList.add('is-open');}
+  });
+  el('cnt').textContent=(q||kind!=='all')?('Найдено: '+total):'';
+  if(q&&subs.length&&subs.length<=3)subs.forEach(function(s){s.setAttribute('open','');s.classList.add('is-open');});
+}
+qi.addEventListener('input',apply);
+document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
+  kind=c.dataset.f;document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
+/* тема */
+var root=document.documentElement,t0=ls('theme');if(t0)root.setAttribute('data-theme',t0);
+el('theme').addEventListener('click',function(){
+  var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  var n=cur==='dark'?'light':'dark';root.setAttribute('data-theme',n);ls('theme',n);});
+})();
 </script>
 <script>
 (function(){
