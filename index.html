@@ -129,7 +129,7 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 }
 @media (max-width:520px){.row{grid-template-columns:1fr;gap:0}}
 
-/* --- Панель, бейджи, шпаргалка, озвучка --- */
+/* --- Панель, бейджи, шпаргалка --- */
 .toolbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);padding:10px 0;margin:8px 0 12px;border-bottom:1px solid var(--line)}
 .toolbar input[type=search]{flex:1 1 220px;min-width:0;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
 .toolbar select{width:auto;background:var(--surface)}
@@ -138,7 +138,6 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 .chip[aria-pressed=true]{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .btn:focus-visible,.chip:focus-visible,.toolbar input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 #cnt{font-size:.82rem;color:var(--muted);margin-left:auto}
-#vnote{font-size:.82rem;color:var(--warn);flex-basis:100%;display:none}
 .kb{display:inline-block;font:600 .68rem/1 var(--mono);padding:3px 6px;border-radius:4px;margin:0 8px 0 2px;vertical-align:middle;border:1px solid}
 .k-odr{color:var(--odr);border-color:var(--odr)}.k-dr{color:var(--dr);border-color:var(--dr)}.k-mix{color:var(--c2);border-color:var(--c2)}
 .cheat{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;margin:4px 0 14px}
@@ -146,12 +145,10 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 .cheat-h b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .cr{display:grid;grid-template-columns:8.5rem 1fr;gap:10px;padding:8px 10px;border-left:4px solid var(--rc);border-radius:4px;margin:6px 0;transition:background .25s,box-shadow .25s}
 .cr b{color:var(--rc);font-weight:600;font-size:.9rem}
-.cr.on{background:color-mix(in srgb,var(--rc) 14%,transparent);box-shadow:0 0 0 2px color-mix(in srgb,var(--rc) 35%,transparent)}
 .r1{--rc:var(--c1)}.r2{--rc:var(--c2)}.r3{--rc:var(--c3)}.r4{--rc:var(--odr)}
-.sayb.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
 .sub-h{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
 @media (max-width:520px){.cr{grid-template-columns:1fr;gap:2px}}
-@media print{.toolbar,.sayb{display:none}}
+@media print{.toolbar{display:none}}
 </style>
 </head>
 <body>
@@ -192,17 +189,14 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <p class="note" style="margin-top:12px">Если у дефекта несколько мест, их пишут через дефис: 21.1-2 значит 21.1 или 21.2. Буква Н в конце (21.2.Н) — дефект взят в накладки. Если дефект относится к двум кодам, их пишут через дробь: 71.2/21.2 — излом из-за поперечной трещины.</p>
 
 <h2>Группы дефектов</h2>
-<p>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа (с озвучкой 🔊), ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
+<p>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
 <div class="toolbar" role="search">
 <input type="search" id="qi" placeholder="Поиск: код, название, причина…" aria-label="Поиск по дефектам">
 <button class="chip" data-f="all" aria-pressed="true">Все</button>
 <button class="chip" data-f="odr" aria-pressed="false">ОДР</button>
 <button class="chip" data-f="dr" aria-pressed="false">ДР</button>
-<select id="rate" aria-label="Скорость озвучки"><option value="0.85">Медленно</option><option value="1" selected>Обычно</option><option value="1.2">Быстро</option></select>
-<button class="btn" id="stopall">⏹ Стоп</button>
 <button class="btn" id="theme" aria-label="Сменить тему">◐ Тема</button>
 <span id="cnt" aria-live="polite"></span>
-<div id="vnote"></div>
 </div>
 <div id="groups"></div>
 
@@ -673,7 +667,6 @@ var D=[
 var S={};D.forEach(function(d){d[0].forEach(function(c){S[c]=d;});});
 var KIND={odr:["ОДР","k-odr"],dr:["ДР","k-dr"],mix:["ДР / ОДР","k-mix"]};
 var ROWS=[["Почему происходит","r1"],["Как выявить","r2"],["Как устранить","r3"],["Как эксплуатировать","r4"]];
-var syn=window.speechSynthesis,voice=null,token=0,activeBtn=null,activeRow=null;
 function el(i){return document.getElementById(i);}
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
 document.querySelectorAll('#groups details.sub').forEach(function(sub){
@@ -684,53 +677,9 @@ document.querySelectorAll('#groups details.sub').forEach(function(sub){
   sub.dataset.kind=d[1];sub.dataset.q=(title+' '+d.slice(2).join(' ')).toLowerCase();
   sub.dataset.code=cd.textContent.trim();
   var rows=ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+d[i+2]+'</span></div>';}).join('');
-  var card='<div class="cheat"><div class="cheat-h"><b>Краткий ответ</b><span>'+(syn?'<button class="btn sayb" type="button">🔊 Озвучить</button>':'')+'</span></div>'+rows+'</div><p class="sub-h">Подробно по инструкции</p>';
+  var card='<div class="cheat"><div class="cheat-h"><b>Краткий ответ</b></div>'+rows+'</div><p class="sub-h">Подробно по инструкции</p>';
   sub.querySelector('.in').insertAdjacentHTML('afterbegin',card);
 });
-/* озвучка */
-function pick(){if(!syn)return;var v=syn.getVoices();voice=v.filter(function(x){return /^ru/i.test(x.lang);})[0]||null;
-  var n=el('vnote');if(v.length&&!voice){n.style.display='block';n.textContent='В системе не найден русский голос — озвучка может звучать неверно. Установите русский голос в настройках ОС.';}else n.style.display='none';}
-if(syn){pick();syn.onvoiceschanged=pick;}
-function norm(t){
-  return t.replace(/(\d{2})\.(\d)((?:-\d)*)/g,function(m,a,b,c){return a+' точка '+b+c.replace(/-/g,' или ');})
-  .replace(/(^|[^А-ЯЁа-яё])ОДР(?![А-ЯЁа-яё])/g,'$1остродефектный рельс')
-  .replace(/(^|[^А-ЯЁа-яё])ДР(?![А-ЯЁа-яё])/g,'$1дефектный рельс')
-  .replace(/(^|[^А-ЯЁа-яё])ЗПП(?![А-ЯЁа-яё])/g,'$1первоочередная замена')
-  .replace(/(^|[^А-ЯЁа-яё])УЗК(?![А-ЯЁа-яё])/g,'$1ультразвуковой контроль')
-  .replace(/(^|[^А-ЯЁа-яё])ВПТ(?![А-ЯЁа-яё])/g,'$1внутренняя продольная трещина')
-  .replace(/км\/ч/g,'километров в час').replace(/(\d) мм/g,'$1 миллиметров')
-  .replace(/>/g,' больше ').replace(/≥/g,' не менее ').replace(/≤/g,' не более ').replace(/</g,' меньше ').replace(/±/g,' плюс-минус ');
-}
-function clearUI(){if(activeBtn){activeBtn.classList.remove('on');activeBtn.textContent='🔊 Озвучить';activeBtn=null;}
-  if(activeRow){activeRow.classList.remove('on');activeRow=null;}}
-function stop(){token++;if(syn)syn.cancel();clearUI();}
-function speak(sub,btn){
-  var d=S[sub.dataset.code],rows=sub.querySelectorAll('.cheat .cr');
-  var title=sub.querySelector('summary').textContent.replace(/ДР \/ ОДР|ОДР|ДР/,'').replace(sub.dataset.code,'').trim();
-  var parts=[{t:'Дефект '+sub.dataset.code+'. '+title,r:null}];
-  ROWS.forEach(function(r,i){parts.push({t:r[0]+'. '+d[i+2],r:rows[i]});});
-  var was=activeBtn===btn;stop();if(was)return;
-  var tk=token;activeBtn=btn;btn.classList.add('on');btn.textContent='⏹ Стоп';
-  function next(i){
-    if(tk!==token)return;
-    if(i>=parts.length){clearUI();return;}
-    if(activeRow)activeRow.classList.remove('on');
-    activeRow=parts[i].r;if(activeRow)activeRow.classList.add('on');
-    var u=new SpeechSynthesisUtterance(norm(parts[i].t));
-    u.lang='ru-RU';if(voice)u.voice=voice;u.rate=+el('rate').value;
-    u.onend=function(){next(i+1);};u.onerror=function(){if(tk===token)clearUI();};
-    syn.speak(u);
-  }
-  setTimeout(function(){next(0);},80);
-}
-el('groups').addEventListener('click',function(e){
-  var b=e.target.closest('.sayb');if(!b)return;
-  speak(b.closest('details.sub'),b);
-});
-el('stopall').addEventListener('click',stop);
-var r0=ls('rate');if(r0)el('rate').value=r0;
-el('rate').addEventListener('change',function(){ls('rate',this.value);});
-window.addEventListener('pagehide',stop);
 /* поиск и фильтр */
 var kind='all',qi=el('qi');
 function apply(){
