@@ -35,10 +35,26 @@ ol.parts span{color:var(--muted)}
 .big .d{display:inline-block;padding-bottom:4px;border-bottom:5px solid}
 .big .p{color:var(--muted)}
 .d1{color:var(--c1);border-color:var(--c1)}.d2{color:var(--c2);border-color:var(--c2)}.d3{color:var(--c3);border-color:var(--c3)}
+
+/* --- Кастомные dropdown'ы декодера --- */
 .pickers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:16px 0}
 label{display:block;font-size:.85rem;color:var(--muted);margin-bottom:4px}
-select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px}
-select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dd{position:relative}
+.dd-btn{width:100%;display:flex;align-items:center;gap:8px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 10px;cursor:pointer;text-align:left;transition:border-color .2s,box-shadow .2s}
+.dd-btn:hover{border-color:var(--accent)}
+.dd-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dd-btn .dd-num{font:600 1rem var(--mono);color:var(--accent);flex:none;min-width:1.4em}
+.dd-btn .dd-lbl{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dd-btn .dd-arrow{flex:none;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--muted);transition:transform .2s}
+.dd.open .dd-btn{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%,transparent)}
+.dd.open .dd-arrow{transform:rotate(180deg)}
+.dd-list{position:absolute;z-index:30;top:calc(100% + 4px);left:0;right:0;max-height:280px;overflow:auto;margin:0;padding:4px;list-style:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 10px 28px rgba(20,35,43,.14);animation:cardIn .18s ease both}
+.dd-list[hidden]{display:none}
+.dd-list li{display:flex;gap:8px;align-items:baseline;padding:7px 9px;border-radius:6px;cursor:pointer;font-size:.92rem;line-height:1.35}
+.dd-list li .dd-num{font:600 .95rem var(--mono);color:var(--accent);flex:none;min-width:1.4em}
+.dd-list li[aria-selected=true]{background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.dd-list li.active,.dd-list li:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.dd-list li.active[aria-selected=true]{background:color-mix(in srgb,var(--accent) 18%,transparent)}
 .mean{border-left:4px solid;padding:2px 0 2px 12px;margin:10px 0}
 .mean b{display:block;font-weight:600}
 .m1{border-color:var(--c1)}.m2{border-color:var(--c2)}.m3{border-color:var(--c3)}
@@ -218,9 +234,15 @@ details > summary{padding-right:44px}
 <div class="decoder">
 <div class="big" id="big" aria-live="polite"></div>
 <div class="pickers">
-<div><label for="g">Первая цифра: группа</label><select id="g"></select></div>
-<div><label for="t">Вторая цифра: тип</label><select id="t"></select></div>
-<div><label for="p">Третья цифра: место</label><select id="p"></select></div>
+<div><label id="lb-g">Первая цифра: группа</label>
+  <div class="dd" data-dd="g" data-label="lb-g"></div>
+</div>
+<div><label id="lb-t">Вторая цифра: тип</label>
+  <div class="dd" data-dd="t" data-label="lb-t"></div>
+</div>
+<div><label id="lb-p">Третья цифра: место</label>
+  <div class="dd" data-dd="p" data-label="lb-p"></div>
+</div>
 </div>
 <div class="mean m1"><b id="mg"></b><span id="mgt"></span></div>
 <div class="mean m2"><b id="mt"></b><span id="mtt"></span></div>
@@ -228,7 +250,6 @@ details > summary{padding-right:44px}
 <div class="status" id="st"></div>
 </div>
 <p class="note" style="margin-top:12px">Если у дефекта несколько мест, их пишут через дефис: 21.1-2 значит 21.1 или 21.2. Буква Н в конце (21.2.Н) — дефект взят в накладки. Если дефект относится к двум кодам, их пишут через дробь: 71.2/21.2 — излом из-за поперечной трещины.</p>
-
 <h2>Группы дефектов</h2>
 <p>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа, ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
 <div class="toolbar" role="search">
@@ -357,11 +378,60 @@ var tail=m[2].replace(/\d\d\./g,"");var ds=tail.match(/\d/g)||[];
 return ds.map(function(d){return m[1]+"."+d;});}
 GROUPS.forEach(function(g){g[3].forEach(function(c){expand(c[0]).forEach(function(k){EXIST[k]=c[1];});});});
 function el(id){return document.getElementById(id);}
-var gsel=el("g"),tsel=el("t"),psel=el("p");
-gsel.innerHTML=GROUPS.map(function(g){return '<option value="'+g[0]+'">'+g[0]+' — '+g[1]+'</option>';}).join("");
-tsel.innerHTML=TYPES.map(function(v,i){return '<option value="'+i+'">'+i+' — '+v+'</option>';}).join("");
-psel.innerHTML=PLACES.map(function(v,i){return '<option value="'+i+'">'+i+' — '+v+'</option>';}).join("");
-gsel.value="2";tsel.value="1";psel.value="2";
+
+/* --- Кастомный dropdown вместо нативного select --- */
+function makeDD(host,items,init,labelText){
+  var btn=document.createElement("button");
+  btn.type="button";btn.className="dd-btn";
+  btn.setAttribute("aria-haspopup","listbox");
+  btn.setAttribute("aria-expanded","false");
+  var list=document.createElement("ul");
+  list.className="dd-list";list.hidden=true;list.setAttribute("role","listbox");
+  host.appendChild(btn);host.appendChild(list);
+  var api={value:init,onchange:null,focus:function(){btn.focus();}};
+  var active=0;
+  function render(){
+    var sel=items.find(function(x){return x.v==api.value;})||items[0];
+    btn.innerHTML='<span class="dd-num">'+sel.v+'</span><span class="dd-lbl">'+sel.t+'</span><span class="dd-arrow"></span>';
+    btn.setAttribute("aria-label",labelText+": "+sel.v+" — "+sel.t);
+    list.innerHTML=items.map(function(x,i){
+      return '<li role="option" data-v="'+x.v+'" aria-selected="'+(x.v==api.value)+'" data-i="'+i+'"><span class="dd-num">'+x.v+'</span><span>'+x.t+'</span></li>';
+    }).join("");
+    active=items.findIndex(function(x){return x.v==api.value;});
+  }
+  function open(){
+    host.classList.add("open");list.hidden=false;btn.setAttribute("aria-expanded","true");
+    if(active<0)active=0;
+    Array.prototype.forEach.call(list.children,function(x){x.classList.remove("active");});
+    var li=list.children[active];
+    if(li){li.classList.add("active");li.scrollIntoView({block:"nearest"});}
+  }
+  function close(){
+    host.classList.remove("open");list.hidden=true;btn.setAttribute("aria-expanded","false");
+    Array.prototype.forEach.call(list.children,function(x){x.classList.remove("active");});
+  }
+  function choose(v){api.value=v;render();close();btn.focus();if(api.onchange)api.onchange(v);}
+  function move(d){
+    if(list.hidden)return;
+    Array.prototype.forEach.call(list.children,function(x){x.classList.remove("active");});
+    active=Math.max(0,Math.min(items.length-1,active+d));
+    var li=list.children[active];if(li){li.classList.add("active");li.scrollIntoView({block:"nearest"});}
+  }
+  btn.addEventListener("click",function(e){e.stopPropagation();host.classList.contains("open")?close():open();});
+  btn.addEventListener("keydown",function(e){
+    if(e.key==="ArrowDown"||e.key==="ArrowUp"){e.preventDefault();if(list.hidden)open();else move(e.key==="ArrowDown"?1:-1);}
+    else if(e.key==="Enter"||e.key===" "){e.preventDefault();list.hidden?open():choose(items[active].v);}
+    else if(e.key==="Escape"){close();}
+    else if(e.key==="Home"){e.preventDefault();if(list.hidden)open();active=0;move(0);}
+    else if(e.key==="End"){e.preventDefault();if(list.hidden)open();active=items.length-1;move(0);}
+  });
+  list.addEventListener("click",function(e){var li=e.target.closest("li");if(li)choose(+li.dataset.v);});
+  document.addEventListener("click",close);
+  render();return api;
+}
+var gsel=makeDD(document.querySelector('.dd[data-dd="g"]'),GROUPS.map(function(g){return {v:g[0],t:g[1]};}),2,"Группа");
+var tsel=makeDD(document.querySelector('.dd[data-dd="t"]'),TYPES.map(function(v,i){return {v:i,t:v};}),1,"Тип");
+var psel=makeDD(document.querySelector('.dd[data-dd="p"]'),PLACES.map(function(v,i){return {v:i,t:v};}),2,"Место");
 function upd(){
 var g=+gsel.value,t=+tsel.value,p=+psel.value,code=g+""+t+"."+p,grp=GROUPS[g-1];
 el("big").innerHTML='<span class="d d1">'+g+'</span><span class="d d2">'+t+'</span><span class="p">.</span><span class="d d3">'+p+'</span>';
@@ -371,7 +441,7 @@ el("mp").textContent="Место "+p;el("mpt").textContent=PLACES[p];
 var s=el("st");
 if(EXIST[code]){s.className="status ok";s.innerHTML="Код "+code+" есть в таблице 1: "+EXIST[code]+'. <a href="#'+code+'" data-go="'+code+'">Открыть карточку →</a>';}
 else{s.className="status no";s.textContent="Кода "+code+" в таблице 1 нет: такая комбинация в инструкции не используется.";}}
-[gsel,tsel,psel].forEach(function(x){x.addEventListener("change",upd);});
+gsel.onchange=upd;tsel.onchange=upd;psel.onchange=upd;
 upd();
 
 /* Каталог дефектов. Каждая карточка привязана к своим кодам (codes):
@@ -381,7 +451,6 @@ var T10=[["h, мм","«Узкие» (a<35 мм)","«Широкие» (a≥35 м�
 ["4–6","70, плановая замена","70, плановая замена","—"],
 ["6–8","40, ЗПП","40, ЗПП","40, ЗПП"],[">8","25","25","25"]]];
 var CAT=[
-/* ---------- Группа 1 ---------- */
 {codes:["10.1-2"],t:"Трещины и выкрашивания от дефектов изготовления",
 r:"На ранних стадиях (до ~150–250 млн т брутто) — поверхностные дефекты металлургического происхождения: волосовины, закаты, плены, участки бейнита. На поздних стадиях — многократные высокие контактные напряжения. К дефекту относят продольные горизонтальные трещины с глубиной до 8,0 мм.",
 v:"Внешний осмотр, контроль линейных размеров (линейка, штангенциркуль с глубиномером, шаблон «измерон»), УЗК в пределах ±300 мм от дефектного сечения. Убедиться в отсутствии под дефектом поперечной трещины.",
@@ -437,7 +506,6 @@ v:"Нет акустического контакта: на 12,5 м три и б
 u:"Наплавка, шлифовка или замена.",
 e:"ДР. «Шумящий» рельс меняют в первоочередном порядке (ЗПП). При гарантии рекламация изготовителю.",
 h:["Срок","Значение"],b:[["Решение о мерах","5 дней с выявления"],["Выполнение мер","14 дней с выявления"],["Если не успели","скорость не более 60 км/ч"]]},
-/* ---------- Группа 2 ---------- */
 {codes:["20.1-2"],t:"Поперечные трещины от внутренних пороков изготовления",
 r:"Флокены (обычно глубже 10 мм), газовые пузыри, засоры, крупные скопления включений. От них радиально растёт усталостная трещина. Критический размер: 14–16 мм по высоте или 25–30% сечения головки (при температуре выше −20 °C, при −20 °C и ниже от 15%).",
 v:"Ультразвуковое дефектоскопирование.",
@@ -473,7 +541,6 @@ r:"Непровары, включения, поры, раковины, трещ�
 v:"Осмотр; контроль по технологической инструкции по УЗК сварных стыков и по правилам контроля алюминотермитной сварки в пути.",
 u:"В плети вырезать участок с трещиной и вварить новую вставку.",
 e:"ОДР, замена без промедления. При образовании в условиях, отвечающих гарантийным обязательствам, предъявить рекламацию изготовителю сварного стыка."},
-/* ---------- Группа 3 ---------- */
 {codes:["30.1-2"],t:"Горизонтальные продольные трещины в головке",
 r:"Крупные скопления неметаллических включений, вытянутые вдоль прокатки, дают горизонтальные продольные трещины на глубине более 8,0 мм. К их образованию приводит и постепенное заглубление трещин, начавшихся на поверхности (на глубине менее 8 мм). При залегании 8 мм и более трещины обычно имеют большую протяжённость. Наибольшую опасность представляют поперечные трещины 21.1-2, 22.1-2, которые могут привести к поперечному излому 71.1-2, 72.1-2.",
 v:"Внешний осмотр, ультразвуковое дефектоскопирование. Убедиться в отсутствии поперечных трещин.",
@@ -490,7 +557,6 @@ e:"ОДР, замена без промедления. При концентра
 r:"Нарушение режима приварки соединителей: сварочные трещины, непровары, поджоги; при развитии усталостных трещин — трещины различной ориентации, излом и отделение части головки. При повторных приварках убедиться в отсутствии трещин в местах приварок.",
 v:"Внешний осмотр, ультразвуковое дефектоскопирование.",
 e:"Любые трещины в основном металле головки — ОДР, замена без промедления. Трещины только в наплавленном металле: периодические наблюдения; при переходе в основной металл — ОДР. Рекламация производителю работ по приварке."},
-/* ---------- Группа 4 ---------- */
 {codes:["40.0"],t:"Волнообразный износ и смятие (длинные и короткие волны)",
 r:"Начальная волнообразная деформация (длиной 25–150 см) возникает при прокатке и правке (вибрация прокатной клети, биение валков), в эксплуатации амплитуда растёт. Короткие неровности — рифли (3–25 см) — от периодического проскальзывания колёс.",
 v:"Внешний осмотр, жёсткая линейка 1 м с набором щупов, штангенциркуль с глубиномером, шаблон «измерон», рельсоизмерительные тележки.",
@@ -526,7 +592,6 @@ v:"Осмотр, измерительные приборы, «измерон»; 
 u:"Местное шлифование; шлифовка рельсошлифовальными поездами; восстановление стыка вырезкой участка с вваркой вставки; замена.",
 e:"ДР при смятии более 1,0 мм. Ограничение скорости по таблице ниже; при h>4 мм — замена или восстановление в первоочередном порядке. При образовании в гарантийных условиях — рекламация изготовителю сварного стыка.",
 h:["h, мм","Скорость, км/ч"],b:[["1–2","120"],["2–3","70"],["3–4","40"],[">4","25"]]},
-/* ---------- Группа 5 ---------- */
 {codes:["50.1-2"],t:"Вертикальные расслоения шейки",
 r:"Дефекты изготовления: остатки усадочной раковины, центральная пористость, резко выраженная ликвация в шейке, скопления неметаллических включений — приводят к расслоению шейки в эксплуатации.",
 v:"Внешний осмотр, ультразвуковое дефектоскопирование.",
@@ -547,7 +612,6 @@ e:"ОДР, замена без промедления. Информироват�
 r:"Нарушения технологии сварки и обработки стыков (горизонтальные трещины — от обработки шва, вертикальные — от режима сварки). Трещины по болтовым отверстиям алюминотермитных стыков — от неудовлетворительной обработки поверхностей отверстий (нет фасок, заусенцы, задиры), внутренних дефектов шейки у концов рельсов, дефектов термитного шва.",
 v:"Внешний осмотр; контроль стыков по ТИ на УЗК и по Правилам контроля алюминотермитной сварки.",
 e:"ОДР, замена без промедления. При образовании в гарантийных условиях — рекламация предприятию, выполнившему сварку."},
-/* ---------- Группа 6 ---------- */
 {codes:["60.1-2"],t:"Трещины и выколы в подошве",
 r:"Пороки изготовления: волосовины, неметаллические включения, расслоения в подошве. Под нагрузкой дают продольные трещины и выколы части подошвы.",
 v:"Внешний осмотр, ультразвуковое дефектоскопирование (контроль подошвы затруднён — зона теней за рёбрами).",
@@ -573,7 +637,6 @@ e:"ОДР, замена без промедления. При образован
 r:"Коррозия металла подошвы в сочетании с циклическими нагрузками даёт коррозионно-усталостные трещины, преимущественно в местах повышенной влажности и загрязнения.",
 v:"Внешний осмотр (при коррозии трещины часто видны), ультразвуковое дефектоскопирование.",
 e:"ОДР, замена без промедления. Излом от дефекта — 79.1-2/69.1-2."},
-/* ---------- Группа 7 ---------- */
 {codes:["70.1-2"],t:"Излом от пороков изготовления",
 r:"Разрушение от своевременно не обнаруженных пороков изготовления: флокенов, газовых пузырей, засоров (дефект 20.1-2) или трещин и выколов подошвы 60.1-2.",
 v:"Вскрытие излома, осмотр излома, вырезка и исследование пробы.",
@@ -619,7 +682,6 @@ r:"Разрушение от поперечных коррозионно-уст�
 v:"Вскрытие излома, осмотр.",
 u:"Замена без промедления.",
 e:"ОДР. Запись — 79.1-2/69.1-2."},
-/* ---------- Группа 8 ---------- */
 {codes:["85.1-2"],t:"Нарушение прямолинейности при выгрузке, ударах",
 r:"Изгибы сверх пределов ГОСТ Р 51685-2000 из-за небрежной погрузки, выгрузки, складирования и перевозки; могут быть пропущены при заводском контроле.",
 v:"Внешний осмотр, проверка измерительными приборами.",
@@ -629,7 +691,6 @@ r:"Нарушения технологии сварки: сварка рельс
 v:"Внешний осмотр, измерение неровностей измерительными приборами, контроль стыков по ТИ на УЗК.",
 u:"Выправка, шлифовка; при невозможности — вырезка стыка с вваркой вставки, замена.",
 e:"Рельсы в пути с неровностями выше допустимых для категории пути, не выправляемыми в пути, — ДР, замена в плановом порядке; допускается перекладка на пути других категорий (с меньшими скоростями). При дефекте по вине предприятия, выполнившего сварку, — рекламация ему."},
-/* ---------- Группа 9 ---------- */
 {codes:["98.0-1-2-3-4"],t:"Прочие дефекты рельсов, оставленных в пути",
 r:"Дефекты и повреждения, не вошедшие в классификацию (коды 98.1–98.4 — по месту: в стыке, вне стыка, в сварном стыке); 98.0 — общая коррозия рельсов, оставленных в пути.",
 v:"Внешний осмотр, измерительный контроль, УЗК — по характеру дефекта.",
@@ -934,8 +995,6 @@ el('theme').addEventListener('click',function(){
       var summary=d.querySelector(':scope > summary');
       if(!summary) return;
 
-      /* Оборачиваем содержимое один раз. Без этого закрытие native <details>
-         происходит мгновенно и CSS-анимация закрытия невозможна. */
       var body=document.createElement('div');
       body.className='details-body';
       var content=document.createElement('div');
@@ -987,7 +1046,6 @@ el('theme').addEventListener('click',function(){
           }
           body.addEventListener('transitionend',end);
 
-          /* Fallback только если transitionend не пришёл. */
           timer=setTimeout(function(){
             if(done) return;
             body.removeEventListener('transitionend',end);
@@ -996,7 +1054,6 @@ el('theme').addEventListener('click',function(){
           },360);
         }else{
           d.setAttribute('open','');
-          /* Первый кадр — закрытое состояние, второй — открытое. */
           requestAnimationFrame(function(){
             requestAnimationFrame(function(){
               d.classList.add('is-open');
