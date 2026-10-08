@@ -195,6 +195,7 @@ details > summary{padding-right:44px}
 <main>
 <h1>Дефекты рельсов: коды и группы</h1>
 <p class="lead">Справочник по инструкции «Дефекты рельсов. Классификация, каталог и параметры дефектных и остродефектных рельсов» (распоряжение ОАО «РЖД» от 23.10.2014 № 2499р).</p>
+<p class="source" style="margin-top:8px">Источник: <a href="https://www.tdesant.ru/info/item/144" target="_blank" rel="noopener">tdesant.ru</a> — схемы из таблицы 2 инструкции 2499р.</p>
 
 <div class="disclaimer">
 <b>О полноте данных.</b> Полный «Каталог дефектов» 2499р (раздел 6, стр. 19–66) в открытых источниках не опубликован. В этом справочнике:
@@ -270,7 +271,7 @@ details > summary{padding-right:44px}
 <dt>Фокус трещины и долом</dt><dd>Фокус — очаг, откуда началось разрушение. Долом — зона конечной стадии разрушения, она отличается от зоны усталостного роста трещины.</dd>
 <dt>Фрагмент и проба</dt><dd>Фрагмент — часть рельса, разрушившегося на три и более куска. Проба — часть разрушенного рельса, вырезанная на исследование.</dd>
 </dl>
-<p class="source">Источник: распоряжение ОАО «РЖД» № 2499р, таблицы 1 и 2, разделы 1, 3, 4. Перед использованием в работе сверяйте с действующей редакцией документа.</p>
+
 </main>
 <script>
 var GROUPS=[
@@ -740,9 +741,31 @@ document.querySelectorAll('#groups details.sub').forEach(function(sub){
 });
 /* поиск и фильтр */
 var kind='all',qi=el('qi'),wasF=false;function nz(s){return s.toLowerCase().replace(/ё/g,'е');}
+
+/* Предзагрузка всех схем сразу после загрузки страницы, независимо от открытия карточек. */
+function preloadImages(){
+  var urls={};
+  Object.keys(IM).forEach(function(c){
+    var m=IM[c]||[];
+    (m[0]||[]).concat(m[1]||[]).forEach(function(n){
+      var f=('00'+n).slice(-3);
+      urls['images/image'+f+'.jpg']='https://www.tdesant.ru/images/info/2499r/image'+f+'.jpg';
+    });
+  });
+  Object.keys(urls).forEach(function(local){
+    var img=new Image();
+    img.onerror=function(){
+      var fallback=new Image();
+      fallback.src=urls[local];
+    };
+    img.src=local;
+  });
+}
+preloadImages();
+
 function pics(c){var m=IM[c];if(!m)return '';
-  function im(n){var f=('00'+n).slice(-3);return '<img loading="lazy" alt="Схематическое изображение дефекта '+c+' (таблица 2 инструкции 2499р)" src="images/image'+f+'.jpg" onerror="this.onerror=function(){this.remove()};this.src=\'https://www.tdesant.ru/images/info/2499r/image'+f+'.jpg\'">';}
-  return '<figure class="fig"><div class="fig-img">'+m[0].map(im).join('')+'</div>'+(m[1]?'<p class="cap">В изломе:</p><div class="fig-img">'+m[1].map(im).join('')+'</div>':'')+'<figcaption>Схематические изображения из таблицы 2 инструкции 2499р. Источник: <a href="https://www.tdesant.ru/info/item/144" target="_blank" rel="noopener">tdesant.ru</a>. Берутся из папки images рядом со страницей, а если её нет, то с сайта-источника.</figcaption></figure>';}
+  function im(n){var f=('00'+n).slice(-3);return '<img loading="eager" decoding="async" alt="Схематическое изображение дефекта '+c+' (таблица 2 инструкции 2499р)" src="images/image'+f+'.jpg" onerror="this.onerror=function(){this.remove()};this.src=\'https://www.tdesant.ru/images/info/2499r/image'+f+'.jpg\'">';}
+  return '<figure class="fig"><div class="fig-img">'+m[0].map(im).join('')+'</div>'+(m[1]?'<p class="cap">В изломе:</p><div class="fig-img">'+m[1].map(im).join('')+'</div>':'')+'</figure>';}
 function fig(kind,ks){
   var col=kind==='odr'?'var(--odr)':kind==='dr'?'var(--dr)':'var(--c3)',g=+ks[0].charAt(0),t=ks[0].slice(0,2),pl=[];
   ks.forEach(function(k){var d=k.split('.')[1];if(pl.indexOf(d)<0)pl.push(d);});
