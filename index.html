@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Дефекты рельсов: коды по распоряжению 2499р</title>
+<title>Дефекты рельсов: коды и группы — распоряжение 2499р</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f2f4f5;--surface:#fff;--ink:#14232b;--muted:#53656e;--line:#cbd5d9;--accent:#1f5c7a;--c1:#1f5c7a;--c2:#2e7d5b;--c3:#8a5a00;--odr:#b3261e;--dr:#8a5a00;--warn:#8a5a00;
+:root{--bg:#f2f4f5;--surface:#fff;--ink:#14232b;--muted:#53656e;--line:#cbd5d9;--accent:#1f5c7a;--c1:#1f5c7a;--c2:#2e7d5b;--c3:#8a5a00;--odr:#b3261e;--dr:#8a5a00;--warn:#8a5a00;--g1:#1f5c7a;--g2:#b3261e;--g3:#6a4c93;--g4:#a05a00;--g5:#28745b;--g6:#007c91;--g7:#8b3a62;--g8:#53656e;--g9:#7a6b2b;
 --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a}}
-:root[data-theme="dark"]{--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a;--g1:#6db3d6;--g2:#ff8a80;--g3:#b79ce0;--g4:#e0a04a;--g5:#6fcf9f;--g6:#5fc4d8;--g7:#e08fb4;--g8:#93a7b0;--g9:#cdbb6a;}}
+:root[data-theme="dark"]{--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a;--g1:#6db3d6;--g2:#ff8a80;--g3:#b79ce0;--g4:#e0a04a;--g5:#6fcf9f;--g6:#5fc4d8;--g7:#e08fb4;--g8:#93a7b0;--g9:#cdbb6a;}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--sans)}
@@ -56,7 +56,7 @@ dl{margin:0}
 dt{font-weight:600;margin-top:14px}
 dd{margin:2px 0 0;max-width:68ch}
 .odr{color:var(--odr);font-weight:600}.dr{color:var(--dr);font-weight:600}
-.src{margin-top:48px;color:var(--muted);font-size:.85rem}
+.source{margin-top:48px;color:var(--muted);font-size:.85rem}
 .wrap{overflow-x:auto}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
 th,td{border:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
@@ -73,18 +73,18 @@ details.sub summary code{color:var(--accent)}
 main{animation:pageIn .45s ease both}
 .decoder, .disclaimer, #groups>details{animation:cardIn .45s ease both}
 #groups>details{border-left:4px solid var(--group-color,var(--line));transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
-#groups>details:hover{transform:translateY(-2px);box-shadow:0 5px 18px rgba(20,35,43,.08)}
-#groups>details:nth-child(1){--group-color:#1f5c7a}
-#groups>details:nth-child(2){--group-color:#b3261e}
-#groups>details:nth-child(3){--group-color:#6a4c93}
-#groups>details:nth-child(4){--group-color:#a05a00}
-#groups>details:nth-child(5){--group-color:#28745b}
-#groups>details:nth-child(6){--group-color:#007c91}
-#groups>details:nth-child(7){--group-color:#8b3a62}
-#groups>details:nth-child(8){--group-color:#53656e}
-#groups>details:nth-child(9){--group-color:#7a6b2b}
+#groups>details:hover{box-shadow:0 5px 18px rgba(20,35,43,.08)}
+#groups>details:nth-child(1){--group-color:var(--g1)}
+#groups>details:nth-child(2){--group-color:var(--g2)}
+#groups>details:nth-child(3){--group-color:var(--g3)}
+#groups>details:nth-child(4){--group-color:var(--g4)}
+#groups>details:nth-child(5){--group-color:var(--g5)}
+#groups>details:nth-child(6){--group-color:var(--g6)}
+#groups>details:nth-child(7){--group-color:var(--g7)}
+#groups>details:nth-child(8){--group-color:var(--g8)}
+#groups>details:nth-child(9){--group-color:var(--g9)}
 details.sub{border-left:3px solid color-mix(in srgb,var(--group-color,var(--accent)) 65%,transparent);transition:background .2s ease,border-color .2s ease,transform .2s ease}
-details.sub:hover{transform:translateX(2px)}
+
 details.sub summary code{color:var(--group-color,var(--accent));font-weight:600}
 summary{transition:color .2s ease,background .2s ease}
 summary:hover{background:color-mix(in srgb,var(--group-color,var(--accent)) 5%,transparent)}
@@ -93,7 +93,7 @@ details > .details-body{
   grid-template-rows:0fr;
   opacity:0;
   overflow:hidden;
-  transition:grid-template-rows .72s cubic-bezier(.16,1,.3,1),opacity .42s ease;
+  transition:grid-template-rows .3s cubic-bezier(.16,1,.3,1),opacity .2s ease;
   will-change:grid-template-rows,opacity;
 }
 details > .details-body > .details-content{
@@ -106,12 +106,16 @@ details > summary::-webkit-details-marker{display:none}
 details > summary::marker{display:none}
 details > summary::after{
   content:"＋";
-  float:right;
+  position:absolute;
+  right:14px;
+  top:14px;
+  width:1em;
+  text-align:center;
   font-size:18px;
   line-height:1;
   opacity:.55;
   transform:rotate(0deg);
-  transition:transform .55s cubic-bezier(.16,1,.3,1),opacity .2s ease;
+  transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .2s ease;
 }
 details.is-open > summary::after{
   content:"−";
@@ -179,6 +183,12 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 .ex-ask{color:var(--muted);margin:2px 0 12px}
 .ex-quote{margin:0 0 14px;padding:10px 14px;border-left:4px solid var(--accent);background:var(--bg);border-radius:4px}
 .ex-fb{font-weight:600;margin:14px 0 4px}.ex-fb.good{color:var(--c2)}.ex-fb.wrong{color:var(--odr)}
+.status a{color:var(--accent)}
+details.sub{scroll-margin-top:96px}
+#exam:focus{outline:none}
+details > summary{padding-right:44px}
+.fig{margin:0 0 14px}.fig svg{width:100%;max-width:520px;height:auto;display:block}.fig figcaption{font-size:.78rem;color:var(--muted);margin-top:4px}
+.fig-img{display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start}.fig-img img{max-width:100%;height:auto;max-height:230px;background:#fff;border:1px solid var(--line);border-radius:6px}.fig a{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -225,14 +235,15 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <button class="chip" data-f="all" aria-pressed="true">Все</button>
 <button class="chip" data-f="odr" aria-pressed="false">ОДР</button>
 <button class="chip" data-f="dr" aria-pressed="false">ДР</button>
+<button class="btn" id="expb">Раскрыть всё</button>
 <button class="btn" id="examb">🎓 Экзамен</button>
 <button class="btn" id="theme" aria-label="Сменить тему">◐ Тема</button>
 <span id="cnt" aria-live="polite"></span>
 </div>
 <div id="groups"></div>
-<div id="exam" hidden role="dialog" aria-modal="true" aria-label="Режим экзамен"><div class="ex-in">
+<div id="exam" tabindex="-1" hidden role="dialog" aria-modal="true" aria-label="Режим экзамен"><div class="ex-in">
 <div class="ex-top"><b>🎓 Экзамен</b>
-<select id="ek" aria-label="Какие дефекты"><option value="all">Все дефекты</option><option value="odr">Только ОДР</option><option value="dr">Только ДР</option></select>
+<select id="ek" aria-label="Какие дефекты"><option value="all">Все дефекты</option><option value="odr">Только ОДР</option><option value="dr">Только ДР</option><option value="mine">Мои ошибки (0)</option></select>
 <label class="ex-l"><input type="checkbox" id="es" checked> Перемешать</label>
 <button class="btn" data-a="restart">Заново</button><button class="btn" data-a="close">✕ Закрыть</button></div>
 <div class="ex-groups" id="eg" role="group" aria-label="Группы дефектов для теста"></div>
@@ -259,7 +270,7 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <dt>Фокус трещины и долом</dt><dd>Фокус — очаг, откуда началось разрушение. Долом — зона конечной стадии разрушения, она отличается от зоны усталостного роста трещины.</dd>
 <dt>Фрагмент и проба</dt><dd>Фрагмент — часть рельса, разрушившегося на три и более куска. Проба — часть разрушенного рельса, вырезанная на исследование.</dd>
 </dl>
-<p class="src">Источник: распоряжение ОАО «РЖД» № 2499р, таблицы 1 и 2, разделы 1, 3, 4. Перед использованием в работе сверяйте с действующей редакцией документа.</p>
+<p class="source">Источник: распоряжение ОАО «РЖД» № 2499р, таблицы 1 и 2, разделы 1, 3, 4. Перед использованием в работе сверяйте с действующей редакцией документа.</p>
 </main>
 <script>
 var GROUPS=[
@@ -357,7 +368,7 @@ el("mg").textContent="Группа "+g+" ("+grp[2]+")";el("mgt").textContent=grp
 el("mt").textContent="Тип "+t;el("mtt").textContent=TYPES[t];
 el("mp").textContent="Место "+p;el("mpt").textContent=PLACES[p];
 var s=el("st");
-if(EXIST[code]){s.className="status ok";s.textContent="Код "+code+" есть в таблице 1: "+EXIST[code]+".";}
+if(EXIST[code]){s.className="status ok";s.innerHTML="Код "+code+" есть в таблице 1: "+EXIST[code]+'. <a href="#'+code+'" data-go="'+code+'">Открыть карточку →</a>';}
 else{s.className="status no";s.textContent="Кода "+code+" в таблице 1 нет: такая комбинация в инструкции не используется.";}}
 [gsel,tsel,psel].forEach(function(x){x.addEventListener("change",upd);});
 upd();
@@ -708,22 +719,62 @@ var S={};D.forEach(function(d){d[0].forEach(function(c){S[c]=d;});});
 var KIND={odr:["ОДР","k-odr"],dr:["ДР","k-dr"],mix:["ДР / ОДР","k-mix"]};
 var ROWS=[["Почему происходит","r1"],["Как выявить","r2"],["Как устранить","r3"],["Как эксплуатировать","r4"]];
 function el(i){return document.getElementById(i);}
+var IDX={};
+var IM={'10.1-2':[[1]],'11.1-2':[[2,3,4,5,6]],'12.1-2':[[7,8,9,10,6]],'13.1':[[11]],'14.1-2':[[12]],'16.3-4':[[13,14]],'17.3-4':[[15,16]],'18.1-2':[[17]],'19.0-1-2':[[18,19]],'20.1-2':[[20],[21]],'21.1-2':[[22],[23,24,25]],'22.1-2':[[26],[23,27,28]],'24.1-2':[[29],[30]],'25.1-2':[[31]],'26.3-4':[[32,33]],'27.3-4':[[34,33]],'30.1-2':[[35]],'31.1-2':[[36]],'33.1':[[37]],'38.1':[[38]],'40.0':[[39,40]],'41.0, 41.2':[[41]],'43.1':[[42]],'44.0':[[43]],'46.3-4':[[44]],'47.3-4':[[45]],'50.1-2':[[46]],'53.1':[[47]],'55.1-2':[[48,49,50]],'56.3-4':[[51,52]],'57.3-4':[[53,54,55]],'60.1-2':[[56]],'64.1-2':[[57]],'65.1-2':[[58]],'66.3-4':[[59,60]],'67.3-4':[[59,60]],'69.1-2':[[61]],'70.1-2':[[62,63]],'71.1-2':[[64,65,66,67]],'72.1-2':[[68,69,70]],'73.1':[[71,72]],'74.1-2':[[73,74]],'75.1-2':[[75]],'76.3-4':[[76,77,78]],'77.3-4':[[79,77,80]],'79.1-2':[[81]],'85.1-2':[[82]],'86.3-4':[[83]]};
+var RP='M32 10H88Q92 10 92 16V34Q92 40 86 42H68V108H100Q106 108 106 114V128Q106 134 100 134H20Q14 134 14 128V114Q14 108 20 108H52V42H34Q28 40 28 34V16Q28 10 32 10Z';
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}}
 document.querySelectorAll('#groups details.sub').forEach(function(sub){
   var cd=sub.querySelector('summary code'),d=S[cd.textContent.trim()];
   if(!d)return;
   var k=KIND[d[1]],title=sub.querySelector('summary').textContent;
   cd.insertAdjacentHTML('afterend','<span class="kb '+k[1]+'">'+k[0]+'</span>');
-  sub.dataset.kind=d[1];sub.dataset.q=(title+' '+d.slice(2).join(' ')).toLowerCase();
+  sub.dataset.kind=d[1];var ks=[];cd.textContent.split(',').forEach(function(x){ks=ks.concat(expand(x.trim()));});var cc=MAP[ks[0]]||{};
+  sub.dataset.q=nz(title+' '+ks.join(' ')+' '+d.slice(2).join(' ')+' '+[cc.r,cc.v,cc.u,cc.e].join(' '));
+  ks.forEach(function(k){IDX[k]=sub;});sub.dataset.first=ks[0]||'';
+  sub.querySelector('summary').addEventListener('click',function(){if(!sub.classList.contains('is-open')&&sub.dataset.first){try{history.replaceState(null,'','#'+sub.dataset.first);}catch(e){}}});
   sub.dataset.code=cd.textContent.trim();
   var rows=ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+d[i+2]+'</span></div>';}).join('');
   var card='<div class="cheat"><div class="cheat-h"><b>Краткий ответ</b></div>'+rows+'</div><p class="sub-h">Подробно по инструкции</p>';
   sub.querySelector('.in').insertAdjacentHTML('afterbegin',card);
+  sub.querySelector('.in').insertAdjacentHTML('afterbegin',pics(cd.textContent.trim())||fig(d[1],ks));
 });
 /* поиск и фильтр */
-var kind='all',qi=el('qi');
+var kind='all',qi=el('qi'),wasF=false;function nz(s){return s.toLowerCase().replace(/ё/g,'е');}
+function pics(c){var m=IM[c];if(!m)return '';
+  function im(n){var f=('00'+n).slice(-3);return '<img loading="lazy" alt="Схематическое изображение дефекта '+c+' (таблица 2 инструкции 2499р)" src="images/image'+f+'.jpg" onerror="this.onerror=function(){this.remove()};this.src=\'https://www.tdesant.ru/images/info/2499r/image'+f+'.jpg\'">';}
+  return '<figure class="fig"><div class="fig-img">'+m[0].map(im).join('')+'</div>'+(m[1]?'<p class="cap">В изломе:</p><div class="fig-img">'+m[1].map(im).join('')+'</div>':'')+'<figcaption>Схематические изображения из таблицы 2 инструкции 2499р. Источник: <a href="https://www.tdesant.ru/info/item/144" target="_blank" rel="noopener">tdesant.ru</a>. Берутся из папки images рядом со страницей, а если её нет, то с сайта-источника.</figcaption></figure>';}
+function fig(kind,ks){
+  var col=kind==='odr'?'var(--odr)':kind==='dr'?'var(--dr)':'var(--c3)',g=+ks[0].charAt(0),t=ks[0].slice(0,2),pl=[];
+  ks.forEach(function(k){var d=k.split('.')[1];if(pl.indexOf(d)<0)pl.push(d);});
+  var n=pl.length,H=Math.max(150,n*34+12),oy=(H-150)/2,
+  hl='fill="'+col+'" fill-opacity=".35" stroke="'+col+'" stroke-width="2"',
+  ln='fill="none" stroke="'+col+'" stroke-width="3" stroke-linecap="round"',
+  nl='fill="none" stroke="var(--muted)"',m='';
+  if(g==1)m='<path d="M36 10h48l2 6H34z" '+hl+'/>';
+  else if(g==2)m='<ellipse cx="60" cy="24" rx="14" ry="8" '+hl+'/>';
+  else if(g==3)m=t=='31'?'<path d="M60 14V36" '+ln+'/>':t=='33'?'<path d="M40 42H80" '+ln+'/>':t=='38'?'<circle cx="60" cy="24" r="6" '+hl+'/>':'<path d="M36 22H84" '+ln+'/>';
+  else if(g==4)m=t=='44'?'<path d="M96 12V34" '+ln+' stroke-dasharray="4 3"/>':'<path d="M32 8Q46 14 60 8T88 8" '+ln+'/>';
+  else if(g==5)m=(t=='53'||t=='55')?'<circle cx="60" cy="75" r="5" '+hl+'/><path d="M65 75l12-8" '+ln+'/>':'<path d="M60 48V102" '+ln+'/>';
+  else if(g==6)m='<path d="M30 126H90" '+ln+'/>';
+  else if(g==7)m='<path d="M62 6L52 26L68 44L54 80L66 112L56 138" '+ln+'/>';
+  else if(g==8)m='<path d="'+RP+'" transform="translate(9 0)" '+nl+' stroke-dasharray="4 3"/>';
+  else m='<text x="60" y="84" text-anchor="middle" font-size="40" fill="'+col+'">?</text>';
+  var s='';
+  pl.forEach(function(d,i){var y=(H-n*34)/2+i*34+3,
+    mk=function(x){return '<rect x="'+x+'" y="'+(y+3)+'" width="14" height="22" rx="3" '+hl+'/>';},
+    bar=function(x){return '<rect x="'+x+'" y="'+(y+9)+'" width="48" height="10" rx="2" '+nl+' stroke-dasharray="3 2"/>';},
+    gap=function(x){return '<rect x="'+(x-2)+'" y="'+(y+6)+'" width="4" height="16" fill="var(--surface)" stroke="var(--muted)"/>';},
+    b='<rect x="170" y="'+(y+6)+'" width="240" height="16" rx="3" fill="var(--bg)" stroke="var(--muted)"/>',e='';
+    if(d=='0')e=mk(195)+mk(283)+mk(371);
+    else if(d=='1')e=gap(290)+bar(266)+mk(272);
+    else if(d=='2')e=gap(200)+bar(176)+mk(340);
+    else if(d=='3')e='<rect x="288" y="'+(y+4)+'" width="4" height="20" fill="var(--muted)"/>'+mk(283);
+    else e='<rect x="282" y="'+(y+4)+'" width="16" height="20" rx="3" fill="var(--line)" stroke="var(--muted)"/>'+mk(283);
+    s+=b+e+'<text x="132" y="'+(y+19)+'" font-size="12" fill="var(--muted)" font-family="var(--mono)">.'+d+'</text>';});
+  return '<figure class="fig"><svg viewBox="0 0 420 '+H+'" role="img" aria-label="Условная схема дефекта: сечение рельса и место по длине"><g transform="translate(0 '+oy+')"><path d="'+RP+'" fill="var(--bg)" stroke="var(--muted)" stroke-width="2"/>'+m+'</g>'+s+'</svg><figcaption>Условная схема: где дефект в сечении рельса и в каком месте по длине (.0 — вся длина, .1 — болтовой стык, .2 — вне стыка, .3 — сварной стык ЭКС, .4 — алюминотермитный). Составлена для справочника, это не рисунок из инструкции 2499р.</figcaption></figure>';}
+
 function apply(){
-  var q=qi.value.trim().toLowerCase(),total=0,subs=[];
+  var q=nz(qi.value.trim()),total=0,subs=[],f=!!(q||kind!=='all');if(!f&&wasF)document.querySelectorAll('#groups details').forEach(function(d){d.classList.remove('is-open');d.removeAttribute('open');});wasF=f;
   document.querySelectorAll('#groups > details').forEach(function(g){
     var n=0;
     g.querySelectorAll('details.sub').forEach(function(s){
@@ -738,10 +789,22 @@ function apply(){
   if(q&&subs.length&&subs.length<=3)subs.forEach(function(s){s.setAttribute('open','');s.classList.add('is-open');});
 }
 qi.addEventListener('input',apply);
-document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
-  kind=c.dataset.f;document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
+function setO(d){d.setAttribute('open','');d.classList.add('is-open');}
+function setC(d){d.classList.remove('is-open');d.removeAttribute('open');}
+function goCode(c){c=decodeURIComponent(String(c).replace(/^#/,'')).trim();var s=IDX[c]||IDX[(expand(c)||[])[0]];if(!s)return false;
+  qi.value='';kind='all';document.querySelectorAll('.toolbar .chip').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.f==='all'?'true':'false');});apply();
+  setO(s.closest('#groups > details'));setO(s);
+  setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},60);return true;}
+document.addEventListener('click',function(e){var a=e.target.closest('a[data-go]');if(a){e.preventDefault();if(goCode(a.dataset.go)){try{history.replaceState(null,'','#'+a.dataset.go);}catch(x){}}}});
+window.addEventListener('hashchange',function(){if(location.hash.length>1)goCode(location.hash.slice(1));});
+var eo=false;el('expb').addEventListener('click',function(){eo=!eo;document.querySelectorAll('#groups > details').forEach(function(g){if(g.style.display==='none')return;if(eo)setO(g);else{setC(g);g.querySelectorAll('details').forEach(setC);}});this.textContent=eo?'Свернуть всё':'Раскрыть всё';});
+if(location.hash.length>1)goCode(location.hash.slice(1));
+document.querySelectorAll('.toolbar .chip').forEach(function(c){c.addEventListener('click',function(){
+  kind=c.dataset.f;document.querySelectorAll('.toolbar .chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
 /* экзамен */
 var ex=el('exam');document.body.appendChild(ex);
+var SAVED={};try{SAVED=JSON.parse(ls('hard')||'{}')||{};}catch(e){}
+function sv(){ls('hard',JSON.stringify(SAVED));var o=el('ek').querySelector('[value=mine]');if(o)o.textContent='Мои ошибки ('+Object.keys(SAVED).length+')';}sv();
 var GSEL={},GL=['Трещины и выкрашивания','Поперечные трещины','Продольные трещины','Смятие и износ','Шейка','Подошва','Изломы','Изгибы','Прочие'];var ALL=[],Q=[],hard={},TOT=0,DONE=0,cur=null,ans=false,okNow=false;
 var KL={odr:'ОДР',dr:'ДР',mix:'ДР, при поперечной трещине — ОДР'};
 function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
@@ -751,14 +814,18 @@ function buildGroups(){var h='';document.querySelectorAll('#groups > details').f
   el('eg').innerHTML=h+'<button class="btn" type="button" data-g="all">Все группы</button>';}
 function buildAll(){if(ALL.length)return;buildGroups();document.querySelectorAll('#groups details.sub').forEach(function(sub){
   var d=S[sub.dataset.code];if(!d)return;var c=sub.querySelector('summary').cloneNode(true);
-  c.querySelectorAll('code,.kb').forEach(function(x){x.remove();});
+  c.querySelectorAll('code,.kb,.tag').forEach(function(x){x.remove();});
   ALL.push({code:sub.dataset.code,kind:d[1],title:c.textContent.trim(),d:d});});}
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function fw(t){return t.toLowerCase().replace(/[^а-яё ]/g,'').split(/\s+/).slice(0,2).join(' ');}
 function pickD(c,f,ok){var out=[],seen={};seen[f(c)]=1;
-  shuffle(ALL.filter(function(x){return x!==c&&x.code.charAt(0)!==c.code.charAt(0)&&ok(x);})).forEach(function(x){
-    var k=f(x);if(out.length<3&&!seen[k]){seen[k]=1;out.push(x);}});return out;}
+  function add(list){shuffle(list).forEach(function(x){var k=f(x);if(out.length<3&&!seen[k]){seen[k]=1;out.push(x);}});}
+  var rest=ALL.filter(function(x){return x!==c&&ok(x);});
+  add(rest.filter(function(x){return GSEL[x.code.charAt(0)];}));
+  if(out.length<3)add(rest.filter(function(x){return !GSEL[x.code.charAt(0)];}));
+  return out;}
 function nm(x){return x.code+' — '+x.title;}
+function cut(s){return s.length>120?s.slice(0,s.lastIndexOf(' ',117))+'…':s;}
 function make(c){
   var T=['cls','why','use','name'],t,r;
   do{r=Math.random();t=r<.2?'cls':r<.45?'why':r<.7?'use':'name';}while(t===c.last);
@@ -767,14 +834,14 @@ function make(c){
     q.opts=[{id:'odr',t:KL.odr},{id:'dr',t:KL.dr},{id:'mix',t:KL.mix}];return q;}
   var f,ok=function(){return true;},n=function(x){return x.d[2];};
   if(t==='why'){q.head=head;q.ask='Почему происходит этот дефект?';ok=function(x){return fw(x.d[2])!==fw(c.d[2]);};}
-  if(t==='use'){q.head=head;q.ask='Как эксплуатировать рельс с этим дефектом?';n=function(x){return x.d[5];};
+  if(t==='use'){q.head=head;q.ask='Как эксплуатировать рельс с этим дефектом?';n=function(x){return cut(x.d[5]);};
     ok=function(x){return c.kind==='odr'?x.kind==='dr':x.kind==='odr';};}
   if(t==='name'){q.head='';q.ask='Какому дефекту соответствует эта причина?';q.quote=c.d[2];n=nm;
     ok=function(x){return fw(x.d[2])!==fw(c.d[2]);};}
   var o=[c].concat(pickD(c,t==='name'?nm:n,ok));
   q.opts=shuffle(o.map(function(x){return {id:x.code,t:t==='name'?nm(x):n(x)};}));return q;}
 function start(list){buildAll();var k=el('ek').value;
-  Q=(list||ALL.filter(function(c){return GSEL[c.code.charAt(0)]&&(k==='all'||c.kind===k||c.kind==='mix');})).slice();
+  Q=(list||ALL.filter(function(c){return GSEL[c.code.charAt(0)]&&(k==='mine'?SAVED[c.code]:(k==='all'||c.kind===k||c.kind==='mix'));})).slice();
   Q.forEach(function(c){c.last='';});
   if(el('es').checked)shuffle(Q);hard={};TOT=Q.length;DONE=0;render();}
 function render(){
@@ -782,7 +849,7 @@ function render(){
   el('ebar').style.width=(TOT?DONE/TOT*100:0)+'%';
   el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+h.length;
   if(!Q.length){card.hidden=true;end.hidden=false;
-    if(!TOT){end.innerHTML='<p>Нет дефектов по выбранным настройкам. Выберите хотя бы одну группу.</p>';return;}
+    if(!TOT){end.innerHTML=el('ek').value==='mine'?'<p>Сохранённых ошибок пока нет.</p>':'<p>Нет дефектов по выбранным настройкам. Выберите хотя бы одну группу.</p>';return;}
     var lst=ALL.filter(function(c){return hard[c.code];});
     end.innerHTML='<h3>Готово!</h3><p>С первого раза верно: <b>'+(TOT-h.length)+' из '+TOT+'</b>.</p>'+
       (lst.length?'<p>Где были ошибки:</p><ul>'+lst.map(function(c){return '<li><code>'+esc(c.code)+'</code> '+esc(c.title)+'</li>';}).join('')+'</ul>':'<p>Без единой ошибки!</p>')+
@@ -803,11 +870,11 @@ function pick(i){
     if(q.opts[j].id===q.ok)b.classList.add('ok');else if(j===i)b.classList.add('bad');else b.classList.add('dim');});
   var fb=el('efb');fb.hidden=false;fb.className='ex-fb '+(okNow?'good':'wrong');
   fb.textContent=okNow?'Верно!':'Неверно. Правильный ответ выделен зелёным.';
-  if(!okNow)hard[cur.code]=1;
+  if(!okNow){hard[cur.code]=1;SAVED[cur.code]=1;}else if(!hard[cur.code])delete SAVED[cur.code];sv();
   el('eans').hidden=false;var nb=ex.querySelector('[data-a=next]');nb.hidden=false;nb.focus();
   el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+Object.keys(hard).length;}
 function act(a){
-  if(a==='close'){ex.hidden=true;document.body.style.overflow='';return;}
+  if(a==='close'){ex.hidden=true;document.body.style.overflow='';document.querySelector('main').inert=false;if(ex._pf&&ex._pf.focus)ex._pf.focus();return;}
   if(a==='restart'){el('eend').hidden=true;start();return;}
   if(a==='hard'){start(ALL.filter(function(c){return hard[c.code];}));return;}
   if(a==='next'&&ans){if(okNow){Q.shift();DONE++;}else Q.push(Q.shift());render();ex.scrollTop=0;}}
@@ -820,7 +887,7 @@ ex.addEventListener('click',function(e){
   var b=e.target.closest('[data-a]');if(b)act(b.dataset.a);});
 el('ek').addEventListener('change',function(){start();});
 el('es').addEventListener('change',function(){start();});
-el('examb').addEventListener('click',function(){ex.hidden=false;document.body.style.overflow='hidden';start();});
+el('examb').addEventListener('click',function(){ex._pf=document.activeElement;ex.hidden=false;document.body.style.overflow='hidden';document.querySelector('main').inert=true;start();ex.focus();});
 document.addEventListener('keydown',function(e){
   if(ex.hidden)return;
   if(e.key==='Escape'){act('close');return;}
@@ -857,6 +924,8 @@ el('theme').addEventListener('click',function(){
       body.appendChild(content);
       d.appendChild(body);
       d.dataset.animReady='1';
+      var sync=function(){summary.setAttribute('aria-expanded',d.classList.contains('is-open')?'true':'false');};
+      sync();new MutationObserver(sync).observe(d,{attributes:true,attributeFilter:['class']});
 
       var reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
       var timer=null;
@@ -901,7 +970,7 @@ el('theme').addEventListener('click',function(){
             body.removeEventListener('transitionend',end);
             finishClose();
             timer=null;
-          },780);
+          },360);
         }else{
           d.setAttribute('open','');
           /* Первый кадр — закрытое состояние, второй — открытое. */
