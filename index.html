@@ -159,6 +159,8 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 .ex-bar{height:6px;background:var(--line);border-radius:3px;margin:6px 0 14px;overflow:hidden}
 .ex-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
 .ex-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.ex-groups{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ex-groups .chip,.ex-groups .btn{font-size:.8rem;padding:6px 10px}
 .ex-q h3{margin:8px 0 14px;font-size:1.25rem;line-height:1.3}
 .ex-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
 .btn.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)}
@@ -233,6 +235,7 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <select id="ek" aria-label="Какие дефекты"><option value="all">Все дефекты</option><option value="odr">Только ОДР</option><option value="dr">Только ДР</option></select>
 <label class="ex-l"><input type="checkbox" id="es" checked> Перемешать</label>
 <button class="btn" data-a="restart">Заново</button><button class="btn" data-a="close">✕ Закрыть</button></div>
+<div class="ex-groups" id="eg" role="group" aria-label="Группы дефектов для теста"></div>
 <div id="eprog" aria-live="polite"></div><div class="ex-bar"><i id="ebar"></i></div>
 <div id="ecard" class="ex-card"></div><div id="eend" class="ex-card ex-end" hidden></div>
 </div></div>
@@ -739,10 +742,14 @@ document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click
   kind=c.dataset.f;document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
 /* экзамен */
 var ex=el('exam');document.body.appendChild(ex);
-var ALL=[],Q=[],hard={},TOT=0,DONE=0,cur=null,ans=false,okNow=false;
+var GSEL={},GL=['Трещины и выкрашивания','Поперечные трещины','Продольные трещины','Смятие и износ','Шейка','Подошва','Изломы','Изгибы','Прочие'];var ALL=[],Q=[],hard={},TOT=0,DONE=0,cur=null,ans=false,okNow=false;
 var KL={odr:'ОДР',dr:'ДР',mix:'ДР, при поперечной трещине — ОДР'};
 function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function buildAll(){if(ALL.length)return;document.querySelectorAll('#groups details.sub').forEach(function(sub){
+function buildGroups(){var h='';document.querySelectorAll('#groups > details').forEach(function(g,i){
+  var n=g.querySelector('summary').textContent.trim().charAt(0),cnt=g.querySelectorAll('details.sub').length;
+  GSEL[n]=1;h+='<button class="chip" type="button" data-g="'+n+'" aria-pressed="true" title="'+esc(g.querySelector('summary').textContent.trim())+'">'+n+' · '+esc(GL[i]||'Группа')+' ('+cnt+')</button>';});
+  el('eg').innerHTML=h+'<button class="btn" type="button" data-g="all">Все группы</button>';}
+function buildAll(){if(ALL.length)return;buildGroups();document.querySelectorAll('#groups details.sub').forEach(function(sub){
   var d=S[sub.dataset.code];if(!d)return;var c=sub.querySelector('summary').cloneNode(true);
   c.querySelectorAll('code,.kb').forEach(function(x){x.remove();});
   ALL.push({code:sub.dataset.code,kind:d[1],title:c.textContent.trim(),d:d});});}
@@ -767,7 +774,7 @@ function make(c){
   var o=[c].concat(pickD(c,t==='name'?nm:n,ok));
   q.opts=shuffle(o.map(function(x){return {id:x.code,t:t==='name'?nm(x):n(x)};}));return q;}
 function start(list){buildAll();var k=el('ek').value;
-  Q=(list||ALL.filter(function(c){return k==='all'||c.kind===k||c.kind==='mix';})).slice();
+  Q=(list||ALL.filter(function(c){return GSEL[c.code.charAt(0)]&&(k==='all'||c.kind===k||c.kind==='mix');})).slice();
   Q.forEach(function(c){c.last='';});
   if(el('es').checked)shuffle(Q);hard={};TOT=Q.length;DONE=0;render();}
 function render(){
@@ -775,6 +782,7 @@ function render(){
   el('ebar').style.width=(TOT?DONE/TOT*100:0)+'%';
   el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+h.length;
   if(!Q.length){card.hidden=true;end.hidden=false;
+    if(!TOT){end.innerHTML='<p>Нет дефектов по выбранным настройкам. Выберите хотя бы одну группу.</p>';return;}
     var lst=ALL.filter(function(c){return hard[c.code];});
     end.innerHTML='<h3>Готово!</h3><p>С первого раза верно: <b>'+(TOT-h.length)+' из '+TOT+'</b>.</p>'+
       (lst.length?'<p>Где были ошибки:</p><ul>'+lst.map(function(c){return '<li><code>'+esc(c.code)+'</code> '+esc(c.title)+'</li>';}).join('')+'</ul>':'<p>Без единой ошибки!</p>')+
@@ -804,6 +812,10 @@ function act(a){
   if(a==='hard'){start(ALL.filter(function(c){return hard[c.code];}));return;}
   if(a==='next'&&ans){if(okNow){Q.shift();DONE++;}else Q.push(Q.shift());render();ex.scrollTop=0;}}
 ex.addEventListener('click',function(e){
+  var g=e.target.closest('[data-g]');if(g){var v=g.dataset.g;
+    if(v==='all'){Object.keys(GSEL).forEach(function(k){GSEL[k]=1;});}else GSEL[v]=GSEL[v]?0:1;
+    ex.querySelectorAll('.chip[data-g]').forEach(function(c){c.setAttribute('aria-pressed',GSEL[c.dataset.g]?'true':'false');});
+    start();return;}
   var t=e.target.closest('.tile');if(t){pick(+t.dataset.i);return;}
   var b=e.target.closest('[data-a]');if(b)act(b.dataset.a);});
 el('ek').addEventListener('change',function(){start();});
