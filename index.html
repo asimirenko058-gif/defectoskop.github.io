@@ -149,6 +149,34 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 .sub-h{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
 @media (max-width:520px){.cr{grid-template-columns:1fr;gap:2px}}
 @media print{.toolbar{display:none}}
+
+[hidden]{display:none!important}
+#exam{position:fixed;inset:0;z-index:50;background:var(--bg);overflow:auto;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
+.ex-in{max-width:760px;margin:0 auto}
+.ex-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}.ex-top b{margin-right:auto;font-size:1.1rem}
+.ex-l{font-size:.85rem;color:var(--muted);display:flex;gap:6px;align-items:center}
+#eprog{font-size:.85rem;color:var(--muted)}
+.ex-bar{height:6px;background:var(--line);border-radius:3px;margin:6px 0 14px;overflow:hidden}
+.ex-bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.ex-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.ex-q h3{margin:8px 0 14px;font-size:1.25rem;line-height:1.3}
+.ex-act{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.btn.pri{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+.ex-hint{font-size:.78rem;color:var(--muted);margin:12px 0 0}
+.ex-end li{margin:4px 0}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.tile{display:flex;gap:10px;align-items:flex-start;text-align:left;font:inherit;line-height:1.45;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:12px 14px;min-height:64px;cursor:pointer;transition:border-color .2s,background .2s,opacity .2s,transform .15s}
+.tile b{flex:none;width:1.6em;height:1.6em;border-radius:50%;background:var(--line);display:grid;place-items:center;font:600 .8rem var(--mono)}
+.tile:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px)}
+.tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tile:disabled{cursor:default}
+.tile.ok{border-color:var(--c2);background:color-mix(in srgb,var(--c2) 16%,transparent)}
+.tile.bad{border-color:var(--odr);background:color-mix(in srgb,var(--odr) 14%,transparent)}
+.tile.dim{opacity:.55}
+.ex-ask{color:var(--muted);margin:2px 0 12px}
+.ex-quote{margin:0 0 14px;padding:10px 14px;border-left:4px solid var(--accent);background:var(--bg);border-radius:4px}
+.ex-fb{font-weight:600;margin:14px 0 4px}.ex-fb.good{color:var(--c2)}.ex-fb.wrong{color:var(--odr)}
 </style>
 </head>
 <body>
@@ -189,16 +217,25 @@ details > summary:focus-visible{outline:2px solid var(--accent);outline-offset:2
 <p class="note" style="margin-top:12px">Если у дефекта несколько мест, их пишут через дефис: 21.1-2 значит 21.1 или 21.2. Буква Н в конце (21.2.Н) — дефект взят в накладки. Если дефект относится к двум кодам, их пишут через дробь: 71.2/21.2 — излом из-за поперечной трещины.</p>
 
 <h2>Группы дефектов</h2>
-<p>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
+<p>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа, ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
 <div class="toolbar" role="search">
 <input type="search" id="qi" placeholder="Поиск: код, название, причина…" aria-label="Поиск по дефектам">
 <button class="chip" data-f="all" aria-pressed="true">Все</button>
 <button class="chip" data-f="odr" aria-pressed="false">ОДР</button>
 <button class="chip" data-f="dr" aria-pressed="false">ДР</button>
+<button class="btn" id="examb">🎓 Экзамен</button>
 <button class="btn" id="theme" aria-label="Сменить тему">◐ Тема</button>
 <span id="cnt" aria-live="polite"></span>
 </div>
 <div id="groups"></div>
+<div id="exam" hidden role="dialog" aria-modal="true" aria-label="Режим экзамен"><div class="ex-in">
+<div class="ex-top"><b>🎓 Экзамен</b>
+<select id="ek" aria-label="Какие дефекты"><option value="all">Все дефекты</option><option value="odr">Только ОДР</option><option value="dr">Только ДР</option></select>
+<label class="ex-l"><input type="checkbox" id="es" checked> Перемешать</label>
+<button class="btn" data-a="restart">Заново</button><button class="btn" data-a="close">✕ Закрыть</button></div>
+<div id="eprog" aria-live="polite"></div><div class="ex-bar"><i id="ebar"></i></div>
+<div id="ecard" class="ex-card"></div><div id="eend" class="ex-card ex-end" hidden></div>
+</div></div>
 
 <h2>Термины и сокращения</h2>
 <dl>
@@ -700,6 +737,85 @@ function apply(){
 qi.addEventListener('input',apply);
 document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){
   kind=c.dataset.f;document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
+/* экзамен */
+var ex=el('exam');document.body.appendChild(ex);
+var ALL=[],Q=[],hard={},TOT=0,DONE=0,cur=null,ans=false,okNow=false;
+var KL={odr:'ОДР',dr:'ДР',mix:'ДР, при поперечной трещине — ОДР'};
+function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function buildAll(){if(ALL.length)return;document.querySelectorAll('#groups details.sub').forEach(function(sub){
+  var d=S[sub.dataset.code];if(!d)return;var c=sub.querySelector('summary').cloneNode(true);
+  c.querySelectorAll('code,.kb').forEach(function(x){x.remove();});
+  ALL.push({code:sub.dataset.code,kind:d[1],title:c.textContent.trim(),d:d});});}
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function fw(t){return t.toLowerCase().replace(/[^а-яё ]/g,'').split(/\s+/).slice(0,2).join(' ');}
+function pickD(c,f,ok){var out=[],seen={};seen[f(c)]=1;
+  shuffle(ALL.filter(function(x){return x!==c&&x.code.charAt(0)!==c.code.charAt(0)&&ok(x);})).forEach(function(x){
+    var k=f(x);if(out.length<3&&!seen[k]){seen[k]=1;out.push(x);}});return out;}
+function nm(x){return x.code+' — '+x.title;}
+function make(c){
+  var T=['cls','why','use','name'],t,r;
+  do{r=Math.random();t=r<.2?'cls':r<.45?'why':r<.7?'use':'name';}while(t===c.last);
+  c.last=t;var head='<code>'+esc(c.code)+'</code><h3>'+esc(c.title)+'</h3>',q={t:t,ok:c.code};
+  if(t==='cls'){q.head=head;q.ask='К какому классу относится дефект?';q.ok=c.kind;
+    q.opts=[{id:'odr',t:KL.odr},{id:'dr',t:KL.dr},{id:'mix',t:KL.mix}];return q;}
+  var f,ok=function(){return true;},n=function(x){return x.d[2];};
+  if(t==='why'){q.head=head;q.ask='Почему происходит этот дефект?';ok=function(x){return fw(x.d[2])!==fw(c.d[2]);};}
+  if(t==='use'){q.head=head;q.ask='Как эксплуатировать рельс с этим дефектом?';n=function(x){return x.d[5];};
+    ok=function(x){return c.kind==='odr'?x.kind==='dr':x.kind==='odr';};}
+  if(t==='name'){q.head='';q.ask='Какому дефекту соответствует эта причина?';q.quote=c.d[2];n=nm;
+    ok=function(x){return fw(x.d[2])!==fw(c.d[2]);};}
+  var o=[c].concat(pickD(c,t==='name'?nm:n,ok));
+  q.opts=shuffle(o.map(function(x){return {id:x.code,t:t==='name'?nm(x):n(x)};}));return q;}
+function start(list){buildAll();var k=el('ek').value;
+  Q=(list||ALL.filter(function(c){return k==='all'||c.kind===k||c.kind==='mix';})).slice();
+  Q.forEach(function(c){c.last='';});
+  if(el('es').checked)shuffle(Q);hard={};TOT=Q.length;DONE=0;render();}
+function render(){
+  var card=el('ecard'),end=el('eend'),h=Object.keys(hard);
+  el('ebar').style.width=(TOT?DONE/TOT*100:0)+'%';
+  el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+h.length;
+  if(!Q.length){card.hidden=true;end.hidden=false;
+    var lst=ALL.filter(function(c){return hard[c.code];});
+    end.innerHTML='<h3>Готово!</h3><p>С первого раза верно: <b>'+(TOT-h.length)+' из '+TOT+'</b>.</p>'+
+      (lst.length?'<p>Где были ошибки:</p><ul>'+lst.map(function(c){return '<li><code>'+esc(c.code)+'</code> '+esc(c.title)+'</li>';}).join('')+'</ul>':'<p>Без единой ошибки!</p>')+
+      '<div class="ex-act"><button class="btn pri" data-a="restart">Заново</button>'+(lst.length?'<button class="btn" data-a="hard">Только ошибки</button>':'')+'</div>';
+    return;}
+  end.hidden=true;card.hidden=false;ans=false;cur=Q[0];var q=cur.q=make(cur);
+  card.innerHTML='<div class="ex-q">'+q.head+(q.head?'<p class="ex-ask">'+esc(q.ask)+'</p>':'<h3>'+esc(q.ask)+'</h3>')+
+    (q.quote?'<blockquote class="ex-quote">'+esc(q.quote)+'</blockquote>':'')+'</div>'+
+    '<div class="tiles">'+q.opts.map(function(o,i){return '<button class="tile" data-i="'+i+'"><b>'+(i+1)+'</b><span>'+esc(o.t)+'</span></button>';}).join('')+'</div>'+
+    '<div id="efb" class="ex-fb" hidden></div>'+
+    '<div id="eans" hidden><p class="sub-h">'+esc(nm(cur))+'</p>'+ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+esc(cur.d[i+2])+'</span></div>';}).join('')+'</div>'+
+    '<div class="ex-act"><button class="btn pri" data-a="next" hidden>Дальше →</button></div>'+
+    '<p class="ex-hint">Нажмите плитку или клавишу 1–'+q.opts.length+' · Enter — дальше · Esc — выйти</p>';
+}
+function pick(i){
+  if(ans||!Q.length)return;var q=cur.q,o=q.opts[i];if(!o)return;ans=true;okNow=o.id===q.ok;
+  ex.querySelectorAll('.tile').forEach(function(b,j){b.disabled=true;
+    if(q.opts[j].id===q.ok)b.classList.add('ok');else if(j===i)b.classList.add('bad');else b.classList.add('dim');});
+  var fb=el('efb');fb.hidden=false;fb.className='ex-fb '+(okNow?'good':'wrong');
+  fb.textContent=okNow?'Верно!':'Неверно. Правильный ответ выделен зелёным.';
+  if(!okNow)hard[cur.code]=1;
+  el('eans').hidden=false;var nb=ex.querySelector('[data-a=next]');nb.hidden=false;nb.focus();
+  el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+Object.keys(hard).length;}
+function act(a){
+  if(a==='close'){ex.hidden=true;document.body.style.overflow='';return;}
+  if(a==='restart'){el('eend').hidden=true;start();return;}
+  if(a==='hard'){start(ALL.filter(function(c){return hard[c.code];}));return;}
+  if(a==='next'&&ans){if(okNow){Q.shift();DONE++;}else Q.push(Q.shift());render();ex.scrollTop=0;}}
+ex.addEventListener('click',function(e){
+  var t=e.target.closest('.tile');if(t){pick(+t.dataset.i);return;}
+  var b=e.target.closest('[data-a]');if(b)act(b.dataset.a);});
+el('ek').addEventListener('change',function(){start();});
+el('es').addEventListener('change',function(){start();});
+el('examb').addEventListener('click',function(){ex.hidden=false;document.body.style.overflow='hidden';start();});
+document.addEventListener('keydown',function(e){
+  if(ex.hidden)return;
+  if(e.key==='Escape'){act('close');return;}
+  var t=e.target.tagName;if(t==='SELECT'||t==='INPUT')return;
+  if(/^[1-4]$/.test(e.key)){pick(+e.key-1);}
+  else if(e.key==='ArrowRight'&&ans)act('next');
+  else if((e.key==='Enter'||e.key===' ')&&ans&&t!=='BUTTON'){e.preventDefault();act('next');}});
 /* тема */
 var root=document.documentElement,t0=ls('theme');if(t0)root.setAttribute('data-theme',t0);
 el('theme').addEventListener('click',function(){
