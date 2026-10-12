@@ -1406,8 +1406,8 @@ var SPECS={
   var message=document.getElementById('scheduleMessage');
   var clock=document.getElementById('scheduleClock');
   if(!board||!message||!clock)return;
-  // 1-я пара 08:00–09:30; перемена 10 мин; 2-я пара 09:40–11:10;
-  // большая перемена 60 мин; затем пары по 90 мин и перемены по 10 мин.
+  // Расписание и кабинеты по таблице на изображении.
+  // Кабинет для 5-й пары в исходной таблице не указан.
   var events=[
     {start:8*60,end:9*60+30,type:'class',num:1},
     {start:9*60+30,end:9*60+40,type:'break'},
@@ -1419,6 +1419,32 @@ var SPECS={
     {start:15*60+20,end:15*60+30,type:'break'},
     {start:15*60+30,end:17*60,type:'class',num:5}
   ];
+  var weekdayNames=['ВОСКРЕСЕНЬЕ','ПОНЕДЕЛЬНИК','ВТОРНИК','СРЕДА','ЧЕТВЕРГ','ПЯТНИЦА','СУББОТА'];
+  // Индексы: 0=воскресенье, 1=понедельник ... 6=суббота.
+  var rooms={
+    1:{1:'24',2:'24',3:'44',4:'44'},
+    2:{1:'24',2:'24',3:'24',4:'24',5:'24'},
+    3:{1:'46',2:'46',3:'46',4:'46'},
+    4:{1:'24',2:'24',3:'44',4:'44'},
+    5:{1:'46',2:'46',3:'44',4:'44'}
+  };
+  // Названия пар по таблице на изображении (неделя 12.10–16.10.2026).
+  // Если название изменится — правьте только этот блок.
+  var US='Средства ультразвукового';
+  var BD='Безопасность движения';
+  var PTE='ПТЭ, инструкции и безопасность';
+  var subjects={
+    1:{1:US,2:US,3:BD,4:BD},
+    2:{1:US,2:US,3:US,4:US},
+    3:{1:US,2:US,3:US,4:US},
+    4:{1:US,2:US,3:PTE,4:PTE},
+    5:{1:US,2:US,3:PTE,4:PTE}
+  };
+  function classDetails(day,num){
+    var room=rooms[day]&&rooms[day][num];
+    var subj=subjects[day]&&subjects[day][num];
+    return weekdayNames[day]+' · ПАРА '+num+(subj?' · '+subj.toUpperCase():'')+(room?' · КАБИНЕТ '+room:' · КАБИНЕТ НЕ УКАЗАН');
+  }
   function pad(n){return String(n).padStart(2,'0');}
   function fmt(ms){var total=Math.max(0,Math.ceil(ms/1000));var h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;return h?pad(h)+':'+pad(m)+':'+pad(s):pad(m)+':'+pad(s);}
   function setText(text){message.innerHTML='';for(var i=0;i<2;i++){var span=document.createElement('span');span.className='schedule-text';span.textContent=text; if(i)span.setAttribute('aria-hidden','true');message.appendChild(span);}}
@@ -1445,7 +1471,7 @@ var SPECS={
     board.classList.remove('is-class','is-break','is-idle');
     if(ev){
       var endToday=new Date(now);endToday.setHours(Math.floor(ev.end/60),ev.end%60,0,0);
-      if(ev.type==='class'){board.classList.add('is-class');setText('ПАРА '+ev.num+' · ДО КОНЦА '+fmt(endToday-now));}
+      if(ev.type==='class'){board.classList.add('is-class');setText(classDetails(now.getDay(),ev.num)+' · ДО КОНЦА '+fmt(endToday-now));}
       else{board.classList.add('is-break');setText('ПЕРЕМЕНА · ДО КОНЦА '+fmt(endToday-now));}
     }else if(minute<8*60){
       board.classList.add('is-idle');var startToday=new Date(now);startToday.setHours(8,0,0,0);setText('ЗАНЯТИЯ НАЧНУТСЯ ЧЕРЕЗ '+fmt(startToday-now));
