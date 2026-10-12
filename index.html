@@ -279,14 +279,31 @@ details > summary{padding-right:44px}
   #exam .ex-top{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0;flex-wrap:wrap;gap:8px}
   #exam .ex-top .btn{min-height:40px}
 }
-@media(prefers-reduced-motion:reduce){.schedule-dot{animation:none}.schedule-message{animation:none;padding-left:14px;white-space:normal}}
+.schedule-board .board-head,.schedule-board .schedule-track{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.schedule-board .board-head:focus-visible,.schedule-board .schedule-track:focus-visible{outline:2px solid #6db3d6;outline-offset:-2px}
+.schedule-chev{width:0;height:0;flex:none;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid #8fa1ad;transition:transform .25s ease}
+.schedule-board.is-open .schedule-chev{transform:rotate(180deg)}
+.schedule-panel{position:relative;z-index:4;max-height:0;overflow:hidden;background:#0b1013;border-top:0 solid #27323a;transition:max-height .35s cubic-bezier(.22,1,.36,1)}
+.schedule-board.is-open .schedule-panel{max-height:min(62vh,560px);overflow-y:auto;border-top-width:1px}
+.schedule-panel .sp-group{padding:8px 14px 2px;font-size:.68rem;letter-spacing:.08em;color:#8fa1ad}
+.schedule-panel table{width:100%;border-collapse:collapse;font-size:.8rem;color:#dfe8ed;font-weight:500}
+.schedule-panel th,.schedule-panel td{border:0;border-top:1px solid #1d272e;padding:5px 14px;text-align:left;vertical-align:top;background:none}
+.schedule-panel td.t{white-space:nowrap;color:#8fa1ad;font-variant-numeric:tabular-nums}
+.schedule-panel td.r{white-space:nowrap;text-align:center}
+.schedule-panel tr.sp-day th{background:#141c21;color:#c8e3ef;font-size:.74rem;letter-spacing:.08em;border-left:3px solid transparent}
+.schedule-panel tr.sp-day.today th{border-left-color:#e53935;color:#fff}
+.schedule-panel tr.now td{background:rgba(229,57,53,.22);color:#fff}
+.schedule-panel tr.now td.t{color:#ffb3b0}
+@media(max-width:600px){.schedule-panel table{font-size:.72rem}.schedule-panel th,.schedule-panel td{padding:5px 9px}.schedule-panel .sp-group{padding:7px 9px 2px}.schedule-board.is-open .schedule-panel{max-height:60vh}.schedule-panel td.tc{display:none}.schedule-panel th.tc{display:none}}
+@media(prefers-reduced-motion:reduce){.schedule-panel{transition:none}.schedule-chev{transition:none}.schedule-dot{animation:none}.schedule-message{animation:none;padding-left:14px;white-space:normal}}
 
 </style>
 </head>
 <body>
 <div id="scheduleBoard" class="schedule-board is-idle" role="status" aria-live="off">
-  <div class="board-head"><span class="schedule-dot" aria-hidden="true"></span><span>РАСПИСАНИЕ · 08:00—17:00</span><span id="scheduleClock" style="margin-left:auto;font-variant-numeric:tabular-nums">--:--:--</span></div>
-  <div class="schedule-track"><div id="scheduleMessage" class="schedule-message"><span class="schedule-text">Загрузка расписания…</span><span class="schedule-text" aria-hidden="true">Загрузка расписания…</span></div></div>
+  <div class="board-head"><span class="schedule-dot" aria-hidden="true"></span><span>РАСПИСАНИЕ · 08:00—17:00</span><span id="scheduleClock" style="margin-left:auto;font-variant-numeric:tabular-nums">--:--:--</span><span class="schedule-chev" aria-hidden="true"></span></div>
+  <div class="schedule-track" id="scheduleTrack" role="button" tabindex="0" aria-expanded="false" aria-controls="schedulePanel" title="Нажмите, чтобы открыть всё расписание"><div id="scheduleMessage" class="schedule-message"><span class="schedule-text">Загрузка расписания…</span><span class="schedule-text" aria-hidden="true">Загрузка расписания…</span></div></div>
+  <div id="schedulePanel" class="schedule-panel" aria-label="Расписание на неделю"></div>
 </div>
 <main>
 <h1>Дефекты рельсов: коды и группы</h1>
@@ -1445,6 +1462,39 @@ var SPECS={
     var subj=subjects[day]&&subjects[day][num];
     return weekdayNames[day]+' · ПАРА '+num+(subj?' · '+subj.toUpperCase():'')+(room?' · КАБИНЕТ '+room:' · КАБИНЕТ НЕ УКАЗАН');
   }
+  // Полное расписание (раскрывается по нажатию на бегущую строку).
+  var GR='Григорьев Б.Г.',AB='Абакумов В.В.';
+  var teachers={1:{1:GR,2:GR,3:AB,4:AB},2:{1:GR,2:GR,3:GR,4:GR},3:{1:GR,2:GR,3:GR,4:GR},4:{1:GR,2:GR,3:AB,4:AB},5:{1:GR,2:GR,3:AB,4:AB}};
+  var dayDates={1:'12.10',2:'13.10',3:'14.10',4:'15.10',5:'16.10'};
+  function hm(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+  var panel=document.getElementById('schedulePanel'),track=document.getElementById('scheduleTrack'),head=board.querySelector('.board-head');
+  function esc2(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  (function buildPanel(){
+    if(!panel)return;
+    var h='<div class="sp-group">ОДТ-48/Р · КУРАТОР ШИШКИН А.А.</div><table><tbody>';
+    [1,2,3,4,5].forEach(function(d){
+      h+='<tr class="sp-day" data-day="'+d+'"><th colspan="4">'+weekdayNames[d]+' · '+dayDates[d]+'.2026</th></tr>';
+      events.forEach(function(ev){
+        if(ev.type!=='class')return;
+        var subj=subjects[d]&&subjects[d][ev.num];if(!subj)return;
+        h+='<tr data-day="'+d+'" data-num="'+ev.num+'"><td class="t">'+hm(ev.start)+'–'+hm(ev.end)+'</td><td>'+esc2(subj)+'</td><td class="r">'+esc2(rooms[d][ev.num]||'—')+'</td><td class="tc">'+esc2(teachers[d][ev.num]||'')+'</td></tr>';
+      });
+    });
+    panel.innerHTML=h+'</tbody></table>';
+  })();
+  function setOpen(o){board.classList.toggle('is-open',o);if(track)track.setAttribute('aria-expanded',o?'true':'false');if(o)markNow(lastDay,lastNum);}
+  function toggle(){setOpen(!board.classList.contains('is-open'));}
+  if(track){track.addEventListener('click',toggle);track.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});}
+  if(head)head.addEventListener('click',toggle);
+  var lastDay=-1,lastNum=0;
+  function markNow(day,num){
+    lastDay=day;lastNum=num;if(!panel)return;
+    Array.prototype.forEach.call(panel.querySelectorAll('tr'),function(r){
+      var d=+r.dataset.day,n=+r.dataset.num;
+      if(r.classList.contains('sp-day'))r.classList.toggle('today',d===day);
+      else r.classList.toggle('now',d===day&&n===num);
+    });
+  }
   function pad(n){return String(n).padStart(2,'0');}
   function fmt(ms){var total=Math.max(0,Math.ceil(ms/1000));var h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;return h?pad(h)+':'+pad(m)+':'+pad(s):pad(m)+':'+pad(s);}
   function setText(text){message.innerHTML='';for(var i=0;i<2;i++){var span=document.createElement('span');span.className='schedule-text';span.textContent=text; if(i)span.setAttribute('aria-hidden','true');message.appendChild(span);}}
@@ -1469,6 +1519,7 @@ var SPECS={
     clock.textContent=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
     var ev=events.find(function(x){return minute>=x.start&&minute<x.end;});
     board.classList.remove('is-class','is-break','is-idle');
+    var nowNum=(ev&&ev.type==='class')?ev.num:0;if(now.getDay()!==lastDay||nowNum!==lastNum)markNow(now.getDay(),nowNum);
     if(ev){
       var endToday=new Date(now);endToday.setHours(Math.floor(ev.end/60),ev.end%60,0,0);
       if(ev.type==='class'){board.classList.add('is-class');setText(classDetails(now.getDay(),ev.num)+' · ДО КОНЦА '+fmt(endToday-now));}
