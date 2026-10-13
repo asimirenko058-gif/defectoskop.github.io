@@ -3544,7 +3544,7 @@ document.addEventListener('click',function(e){
   }
 
   /* ---------- Конструктор кода ---------- */
-  var elSel = makeDD(document.querySelector('.dd[data-dd="el2143"]'), ELEMENTS.map(function(e){return {v:e.v, p:false, t:e.t};}), 'О', 'Элемент');
+  var elSel = makeDD(document.querySelector('.dd[data-dd="el2143"]'), ELEMENTS.map(function(e){return {v:e.v, p:false, t:e.v + ' — ' + e.t};}), 'О', 'Элемент');
   var idxSel = makeDD(document.querySelector('.dd[data-dd="idx2143"]'), INDICES.map(function(i){return {v:i.v, p:false, t:i.t};}), '', 'Индекс');
   var gSel2143 = makeDD(document.querySelector('.dd[data-dd="g2143"]'), GROUPS2143.map(function(g){return {v:g[0], t:g[1]};}), 2, 'Группа');
   var tSel2143 = makeDD(document.querySelector('.dd[data-dd="t2143"]'), TYPES2143.map(function(v,i){return {v:i, t:v};}), 1, 'Тип');
