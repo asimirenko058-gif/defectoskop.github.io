@@ -1770,17 +1770,12 @@ document.addEventListener('click',function(e){
   if(doc === '2499' || doc === '2143'){
     enter();
     closeMenu();
-    // Показать/скрыть нужный документ
-    document.querySelector('main > h1').hidden = (doc !== '2499');
-    document.querySelector('main > .lead').hidden = (doc !== '2499');
-    document.querySelectorAll('main > h2, main > .parts, main > .decoder, main > .note, main > .calc, main > .toolbar, main > #groups, main > dl, main > .source, main > #exam').forEach(function(el){
-      // Для 2499р показываем все элементы, кроме #doc-2143
+    // Показать/скрыть нужный документ: прячем ВСЕ прямые элементы main, кроме блока 2143р,
+    // и возвращаем исходное состояние при переключении обратно на 2499р
+    Array.prototype.forEach.call(document.querySelector('main').children, function(el){
       if (el.id === 'doc-2143') return;
-      if (doc === '2499') {
-        el.hidden = false;
-      } else {
-        el.hidden = true;
-      }
+      if (el.dataset.h0 === undefined) el.dataset.h0 = el.hidden ? '1' : '0';
+      el.hidden = (doc === '2143') ? true : (el.dataset.h0 === '1');
     });
     document.getElementById('doc-2143').hidden = (doc !== '2143');
     // Обновить активный пункт меню
