@@ -473,6 +473,15 @@ a{color:var(--accent)}
 .stag.s-big{font-size:.72rem;padding:5px 8px}
 .stag.s-odr-t{color:var(--odr);border-color:var(--odr);font-size:.72rem;padding:5px 8px}
 .stag.s-dr-t{color:var(--dr);border-color:var(--dr);font-size:.72rem;padding:5px 8px}
+
+/* знаки скорости: квадратные, цвет от зелёного (максимум в таблице) к красному (минимум) */
+.spt td.sp{background:hsl(var(--h) 62% 46% / .16)}
+.sgn{border-radius:5px;border-color:hsl(var(--h,0) 68% 40%)}
+.spt td:hover .sgn{transform:scale(1.1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .spt td.sp{background:hsl(var(--h) 55% 45% / .22)}}
+:root[data-theme="dark"] .spt td.sp,:root[data-theme="amoled"] .spt td.sp{background:hsl(var(--h) 55% 45% / .22)}
+:root[data-theme="amoled"] .sgn{border-color:hsl(var(--h,0) 68% 45%)}
+.spd-sign .sgn{border-radius:6px}
 </style>
 </head>
 <body class="landing-open">
@@ -1127,10 +1136,13 @@ window.speedSign=speedSign;
 function isTok(x){return /^(ЗПП|ДР|ОДР)$/.test(String(x).trim());}
 function isSpeedTbl(b){var n=0,k=0,sp=0;b.forEach(function(r){r.slice(1).forEach(function(x){n++;if(spdParts(x)){k++;sp++;}else if(/^[—–-]$/.test(String(x).trim())||isTok(x))k++;});});return n&&sp&&k/n>.6;}
 function tokCell(x){x=String(x).trim();return x==='ЗПП'?'<td class="s-min"><span class="stag s-zpp s-big" title="Замена в первоочередном порядке">ЗПП</span></td>':x==='ОДР'?'<td class="s-odr"><span class="stag s-odr-t">ОДР</span></td>':'<td class="s-lo"><span class="stag s-dr-t">ДР</span></td>';}
+function spdHue(n,lo,hi){return hi>lo?Math.round(120*(n-lo)/(hi-lo)):120;}
 function tbl(h,b){
+  var sv=[];b.forEach(function(r){r.slice(1).forEach(function(x){var p=spdParts(x);if(p)sv.push(p.n);});});
+  var lo=Math.min.apply(null,sv),hi=Math.max.apply(null,sv);
   if(isSpeedTbl(b)){
     return '<div class="spt-wrap"><table class="spt"><thead><tr>'+h.map(function(x,i){return '<th'+(i?'':' class="spt-h0"')+'>'+x+'</th>';}).join("")+'</tr></thead><tbody>'+b.map(function(r){return '<tr><th>'+r[0]+'</th>'+r.slice(1).map(function(x){var p=spdParts(x);
-      return p?'<td class="'+spdTier(p.n)+'">'+speedSign(x)+'</td>':isTok(x)?tokCell(x):'<td class="s-none">—</td>';}).join("")+'</tr>';}).join("")+'</tbody></table></div>';
+      return p?'<td class="sp" style="--h:'+spdHue(p.n,lo,hi)+'" title="'+p.n+' км/ч">'+speedSign(x)+'</td>':isTok(x)?tokCell(x):'<td class="s-none">—</td>';}).join("")+'</tr>';}).join("")+'</tbody></table></div>';
   }
   return '<div class="wrap"><table class="dt"><tr>'+h.map(function(x){return '<th>'+x+'</th>';}).join("")+'</tr>'+b.map(function(r){return '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join("")+'</tr>';}).join("")+'</table></div>';}
 function lt(x){return String(x).replace(/<(?!\/?(?:b|i|br|span|code|a|sub|sup|em|strong|abbr|p|ul|ol|li|small)[\s>\/])/g,'&lt;');}
@@ -1621,7 +1633,7 @@ var SPECS={
   function run(){var d=curDef,r=d.run(vals());
     var cls=r.c==='odr'?'odr':r.c==='dr'?'dr':'none',lab=r.c==='odr'?'ОДР':r.c==='dr'?'ДР':'дефектом не является';
     out.innerHTML='<span class="verdict '+cls+'">'+lab+'</span>'+
-      (r.s&&r.s!=='—'?(window.speedSign&&window.speedSign(r.s,true)?'<span class="spd spd-sign">'+window.speedSign(r.s,true)+'<span class="spd-l">км/ч</span></span>':(/^\d/.test(r.s)?'<span class="spd">Скорость: <b>'+GESC(r.s)+'</b> км/ч</span>':'<span class="spd"><b>'+GESC(r.s)+'</b></span>')):'')+
+      (r.s&&r.s!=='—'?(window.speedSign&&window.speedSign(r.s,true)?'<span class="spd spd-sign" style="--h:'+Math.max(0,Math.min(120,Math.round(120*(parseInt(r.s,10)-25)/115)))+'">'+window.speedSign(r.s,true)+'<span class="spd-l">км/ч</span></span>':(/^\d/.test(r.s)?'<span class="spd">Скорость: <b>'+GESC(r.s)+'</b> км/ч</span>':'<span class="spd"><b>'+GESC(r.s)+'</b></span>')):'')+
       (r.n?'<p>'+GESC(r.n)+'</p>':'');}
   function build(){curDef=DEFS[dsel.value];
     while(params.firstChild)params.removeChild(params.firstChild);
@@ -1741,13 +1753,18 @@ var SPECS={
   function tick(){
     var now=new Date(Date.now()+clockSkewMs),minute=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
     clock.textContent=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
-    var ev=events.find(function(x){return minute>=x.start&&minute<x.end;});
+    var today=now.getDay(),lastNumToday=0;
+    events.forEach(function(x){if(x.type==='class'&&subjects[today]&&subjects[today][x.num])lastNumToday=x.num;});
+    var dayEnd=0;events.forEach(function(x){if(x.type==='class'&&x.num===lastNumToday)dayEnd=x.end;});
+    var ev=lastNumToday?events.find(function(x){return minute>=x.start&&minute<x.end&&x.end<=dayEnd;}):null;
     board.classList.remove('is-class','is-break','is-idle');
     var nowNum=(ev&&ev.type==='class')?ev.num:0;if(now.getDay()!==lastDay||nowNum!==lastNum)markNow(now.getDay(),nowNum);
     if(ev){
       var endToday=new Date(now);endToday.setHours(Math.floor(ev.end/60),ev.end%60,0,0);
       if(ev.type==='class'){board.classList.add('is-class');setText(classDetails(now.getDay(),ev.num)+' · ДО КОНЦА '+fmt(endToday-now));}
       else{board.classList.add('is-break');setText('ПЕРЕМЕНА · ДО КОНЦА '+fmt(endToday-now));}
+    }else if(!lastNumToday){
+      board.classList.add('is-idle');setText('СЕГОДНЯ ЗАНЯТИЙ НЕТ');
     }else if(minute<8*60){
       board.classList.add('is-idle');var startToday=new Date(now);startToday.setHours(8,0,0,0);setText('ЗАНЯТИЯ НАЧНУТСЯ ЧЕРЕЗ '+fmt(startToday-now));
     }else{board.classList.add('is-idle');setText('УЧЕБНЫЙ ДЕНЬ ЗАВЕРШЁН · ДО ЗАВТРА');}
@@ -4960,23 +4977,30 @@ document.addEventListener('click',function(e){
     });
   });
 
-  document.getElementById('expb2143').addEventListener('click', function(){
-    var allOpen = true;
-    groupsContainer.querySelectorAll('details.group').forEach(function(g){
-      if (g.style.display === 'none') return;
-      if (!g.classList.contains('is-open')) allOpen = false;
-    });
-    groupsContainer.querySelectorAll('details.group').forEach(function(g){
-      if (g.style.display === 'none') return;
+  var expb2143 = document.getElementById('expb2143');
+  function visGroups2143(){
+    return Array.prototype.filter.call(groupsContainer.querySelectorAll('details.group'), function(g){ return g.style.display !== 'none'; });
+  }
+  function syncExpb2143(){
+    var gs = visGroups2143();
+    var allOpen = gs.length && gs.every(function(g){ return g.classList.contains('is-open'); });
+    expb2143.textContent = allOpen ? 'Свернуть всё' : 'Раскрыть всё';
+  }
+  expb2143.addEventListener('click', function(){
+    var gs = visGroups2143();
+    var allOpen = gs.length && gs.every(function(g){ return g.classList.contains('is-open'); });
+    gs.forEach(function(g){
       if (allOpen) {
-        g.classList.remove('is-open');
-        g.removeAttribute('open');
+        g.classList.remove('is-open'); g.removeAttribute('open');
+        g.querySelectorAll('details').forEach(function(d){ d.classList.remove('is-open'); d.removeAttribute('open'); });
       } else {
-        g.classList.add('is-open');
-        g.setAttribute('open', '');
+        g.classList.add('is-open'); g.setAttribute('open', '');
       }
     });
+    syncExpb2143();
   });
+  new MutationObserver(syncExpb2143).observe(groupsContainer, { subtree:true, attributes:true, attributeFilter:['class','open','style'] });
+  syncExpb2143();
 
 
   /* ---------- Калькулятор: ОДНА категория пути — либо группа (В, С), либо класс (1–5) ---------- */
