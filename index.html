@@ -579,6 +579,95 @@ details.sub > summary code{margin-right:6px}
   .side-sec .sitem-theme{width:100%}
 }
 .landing-kicker{max-width:none;margin-left:auto;margin-right:auto}
+
+/* ---- справочник ОДТ ---- */
+
+.odt h2{margin:.2em 0 .3em}
+.odt h3{margin:1.2em 0 .4em;font-size:1.08em}
+.odt .odt-lead{margin:0 0 1em;opacity:.85}
+.odt .odt-body p{margin:.5em 0}
+.odt ul,.odt ol{margin:.4em 0;padding-left:1.3em}
+.odt li{margin:.25em 0}
+.odt .odt-tw{overflow-x:auto;margin:.6em 0}
+.odt table{border-collapse:collapse;width:100%;font-size:.94em}
+.odt th,.odt td{border:1px solid var(--odt-line);padding:.4em .55em;text-align:left;vertical-align:top}
+.odt th{background:var(--odt-soft)}
+.odt .odt-note{border-left:3px solid var(--odt-acc);padding:.35em .8em;margin:.7em 0;background:var(--odt-soft)}
+.odt .odt-warn{border-left:3px solid var(--odt-def);padding:.35em .8em;margin:.7em 0}
+.odt .odt-easy{border:1px dashed var(--odt-line);border-radius:8px;padding:.5em .9em;margin:.7em 0}
+.odt .odt-easy::before{content:"Проще говоря: ";font-weight:600}
+.odt .odt-src{font-size:.85em;opacity:.7;margin-top:1.2em}
+.odt [hidden]{display:none!important}
+/* глоссарий */
+.odt dl.odt-gl{margin:.4em 0}
+.odt dl.odt-gl dt{font-weight:600;margin-top:.7em}
+.odt dl.odt-gl dd{margin:.15em 0 0 1em}
+/* рисунки */
+.odt figure{margin:1em 0;text-align:center}
+.odt figure svg{max-width:100%;height:auto;overflow:visible}
+.odt figcaption{font-size:.88em;opacity:.8;margin-top:.3em}
+.odt svg text{fill:currentColor;font-size:12px;font-family:inherit}
+.odt svg .sm{font-size:10.5px}
+.odt svg .b{font-weight:700}
+.odt svg .s{stroke:currentColor;fill:none;stroke-width:1.4}
+.odt svg .th{stroke:currentColor;fill:none;stroke-width:.8;opacity:.55}
+.odt svg .dash{stroke:currentColor;fill:none;stroke-width:1;stroke-dasharray:4 3;opacity:.7}
+.odt svg .rail{fill:var(--odt-soft);stroke:currentColor;stroke-width:1.4}
+.odt svg .blk{fill:var(--odt-soft);stroke:currentColor;stroke-width:1.2}
+.odt svg .fill{fill:currentColor;stroke:none}
+.odt svg .a{stroke:var(--odt-acc);fill:none;stroke-width:2}
+.odt svg .af{fill:var(--odt-acc);stroke:none}
+.odt svg .at{fill:var(--odt-acc)}
+.odt svg .d{stroke:var(--odt-def);fill:none;stroke-width:2.4}
+.odt svg .df{fill:var(--odt-def);stroke:none}
+.odt svg .dt{fill:var(--odt-def)}
+.odt svg .ok{stroke:var(--odt-ok);fill:none;stroke-width:2}
+.odt svg .okt{fill:var(--odt-ok)}
+.odt svg .scr{fill:var(--odt-soft);stroke:currentColor;stroke-width:1.2}
+.odt svg .gate{fill:color-mix(in srgb,var(--odt-acc) 18%,transparent);stroke:var(--odt-acc);stroke-width:1}
+
+.odt{--odt-line:color-mix(in srgb,currentColor 20%,transparent);--odt-soft:color-mix(in srgb,currentColor 7%,transparent);--odt-acc:var(--accent);--odt-def:var(--odr);--odt-ok:var(--c2);line-height:1.6}
+.odt .odt-body{padding:0 2px 6px}
+
+.lcard.lc-odt{--lc:var(--g3)}
+.landing-cards{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.landing-in{max-width:1040px}
+@media (max-width:760px){.tabbar{grid-template-columns:repeat(4,1fr)}.tabbar.no-calc{grid-template-columns:repeat(3,1fr)}}
+.tb[hidden]{display:none!important}
+/* справочник ОДТ в стиле сайта */
+#groupsOdt>details{border-left:4px solid var(--group-color,var(--line));animation:cardIn .4s cubic-bezier(.22,1,.36,1) backwards}
+#groupsOdt>details:nth-child(1){--group-color:var(--g1)}#groupsOdt>details:nth-child(2){--group-color:var(--g2)}
+#groupsOdt>details:nth-child(3){--group-color:var(--g3)}#groupsOdt>details:nth-child(4){--group-color:var(--g4)}
+#groupsOdt>details:nth-child(5){--group-color:var(--g5)}#groupsOdt>details:nth-child(6){--group-color:var(--g6)}
+#groupsOdt details.sub summary .onum{font:600 .9rem var(--mono);color:var(--group-color,var(--accent));margin-right:4px}
+#groupsOdt details.sub summary .st{font-weight:500}
+#groupsOdt .odt-body h3{font-size:1rem;margin:1.1em 0 .35em}
+#doc-odt .odt-warn{border-left:3px solid var(--odr);background:color-mix(in srgb,var(--odr) 6%,transparent);padding:8px 12px;border-radius:0 8px 8px 0;max-width:72ch;font-size:.92rem}
+#doc-odt figure svg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px}
+a.xref{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid color-mix(in srgb,var(--accent) 45%,transparent);white-space:nowrap;cursor:pointer}
+a.xref:hover{border-bottom-color:var(--accent)}
+a.xref::after{content:"↗";font-size:.72em;margin-left:1px;opacity:.7}
+.xref-box{margin:12px 0 4px;padding:10px 12px;border:1px dashed color-mix(in srgb,var(--g3) 60%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--g3) 6%,transparent);font-size:.9rem}
+.xref-box b{display:block;font:600 .7rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--g3);margin-bottom:4px}
+.xref-box a{display:inline-block;margin:2px 10px 2px 0}
+.xref-flash{animation:xFlash 1.6s ease}
+@keyframes xFlash{0%,30%{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 55%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
+
+.landing{justify-items:stretch}
+.landing-in{margin:0 auto;min-width:0}
+.landing-cards{grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr))}
+.lcard{min-width:0}
+.lcard-title,.lcard-note{overflow-wrap:anywhere;hyphens:auto}
+.xref-box a.xref,#doc-2499 .note a.xref{white-space:normal}
+.xref-box a{max-width:100%}
+
+@media (max-width:760px){
+  .snav{flex-direction:column;gap:8px}
+  .snav .sitem{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:4px 12px;padding:12px 14px}
+  .snav .sitem-code{min-width:3.4em}
+  .snav .sitem-title{font-size:.9rem}
+  .snav .sitem-tag{margin:0}
+}
 </style>
 </head>
 <body class="landing-open">
@@ -612,6 +701,13 @@ details.sub > summary code{margin-right:6px}
   <span class="lcard-note">Распоряжение ОАО «РЖД» от 27.09.2019 № 2143/р</span>
   <span class="lcard-open">Открыть →</span>
       </button>
+<button type="button" class="lcard lc-odt" data-doc="odt">
+  <span class="lcard-ico" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M9 26a11 11 0 0 1 22 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><path d="M14 26a6 6 0 0 1 12 0" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="20" cy="26" r="2.6" fill="currentColor"/><path d="M6 33h28" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></span>
+  <span class="lcard-code">ОДТ <span class="lcard-cnt" data-cnt="odt"></span></span>
+  <span class="lcard-title">Справочник оператора дефектоскопной тележки</span>
+  <span class="lcard-note">По книге Маркова и Шпагина «Ультразвуковая дефектоскопия рельсов», 1999</span>
+  <span class="lcard-open">Открыть →</span>
+</button>
     </div>
   </div>
 </div>
@@ -621,9 +717,9 @@ details.sub > summary code{margin-right:6px}
 <nav class="tabbar" id="tabbar" aria-label="Быстрые переходы">
   <button type="button" class="tb" data-act="list"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Дефекты</span></button>
   <button type="button" class="tb" data-act="calc"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="16.5" r="1.2" fill="currentColor"/><circle cx="15" cy="16.5" r="1.2" fill="currentColor"/></svg><span>Расчёт</span></button>
-  <button type="button" class="tb tb-doc" data-act="doc" data-doc="2143"><span class="tb-code">2143р</span><span>Документ</span></button>
+  <button type="button" class="tb tb-doc" data-act="docs" aria-label="Выбрать документ"><span class="tb-code">2499р</span><span>Документ</span></button>
   <button type="button" class="tb" data-act="top"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 19h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Наверх</span></button>
-  <button type="button" class="tb" data-act="menu" aria-controls="sidePanel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Меню</span></button>
+  <button type="button" class="tb" data-act="menu" aria-controls="sidePanel" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Меню</span></button>
 </nav>
 <div id="sideBack" class="side-back" hidden></div>
 <aside id="sidePanel" class="side-panel" aria-hidden="true" aria-label="Документы">
@@ -641,6 +737,11 @@ details.sub > summary code{margin-right:6px}
 <button type="button" class="sitem" data-doc="2143">
   <span class="sitem-code">2143р</span>
   <span class="sitem-title">Классификатор дефектов стрелочных переводов</span>
+  <span class="sitem-tag">Открыть</span>
+</button>
+<button type="button" class="sitem" data-doc="odt">
+  <span class="sitem-code">ОДТ</span>
+  <span class="sitem-title">Справочник оператора дефектоскопной тележки</span>
   <span class="sitem-tag">Открыть</span>
 </button>
   </nav>
@@ -816,6 +917,1160 @@ details.sub > summary code{margin-right:6px}
 <dt>Фрагмент и проба</dt><dd>Фрагмент — часть рельса, разрушившегося на три и более куска. Проба — часть разрушенного рельса, вырезанная на исследование.</dd>
 </dl>
 </div>
+<section id="doc-odt" class="odt" hidden>
+  <h1>Справочник оператора дефектоскопной тележки</h1>
+  <p class="lead">Основы ультразвукового контроля рельсов с нуля: что такое ультразвук и как он находит трещины, что означают термины, как устроена тележка, как её настроить и что делать, когда «запищало». По учебному пособию А.А. Маркова и Д.А. Шпагина «Ультразвуковая дефектоскопия рельсов» (1999).</p>
+  <div class="odt-warn"><strong>Важно.</strong> Книга 1999 года. Коды дефектов в ней даны по каталогу НТД/ЦП-1…3-93, нормы — по инструкциям МПС того времени, приборы — РЕЛЬС-5, ПОИСК-2, ПОИСК-10Э. Перед применением сверяйте коды с распоряжением 2499р, а значения настроек — с действующей инструкцией и руководством к вашему дефектоскопу.</div>
+  <p class="source">Источник: Марков А.А., Шпагин Д.А. «Ультразвуковая дефектоскопия рельсов». СПб., 1999. Рисунки перерисованы схематично. Ссылки на коды ведут в распоряжение 2499р — только там, где дефект по смыслу тот же; коды 1993 года, которых нет в 2499р, оставлены без ссылки.</p>
+  <h2>Разделы</h2>
+  <div class="toolbar" role="search">
+    <input type="search" id="qiOdt" placeholder="Поиск: строб, 53.1, СО-3Р, калибр, мёртвая зона…" aria-label="Поиск по справочнику ОДТ">
+    <button class="btn" id="expbOdt" type="button">Раскрыть всё</button>
+    <span id="cntOdt" aria-live="polite"></span>
+  </div>
+  <div id="groupsOdt">
+<details class="ogroup">
+<summary>1 — Основы ультразвукового контроля <span class="where">(как ультразвук находит трещины)</span></summary>
+<details class="sub" id="odt-1" data-odt="1"><summary><span class="onum">1.1</span> <span class="st">Как это работает — объяснение за пять минут</span></summary>
+
+<div class="odt-body">
+<p>Трещину внутри рельса глазом не увидеть. Поэтому рельс «простукивают» звуком — но таким высоким, что человек его не слышит. Это <strong>ультразвук</strong>.</p>
+<p>Работает это как эхо в горах или эхолот у рыбака. Прибор коротко «кричит» в металл и затем «слушает». Если металл целый, звук доходит до низа рельса (подошвы), отражается и возвращается — это нормальный ответ. Если на пути есть трещина, звук отражается от неё раньше или не доходит до подошвы вовсе. Прибор это замечает и подаёт сигнал оператору в наушники.</p>
+<figure>
+<svg aria-label="Принцип ультразвукового контроля рельса" role="img" viewbox="0 0 640 250">
+<!-- рельс сбоку -->
+<rect class="rail" height="38" width="530" x="20" y="60"></rect>
+<rect class="rail" height="70" width="530" x="20" y="98"></rect>
+<rect class="rail" height="22" width="530" x="20" y="168"></rect>
+<text class="sm" x="556" y="84">головка</text>
+<text class="sm" x="556" y="138">шейка</text>
+<text class="sm" x="556" y="183">подошва</text>
+<!-- ПЭП 1 здоровое место -->
+<rect class="blk" height="20" width="34" x="110" y="40"></rect>
+<text class="sm" x="96" y="32">датчик (ПЭП)</text>
+<line class="a" x1="127" x2="127" y1="60" y2="190"></line>
+<path class="a" d="M122 182 L127 190 L132 182"></path>
+<path class="ok" d="M136 186 L136 64"></path>
+<path class="ok" d="M131 72 L136 64 L141 72"></path>
+<text class="sm okt" x="146" y="128">звук вернулся от подошвы —</text>
+<text class="sm okt" x="146" y="142">металл целый</text>
+<!-- ПЭП 2 над трещиной -->
+<rect class="blk" height="20" width="34" x="420" y="40"></rect>
+<line class="a" x1="437" x2="437" y1="60" y2="118"></line>
+<path class="a" d="M432 110 L437 118 L442 110"></path>
+<path class="d" d="M410 122 L470 118"></path>
+<path class="ok" d="M446 114 L446 66"></path>
+<path class="ok" d="M441 74 L446 66 L451 74"></path>
+<text class="sm dt" x="476" y="122">трещина</text>
+<text class="sm" x="330" y="212">звук отразился от трещины и не дошёл до подошвы —</text>
+<text class="sm" x="330" y="226">прибор подаёт сигнал оператору</text>
+<!-- наушники -->
+<path class="s" d="M480 20 q14 -16 28 0"></path><rect class="blk" height="12" width="7" x="476" y="18"></rect><rect class="blk" height="12" width="7" x="505" y="18"></rect>
+<text class="sm" x="520" y="28">«пи-и-и»</text>
+<text class="sm" x="20" y="244">Синие стрелки — посланный звук, зелёные — вернувшийся</text>
+</svg>
+<figcaption>Рис. 1. Принцип: датчик посылает ультразвук в рельс и слушает, что вернулось.</figcaption>
+</figure>
+<p>Тележка катится по рельсу со скоростью пешехода (около 4 км/ч). На каждой нитке у неё стоят несколько датчиков, и каждый «смотрит» в свою часть рельса: одни — косо в головку, другие — прямо вниз сквозь шейку до подошвы. Оператор слушает наушники и смотрит на экран. Если сработал сигнал — останавливается и разбирается: настоящая трещина или помеха (грязь, стык, отверстие).</p>
+<div class="odt-easy">прибор кричит в рельс и слушает эхо. Пришло эхо там, где его быть не должно, или не пришло там, где должно, — повод проверить это место.</div>
+<p>Дальше по разделам: сначала словарь терминов, затем немного физики с картинками, потом методы, устройство тележки, настройка и действия оператора.</p>
+</div>
+</details>
+<details class="sub" id="odt-2" data-odt="2"><summary><span class="onum">1.2</span> <span class="st">Физика ультразвука простыми словами</span></summary>
+
+<div class="odt-body">
+<h3>Что такое звуковая волна</h3>
+<p>Звук — это колебание частиц вещества. Каждая частица только качается около своего места, а дальше передаётся «толчок», то есть энергия, а не само вещество. Как на стадионе «волна» из болельщиков: люди встают и садятся на месте, а волна бежит по трибуне.</p>
+<figure>
+<svg aria-label="Продольная и поперечная волна" role="img" viewbox="0 0 640 210">
+<text class="b" x="10" y="18">Продольная волна</text>
+<g>
+<!-- сгущения и разрежения: вертикальные линии с переменным шагом -->
+<g class="th">
+<line x1="20" x2="20" y1="30" y2="80"></line><line x1="26" x2="26" y1="30" y2="80"></line><line x1="31" x2="31" y1="30" y2="80"></line><line x1="35" x2="35" y1="30" y2="80"></line><line x1="39" x2="39" y1="30" y2="80"></line><line x1="44" x2="44" y1="30" y2="80"></line><line x1="51" x2="51" y1="30" y2="80"></line><line x1="60" x2="60" y1="30" y2="80"></line><line x1="71" x2="71" y1="30" y2="80"></line><line x1="82" x2="82" y1="30" y2="80"></line><line x1="91" x2="91" y1="30" y2="80"></line><line x1="98" x2="98" y1="30" y2="80"></line>
+<line x1="104" x2="104" y1="30" y2="80"></line><line x1="109" x2="109" y1="30" y2="80"></line><line x1="113" x2="113" y1="30" y2="80"></line><line x1="117" x2="117" y1="30" y2="80"></line><line x1="122" x2="122" y1="30" y2="80"></line><line x1="129" x2="129" y1="30" y2="80"></line><line x1="138" x2="138" y1="30" y2="80"></line><line x1="149" x2="149" y1="30" y2="80"></line><line x1="160" x2="160" y1="30" y2="80"></line><line x1="169" x2="169" y1="30" y2="80"></line><line x1="176" x2="176" y1="30" y2="80"></line>
+<line x1="182" x2="182" y1="30" y2="80"></line><line x1="187" x2="187" y1="30" y2="80"></line><line x1="191" x2="191" y1="30" y2="80"></line><line x1="195" x2="195" y1="30" y2="80"></line><line x1="200" x2="200" y1="30" y2="80"></line><line x1="207" x2="207" y1="30" y2="80"></line><line x1="216" x2="216" y1="30" y2="80"></line><line x1="227" x2="227" y1="30" y2="80"></line><line x1="238" x2="238" y1="30" y2="80"></line><line x1="247" x2="247" y1="30" y2="80"></line><line x1="254" x2="254" y1="30" y2="80"></line>
+<line x1="260" x2="260" y1="30" y2="80"></line><line x1="265" x2="265" y1="30" y2="80"></line><line x1="269" x2="269" y1="30" y2="80"></line><line x1="273" x2="273" y1="30" y2="80"></line><line x1="278" x2="278" y1="30" y2="80"></line><line x1="285" x2="285" y1="30" y2="80"></line><line x1="294" x2="294" y1="30" y2="80"></line>
+</g>
+<path class="a" d="M33 88 h78"></path><path class="a" d="M33 84 v8 M111 84 v8"></path>
+<text class="sm at" x="54" y="103">λ = 2,36 мм</text>
+<text class="sm" x="22" y="122">густо — сжатие, редко — растяжение</text>
+<path class="s" d="M200 140 h90"></path><path class="s" d="M282 135 L290 140 L282 145"></path>
+<text class="sm" x="200" y="158">куда бежит волна</text>
+<path class="a" d="M20 140 h30 M20 136 v8 M50 136 v8"></path>
+<text class="sm at" x="18" y="158">частицы — вдоль</text>
+</g>
+<text class="b" x="340" y="18">Поперечная (сдвиговая) волна</text>
+<path class="s" d="M345 55 q15 -25 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t15 0"></path>
+<g class="fill"><circle cx="360" cy="42" r="3"></circle><circle cx="375" cy="55" r="3"></circle><circle cx="390" cy="68" r="3"></circle><circle cx="405" cy="55" r="3"></circle><circle cx="420" cy="42" r="3"></circle><circle cx="435" cy="55" r="3"></circle><circle cx="450" cy="68" r="3"></circle><circle cx="465" cy="55" r="3"></circle><circle cx="480" cy="42" r="3"></circle><circle cx="495" cy="55" r="3"></circle><circle cx="510" cy="68" r="3"></circle><circle cx="525" cy="55" r="3"></circle><circle cx="540" cy="42" r="3"></circle><circle cx="555" cy="55" r="3"></circle><circle cx="570" cy="68" r="3"></circle><circle cx="585" cy="55" r="3"></circle><circle cx="600" cy="42" r="3"></circle></g>
+<path class="a" d="M360 88 h60"></path><path class="a" d="M360 84 v8 M420 84 v8"></path>
+<text class="sm at" x="368" y="103">λ ≈ 1,3 мм</text>
+<path class="s" d="M520 140 h90"></path><path class="s" d="M602 135 L610 140 L602 145"></path>
+<text class="sm" x="520" y="158">куда бежит волна</text>
+<path class="a" d="M360 125 v30 M356 125 h8 M356 155 h8"></path>
+<text class="sm at" x="372" y="144">частицы — поперёк</text>
+<text class="sm" x="10" y="190">Продольная: сталь 5900 м/с, есть в любой среде.</text>
+<text class="sm" x="340" y="190">Поперечная: сталь ≈ 3260 м/с, только в твёрдом теле.</text>
+</svg>
+<figcaption>Рис. 2. Два вида волн, которые используют в рельсовой дефектоскопии.</figcaption>
+</figure>
+<h3>Почему именно 2,5 МГц</h3>
+<figure>
+<svg aria-label="Шкала частот" role="img" viewbox="0 0 640 110">
+<line class="s" x1="20" x2="620" y1="60" y2="60"></line>
+<path class="s" d="M612 55 L620 60 L612 65"></path>
+<g class="s"><line x1="60" x2="60" y1="55" y2="65"></line><line x1="180" x2="180" y1="55" y2="65"></line><line x1="480" x2="480" y1="55" y2="65"></line></g>
+<text class="sm" x="48" y="82">20 Гц</text><text class="sm" x="164" y="82">20 кГц</text><text class="sm" x="468" y="82">1 ГГц</text>
+<text class="sm" x="22" y="48">инфра-</text><text class="sm" x="90" y="48">слышимый звук</text><text class="sm" x="290" y="48">ультразвук</text><text class="sm" x="520" y="48">гиперзвук</text>
+<rect class="gate" height="8" width="296" x="182" y="56"></rect>
+<line class="a" x1="345" x2="345" y1="60" y2="96"></line><circle class="af" cx="345" cy="60" r="4"></circle>
+<text class="sm at b" x="352" y="100">2,5 МГц — рельсовые дефектоскопы</text>
+</svg>
+<figcaption>Рис. 3. Где на шкале частот находится рабочий ультразвук.</figcaption>
+</figure>
+<p>Частоту выбирают как компромисс. Чем она выше, тем короче волна и тем мельче дефекты видны, но тем сильнее звук рассеивается на зёрнах металла и тем меньше «пробивает». При 2,5 МГц длина волны (2,36 мм) сравнима с опасными дефектами и много больше зерна стали.</p>
+<h3>Как датчик делает звук: пьезоэффект</h3>
+<figure>
+<svg aria-label="Пьезоэффект" role="img" viewbox="0 0 640 150">
+<text class="b" x="20" y="18">Излучение (обратный пьезоэффект)</text>
+<rect class="blk" height="22" width="110" x="40" y="55"></rect>
+<rect class="fill" height="7" opacity=".4" width="110" x="40" y="48"></rect><rect class="fill" height="7" opacity=".4" width="110" x="40" y="77"></rect>
+<text class="sm" x="160" y="56">электрод</text><text class="sm" x="160" y="72">пьезокерамика</text>
+<path class="s" d="M95 32 v14 M95 86 v14"></path><text class="sm" x="102" y="42">~ напряжение</text>
+<rect class="dash" height="14" width="110" x="40" y="110"></rect><rect class="blk" height="6" width="110" x="40" y="114"></rect>
+<text class="sm" x="40" y="142">пластина «дышит» → в металл уходит звук</text>
+<text class="b" x="340" y="18">Приём (прямой пьезоэффект)</text>
+<path class="a" d="M380 40 q8 -8 16 0 t16 0 t16 0"></path><path class="a" d="M380 48 q8 -8 16 0 t16 0 t16 0"></path>
+<rect class="blk" height="22" width="110" x="360" y="60"></rect>
+<text class="sm at" x="480" y="50">пришло эхо</text>
+<path class="s" d="M415 82 v20"></path><path class="s" d="M405 112 q5 -10 10 0 t10 0 t10 0"></path>
+<text class="sm" x="440" y="112">на электродах — напряжение,</text>
+<text class="sm" x="440" y="126">прибор его усиливает и показывает</text>
+</svg>
+<figcaption>Рис. 4. Одна и та же пластина и «кричит», и «слушает».</figcaption>
+</figure>
+<p>Пластина звучит громче всего на своей собственной (резонансной) частоте, которая зависит от толщины: 0,7 мм — 2,5 МГц, 0,3 мм — 5 МГц, 1,3 мм — 1,25 МГц.</p>
+<h3>Устройство прямого и наклонного датчика</h3>
+<figure>
+<svg aria-label="Устройство прямого и наклонного ПЭП" role="img" viewbox="0 0 640 230">
+<!-- прямой -->
+<text class="b" x="40" y="18">Прямой ПЭП (α = 0°)</text>
+<rect class="blk" height="80" width="110" x="70" y="40"></rect>
+<rect class="fill" height="10" opacity=".55" width="60" x="95" y="94"></rect>
+<rect class="dash" height="16" width="74" x="88" y="104"></rect>
+<line class="th" x1="125" x2="125" y1="40" y2="94"></line>
+<text class="sm" x="190" y="102">пьезопластина</text>
+<text class="sm" x="190" y="118">протектор</text>
+<text class="sm" x="190" y="60">к дефектоскопу</text>
+<rect class="rail" height="60" width="250" x="20" y="124"></rect>
+<rect class="af" height="4" opacity=".5" width="250" x="20" y="120"></rect>
+<text class="sm at" x="22" y="198">контактная жидкость — тонкий слой между датчиком и рельсом</text>
+<line class="a" x1="125" x2="125" y1="124" y2="178"></line><path class="a" d="M120 170 L125 178 L130 170"></path>
+<text class="sm at" x="132" y="160">луч вниз</text>
+<!-- наклонный -->
+<text class="b" x="380" y="18">Наклонный ПЭП</text>
+<rect class="blk" height="80" width="220" x="380" y="40"></rect>
+<line style="stroke:currentColor;stroke-width:8;opacity:.6" x1="477" x2="523" y1="56" y2="94"></line>
+<text class="sm" x="532" y="62">пьезо-</text><text class="sm" x="532" y="75">пластина</text>
+<text class="sm" x="500" y="112">призма</text>
+<line class="a" x1="500" x2="463" y1="75" y2="120"></line>
+<rect class="rail" height="62" width="300" x="330" y="124"></rect>
+<line class="a" x1="463" x2="367" y1="124" y2="183"></line><path class="a" d="M371 174 L367 183 L377 182"></path>
+<line class="dash" x1="463" x2="463" y1="124" y2="186"></line>
+<path class="a" d="M463 160 A36 36 0 0 0 432 143"></path>
+<text class="sm at" x="435" y="175">α</text>
+<circle class="df" cx="463" cy="121" r="3.5"></circle>
+<text class="sm dt" x="470" y="140">точка выхода</text>
+<path class="s" d="M380 34 h83"></path><path class="s" d="M380 29 v10 M463 29 v10"></path>
+<text class="sm" x="268" y="38">стрела n = 9–15 мм</text>
+</svg>
+<figcaption>Рис. 5. Прямой датчик светит вниз, наклонный — под углом α через клин-призму. Угол α отсчитывают от вертикали (перпендикуляра к поверхности).</figcaption>
+</figure>
+<h3>Луч расходится: ближняя и дальняя зона</h3>
+<figure>
+<svg aria-label="Диаграмма направленности" role="img" viewbox="0 0 640 165">
+<rect class="blk" height="40" width="12" x="20" y="55"></rect>
+<path class="a" d="M32 55 L120 55 L600 15 M32 95 L120 95 L600 135"></path>
+<line class="dash" x1="32" x2="610" y1="75" y2="75"></line>
+<line class="th" x1="120" x2="120" y1="40" y2="110"></line>
+<text class="sm" x="40" y="125">ближняя зона ≈ 15 мм:</text>
+<text class="sm" x="40" y="139">сила звука неравномерна</text>
+<text class="sm" x="300" y="160">дальняя зона: луч расходится конусом 10–14°</text>
+<text class="sm" x="380" y="70">центральный луч — самый сильный</text>
+</svg>
+<figcaption>Рис. 6. Чем больше пластина относительно длины волны, тем уже луч.</figcaption>
+</figure>
+<h3>Как наклонный датчик загоняет звук под углом</h3>
+<p>Звук, переходя из оргстекла в сталь под углом, «ломается» — меняет направление, потому что в стали он бежит быстрее. Подобрав угол призмы, получают нужный угол в металле. При углах призмы от 27° до 56° в сталь проходит только поперечная волна — это удобно, потому что нет путаницы из двух волн с разной скоростью.</p>
+<figure>
+<svg aria-label="Преломление луча" role="img" viewbox="0 0 640 220">
+<rect class="blk" height="90" width="600" x="20" y="20"></rect>
+<rect class="rail" height="95" width="600" x="20" y="110"></rect>
+<text class="sm" x="30" y="40">оргстекло (призма), звук 2670 м/с</text>
+<text class="sm" x="30" y="198">сталь рельса, поперечная волна ≈ 3260 м/с</text>
+<line class="dash" x1="320" x2="320" y1="20" y2="205"></line>
+<line class="a" x1="240" x2="320" y1="30" y2="110"></line><path class="a" d="M308 104 L320 110 L313 98"></path>
+<line class="a" x1="320" x2="440" y1="110" y2="190"></line><path class="a" d="M428 189 L440 190 L433 180"></path>
+<path class="s" d="M320 70 A40 40 0 0 0 292 82"></path><text class="sm" x="290" y="64">β — угол призмы</text>
+<path class="a" d="M320 150 A40 40 0 0 0 353 132"></path><text class="sm at" x="350" y="160">α — угол ввода</text>
+<text class="sm" x="455" y="80">β = 40° → α = 50°</text>
+<text class="sm" x="455" y="96">β = 45° → α ≈ 58°</text>
+</svg>
+<figcaption>Рис. 7. Преломление на границе призмы и рельса: угол в металле больше угла призмы.</figcaption>
+</figure>
+<h3>Что видно на экране: импульсы</h3>
+<p>Прибор не «гудит» непрерывно. Он сотни раз в секунду коротко посылает импульс и после каждого слушает. Экран показывает, что пришло за время после «крика»: по горизонтали — время (то есть глубина), по вертикали — сила сигнала. Такой экран называют А-развёрткой.</p>
+<figure>
+<svg aria-label="Импульсы на экране" role="img" viewbox="0 0 640 200">
+<rect class="scr" height="140" rx="6" width="600" x="20" y="20"></rect>
+<line class="s" x1="40" x2="600" y1="140" y2="140"></line>
+<path class="fill" d="M45 140 L50 40 L58 140" opacity=".85"></path>
+<text class="sm" x="35" y="34">зондирующий</text>
+<path class="df" d="M250 140 L256 95 L262 140"></path>
+<text class="sm dt" x="226" y="88">эхо от дефекта</text>
+<path class="af" d="M500 140 L506 65 L512 140"></path>
+<text class="sm at" x="470" y="58">донный сигнал</text>
+<path class="s" d="M58 150 h192"></path><path class="s" d="M58 146 v8 M250 146 v8"></path>
+<text class="sm" x="90" y="176">время туда-обратно → глубина дефекта</text>
+<text class="sm" x="40" y="194">→ время (глубина)</text>
+<text class="sm" x="560" y="194">↑ сила</text>
+</svg>
+<figcaption>Рис. 8. А-развёртка: чем правее всплеск, тем глубже отражатель; чем выше — тем сильнее отражение.</figcaption>
+</figure>
+<p>Глубина считается так: путь = скорость × время ÷ 2 (звук прошёл туда и обратно). Прибор делает это сам и вычитает время пробега в призме (3–8 мкс), поэтому шкала сразу в миллиметрах.</p>
+<div class="odt-note">Внутри одного импульса 4–12 колебаний ультразвука. Длинный импульс мощнее и бьёт глубже, но увеличивает мёртвую зону и хуже различает близкие отражатели. Короткий — наоборот. В рельсовых приборах импульс 4–5 мкс.</div>
+<h3>Отражение: почему трещины видны</h3>
+<ul>
+<li>Трещина — это тонкая щель с воздухом. На границе «металл — воздух» отражается почти 100 % звука, даже если щель тоньше волоса.</li>
+<li>Шлак внутри металла отражает только 15–50 % — такие включения видны хуже.</li>
+<li>Гладкая большая трещина работает как зеркало: если луч падает косо, звук уйдёт в сторону, а не обратно к датчику. Поэтому сильно развитые трещины иногда видны хуже мелких — их ловят по краям или зеркальным методом.</li>
+<li>Если в трещину попала вода или масло, она отражает слабее.</li>
+</ul>
+<div class="odt-easy">ультразвук — это «фонарик», который светит в металл. Трещина — «зеркало». Важно, чтобы отражённый свет вернулся в датчик, а не ушёл в сторону.</div>
+</div>
+</details>
+<details class="sub" id="odt-3" data-odt="3"><summary><span class="onum">1.3</span> <span class="st">Методы контроля: как прибор понимает, что есть дефект</span></summary>
+
+<div class="odt-body">
+<h3>Эхо-метод — «услышать отражение от трещины»</h3>
+<p>Датчик посылает импульс и ждёт эхо. Если в стробе (рабочем окне) появился сигнал выше порога — срабатывает звук. По положению сигнала на развёртке прибор считает глубину, по высоте — насколько сильно отражает дефект.</p>
+<figure>
+<svg aria-label="Эхо-метод" role="img" viewbox="0 0 640 230">
+<rect class="rail" height="130" width="300" x="20" y="40"></rect>
+<rect class="blk" height="20" width="44" x="70" y="20"></rect>
+<line class="a" x1="92" x2="190" y1="40" y2="120"></line><path class="a" d="M180 117 L190 120 L186 110"></path>
+<path class="d" d="M175 140 L205 100"></path>
+<text class="sm dt" x="210" y="100">трещина</text>
+<path class="ok" d="M183 128 L102 50"></path><path class="ok" d="M105 59 L102 50 L111 53"></path>
+<text class="sm" x="30" y="188">H — глубина, L — расстояние</text>
+<text class="sm" x="30" y="202">по поверхности до дефекта</text>
+<line class="dash" x1="92" x2="92" y1="40" y2="128"></line><line class="dash" x1="92" x2="183" y1="128" y2="128"></line>
+<text class="sm" x="66" y="92">H</text><text class="sm" x="130" y="142">L</text>
+<!-- экран -->
+<rect class="scr" height="150" rx="6" width="270" x="350" y="30"></rect>
+<line class="s" x1="365" x2="605" y1="160" y2="160"></line>
+<rect class="gate" height="100" width="140" x="440" y="60"></rect>
+<text class="sm at" x="470" y="54">строб</text>
+<line class="dash" x1="440" x2="580" y1="110" y2="110"></line><text class="sm" x="584" y="113">порог</text>
+<path class="fill" d="M368 160 L373 45 L380 160" opacity=".85"></path>
+<path class="df" d="M505 160 L511 80 L517 160"></path>
+<text class="sm dt" x="380" y="200">эхо выше порога в стробе → звук</text>
+</svg>
+<figcaption>Рис. 9. Эхо-метод наклонным датчиком: звук отразился от трещины и вернулся.</figcaption>
+</figure>
+<ul>
+<li><strong>Плюсы:</strong> доступ к рельсу только сверху; высокая чувствительность; точные координаты. Этим методом находят более 90 % дефектов.</li>
+<li><strong>Минусы:</strong> сигнал сильно зависит от того, как повёрнута трещина; мешают отражения от неровностей поверхности; если пропал контакт, прибор молчит — и оператор об этом не знает (нет «сигнала, что всё хорошо»).</li>
+</ul>
+<h3>Зеркально-теневой метод (ЗТМ) — «следить, что дно на месте»</h3>
+<p>Прямой датчик светит вниз сквозь шейку и всё время получает отражение от низа подошвы — донный сигнал. Пока он стабилен, всё в порядке. Дефект встаёт на пути звука как ширма, и донный сигнал проседает или пропадает. Прибор пищит, когда донный падает ниже порога.</p>
+<figure>
+<svg aria-label="Зеркально-теневой метод" role="img" viewbox="0 0 640 250">
+<text class="b okt" x="20" y="16">Здоровый рельс</text>
+<rect class="blk" height="16" width="34" x="40" y="26"></rect>
+<rect class="rail" height="150" width="80" x="20" y="42"></rect>
+<line class="a" x1="57" x2="57" y1="42" y2="192"></line>
+<path class="ok" d="M66 190 L66 46"></path>
+<rect class="scr" height="150" rx="6" width="190" x="120" y="40"></rect>
+<line class="s" x1="130" x2="300" y1="170" y2="170"></line>
+<path class="fill" d="M133 170 L137 55 L143 170" opacity=".85"></path>
+<rect class="gate" height="110" width="50" x="230" y="60"></rect>
+<line class="dash" x1="225" x2="285" y1="130" y2="130"></line>
+<path class="af" d="M249 170 L255 70 L261 170"></path>
+<text class="sm at" x="218" y="54">донный ✓</text>
+<text class="sm" x="130" y="210">донный в стробе выше порога —</text>
+<text class="sm okt" x="130" y="224">тишина</text>
+<text class="b dt" x="340" y="16">Над дефектом</text>
+<rect class="blk" height="16" width="34" x="360" y="26"></rect>
+<rect class="rail" height="150" width="80" x="340" y="42"></rect>
+<line class="a" x1="377" x2="377" y1="42" y2="110"></line>
+<path class="d" d="M355 112 L405 108"></path>
+<line class="dash" x1="377" x2="377" y1="115" y2="192"></line>
+<rect class="scr" height="150" rx="6" width="190" x="440" y="40"></rect>
+<line class="s" x1="450" x2="620" y1="170" y2="170"></line>
+<path class="fill" d="M453 170 L457 55 L463 170" opacity=".85"></path>
+<rect class="gate" height="110" width="50" x="550" y="60"></rect>
+<line class="dash" x1="545" x2="605" y1="130" y2="130"></line>
+<path class="af" d="M569 170 L575 152 L581 170"></path>
+<path class="df" d="M510 170 L515 120 L520 170" opacity=".8"></path>
+<text class="sm dt" x="545" y="54">донный ✗</text>
+<text class="sm" x="450" y="210">донный упал ниже порога —</text>
+<text class="sm dt" x="450" y="224">звук. Часто видно и эхо от дефекта</text>
+<text class="sm" x="20" y="246">Пунктир на экране — порог, голубая зона — строб донного сигнала</text>
+</svg>
+<figcaption>Рис. 10. ЗТМ: дефект «заслоняет» подошву, и донный сигнал проседает.</figcaption>
+</figure>
+<ul>
+<li><strong>Коэффициент выявляемости</strong> К<sub>д</sub> = U<sub>д</sub> / U<sub>0</sub>, где U<sub>0</sub> — донный на здоровом месте, U<sub>д</sub> — над дефектом. 1 — не изменился, 0 — исчез. Над реальными дефектами получается от 0 до 0,6. Чем крупнее дефект, тем меньше К<sub>д</sub>.</li>
+<li><strong>Плюсы:</strong> видит вертикальные расслоения шейки (код 50), которые эхо-методом не найти — они рассеивают звук, но не отражают назад. И сам сигнализирует о плохом контакте или сбитой центровке: донный пропал — значит, что-то не так.</li>
+<li><strong>Минусы:</strong> не показывает глубину; ложно срабатывает на сварных стыках, коррозии, отверстиях, при смещении датчика; плохо видит поперечные трещины подошвы (69); работает только на плоскопараллельных участках.</li>
+</ul>
+<div class="odt-warn"><strong>Ловушка ЗТМ.</strong> От горизонтальной трещины звук многократно «прыгает» между ней и поверхностью катания. Одно из таких переотражений может прийти ровно туда, где прибор ждёт донный сигнал, — и прибор примет его за дно. Крупная горизонтальная трещина (30Г, 52, 55, 56.3) в верхней половине рельса тогда пропускается. Поэтому на экране смотрите и на сигналы между зондирующим и донным.</div>
+<h3>Зеркальный метод — «поймать звук, отразившийся как от зеркала»</h3>
+<p>Большая гладкая поперечная трещина отражает звук в сторону, как зеркало, и тот не возвращается в излучающий датчик. Ставят второй датчик, который только слушает, именно там, куда уйдёт «зеркальный» отблеск.</p>
+<figure>
+<svg aria-label="Зеркальный метод" role="img" viewbox="0 0 640 200">
+<rect class="rail" height="110" width="600" x="20" y="40"></rect>
+<text class="sm" x="22" y="168">нижняя грань головки</text>
+<rect class="blk" height="20" width="40" x="150" y="20"></rect><text class="sm" x="130" y="14">1 — излучает</text>
+<rect class="blk" height="20" width="40" x="250" y="20"></rect><text class="sm" x="250" y="14">2 — только слушает</text>
+<line class="a" x1="170" x2="300" y1="40" y2="150"></line>
+<line class="a" x1="300" x2="400" y1="150" y2="65"></line>
+<path class="d" d="M400 50 L400 145"></path><text class="sm dt" x="408" y="100">гладкая поперечная</text><text class="sm dt" x="408" y="114">трещина</text>
+<line class="ok" x1="400" x2="270" y1="65" y2="40"></line><path class="ok" d="M281 38 L270 40 L279 47"></path>
+<text class="sm" x="22" y="190">Расстояние между датчиками ≈ 50 мм, оба 58°, развёрнуты на 34° к рабочей грани</text>
+</svg>
+<figcaption>Рис. 11. Зеркальный метод: звук отражается от дна головки, затем от трещины и попадает во второй датчик.</figcaption>
+</figure>
+<p>Плюс второй: слушающий датчик почти не реагирует на мелкие поверхностные трещины и дефект 11, поэтому выручает на «шумящих» рельсах. Применён в ПОИСК-10Э-2Н, ПОИСК-10ЭРА, АВИКОН-01.</p>
+<h3>Теневой и дельта-метод</h3>
+<p>Теневой требует ставить приёмник с другой стороны изделия — в пути невозможно. Дельта-метод ловит звук, рассеянный кончиком трещины; он трудоёмкий и используется только в экспертизе. На тележке их нет.</p>
+<h3>Строб, или «где прибор слушает»</h3>
+<p>Прибор реагирует не на всё подряд, а только на сигналы, попавшие в строб — заданный отрезок времени после импульса. Всё, что раньше или позже, звука не вызывает. Для канала головки у тележки строб около 65 мкс: туда попадает эхо от поперечных трещин, найденных лучом, однократно отражённым от низа головки.</p>
+<figure>
+<svg aria-label="Зона селекции канала головки" role="img" viewbox="0 0 640 170">
+<rect class="scr" height="110" rx="6" width="600" x="20" y="20"></rect>
+<line class="s" x1="40" x2="600" y1="110" y2="110"></line>
+<path class="fill" d="M42 110 L46 30 L52 110" opacity=".85"></path>
+<rect class="gate" height="70" width="460" x="90" y="40"></rect>
+<text class="sm at" x="280" y="34">строб ≈ 65 мкс</text>
+<path class="s" d="M150 110 l3 -18 l3 18 l3 -12 l3 12 l3 -20 l3 20" opacity=".6"></path>
+<text class="sm" x="118" y="128">40–45 мкс: неровности</text>
+<text class="sm" x="118" y="141">низа головки</text>
+<path class="df" d="M300 110 L306 60 L312 110"></path>
+<text class="sm dt" x="275" y="128">эхо от трещины</text>
+<path class="s" d="M470 110 l3 -15 l3 15 l3 -22 l3 22 l3 -10 l3 10 l3 -18 l3 18" opacity=".6"></path>
+<text class="sm" x="420" y="128">80–90 мкс: микротрещины</text>
+<text class="sm" x="420" y="141">выкружки, дефект 11</text>
+<text class="sm" x="20" y="162">Помехи «пляшут» по высоте и тянутся на длинном участке, эхо от трещины — устойчивое и короткое по длине рельса</text>
+</svg>
+<figcaption>Рис. 12. Что может появиться в стробе канала головки (по экрану ПОИСК-10Э).</figcaption>
+</figure>
+<h3>Условные размеры дефекта ΔL и ΔH</h3>
+<p>Луч — конус, поэтому дефект «звучит» не в одной точке, а на отрезке пути датчика. Двигаем датчик и отмечаем, где сигнал появился и где пропал (опустился до порога).</p>
+<figure>
+<svg aria-label="Условные размеры дефекта" role="img" viewbox="0 0 640 190">
+<rect class="rail" height="120" width="600" x="20" y="40"></rect>
+<rect class="blk" height="20" opacity=".55" width="34" x="120" y="20"></rect><rect class="blk" height="20" width="34" x="300" y="20"></rect>
+<line class="a" opacity=".6" x1="137" x2="373" y1="40" y2="118"></line>
+<line class="a" x1="317" x2="376" y1="40" y2="113"></line>
+<circle class="df" cx="380" cy="120" r="7"></circle>
+<text class="sm dt" x="392" y="124">дефект</text>
+<path class="s" d="M137 172 h180"></path><path class="s" d="M137 167 v10 M317 167 v10"></path>
+<text class="sm" x="200" y="186">ΔL — путь датчика, на котором есть сигнал</text>
+<text class="sm" x="105" y="14">начало сигнала</text><text class="sm" x="300" y="14">конец сигнала</text>
+</svg>
+<figcaption>Рис. 13. ΔL — протяжённость; ΔH — разница глубин по глубиномеру в тех же крайних точках; ΔX — то же поперёк рельса.</figcaption>
+</figure>
+<p>Условные размеры зависят от настройки прибора и почти всегда больше или меньше настоящих — поэтому их сравнивают с табличными признаками, а не принимают за реальный размер.</p>
+</div>
+</details>
+</details>
+<details class="ogroup">
+<summary>2 — Рельс и дефектоскоп <span class="where">(где дефекты и куда смотрят датчики)</span></summary>
+<details class="sub" id="odt-4" data-odt="4"><summary><span class="onum">2.1</span> <span class="st">Рельс: из чего состоит и где чаще всего дефекты</span></summary>
+
+<div class="odt-body">
+<figure>
+<svg aria-label="Поперечное сечение рельса" role="img" viewbox="0 0 640 250">
+<path class="rail" d="M260 20 Q253 20 253 28 L253 62 L281 82 L281 150 Q281 165 260 172 L217 186 L215 200 L385 200 L383 186 L340 172 Q319 165 319 150 L319 82 L347 62 L347 28 Q347 20 340 20 Z"></path>
+<!-- подписи -->
+<path class="th" d="M300 20 L430 14"></path><text class="sm" x="434" y="17">поверхность катания</text>
+<path class="th" d="M255 24 L195 50"></path><text class="sm" x="70" y="54">верхняя выкружка</text>
+<path class="th" d="M253 45 L195 80"></path><text class="sm" x="40" y="84">рабочая грань (внутрь колеи)</text>
+<path class="th" d="M347 45 L430 45"></path><text class="sm" x="434" y="48">нерабочая грань (наружу)</text>
+<path class="th" d="M268 72 L195 112"></path><text class="sm" x="20" y="116">подголовочная грань, нижняя выкружка</text>
+<path class="th" d="M319 120 L430 110"></path><text class="sm" x="434" y="113">шейка</text>
+<path class="th" d="M370 192 L430 175"></path><text class="sm" x="434" y="178">подошва</text>
+<path class="th" d="M222 194 L160 214"></path><text class="sm" x="90" y="228">перо подошвы</text>
+<text class="sm b" text-anchor="middle" x="300" y="44">ГОЛОВКА</text>
+<rect class="dash" height="96" opacity=".4" width="38" x="281" y="82"></rect>
+<text class="sm" x="440" y="226">штрих — зона шейки и её</text>
+<text class="sm" x="440" y="240">продолжение в головку и подошву</text>
+</svg>
+<figcaption>Рис. 14. Элементы рельса (поперечное сечение).</figcaption>
+</figure>
+<ul>
+<li><strong>Головка</strong> нагружена сильнее всего, особенно со стороны рабочей грани: сюда давят колёса. Здесь возникают контактно-усталостные трещины (коды 11, 21). Продольные трещины обычно начинаются на выкружке рабочей грани и уходят вглубь на 5–11 мм, а от них развивается поперечная трещина — самая опасная, ведёт к излому под поездом.</li>
+<li><strong>Концы рельсов у болтовых стыков</strong> — второе опасное место: трещины от болтовых отверстий (53.1) и в зоне сопряжения головки с шейкой (52.1).</li>
+<li><strong>Шейка и подошва вне стыков</strong> — дефектов меньше 10 %, но по ним происходит много изломов. Особенно опасна коррозионная трещина в подошве (69).</li>
+<li><strong>Сварные стыки</strong> — дефекты сварки: 26.3, 56.3, 66.3.</li>
+</ul>
+<p>Съёмные и переносные дефектоскопы обнаруживают до 98–99 % всех выявляемых дефектов. Изломы рельсов — первая причина крушений в путевом хозяйстве (около 30 % тяжёлых происшествий).</p>
+</div>
+</details>
+<details class="sub" id="odt-5" data-odt="5"><summary><span class="onum">2.2</span> <span class="st">Как устроена тележка: какой датчик куда смотрит</span></summary>
+
+<div class="odt-body">
+<p>На каждой нитке у двухниточной тележки (РЕЛЬС-5, ПОИСК-2, ПОИСК-10Э) стоит набор из четырёх датчиков. Две пары, две задачи:</p>
+<ul>
+<li><strong>Два наклонных ПЭП 58°</strong> — для головки. Повёрнуты на 34° к рабочей грани и светят в разные стороны: один по ходу движения, другой против. Поперечные трещины бывают наклонены на 15–18° в ту или другую сторону, поэтому нужны оба: каждый лучше видит «свою» трещину.</li>
+<li><strong>Два прямых ПЭП 0°</strong> — для шейки и её продолжения в головку и подошву (ЗТМ). Обычно работает первый; второй включается кнопкой и вместе с первым образует «ультразвуковой калибр» для болтовых стыков.</li>
+</ul>
+<figure>
+<svg aria-label="Схема прозвучивания тележки, вид сверху" role="img" viewbox="0 0 640 230">
+<text class="b" x="20" y="16">Вид сверху на головку одной нитки</text>
+<rect class="rail" height="80" width="600" x="20" y="60"></rect>
+<text class="sm" x="24" y="54">рабочая грань (внутрь колеи)</text>
+<text class="sm" x="24" y="134">нерабочая грань</text>
+<line class="dash" x1="20" x2="620" y1="100" y2="100"></line>
+<text class="sm" x="560" y="96">ось рельса</text>
+<!-- наклонные -->
+<g transform="translate(160 100) rotate(-34)"><rect class="blk" height="22" width="32" x="-16" y="-11"></rect></g>
+<line class="a" x1="160" x2="220" y1="100" y2="60"></line><path class="a" d="M209 62 L220 60 L215 70"></path>
+<text class="sm" x="105" y="158">ПЭП 58°: светит</text><text class="sm" x="105" y="171">по ходу (наезжающий)</text>
+<g transform="translate(460 100) rotate(34)"><rect class="blk" height="22" width="32" x="-16" y="-11"></rect></g>
+<line class="a" x1="460" x2="400" y1="100" y2="60"></line><path class="a" d="M405 70 L400 60 L411 62"></path>
+<text class="sm" x="420" y="158">ПЭП 58°: светит</text><text class="sm" x="420" y="171">против хода (отъезжающий)</text>
+<path class="s" d="M175 90 A30 30 0 0 0 190 100"></path><text class="sm" x="186" y="88">34°</text>
+<!-- прямые -->
+<rect class="blk" height="24" width="24" x="285" y="88"></rect><circle class="af" cx="297" cy="100" r="4"></circle>
+<rect class="blk" height="24" width="24" x="325" y="88"></rect><circle class="af" cx="337" cy="100" r="4"></circle>
+<text class="sm" x="262" y="158">2 прямых ПЭП 0°</text><text class="sm" x="262" y="171">(второй — калибр)</text>
+<path class="s" d="M240 196 h160"></path><path class="s" d="M392 191 L400 196 L392 201"></path>
+<text class="sm" x="250" y="216">направление движения тележки</text>
+</svg>
+<figcaption>Рис. 15. Основная схема прозвучивания одной нитки. Порядок датчиков в блоках зависит от модели прибора.</figcaption>
+</figure>
+<figure>
+<svg aria-label="Ход луча в головке, вид сбоку" role="img" viewbox="0 0 640 170">
+<text class="b" x="20" y="16">Вид сбоку: путь луча в головке</text>
+<rect class="rail" height="60" width="600" x="20" y="40"></rect>
+<text class="sm" x="24" y="116">нижняя (подголовочная) грань головки</text>
+<rect class="blk" height="18" width="34" x="60" y="22"></rect>
+<line class="a" x1="77" x2="114" y1="40" y2="100"></line>
+<line class="a" x1="114" x2="200" y1="100" y2="58"></line>
+<path class="d" d="M200 52 L200 98"></path>
+<text class="sm dt" x="205" y="75">трещина</text>
+<text class="sm" x="80" y="140">луч дошёл до низа головки, отразился и встретил трещину —</text>
+<text class="sm" x="80" y="154">так тележка находит поперечные трещины (однократно отражённым лучом)</text>
+<path class="a" d="M300 60 q20 -25 40 0 t40 0 t40 0 t40 0" opacity=".35"></path>
+<text class="sm" x="470" y="56">дальше луч идёт</text><text class="sm" x="470" y="70">по головке зигзагом —</text><text class="sm" x="470" y="84">«змейка»</text>
+</svg>
+<figcaption>Рис. 16. Упрощённо (в одной плоскости): реальный путь луча по сложному профилю головки — пространственный зигзаг.</figcaption>
+</figure>
+<div class="odt-easy">наклонные датчики «смотрят» в головку, прямые — сквозь шейку до подошвы. Головку проверяет эхо-метод, шейку — ЗТМ.</div>
+<h3>Наезжающий и отъезжающий каналы</h3>
+<p>Наезжающий светит туда, куда едет тележка, и видит дефект до того, как датчик над ним окажется. Отъезжающий светит назад и видит дефект, уже проехав его. Трещины от болтовых отверстий, наклонённые в разные стороны, видит только один из двух каналов (таблица в разделе о болтовом стыке).</p>
+<h3>Дополнительные схемы (по графику ПЧ)</h3>
+<p>Основная схема не видит часть дефектов, поэтому периодически (обычно не чаще раза в месяц) датчики переставляют по графику, утверждённому начальником дистанции. Изменение схемы обязательно записывают в рабочий журнал оператора.</p>
+<div class="odt-tw"><table>
+<tr><th>Что ищем</th><th>Что изменить</th><th>Кто делает</th></tr>
+<tr><td>Трещины у нерабочей грани головки</td><td>Передний по ходу наклонный ПЭП развернуть на 34° в сторону нерабочей грани. Тогда одновременно проверяются обе боковые части головки</td><td>Оператор</td></tr>
+<tr><td>Трещины в средней части головки, шейка</td><td>Передний наклонный ПЭП развернуть вдоль оси рельса</td><td>Оператор</td></tr>
+<tr><td>Поперечные трещины подошвы (69)</td><td>Наклонный 58° заменить на 45° вдоль оси; удлинить развёртку и строб до 200 мкс (на ПОИСК-10Э — кнопка «АККУМ» после доработки)</td><td>Дорожная лаборатория</td></tr>
+<tr><td>Крупные гладкие трещины 21.2, «шумящие» рельсы</td><td>Зеркальный канал: вместо одного прямого ПЭП — второй наклонный 58° только на приём, база ≈ 50 мм. Пропадает «калибр», но, по опыту, контроль от этого не хуже</td><td>Дорожная лаборатория (плата селектора)</td></tr>
+</table></div>
+<figure>
+<svg aria-label="Схема для нерабочей грани" role="img" viewbox="0 0 640 140">
+<rect class="rail" height="80" width="600" x="20" y="30"></rect>
+<text class="sm" x="24" y="24">рабочая грань</text><text class="sm" x="24" y="126">нерабочая грань</text>
+<line class="dash" x1="20" x2="620" y1="70" y2="70"></line>
+<g transform="translate(200 70) rotate(34)"><rect class="blk" height="22" width="32" x="-16" y="-11"></rect></g>
+<line class="a" x1="200" x2="260" y1="70" y2="110"></line><path class="a" d="M249 109 L260 110 L256 100"></path>
+<text class="sm at" x="270" y="104">передний ПЭП развёрнут к нерабочей грани</text>
+<g transform="translate(460 70) rotate(34)"><rect class="blk" height="22" width="32" x="-16" y="-11"></rect></g>
+<line class="a" x1="460" x2="400" y1="70" y2="30"></line><path class="a" d="M405 40 L400 30 L411 32"></path>
+<text class="sm" x="470" y="56">второй — как обычно</text>
+<path class="s" d="M520 132 h90"></path><path class="s" d="M602 127 L610 132 L602 137"></path><text class="sm" x="440" y="136">движение</text>
+</svg>
+<figcaption>Рис. 17. Схема для поиска трещин у нерабочей грани головки (вид сверху).</figcaption>
+</figure>
+<p>Зона селекции для трещины 69 при ПЭП 45° (общая для всех типов — примерно 110–190 мкс):</p>
+<div class="odt-tw"><table>
+<tr><th>Тип</th><th>Высота, мм</th><th>Начало, мкс</th><th>Конец, мкс</th><th>Длительность, мкс</th></tr>
+<tr><td>Р43</td><td>140</td><td>110,5</td><td>136,5</td><td>26</td></tr>
+<tr><td>Р50</td><td>152</td><td>120</td><td>148,2</td><td>28,2</td></tr>
+<tr><td>Р65</td><td>180</td><td>142,1</td><td>175,5</td><td>33,4</td></tr>
+<tr><td>Р75</td><td>192</td><td>151,6</td><td>187,2</td><td>35,6</td></tr>
+</table></div>
+<p>Для трещин 69 глубиной от 2 мм чувствительность канала 45° — не ниже 30 мм по СО-1 или 14 дБ по СО-3Р. Авторы советуют начинать строб с 40 мкс, чтобы заодно контролировать шейку.</p>
+<p>ПЭП 70° вдоль оси (зарубежная схема) хорош только для очень развитых трещин и годится лишь как дополнение: в испытаниях он нашёл 8 из 17 дефектов, основная схема — все 17.</p>
+</div>
+</details>
+</details>
+<details class="ogroup">
+<summary>3 — Подготовка и настройка <span class="where">(образцы, проверка датчика, чувствительность)</span></summary>
+<details class="sub" id="odt-6" data-odt="6"><summary><span class="onum">3.1</span> <span class="st">Стандартные образцы: «линейка» для настройки</span></summary>
+
+<div class="odt-body">
+<p>Прибор надо «откалибровать», как весы гирькой. Для этого есть стандартные образцы (СО) — бруски с отверстиями известного размера на известной глубине. По ним проверяют датчик и выставляют чувствительность.</p>
+<div class="odt-tw"><table>
+<tr><th>Образец</th><th>Материал</th><th>Для чего</th></tr>
+<tr><td>СО-1</td><td>Оргстекло</td><td>Чувствительность в мм (отверстия Ø2 мм на разной глубине); проверка глубиномера — интервал между донными сигналами от прорези 20 мкс; разрешающая способность; угол призмы</td></tr>
+<tr><td>СО-1Р</td><td>Оргстекло</td><td>То же для рельсовых дефектоскопов: отверстия Ø10 мм. На обычном СО-1 эхо от нужных отверстий (35–40 мм) не попадает в строб тележки, поэтому настраивают по СО-1Р</td></tr>
+<tr><td>СО-2</td><td>Сталь Ст20/Ст3</td><td>Угол ввода и чувствительность в дБ — по отверстию Ø6 мм на глубине 44 мм; мёртвая зона — по отверстиям Ø2 мм на 3, 6 и 8 мм; глубиномер 20 мкс</td></tr>
+<tr><td>СО-3</td><td>Сталь</td><td>Точка выхода луча — по вогнутой полуокружности</td></tr>
+<tr><td>СО-3Р</td><td>Сталь</td><td>Всё от СО-2 и СО-3 в одном бруске. Им комплектуют новые приборы; 5 из 8 параметров проверяются на нём одном</td></tr>
+</table></div>
+<figure>
+<svg aria-label="Упрощённый вид СО-3Р" role="img" viewbox="0 0 640 230">
+<path class="rail" d="M60 50 L470 50 L470 70 A110 110 0 0 1 380 190 L60 190 Z"></path>
+<text class="sm" x="64" y="44">рабочая поверхность</text>
+<circle class="s" cx="160" cy="160" r="6"></circle>
+<text class="sm" x="40" y="214">отверстие Ø6 мм на глубине 44 мм:</text>
+<text class="sm" x="40" y="227">угол ввода и чувствительность в дБ</text>
+<circle class="s" cx="120" cy="80" r="2.5"></circle><circle class="s" cx="135" cy="98" r="2.5"></circle>
+<text class="sm" x="140" y="80">Ø2 мм на 3 и 8 мм: мёртвая зона</text>
+<rect class="blk" height="20" width="44" x="262" y="30"></rect>
+<line class="a" x1="284" x2="166" y1="50" y2="155"></line>
+<text class="sm at" x="312" y="44">ПЭП в положении максимума эхо</text>
+<path class="th" d="M380 70 L380 50"></path>
+<text class="sm" x="485" y="120">полуокружность —</text>
+<text class="sm" x="485" y="134">для точки выхода</text>
+<g class="th"><line x1="280" x2="280" y1="50" y2="58"></line><line x1="300" x2="300" y1="50" y2="56"></line><line x1="320" x2="320" y1="50" y2="58"></line><line x1="340" x2="340" y1="50" y2="56"></line></g>
+<text class="sm" x="330" y="70">шкала углов</text>
+</svg>
+<figcaption>Рис. 18. Упрощённая схема стального образца СО-3Р (не в масштабе).</figcaption>
+</figure>
+<div class="odt-note">Затухание в оргстекле (СО-1) сильно зависит от температуры. Если у прибора есть аттенюатор (кнопки в дБ), надёжнее настраивать по стальному СО-2 или СО-3Р. К каждому СО-1 должен прилагаться свой аттестат-график поправок.</div>
+</div>
+</details>
+<details class="sub" id="odt-7" data-odt="7"><summary><span class="onum">3.2</span> <span class="st">Проверка датчика: точка выхода, угол, мёртвая зона, глубиномер</span></summary>
+
+<div class="odt-body">
+<ol>
+<li><strong>Точка выхода луча</strong> (СО-3 или СО-3Р). Водить датчиком по образцу, пока эхо от полуокружности не станет максимальным. Точка выхода в этот момент — над центром полуокружности. Боковые грани датчика параллельны граням образца. Если риска на корпусе не совпадает — нанести новую.</li>
+<li><strong>Угол ввода</strong> (СО-2 или СО-3Р). Найти максимум эхо от отверстия Ø6 мм на 44 мм и прочитать угол по шкале образца напротив риски точки выхода. Пример: призма 40° → должно быть 50° ± 2°. Не соответствует — датчик в ремонт.</li>
+<li><strong>Мёртвая зона</strong> (отверстия Ø2 мм). Если эхо от отверстия на 3 мм сливается с зондирующим импульсом, а от 8 мм видно отдельно — мёртвая зона между 3 и 8 мм. Для сварных стыков: ПЭП 65° — не более 3 мм, ПЭП 50° — не более 8 мм. Проверять при тех же положениях ручек «Чувствительность» и «ВРЧ», на которых будете работать.</li>
+<li><strong>Глубиномер.</strong> Прямым датчиком по донным сигналам с шагом 20 мкс: на СО-1 не менее двух интервалов, на СО-2 / СО-3Р не менее пяти. Наклонным 40–65° по отверстию Ø6 мм: глубина должна читаться 42 ± 2 мм.</li>
+</ol>
+<figure>
+<svg aria-label="Проверка мёртвой зоны" role="img" viewbox="0 0 640 140">
+<rect class="scr" height="100" rx="6" width="290" x="20" y="10"></rect>
+<line class="s" x1="35" x2="295" y1="95" y2="95"></line>
+<path class="fill" d="M38 95 L43 20 L60 95" opacity=".85"></path><path class="df" d="M52 95 L56 60 L62 95" opacity=".7"></path>
+<text class="sm" x="80" y="40">отверстие на 3 мм:</text><text class="sm dt" x="80" y="54">эхо слилось с импульсом</text>
+<text class="sm" x="40" y="128">→ на глубине 3 мм дефект не виден</text>
+<rect class="scr" height="100" rx="6" width="290" x="330" y="10"></rect>
+<line class="s" x1="345" x2="605" y1="95" y2="95"></line>
+<path class="fill" d="M348 95 L353 20 L370 95" opacity=".85"></path><path class="df" d="M392 95 L397 50 L402 95"></path>
+<text class="sm" x="420" y="40">отверстие на 8 мм:</text><text class="sm okt" x="420" y="54">эхо отдельно</text>
+<text class="sm" x="350" y="128">→ мёртвая зона меньше 8 мм</text>
+</svg>
+<figcaption>Рис. 19. Как читается мёртвая зона на экране.</figcaption>
+</figure>
+<div class="odt-warn">Хранить неисправные датчики в комплекте дефектоскопа запрещено.</div>
+</div>
+</details>
+<details class="sub" id="odt-8" data-odt="8"><summary><span class="onum">3.3</span> <span class="st">Настройка чувствительности по шагам</span></summary>
+
+<div class="odt-body">
+<p><strong>Зачем.</strong> Если прибор слишком «глухой», мелкая трещина не вызовет звука. Если слишком «чуткий», будет пищать на каждой царапине и неровности. Чувствительность ставят ровно такой, чтобы надёжно слышать дефекты опасного размера.</p>
+<p><strong>Почему через «плюс N дБ».</strong> Отверстие Ø6 мм в образце отражает звук намного сильнее реальной трещины. Поэтому сначала выставляют прибор так, чтобы отверстие было ровно на пороге, а затем делают его чувствительнее на заданное число децибел.</p>
+<h3>Эхо-каналы по СО-3Р — три шага</h3>
+<figure>
+<svg aria-label="Три шага настройки чувствительности" role="img" viewbox="0 0 640 200">
+<g>
+<rect class="scr" height="120" rx="6" width="196" x="10" y="20"></rect>
+<line class="s" x1="20" x2="196" y1="120" y2="120"></line><line class="dash" x1="20" x2="196" y1="80" y2="80"></line>
+<path class="fill" d="M22 120 L26 30 L32 120" opacity=".85"></path><path class="af" d="M110 120 L116 40 L122 120"></path>
+<text class="sm" x="150" y="76">порог</text>
+<text class="sm b" x="12" y="158">1. Поймать максимум</text>
+<text class="sm" x="12" y="172">эхо от Ø6 мм на 44 мм</text>
+<text class="sm" x="12" y="186">(не от угла образца!)</text>
+</g>
+<g>
+<rect class="scr" height="120" rx="6" width="196" x="222" y="20"></rect>
+<line class="s" x1="232" x2="408" y1="120" y2="120"></line><line class="dash" x1="232" x2="408" y1="80" y2="80"></line>
+<path class="fill" d="M234 120 L238 30 L244 120" opacity=".85"></path><path class="af" d="M322 120 L328 80 L334 120"></path>
+<text class="sm" x="300" y="40">ослабление 36 дБ</text>
+<text class="sm b" x="224" y="158">2. Кнопками аттенюатора</text>
+<text class="sm" x="224" y="172">опустить эхо ровно до порога,</text>
+<text class="sm" x="224" y="186">записать положение кнопок</text>
+</g>
+<g>
+<rect class="scr" height="120" rx="6" width="196" x="434" y="20"></rect>
+<line class="s" x1="444" x2="620" y1="120" y2="120"></line><line class="dash" x1="444" x2="620" y1="80" y2="80"></line>
+<path class="fill" d="M446 120 L450 30 L456 120" opacity=".85"></path>
+<text class="sm" x="470" y="40">ослабление 36 − 12 = 24 дБ</text>
+<text class="sm okt" x="470" y="60">прибор чутче на 12 дБ</text>
+<text class="sm b" x="436" y="158">3. Снять ПЭП и добавить</text>
+<text class="sm" x="436" y="172">заданные дБ (отжать кнопки;</text>
+<text class="sm" x="436" y="186">у АВИКОН-01 — нажать)</text>
+</g>
+</svg>
+<figcaption>Рис. 20. Настройка эхо-канала в децибелах. Цифры условные — значения берите из инструкции.</figcaption>
+</figure>
+<p>Подсказки к шагу 1: эхо от нижнего угла образца на развёртке всегда дальше, чем от отверстия. Правильная установка подтверждается тем, что точка выхода стоит против отметки угла ввода на шкале, а глубиномер показывает 42 ± 2 мм.</p>
+<p>Ориентировочные значения для типовых датчиков:</p>
+<div class="odt-tw"><table>
+<tr><th>Угол ввода</th><th>По СО-1, мм</th><th>По СО-3Р, дБ</th><th>Где применяется</th></tr>
+<tr><td>50°</td><td>45</td><td>24 (для сварки 22–24)</td><td>Сварные стыки</td></tr>
+<tr><td>58–60°</td><td>35</td><td>12</td><td>Сплошной контроль головки</td></tr>
+<tr><td>65°</td><td>30</td><td>6</td><td>Ручной контроль</td></tr>
+</table></div>
+<p><strong>По СО-1(Р) в миллиметрах</strong> настройка «на 35 мм» значит: все отверстия на глубине 5–35 мм уверенно звучат, а на 40 мм и глубже — нет. «Отсечку» ставят на минимум, при котором ещё нет шумов призмы.</p>
+<h3>ЗТМ-каналы (прямые датчики) — прямо на рельсе</h3>
+<ol>
+<li>Поставить тележку на чистый здоровый участок основного металла — не на стык, не на сварку, не над отверстием.</li>
+<li>Ручкой «Тип рельса» совместить строб с донным сигналом (звук в наушниках пропадает).</li>
+<li>Аттенюатором ослабить донный сигнал до порога срабатывания.</li>
+<li>Добавить чувствительность — обычно 14 дБ (К = 0,2): прибор запищит, когда донный упадёт более чем в 5 раз.</li>
+</ol>
+<div class="odt-tw"><table>
+<tr><th>Во сколько раз должен упасть донный</th><th>в 5 раз (0,2)</th><th>в 2,5 раза (0,4)</th><th>в 2 раза (0,5)</th><th>в 1,7 раза (0,6)</th></tr>
+<tr><th>Децибелы</th><td>14</td><td>8</td><td>6</td><td>4</td></tr>
+</table></div>
+<ul>
+<li>Чем меньше износ и грязь на поверхности катания, тем выше можно поднимать чувствительность прямых каналов.</li>
+<li>Короткое нажатие кнопки имитатора дефекта в ходе работы проверяет, что канал жив и настроен: звук должен сработать.</li>
+<li>Анализ второго донного сигнала (вместо первого) чувствительнее к внутренним дефектам и меньше страдает от помех.</li>
+</ul>
+<div class="odt-warn">Настройку проверять каждые 2–3 часа работы, после смены датчика и при переходе к другому изделию: она сбивается от износа датчика, температуры и дрейфа прибора.</div>
+</div>
+</details>
+<details class="sub" id="odt-9" data-odt="9"><summary><span class="onum">3.4</span> <span class="st">Шпаргалка по децибелам</span></summary>
+
+<div class="odt-body">
+<p>Децибелы нужны, чтобы не делить и не умножать: «во сколько раз» превращается в «плюс или минус столько-то». Запомните опорные точки: <strong>6 дБ — в 2 раза, 20 дБ — в 10 раз</strong>; децибелы складываются, а разы перемножаются (12 дБ = 6 + 6 = в 2 × 2 = 4 раза).</p>
+<div class="odt-tw"><table>
+<tr><th>дБ</th><th>2</th><th>4</th><th>6</th><th>8</th><th>12</th><th>14</th><th>20</th><th>26</th><th>40</th></tr>
+<tr><th>Раз по амплитуде</th><td>1,26</td><td>1,6</td><td>2</td><td>2,5</td><td>4</td><td>5</td><td>10</td><td>20</td><td>100</td></tr>
+</table></div>
+<ul>
+<li>Донный над дефектом упал вдвое — коэффициент выявляемости «минус 6 дБ».</li>
+<li>Как оценить эхо-дефект: довести эталон (Ø6 мм на 44 мм в СО-3Р) до порога и записать показание аттенюатора; затем то же для дефекта; разница — во сколько дБ дефект слабее или сильнее эталона.</li>
+<li>«Отрицательные» дБ — ослабление, «положительные» — усиление. В разговоре знак часто опускают.</li>
+</ul>
+</div>
+</details>
+</details>
+<details class="ogroup">
+<summary>4 — Работа на линии <span class="where">(смена, скорость, что делать при сигнале)</span></summary>
+<details class="sub" id="odt-10" data-odt="10"><summary><span class="onum">4.1</span> <span class="st">Когда что проверять и с какой скоростью работать</span></summary>
+
+<div class="odt-body">
+<div class="odt-tw"><table>
+<tr><th>Параметр</th><th>Когда проверять</th></tr>
+<tr><td>Чувствительность; мёртвая зона</td><td>Каждые 2–3 часа, при смене датчика, при контроле другого изделия</td></tr>
+<tr><td>Стрела датчика; угол ввода; погрешность глубиномера</td><td>В начале смены и при смене датчика</td></tr>
+<tr><td>Минимальный обнаруживаемый размер на рабочей скорости; частота УЗК; длительность импульса</td><td>В дорожной лаборатории раз в 6 месяцев</td></tr>
+</table></div>
+<p><strong>Скорость.</strong> Рабочая скорость тележки — около 4 км/ч. Индикатор срабатывает не от одного импульса, а от нескольких подряд (защита от случайных щелчков). Если ехать быстрее, короткий дефект даст меньше импульсов, чем нужно, и звука не будет. Считается достаточным, если на рабочей скорости уверенно звучат отверстия контактных соединителей Ø6–10 мм.</p>
+<p><strong>Сезонность.</strong> Зимой дефектов выявляется в 2–3 раза больше, чем летом (металл на холоде хрупче). Пик — март в европейской части, апрель на дорогах Сибири и Востока: резкие перепады температуры днём и ночью, оттаивание балласта, весеннее расстройство пути. В это время внимательность нужна особая.</p>
+</div>
+</details>
+<details class="sub" id="odt-11" data-odt="11"><summary><span class="onum">4.2</span> <span class="st">Порядок работы на смене (кратко)</span></summary>
+
+<div class="odt-body">
+<ol>
+<li>Проверить комплект: тележка, датчики, аккумулятор, наушники, контактная жидкость, стандартные образцы, ручные датчики, набор для осмотра (металлическая линейка не короче 300 мм, зеркало, типовой молоток, щупы, лупа), мел и несмываемая светлая краска, рабочий журнал.</li>
+<li>В начале смены: проверить стрелу, угол ввода, глубиномер; настроить чувствительность всех каналов.</li>
+<li>Уточнить по графику, какая схема прозвучивания сегодня (основная или дополнительная), и при смене схемы сделать запись в журнале.</li>
+<li>Перед стартом оценить износ и загрязнённость рельсов и подстроить прямые каналы.</li>
+<li>Идти около 4 км/ч, следить за подачей жидкости и центровкой датчиков (особенно в кривых).</li>
+<li>У болтовых стыков включать «калибр» (кнопка «Болтовой стык»).</li>
+<li>Каждые 2–3 часа проверять настройку.</li>
+<li>Любое срабатывание — разобрать по порядку из следующего раздела. Результат — в журнал.</li>
+</ol>
+</div>
+</details>
+<details class="sub" id="odt-12" data-odt="12"><summary><span class="onum">4.3</span> <span class="st">Запищало: что делать</span></summary>
+
+<div class="odt-body">
+<p>Звук — это не всегда дефект. Задача оператора — найти причину.</p>
+<h3>Прямой канал (ЗТМ) на перегоне</h3>
+<div class="odt-tw"><table>
+<tr><th>Возможная причина</th><th>Как понять</th><th>Что сделать</th></tr>
+<tr><td>Грязь, песок под датчиком, мало жидкости</td><td>Звук на случайных местах, после очистки пропадает</td><td>Очистить поверхность катания, протереть подошву блоков, проверить подачу жидкости</td></tr>
+<tr><td>Сбита центровка (часто в кривых)</td><td>Донный слабый на длинном участке</td><td>Сместить блоки к оси рельса; на ПОИСК-10Э — по максимуму донного на экране</td></tr>
+<tr><td>Вмятина от инструмента, поверхностные дефекты</td><td>Видно глазом</td><td>Осмотреть, при сомнении — ручной контроль</td></tr>
+<tr><td>Одиночное отверстие в шейке</td><td>Видно глазом</td><td>Осмотреть</td></tr>
+<tr><td>Коррозия подошвы</td><td>Видно с зеркалом</td><td>Осмотреть, проверить ручным наклонным датчиком</td></tr>
+<tr><td>Опасный дефект</td><td>Звук повторяется на одном месте, причины снаружи нет</td><td>Ручной контроль, маркировка, журнал, уведомление</td></tr>
+</table></div>
+<h3>Алгоритм разбора</h3>
+<ol>
+<li>Очистить поверхность, если грязная.</li>
+<li>Повторить проезд и отметить мелом, где звук начался и где закончился.</li>
+<li>Осмотреть место по всему периметру рельса.</li>
+<li>Найти минимальную чувствительность, при которой звук ещё есть.</li>
+<li>Проверить ручным датчиком: координаты и условные размеры.</li>
+<li>Записать в журнал, выдать уведомление дорожному мастеру, дефектный рельс промаркировать несмываемой светлой краской.</li>
+<li>Если рельс не признан остродефектным — продолжать по графику, но при каждом следующем проходе следить за этим местом особенно внимательно.</li>
+</ol>
+<div class="odt-note">В основном металле при правильной настройке звук в прямых каналах почти не появляется — здесь нет отверстий и торцов. Поэтому любой повторяющийся звук на перегоне — повод разобраться.</div>
+<h3>Наклонные каналы (головка)</h3>
+<ul>
+<li>Короткий звук на одном месте, повторяется при повторном проходе — кандидат в дефект, проверка ручным датчиком.</li>
+<li>Частые короткие срабатывания на протяжённом участке — скорее всего «шумящий» рельс (микротрещины, дефект 11). На экране такие сигналы «пляшут» по высоте и стоят в начале (40–45 мкс) или конце (80–90 мкс) строба.</li>
+<li>У болтового стыка наклонные каналы всегда звучат от торцов головки — это нормально.</li>
+</ul>
+</div>
+</details>
+<details class="sub" id="odt-13" data-odt="13"><summary><span class="onum">4.4</span> <span class="st">Ручной контроль: как уточнить подозрительное место</span></summary>
+
+<div class="odt-body">
+<ol>
+<li><strong>Подключить ручной датчик</strong> (65°, 58°, 50° или 0°) к разъёму РН (ручной наклонный) или РП (ручной прямой) и нажать «Ручной контроль». На ПОИСК-10Э наклонный ручной датчик работает через канал 1 БД правой нитки. Настроить чувствительность ручного канала (на ПОИСК-10Э — ещё и развёртку).</li>
+<li><strong>Сначала осмотреть, потом чистить.</strong> Трещину, вышедшую на поверхность, легко затереть грязью при очистке.</li>
+<li>Очистить шабером участок ±200 мм от подозрительного места, протереть ветошью, осмотреть с зеркалом, фонарём, лупой.</li>
+<li>Обильно смочить контактной жидкостью: вода, зимой — раствор спирта, минеральное масло.</li>
+<li>Направить датчик в сторону предполагаемой трещины, по возможности перпендикулярно ей, и водить, как на рисунке.</li>
+</ol>
+<figure>
+<svg aria-label="Схема сканирования ручным датчиком" role="img" viewbox="0 0 640 170">
+<rect class="rail" height="100" width="600" x="20" y="30"></rect>
+<text class="sm" x="24" y="24">поверхность катания (вид сверху)</text>
+<path class="a" d="M80 60 L200 60 L200 66 L80 66 L80 72 L200 72 L200 78 L80 78 L80 84 L200 84 L200 90 L80 90 L80 96 L200 96 L200 102 L80 102"></path>
+<text class="sm at" x="80" y="146">возвратно-поступательно, шаг 2–3 мм,</text>
+<text class="sm at" x="80" y="160">не быстрее 100 мм/с, поворачивая на 10–30°</text>
+<path class="d" d="M330 40 L330 120"></path><text class="sm dt" x="300" y="24">предполагаемая трещина</text>
+<path class="a" d="M460 60 L580 60 L580 66 L460 66 L460 72 L580 72 L580 78 L460 78 L460 84 L580 84 L580 90 L460 90"></path>
+<text class="sm" x="450" y="146">и то же с другой стороны</text>
+<path class="a" d="M210 80 h60"></path><path class="a" d="M262 75 L270 80 L262 85"></path>
+<path class="a" d="M450 80 h-60"></path><path class="a" d="M398 75 L390 80 L398 85"></path>
+</svg>
+<figcaption>Рис. 21. Сканирование ручным датчиком: каждую зону — с двух сторон от подозрительного сечения.</figcaption>
+</figure>
+<p><strong>Признак дефекта</strong> — звук плюс импульс на экране, который <em>двигается по развёртке</em>, когда двигаешь датчик. Такие же признаки дают неровности поверхности, поэтому измерить координаты отражателя и сравнить с тем, что видно на поверхности. Если внешней причины нет — измерить ΔL, ΔH, ΔX и минимальную чувствительность, при которой дефект ещё звучит.</p>
+<div class="odt-tw"><table>
+<tr><th>Что за дефект в головке</th><th>ΔL, мм</th><th>ΔH, мм</th><th>Дополнительно</th></tr>
+<tr><td>Зарождающийся дефект второй группы (поперечная трещина)</td><td>8–12</td><td>&lt; 5</td><td>Сигнал виден при датчике, направленном вдоль рельса</td></tr>
+<tr><td>Развитый дефект второй группы</td><td>&gt; 12 (12–30)</td><td>&gt; 5</td><td>Сигнал сохраняется при смещении датчика поперёк рельса</td></tr>
+<tr><td>Дефекты 11 или 30Г</td><td>&gt; 12</td><td>2–3</td><td>Иногда эхо только с одной стороны</td></tr>
+</table></div>
+<p>Если на фоне дефекта 11 сигнал остаётся при снижении чувствительности — это признак дефекта второй группы или 30Г.</p>
+<figure>
+<svg aria-label="Отражение от кромок большой трещины" role="img" viewbox="0 0 640 170">
+<rect class="rail" height="110" width="600" x="20" y="20"></rect>
+<path class="d" d="M300 30 L300 120"></path>
+<circle class="df" cx="300" cy="30" r="5"></circle><circle class="df" cx="300" cy="120" r="5"></circle>
+<text class="sm dt" x="312" y="40">верхняя кромка: рассеивает — эхо есть</text>
+<text class="sm" x="312" y="80">гладкая середина: зеркало — эхо уходит в сторону</text>
+<text class="sm dt" x="312" y="124">нижняя кромка: рассеивает — эхо есть</text>
+<line class="a" x1="60" x2="300" y1="20" y2="75"></line>
+<line class="dash" x1="300" x2="150" y1="75" y2="130"></line>
+<text class="sm" x="40" y="150">Поэтому большая трещина может давать два отдельных сигнала с «провалом» посередине.</text>
+</svg>
+<figcaption>Рис. 22. Крупная поперечная трещина отражает в основном краями.</figcaption>
+</figure>
+</div>
+</details>
+</details>
+<details class="ogroup">
+<summary>5 — Дефекты по зонам рельса <span class="where">(стыки, шейка, подошва, сварка)</span></summary>
+<details class="sub" id="odt-14" data-odt="14"><summary><span class="onum">5.1</span> <span class="st">Дефект 21.2: когда можно оставить на накладках (21.2.Н)</span></summary>
+
+<div class="odt-body">
+<p>Внутренняя поперечная трещина головки (21.2) не всегда требует немедленной вырезки. Около 60 % вскрытых трещин кода 21 занимают не более 10–15 % площади головки. Если трещина небольшая, место можно усилить накладками — тогда дефект называют <strong>21.2.Н</strong>, а рельс считается дефектным до плановой замены.</p>
+<ul>
+<li>Условия: трещина не вышла на поверхность и её граница не заходит за середину головки.</li>
+<li>Как проверить размер: если внутренняя граница дефекта не дальше 35 мм от боковой рабочей грани, площадь трещины не более 25–30 % сечения головки.</li>
+<li>Как найти место: озвучить дефект с двух сторон с поверхности катания, при расхождении координат — ещё и с боковой нерабочей грани. Границу ищут, ведя датчик поперёк головки от внутренней грани к наружной с шагом 2–3 мм, луч вдоль оси рельса.</li>
+</ul>
+<figure>
+<svg aria-label="Установка накладок на дефект 21.2" role="img" viewbox="0 0 640 150">
+<rect class="rail" height="80" width="600" x="20" y="30"></rect>
+<rect class="blk" height="50" width="360" x="140" y="45"></rect>
+<g class="s"><circle cx="175" cy="70" r="7"></circle><circle cx="235" cy="70" r="7"></circle><circle cx="405" cy="70" r="7"></circle><circle cx="465" cy="70" r="7"></circle></g>
+<g class="dash"><circle cx="295" cy="70" r="7"></circle><circle cx="345" cy="70" r="7"></circle></g>
+<path class="d" d="M320 34 L320 106"></path>
+<text class="sm dt" x="326" y="26">дефект 21.2 — по середине накладки</text>
+<text class="sm" x="210" y="128">средние отверстия в рельсе не сверлить (пунктир)</text>
+<text class="sm" x="24" y="144">шестидырная накладка на 4 болтах (Р65, Р50)</text>
+</svg>
+<figcaption>Рис. 23. Накладки на дефект 21.2.Н: середина накладки над дефектом, два средних отверстия не сверлятся, чтобы трещина не пошла к ним.</figcaption>
+</figure>
+<ul>
+<li>Если в плети два дефекта кода 21 ближе 12,5 м друг к другу — ставить накладки запрещено.</li>
+<li>За дефектом 21.2.Н — визуальный надзор, остукивание стыковых болтов, дефектоскопирование по графику.</li>
+</ul>
+<div class="odt-warn">Трещина 21.2.Н ушла за середину головки или вышла на поверхность — рельс заменяется немедленно. Если середина накладки не совмещена с дефектом — рельс остродефектный.</div>
+</div>
+</details>
+<details class="sub" id="odt-15" data-odt="15"><summary><span class="onum">5.2</span> <span class="st">Болтовой стык, «ультразвуковой калибр» и дефект 53.1</span></summary>
+
+<div class="odt-body">
+<p>Болтовой стык бьют колёса на каждом зазоре. Самое напряжённое место — кромки болтовых отверстий. Трещина начинается на стенке отверстия и идёт по шейке примерно под 45°; итог — выкол куска головки длиной около высоты рельса и риск схода.</p>
+<figure>
+<svg aria-label="Болтовой стык" role="img" viewbox="0 0 640 170">
+<rect class="rail" height="110" width="290" x="20" y="30"></rect><rect class="rail" height="110" width="304" x="316" y="30"></rect>
+<rect class="dash" height="44" width="400" x="120" y="68"></rect>
+<g class="s"><circle cx="150" cy="90" r="9"></circle><circle cx="210" cy="90" r="9"></circle><circle cx="270" cy="90" r="9"></circle><circle cx="360" cy="90" r="9"></circle><circle cx="420" cy="90" r="9"></circle><circle cx="480" cy="90" r="9"></circle></g>
+<path class="d" d="M276 84 L300 58"></path><text class="sm dt" x="200" y="24">трещина 53.1 ≈ 45° от отверстия</text>
+<text class="sm" x="290" y="160">стыковой зазор</text><path class="th" d="M313 140 v10"></path>
+<text class="sm" x="440" y="130">накладка (пунктир)</text>
+</svg>
+<figcaption>Рис. 24. Элементы болтового стыка и характерная трещина от отверстия.</figcaption>
+</figure>
+<ul>
+<li>Около 45 % изымаемых дефектных рельсов — из-за трещин от болтовых отверстий; около 50 % изломов — по дефекту 53.1.</li>
+<li>Дефекты в зоне болтового стыка (50, 52, 53, 55) относят к остродефектным <strong>независимо от размера</strong> — замена немедленно.</li>
+<li>Даже в целом стыке прямой канал звучит над каждым отверстием и зазором (отверстие закрывает подошву). Без калибра трещину иногда можно заметить только по тому, что над отверстием звук <strong>длиннее</strong>, чем над соседними.</li>
+</ul>
+<h3>«Ультразвуковой калибр»</h3>
+<p>Два прямых датчика в одном канале стоят на расстоянии чуть больше диаметра отверстия. Канал молчит, пока хотя бы один из них получает донный сигнал.</p>
+<figure>
+<svg aria-label="Работа ультразвукового калибра" role="img" viewbox="0 0 640 200">
+<text class="b okt" x="20" y="16">Целое отверстие — тишина</text>
+<rect class="rail" height="130" width="280" x="20" y="40"></rect>
+<circle class="s" cx="128" cy="105" r="22"></circle>
+<rect class="blk" height="18" width="20" x="112" y="22"></rect><rect class="blk" height="18" width="20" x="188" y="22"></rect>
+<line class="a" x1="122" x2="122" y1="40" y2="84"></line>
+<line class="ok" x1="198" x2="198" y1="40" y2="170"></line>
+<text class="sm" x="30" y="188">отверстие перекрывает только один луч —</text>
+<text class="sm" x="30" y="200">донный от второго есть</text>
+<text class="b dt" x="340" y="16">Отверстие с трещиной — звук</text>
+<rect class="rail" height="130" width="280" x="340" y="40"></rect>
+<circle class="s" cx="452" cy="105" r="22"></circle>
+<path class="d" d="M470 92 L540 52"></path>
+<rect class="blk" height="18" width="20" x="432" y="22"></rect><rect class="blk" height="18" width="20" x="508" y="22"></rect>
+<line class="a" x1="442" x2="442" y1="40" y2="85"></line>
+<line class="a" x1="518" x2="518" y1="40" y2="63"></line>
+<text class="sm" x="350" y="188">отверстие + трещина закрывают оба луча —</text>
+<text class="sm dt" x="350" y="200">донного нет, срабатывает индикатор</text>
+</svg>
+<figcaption>Рис. 25. Принцип «ультразвукового калибра». Включать кнопкой «Болтовой стык» при каждом проходе стыка.</figcaption>
+</figure>
+<ul>
+<li>Калибр даёт ложные срабатывания на «разбитых» овальных отверстиях и работает правильно, только если отверстия по ГОСТ, а расстояние между датчиками не сбито.</li>
+<li>Гарантированно ловятся лишь трещины, чья проекция на поверхность катания выходит за отверстие более чем на 10 мм, — при реальной длине до 30 мм. Вагоны и АМД с наклонными датчиками находят 53.1 раньше, от 5 мм. Поэтому у стыков слушайте внимательно и смотрите на длительность звука.</li>
+</ul>
+<h3>Какой наклонный канал видит трещину от отверстия</h3>
+<p>Эхо от трещины приходит чуть позже эха от стенки отверстия. Направления — на схеме, где тележка едет слева направо.</p>
+<div class="odt-tw"><table>
+<tr><th>Куда идёт трещина</th><th>Видит канал</th></tr>
+<tr><td>Вверх и вправо</td><td>Наезжающий</td></tr>
+<tr><td>Вверх и влево</td><td>Отъезжающий</td></tr>
+<tr><td>Вниз и вправо</td><td>Отъезжающий</td></tr>
+<tr><td>Вниз и влево</td><td>Наезжающий</td></tr>
+<tr><td>Горизонтально вправо</td><td>Отъезжающий (трудно: сливается с эхом от стенки)</td></tr>
+<tr><td>Горизонтально влево</td><td>Наезжающий (трудно)</td></tr>
+</table></div>
+<p>На АВИКОН-01 стоит двухлучевой датчик (41° и 49° из одной точки). В режиме «Болтовой стык» он сигналит только тогда, когда за один импульс пришли два эха — от стенки и от трещины. От целого отверстия приходит одно эхо, и прибор молчит.</p>
+</div>
+</details>
+<details class="sub" id="odt-16" data-odt="16"><summary><span class="onum">5.3</span> <span class="st">Шейка и подошва вне стыков</span></summary>
+
+<div class="odt-body">
+<div class="odt-tw"><table>
+<tr><th>Код</th><th>Дефект</th><th>Чем видно</th></tr>
+<tr><td>50</td><td>Расслоение шейки</td><td>ЗТМ (эхо-методом не видно)</td></tr>
+<tr><td>52.2</td><td>Трещина в зоне сопряжения головки с шейкой. Длиннее 30 мм — остродефектный, короче — дефектный, плановая замена</td><td>ЗТМ при глубоком заходе в шейку; наклонный 45°</td></tr>
+<tr><td>55</td><td>Поперечная трещина в шейке</td><td>ЗТМ хорошо, плюс эхо от краёв</td></tr>
+<tr><td>60</td><td>Волосовины, выколы подошвы</td><td>ЗТМ</td></tr>
+<tr><td>69</td><td>Коррозионная трещина подошвы — ведёт к хрупкому излому</td><td>ЗТМ ненадёжен; наклонный 45° вдоль оси (доп. схема)</td></tr>
+</table></div>
+<ul>
+<li>Дефектов здесь меньше 10 % от всех, но по дефектам пятой и шестой групп происходит около 60 % изломов.</li>
+<li>Ложное падение донного сигнала дают: плохой контакт, изменённая донная поверхность (коррозия), сварной стык, непараллельные поверхности, смещение датчика поперёк рельса. Первым делом проверьте центровку.</li>
+<li>Звук прямого канала в зоне сварного стыка (на 50–60 мм зоны нагрева) — нормально: там донный всегда ослаблен.</li>
+</ul>
+<figure>
+<svg aria-label="Почему падает донный сигнал" role="img" viewbox="0 0 640 160">
+<g><rect class="rail" height="100" width="90" x="20" y="30"></rect><rect class="blk" height="16" width="34" x="48" y="14"></rect><path class="d" d="M40 33 q8 -4 16 0"></path><line class="dash" x1="65" x2="65" y1="34" y2="130"></line><text class="sm" x="20" y="150">нет контакта</text></g>
+<g><rect class="rail" height="100" width="90" x="140" y="30"></rect><rect class="blk" height="16" width="34" x="190" y="14"></rect><line class="a" x1="207" x2="207" y1="30" y2="130"></line><line class="dash" x1="185" x2="185" y1="30" y2="130"></line><text class="sm" x="140" y="150">сбита центровка</text></g>
+<g><rect class="rail" height="100" width="90" x="260" y="30"></rect><rect class="blk" height="16" width="34" x="288" y="14"></rect><line class="a" x1="305" x2="305" y1="30" y2="130"></line><path class="d" d="M280 130 q6 -6 12 0 t12 0 t12 0 t12 0"></path><text class="sm" x="260" y="150">коррозия подошвы</text></g>
+<g><rect class="rail" height="100" width="90" x="380" y="30"></rect><rect class="blk" height="16" width="34" x="408" y="14"></rect><line class="a" x1="425" x2="425" y1="30" y2="130"></line><rect class="gate" height="100" width="10" x="420" y="30"></rect><text class="sm" x="380" y="150">сварной стык</text></g>
+<g><rect class="rail" height="100" width="90" x="500" y="30"></rect><rect class="blk" height="16" width="34" x="528" y="14"></rect><line class="a" x1="545" x2="545" y1="30" y2="80"></line><path class="d" d="M520 82 L570 78"></path><text class="sm dt" x="500" y="150">настоящий дефект</text></g>
+</svg>
+<figcaption>Рис. 26. Донный сигнал проседает не только из-за дефекта. Схематично, сечение шейки.</figcaption>
+</figure>
+</div>
+</details>
+<details class="sub" id="odt-17" data-odt="17"><summary><span class="onum">5.4</span> <span class="st">Сварные стыки (ручной контроль)</span></summary>
+
+<div class="odt-body">
+<ul>
+<li>Дефекты: 26.3 (поперечная трещина в головке), 56.3 (трещина в шейке), 66.3 (в подошве), а также горячие трещины, пережоги, свищи, непровары. Слипания («холодная сварка») обычными способами не выявляются.</li>
+<li>Дефекты в подошве сильнее всего снижают долговечность стыка — подошву контролируйте особенно тщательно.</li>
+<li>ЗТМ в зоне сварки не применяют: донный там ослаблен и без дефекта. Контроль — эхо-методом ручным датчиком 50° (призма 40°), 2,5 МГц.</li>
+<li>Чувствительность: 45 мм по СО-1 или 22–24 дБ по СО-3Р. Мёртвая зона датчика 50° — не более 8 мм.</li>
+<li>Подготовка: очистить по периметру 100–200 мм в обе стороны (кроме подошвы снизу) от ржавчины, окалины, песка и мазута, смазать минеральным маслом. Снимать клеммные болты и чистить от балласта — работа монтёров пути.</li>
+<li>Развёртку и строб ставят на 100 мм глубины, а не на высоту рельса. Для шейки и подошвы с поверхности катания — режим «по слоям»: задержка 100 мм, слой 90 мм (Р65) или 60 мм (Р50, Р43).</li>
+<li>Датчик держат перпендикулярно шву, поворачивают на 15–25° в обе стороны, шаг не более 3 мм, скорость не более 100 мм/с, без сильного нажима (иначе датчик быстро стирается, а контакт лучше не становится). Каждую зону — с двух сторон шва.</li>
+</ul>
+<figure>
+<svg aria-label="Порядок прозвучивания сварного стыка" role="img" viewbox="0 0 640 230">
+<path class="rail" d="M260 20 Q253 20 253 28 L253 62 L281 82 L281 150 Q281 165 260 172 L217 186 L215 200 L385 200 L383 186 L340 172 Q319 165 319 150 L319 82 L347 62 L347 28 Q347 20 340 20 Z"></path>
+<!-- 1 перо подошвы -->
+<rect class="blk" height="12" transform="rotate(-18 367 174)" width="22" x="356" y="168"></rect>
+<line class="a" x1="362" x2="300" y1="182" y2="196"></line>
+<text class="sm b" x="400" y="190">1</text><text class="sm" x="414" y="190">перья подошвы, поворот 0–30°</text>
+<!-- 2 шейка сбоку -->
+<rect class="blk" height="22" width="12" x="319" y="104"></rect>
+<line class="a" x1="319" x2="285" y1="115" y2="140"></line>
+<text class="sm b" x="400" y="120">2</text><text class="sm" x="414" y="120">шейка сбоку</text>
+<!-- 3 головка -->
+<rect class="blk" height="22" width="12" x="347" y="34"></rect>
+<line class="a" x1="347" x2="268" y1="45" y2="58"></line>
+<text class="sm b" x="400" y="48">3</text><text class="sm" x="414" y="48">головка сверху и с обеих боковых граней</text>
+<!-- 4 с поверхности катания -->
+<rect class="blk" height="12" width="22" x="284" y="8"></rect>
+<line class="a" opacity=".5" x1="295" x2="300" y1="20" y2="190"></line>
+<text class="sm b" x="20" y="30">4</text><text class="sm" x="34" y="30">шейка и подошва под шейкой</text><text class="sm" x="34" y="44">с поверхности катания,</text><text class="sm" x="34" y="58">50–200 мм от шва</text>
+<text class="sm" x="20" y="224">Схематично: в действительности луч идёт под 50° вдоль рельса через шов, а не в плоскости сечения.</text>
+</svg>
+<figcaption>Рис. 27. Порядок прозвучивания сварного стыка (1 → 4) и откуда ставят датчик.</figcaption>
+</figure>
+<ul>
+<li>Головку прозвучивают только прямым лучом; дефекты в боковых частях головки обычно видны с противоположной грани.</li>
+<li>Температура: на РСП воздух не ниже +10 °C, металл стыка не выше +60 °C (затухание в призме сильно меняется с температурой); в пути — не ниже +5 °C, то есть весна–осень по графику ПЧ.</li>
+<li>Признак дефекта тот же, что и при ручном контроле: звук и импульс, двигающийся по развёртке. Координаты читать по шкалам «H» и «L» для датчика 50°; при контроле подошвы и шейки сбоку меряют только L.</li>
+<li>В пути при дефекте записывают координаты и минимальную чувствительность, при которой он ещё виден. Рельс с дефектом сварного стыка — остродефектный, маркируется и немедленно вырезается из плети.</li>
+<li>На РСП проверенный стык маркируют белыми масляными полосами шириной 20 мм по шейке и верху подошвы в 100 мм с обеих сторон шва.</li>
+</ul>
+<p><strong>Седловина 46.3</strong> — смятие головки в зоне сварки. Под ней быстро растут трещины 26.3, поэтому контроль там особенно тщательный. Смятие более 1 мм на базе 1 м — рельс дефектный.</p>
+<div class="odt-tw"><table>
+<tr><th>Глубина смятия</th><th>Скорость не более</th></tr>
+<tr><td>от 1 до 2 мм</td><td>120 км/ч</td></tr>
+<tr><td>от 2 до 3 мм</td><td>70 км/ч</td></tr>
+<tr><td>более 3 мм</td><td>40 км/ч</td></tr>
+</table></div>
+</div>
+</details>
+<details class="sub" id="odt-18" data-odt="18"><summary><span class="onum">5.5</span> <span class="st">Визуальные признаки дефектов (что видно глазом и рукой)</span></summary>
+
+<div class="odt-body">
+<p>Многие дефекты заметны снаружи. Осмотр вместе с ультразвуком заметно повышает надёжность.</p>
+<div class="odt-tw"><table>
+<tr><th>Код</th><th>Признак</th></tr>
+<tr><td>30В.2</td><td>Тёмные продольные полосы с желобком 1–3 мм на поверхности катания, местное уширение головки до 90 мм</td></tr>
+<tr><td>52.2</td><td>Краснота под головкой, осыпание окалины, узкая красноватая полоска в зоне сопряжения головки с шейкой со стороны рабочей грани</td></tr>
+<tr><td>10.2, 27.1-2, 30Г.1-2</td><td>Тонкие продольные или поперечные трещины на верхней или боковой поверхности головки; отслоение и выкрашивание металла</td></tr>
+<tr><td>62.1-2, 55.1-2</td><td>Ржавые или синие полосы в месте сопряжения шейки с подошвой и на полке подошвы</td></tr>
+<tr><td>11.1-2, 14, 17.1-2, 25</td><td>Выщербины на головке — возможный очаг поперечной трещины 21</td></tr>
+<tr><td>14</td><td>Впадины одновременно на обеих нитках (пробуксовка локомотивов) — при видимых трещинах тщательный ручной контроль</td></tr>
+<tr><td>41.1</td><td>Сбитые и смятые концы рельсов на стыках</td></tr>
+<tr><td>52.1, 53.1</td><td>Молоток почти не отскакивает от конца рельса, звук дребезжащий. Щуп, проведённый по торцу, по стенке отверстия (вынув болт) или по шейке, застревает в трещине</td></tr>
+</table></div>
+<p>Закалочные микротрещины на поверхности катания и выкружке ощущаются пальцами при поглаживании в одном направлении.</p>
+</div>
+</details>
+</details>
+<details class="ogroup">
+<summary>6 — Словарь терминов <span class="where">(глоссарий)</span></summary>
+<details class="sub" id="odt-19" data-odt="19"><summary><span class="onum">6.1</span> <span class="st">Словарь терминов (глоссарий)</span></summary>
+
+<div class="odt-body">
+<p>Термины сгруппированы по темам. Пользуйтесь поиском вверху страницы, если ищете конкретное слово.</p>
+<h3>Звук и волны</h3>
+<dl class="odt-gl">
+<dt>Ультразвук (УЗК — ультразвуковые колебания)</dt>
+<dd>Звук с частотой выше 20 000 Гц — его человек не слышит. В рельсовых дефектоскопах используется 2,5 МГц (2,5 миллиона колебаний в секунду).</dd>
+<dt>Частота, Гц / МГц</dt>
+<dd>Сколько колебаний происходит за одну секунду. 1 Гц — одно колебание в секунду, 1 МГц — миллион.</dd>
+<dt>Длина волны (λ)</dt>
+<dd>Расстояние, на котором волна делает одно полное колебание. В стали рельса для продольной волны ≈ 2,36 мм. Дефекты сильно меньше длины волны ультразвук почти не замечает.</dd>
+<dt>Скорость звука (c)</dt>
+<dd>Как быстро волна бежит по материалу. В стали продольная — 5900 м/с, поперечная — около 3260 м/с. Зная скорость и время, прибор пересчитывает время в миллиметры глубины.</dd>
+<dt>Продольная волна</dt>
+<dd>Частицы металла колеблются вдоль направления движения волны (сжатие–растяжение, как пружина). Может идти в твёрдом, жидком и газе. Её вводят прямые датчики (0°).</dd>
+<dt>Поперечная (сдвиговая) волна</dt>
+<dd>Частицы колеблются поперёк направления движения (как волна по встряхнутой верёвке). Идёт только в твёрдом теле, медленнее продольной примерно вдвое. Её вводят наклонные датчики.</dd>
+<dt>Затухание</dt>
+<dd>Ослабление звука по мере пути: часть энергии уходит в тепло, часть рассеивается на зёрнах металла. В воздухе затухание огромное (поэтому нужна контактная жидкость), в стали небольшое — звук проходит до 5–6 м.</dd>
+<dt>Отражение, коэффициент отражения</dt>
+<dd>Какая доля звука отразится от границы двух сред. От границы «металл — воздух» (трещина, пора) отражается почти всё, поэтому трещины хорошо видны. Шлаковые включения отражают лишь 15–50 %.</dd>
+<dt>Преломление</dt>
+<dd>Изменение направления луча при переходе из одного материала в другой под углом (как ложка «ломается» в стакане воды). На этом устроены наклонные датчики.</dd>
+<dt>Критические углы</dt>
+<dd>Для пары «оргстекло — сталь» это 27° и 56°. Если угол призмы между ними, в рельс уходит только поперечная волна — так и делают наклонные датчики.</dd>
+<dt>Диаграмма направленности</dt>
+<dd>«Фонарик» ультразвука: в какие стороны и насколько сильно датчик излучает. Луч слегка расходится конусом (10–14°). Ось этого конуса — центральный луч, он самый сильный.</dd>
+<dt>Ближняя и дальняя зона</dt>
+<dd>Сразу перед датчиком (около 15 мм) поле неровное, сила звука «скачет» — это ближняя зона. Дальше луч ровный и расходится конусом — дальняя зона.</dd>
+<dt>Дифракция</dt>
+<dd>Огибание и рассеяние звука на острых краях препятствия. Края трещины «светятся» рассеянным звуком, даже когда её гладкая середина отражает звук в сторону.</dd>
+<dt>Зеркальное и диффузное отражение</dt>
+<dd>Зеркальное — от гладкой поверхности, как свет от зеркала: под тем же углом, в одну сторону. Диффузное — от шероховатой, во все стороны понемногу.</dd>
+</dl>
+<h3>Датчики</h3>
+<dl class="odt-gl">
+<dt>ПЭП (пьезоэлектрический преобразователь), резонатор, вставка, искатель</dt>
+<dd>Датчик, который превращает электрический импульс в ультразвук и обратно. Всё это разные названия одного и того же.</dd>
+<dt>Пьезоэффект</dt>
+<dd>Свойство некоторых материалов (пьезокерамика ЦТС-19, кварц): подаёшь напряжение — пластина сжимается и разжимается (обратный эффект, излучение). Давишь на пластину звуком — на ней появляется напряжение (прямой эффект, приём).</dd>
+<dt>Пьезопластина</dt>
+<dd>Сердце датчика — керамический диск Ø12 мм толщиной ≈ 0,7 мм (именно такая толщина звучит на 2,5 МГц).</dd>
+<dt>Протектор</dt>
+<dd>Тонкая защитная прослойка (0,5–2 мм) у прямого датчика между пластиной и рельсом, чтобы пластина не стиралась.</dd>
+<dt>Призма</dt>
+<dd>Клин из оргстекла у наклонного датчика. Пластина лежит на скошенной грани, и звук входит в рельс под углом.</dd>
+<dt>Прямой ПЭП (α = 0°)</dt>
+<dd>Посылает звук перпендикулярно поверхности — прямо вниз. Используется для шейки и подошвы.</dd>
+<dt>Наклонный ПЭП</dt>
+<dd>Посылает звук под углом (50°, 58°, 65°, 70° и т. д.). Используется для головки, сварных стыков, болтовых отверстий.</dd>
+<dt>Угол ввода (α)</dt>
+<dd>Угол между лучом в металле и перпендикуляром к поверхности, на которой стоит датчик. Всегда считается от перпендикуляра, а не от поверхности.</dd>
+<dt>Угол призмы (β)</dt>
+<dd>Угол скоса призмы. Не путать с углом ввода: призма 45° даёт ввод ≈ 58°, призма 40° — ввод 50°.</dd>
+<dt>Угол разворота (γ)</dt>
+<dd>Насколько датчик повёрнут в плане относительно оси рельса. У тележки наклонные датчики головки повёрнуты на 34° в сторону рабочей грани.</dd>
+<dt>Точка выхода луча</dt>
+<dd>Место на подошве наклонного датчика, откуда луч выходит в металл. Отмечается риской на корпусе.</dd>
+<dt>Стрела ПЭП (n)</dt>
+<dd>Расстояние от точки выхода до передней грани корпуса, 9–15 мм. Чем меньше, тем ближе можно подвести датчик к сварному шву.</dd>
+<dt>Совмещённый ПЭП</dt>
+<dd>Одна пластина и излучает, и принимает. Самый распространённый на тележках.</dd>
+<dt>Раздельно-совмещённый (РС) ПЭП</dt>
+<dd>Две пластины в одном корпусе, разделённые экраном: одна только излучает, другая только принимает.</dd>
+<dt>Раздельный режим</dt>
+<dd>Излучатель и приёмник — в разных корпусах (так работает зеркальный метод).</dd>
+<dt>Наезжающий и отъезжающий ПЭП (канал)</dt>
+<dd>Наезжающий светит вперёд по ходу движения тележки — «наезжает» на дефект. Отъезжающий светит назад и видит дефект, уже проехав над ним.</dd>
+<dt>Искательная система, акустический блок</dt>
+<dd>Весь набор датчиков тележки на одной нитке вместе с креплениями, которые прижимают их к рельсу.</dd>
+<dt>Контактная жидкость</dt>
+<dd>Вода (зимой — с добавлением спирта) или масло между датчиком и рельсом. Без неё звук не пройдёт через воздушную прослойку.</dd>
+<dt>Акустический контакт</dt>
+<dd>Насколько хорошо звук проходит из датчика в рельс. Грязь, песок, сухая поверхность, перекос датчика — «нарушение контакта».</dd>
+</dl>
+<h3>Сигналы и экран</h3>
+<dl class="odt-gl">
+<dt>Зондирующий импульс</dt>
+<dd>Короткий «крик» датчика длительностью 4–5 мкс. На экране — первый большой всплеск в начале линии.</dd>
+<dt>Эхо-сигнал</dt>
+<dd>Звук, вернувшийся от отражателя (трещины, отверстия, торца). На экране — всплеск, отстоящий от зондирующего на время пути туда и обратно.</dd>
+<dt>Донный сигнал</dt>
+<dd>Эхо от противоположной поверхности — для прямого датчика от низа подошвы. Есть всегда, пока металл целый и контакт хороший.</dd>
+<dt>Развёртка</dt>
+<dd>Горизонтальная линия на экране — ось времени (а после пересчёта — глубины в мм). Чем правее всплеск, тем дальше отражатель.</dd>
+<dt>Строб, стробирующий импульс, зона селекции, зона АСД</dt>
+<dd>«Окно» на развёртке. Прибор реагирует только на сигналы, попавшие в это окно, — остальные игнорирует. Так отсекают заведомо лишние отражения.</dd>
+<dt>АСД (автоматический сигнализатор дефектов)</dt>
+<dd>Звуковой или световой индикатор, который срабатывает сам, когда сигнал в стробе пересёк порог.</dd>
+<dt>Порог (пороговый уровень)</dt>
+<dd>Высота сигнала, выше которой срабатывает АСД (в эхо-канале) или ниже которой он срабатывает (в канале донного сигнала).</dd>
+<dt>Амплитуда</dt>
+<dd>Высота всплеска на экране — насколько сильный пришёл сигнал.</dd>
+<dt>Период и частота посылок</dt>
+<dd>Как часто датчик «кричит» — сотни–тысячи раз в секунду. Не путать с частотой ультразвука (2,5 МГц).</dd>
+<dt>Инерционность индикатора (N)</dt>
+<dd>Сколько импульсов подряд должно прийти, чтобы сработал АСД. Защищает от случайных щелчков, но при слишком быстром ходе короткий дефект может «проскочить».</dd>
+<dt>ЭЛТ, ЖКД</dt>
+<dd>Электронно-лучевая трубка (кинескоп) или жидкокристаллический дисплей — экран дефектоскопа.</dd>
+<dt>«Шумящий» рельс</dt>
+<dd>Рельс с множеством мелких отражателей (микротрещины, следы прокатки). Звук срабатывает часто и коротко на длинном участке.</dd>
+</dl>
+<h3>Настройка</h3>
+<dl class="odt-gl">
+<dt>Децибел, дБ</dt>
+<dd>Единица для сравнения двух сигналов «во сколько раз». +6 дБ — вдвое сильнее, −6 дБ — вдвое слабее, 20 дБ — в 10 раз. Удобно тем, что «во сколько раз» превращается в простое сложение и вычитание.</dd>
+<dt>Аттенюатор</dt>
+<dd>Ослабитель с кнопками или ручкой, проградуированный в дБ. Им точно уменьшают или увеличивают чувствительность.</dd>
+<dt>Чувствительность (условная чувствительность, Ку)</dt>
+<dd>Насколько слабые сигналы прибор замечает. «Условная» — потому что задаётся через искусственный отражатель в образце: в мм (глубина отверстия Ø2 мм в СО-1, которое ещё звучит) или в дБ (на сколько больше, чем нужно для отверстия Ø6 мм в СО-3Р).</dd>
+<dt>ВРЧ (временная регулировка чувствительности)</dt>
+<dd>Автоматическое приглушение в начале развёртки, чтобы ближние сильные помехи (шумы призмы) не давали ложных срабатываний.</dd>
+<dt>Отсечка</dt>
+<dd>Подавление самых мелких сигналов-шумов. Ставят в минимум, при котором развёртка ещё чистая.</dd>
+<dt>«Мёртвая» зона</dt>
+<dd>Слой металла у самой поверхности, где датчик дефект не видит — сигнал сливается с зондирующим импульсом.</dd>
+<dt>Глубиномер</dt>
+<dd>Функция прибора, которая пересчитывает время прихода эхо в глубину H и расстояние L до отражателя.</dd>
+<dt>Разрешающая способность</dt>
+<dd>Насколько близко друг к другу могут стоять два отражателя, чтобы прибор показал их раздельно.</dd>
+<dt>Стандартный образец (СО-1, СО-1Р, СО-2, СО-3, СО-3Р)</dt>
+<dd>Эталонный брусок с известными отверстиями и размерами. По нему проверяют датчик и настраивают прибор.</dd>
+<dt>Имитатор дефекта</dt>
+<dd>Кнопка, которая искусственно ослабляет донный сигнал. Нажал — индикатор должен сработать. Быстрая проверка, что канал работает.</dd>
+<dt>Аттестат-график</dt>
+<dd>Таблица поправок к конкретному экземпляру СО-1 (оргстекло у разных партий звучит чуть по-разному).</dd>
+</dl>
+<h3>Методы и схемы</h3>
+<dl class="odt-gl">
+<dt>Эхо-метод</dt>
+<dd>Ищем звук, который вернулся от дефекта. Признак — эхо в стробе выше порога.</dd>
+<dt>Зеркально-теневой метод (ЗТМ)</dt>
+<dd>Следим за донным сигналом. Дефект «заслоняет» подошву, и донный сигнал проседает. Признак — донный ниже порога.</dd>
+<dt>Зеркальный метод</dt>
+<dd>Один датчик светит, второй стоит рядом и ловит звук, отразившийся от гладкой трещины как от зеркала.</dd>
+<dt>Теневой метод</dt>
+<dd>Излучатель с одной стороны изделия, приёмник с другой. Трещина отбрасывает «звуковую тень». В пути не применяется.</dd>
+<dt>Дельта-метод</dt>
+<dd>Ловят звук, рассеянный кончиком трещины. Сложен, используется только для экспертизы.</dd>
+<dt>Коэффициент выявляемости (Кд)</dt>
+<dd>Во сколько раз просел донный сигнал над дефектом: 1 — не просел, 0 — пропал совсем.</dd>
+<dt>Схема прозвучивания</dt>
+<dd>Как расставлены и куда направлены датчики тележки.</dd>
+<dt>«Змейка»</dt>
+<dd>Основная схема для головки: два наклонных датчика 58°, повёрнутые к рабочей грани и светящие в разные стороны. Луч идёт по головке, отражаясь от её стенок, — зигзагом.</dd>
+<dt>«Ультразвуковой калибр»</dt>
+<dd>Два прямых датчика, включённых в один канал на расстоянии чуть больше диаметра болтового отверстия. Целое отверстие не может закрыть оба луча сразу, а отверстие с трещиной — может.</dd>
+<dt>Прямой и однократно отражённый луч</dt>
+<dd>Прямой луч попадает в дефект сразу. Однократно отражённый сначала отражается от противоположной стенки (у головки — от нижней грани), затем попадает в дефект. Поперечные трещины головки тележка обычно видит именно отражённым лучом.</dd>
+<dt>Сплошной контроль</dt>
+<dd>Проход тележкой по всему участку подряд.</dd>
+<dt>Ручной контроль</dt>
+<dd>Уточнение конкретного места ручным датчиком, который оператор водит рукой.</dd>
+</dl>
+<h3>Размеры дефекта</h3>
+<dl class="odt-gl">
+<dt>Условные размеры</dt>
+<dd>Размеры дефекта «по мнению ультразвука» — они зависят от настройки и почти всегда отличаются от настоящих. Измеряют, двигая датчик до точек, где сигнал падает до порога.</dd>
+<dt>ΔL — условная протяжённость</dt>
+<dd>На каком отрезке вдоль рельса (мм) дефект даёт сигнал.</dd>
+<dt>ΔH — условная высота</dt>
+<dd>Разница показаний глубиномера в крайних точках ΔL.</dd>
+<dt>ΔX — условная ширина</dt>
+<dd>На каком отрезке поперёк рельса дефект даёт сигнал.</dd>
+<dt>Координаты H и L</dt>
+<dd>H — глубина залегания отражателя от поверхности, L — расстояние по поверхности от точки выхода луча до проекции отражателя.</dd>
+<dt>Минимальная условная чувствительность</dt>
+<dd>При какой самой «глухой» настройке дефект ещё звучит. Чем грубее настройка, при которой дефект виден, тем он крупнее.</dd>
+</dl>
+<h3>Рельс и путь</h3>
+<dl class="odt-gl">
+<dt>Головка, шейка, подошва</dt>
+<dd>Верхняя толстая часть, по которой катятся колёса; тонкая вертикальная стенка; широкое основание, лежащее на шпалах.</dd>
+<dt>Поверхность катания</dt>
+<dd>Верх головки, по которому идут колёса и скользят датчики.</dd>
+<dt>Рабочая и нерабочая грань</dt>
+<dd>Рабочая — боковая сторона головки, внутренняя в колее, к которой прижимается гребень колеса. Нерабочая — наружная.</dd>
+<dt>Выкружка</dt>
+<dd>Скруглённый переход между поверхностью катания и боковой гранью (верхняя) или между головкой и шейкой (нижняя).</dd>
+<dt>Подголовочная грань</dt>
+<dd>Нижняя поверхность головки по бокам от шейки — от неё отражается луч в канале головки.</dd>
+<dt>Перо подошвы</dt>
+<dd>Тонкий край подошвы.</dd>
+<dt>Болтовой стык, накладка, стыковой зазор</dt>
+<dd>Соединение двух рельсов парой накладок на болтах через отверстия в шейке; зазор — щель между торцами.</dd>
+<dt>Сварной стык, плеть</dt>
+<dd>Место сварки двух рельсов. Плеть — длинный сваренный рельс бесстыкового пути.</dd>
+<dt>Основной металл</dt>
+<dd>Участок рельса между стыками — на бесстыковом пути около 96 % длины.</dd>
+<dt>Дефектный рельс</dt>
+<dd>Рельс с дефектом, который ещё можно эксплуатировать под надзором до плановой замены (иногда с ограничением скорости).</dd>
+<dt>Остродефектный рельс (ОДР)</dt>
+<dd>Рельс с опасным дефектом, подлежит немедленной замене.</dd>
+<dt>Код дефекта</dt>
+<dd>Номер по каталогу 1993 г., по которому написана книга. Первая цифра — вид и место дефекта: 1 — отслоения и выкрашивания на поверхности катания, 2 — поперечные трещины головки, 3 — продольные трещины головки, 4 — смятие и износ, 5 — шейка, 6 — подошва, 7 — изломы по всему сечению. Вторая цифра — причина (0 — заводская технология, 1 — контактная усталость, 6 — сварка и т. д.). Цифра после точки — место по длине: .1 — в зоне болтового стыка, .2 — вне стыка, .3 — в зоне сварного стыка. Например, 53.1 — трещина в шейке у болтового стыка, 21.2 — усталостная поперечная трещина головки вне стыка. В распоряжении 2499р система кодов изменена — сверяйтесь с ним.</dd>
+<dt>ПЧ</dt>
+<dd>Начальник дистанции пути — утверждает графики проходов и смены схем.</dd>
+<dt>РСП</dt>
+<dd>Рельсосварочное предприятие.</dd>
+<dt>АМД, вагон-дефектоскоп</dt>
+<dd>Скоростные средства контроля: автомотриса и вагон. Работают на 40–60 км/ч и имеют более полные схемы, но тележка всё равно нужна.</dd>
+</dl>
+</div>
+</details>
+</details>
+  </div>
+</section>
+
 </main>
 
 <script>
@@ -1944,12 +3199,13 @@ document.addEventListener('click',function(e){
   var t=e.target.closest('[data-doc]');
   if(!t||t.disabled)return;
   var doc = t.getAttribute('data-doc');
-  if(doc === '2499' || doc === '2143'){
+  if(doc === '2499' || doc === '2143' || doc === 'odt'){
     enter();
     closeMenu();
     document.getElementById('doc-2499').hidden = (doc !== '2499');
     document.getElementById('doc-2143').hidden = (doc !== '2143');
-    document.title = doc === '2143' ? 'Дефекты стрелочных переводов — распоряжение 2143р' : 'Дефекты рельсов: коды и группы — распоряжение 2499р';
+    document.getElementById('doc-odt').hidden = (doc !== 'odt');
+    document.title = doc === '2143' ? 'Дефекты стрелочных переводов — распоряжение 2143р' : doc === 'odt' ? 'Справочник оператора дефектоскопной тележки' : 'Дефекты рельсов: коды и группы — распоряжение 2499р';
     // Обновить активный пункт меню
     document.querySelectorAll('.sitem[data-doc]').forEach(function(s){
       var on = s.getAttribute('data-doc') === doc;
@@ -5270,19 +6526,21 @@ document.addEventListener('click',function(e){
 <script>
 /* ---------- Оформление и мобильная навигация ---------- */
 (function(){
-  function cur(){ return document.getElementById('doc-2143').hidden ? '2499' : '2143'; }
+  function cur(){ return !document.getElementById('doc-odt').hidden ? 'odt' : document.getElementById('doc-2143').hidden ? '2499' : '2143'; }
   function plural(n,a,b,c){var m=n%10,h=n%100;return (m===1&&h!==11)?a:(m>=2&&m<=4&&(h<12||h>14))?b:c;}
   /* счётчики на старте и в шапке документа */
   function stats(){
-    [['2499','#groups'],['2143','#groups2143']].forEach(function(d){
+    [['2499','#groups'],['2143','#groups2143'],['odt','#groupsOdt']].forEach(function(d){
       var cards=document.querySelectorAll(d[1]+' details.sub').length, groups=document.querySelectorAll(d[1]+' > details').length;
       var c=document.querySelector('.lcard-cnt[data-cnt="'+d[0]+'"]');
-      if(c&&cards)c.textContent=cards+' '+plural(cards,'дефект','дефекта','дефектов');
+      if(c&&cards)c.textContent=cards+' '+(d[0]==='odt'?plural(cards,'раздел','раздела','разделов'):plural(cards,'дефект','дефекта','дефектов'));
       var sec=document.getElementById('doc-'+d[0]);
       if(sec&&cards&&!sec.querySelector('.doc-stats')){
         var lead=sec.querySelector('.lead'); if(!lead)return;
         var box=document.createElement('div');box.className='doc-stats';
-        box.innerHTML='<button type="button" data-jump="list"><b>'+cards+'</b> '+plural(cards,'карточка','карточки','карточек')+' · '+groups+' '+plural(groups,'группа','группы','групп')+' →</button><button type="button" data-jump="calc">Калькулятор →</button>';
+        box.innerHTML=d[0]==='odt'
+          ?'<button type="button" data-jump="list"><b>'+cards+'</b> '+plural(cards,'раздел','раздела','разделов')+' · '+groups+' '+plural(groups,'тема','темы','тем')+' →</button>'
+          :'<button type="button" data-jump="list"><b>'+cards+'</b> '+plural(cards,'карточка','карточки','карточек')+' · '+groups+' '+plural(groups,'группа','группы','групп')+' →</button><button type="button" data-jump="calc">Калькулятор →</button>';
         lead.insertAdjacentElement('afterend',box);
       }
     });
@@ -5305,17 +6563,19 @@ document.addEventListener('click',function(e){
   function target(act){
     var d=cur();
     if(act==='list')return document.querySelector('#doc-'+d+' .toolbar');
-    if(act==='calc'){var c=document.getElementById(d==='2143'?'calc2143':'calc');var h=c&&c.previousElementSibling;while(h&&h.tagName!=='H2')h=h.previousElementSibling;return h||c;}
+    if(act==='calc'){if(d==='odt')return null;var c=document.getElementById(d==='2143'?'calc2143':'calc');var h=c&&c.previousElementSibling;while(h&&h.tagName!=='H2')h=h.previousElementSibling;return h||c;}
   }
   function go(el){if(!el)return;var y=el.getBoundingClientRect().top+window.scrollY-8;window.scrollTo({top:y,behavior:'smooth'});}
   function syncDocBtn(){
-    if(!bar)return;var other=cur()==='2499'?'2143':'2499';
-    var b=bar.querySelector('.tb-doc');b.dataset.doc=other;b.querySelector('.tb-code').textContent=other+'р';
-    b.setAttribute('aria-label','Открыть распоряжение '+other+'р');
+    if(!bar)return;var d=cur();
+    bar.querySelector('.tb-doc .tb-code').textContent=d==='odt'?'ОДТ':d+'р';
+    var calc=bar.querySelector('.tb[data-act="calc"]');calc.hidden=(d==='odt');
+    bar.classList.toggle('no-calc',d==='odt');
+    bar.querySelector('.tb[data-act="list"] span').textContent=d==='odt'?'Разделы':'Дефекты';
   }
   function syncActive(){
     if(!bar)return;var vh=window.innerHeight,on=null;
-    var l=target('list'),c=document.getElementById(cur()==='2143'?'calc2143':'calc');
+    var l=target('list'),c=cur()==='odt'?null:document.getElementById(cur()==='2143'?'calc2143':'calc');
     if(l&&l.getBoundingClientRect().top<vh*0.45)on='list';
     else if(c){var r=c.getBoundingClientRect();if(r.top<vh*0.7&&r.bottom>0)on='calc';}
     bar.querySelectorAll('.tb[data-act]').forEach(function(b){b.classList.toggle('is-on',b.dataset.act===on);});
@@ -5325,7 +6585,7 @@ document.addEventListener('click',function(e){
       var b=e.target.closest('.tb');if(!b)return;var a=b.dataset.act;
       if(a==='list'||a==='calc')go(target(a));
       else if(a==='top')window.scrollTo({top:0,behavior:'smooth'});
-      else if(a==='menu'){var m=document.getElementById('menuBtn');if(m)m.click();}
+      else if(a==='menu'||a==='docs'){var m=document.getElementById('menuBtn');if(m)m.click();}
       /* «Документ» обрабатывает общий обработчик [data-doc] */
     });
     var tk=false;window.addEventListener('scroll',function(){if(tk)return;tk=true;requestAnimationFrame(function(){tk=false;syncActive();});},{passive:true});
@@ -5333,7 +6593,7 @@ document.addEventListener('click',function(e){
   document.addEventListener('click',function(e){
     var t=e.target.closest('[data-doc]');if(!t||t.disabled)return;
     var d=t.getAttribute('data-doc');
-    if(d==='2499'||d==='2143'){remember(d);setTimeout(function(){syncDocBtn();syncActive();},0);}
+    if(d==='2499'||d==='2143'||d==='odt'){remember(d);setTimeout(function(){syncDocBtn();syncActive();},0);}
   });
   document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j)go(target(j.dataset.jump));});
   /* название дефекта — отдельным блоком, чтобы на телефоне шло под кодом */
@@ -5345,6 +6605,89 @@ document.addEventListener('click',function(e){
     var sp=document.createElement('span');sp.className='st';sp.textContent=' '+txt;sm.appendChild(sp);
   });
   stats();markLast();syncDocBtn();now();setInterval(now,1000);
+})();
+</script>
+
+<script>
+/* ---------- Справочник ОДТ: поиск, «Раскрыть всё», перекрёстные ссылки с 2499р ---------- */
+(function(){
+  var root=document.getElementById('groupsOdt');if(!root)return;
+  var qi=document.getElementById('qiOdt'),expb=document.getElementById('expbOdt'),cnt=document.getElementById('cntOdt');
+  function op(d){d.setAttribute('open','');d.classList.add('is-open');}
+  function cl(d){d.classList.remove('is-open');d.removeAttribute('open');}
+  function groups(){return Array.prototype.filter.call(root.children,function(g){return g.tagName==='DETAILS'&&g.style.display!=='none';});}
+  function sync(){var gs=groups();expb.textContent=(gs.length&&gs.every(function(g){return g.classList.contains('is-open');}))?'Свернуть всё':'Раскрыть всё';}
+  expb.addEventListener('click',function(){var gs=groups(),all=gs.length&&gs.every(function(g){return g.classList.contains('is-open');});
+    gs.forEach(function(g){if(all){cl(g);g.querySelectorAll('details').forEach(cl);}else op(g);});sync();});
+  new MutationObserver(sync).observe(root,{subtree:true,attributes:true,attributeFilter:['class','open','style']});
+  function filter(){
+    var q=qi.value.trim().toLowerCase(),n=0;
+    Array.prototype.forEach.call(root.children,function(g){
+      var any=0;g.querySelectorAll('details.sub').forEach(function(c){var hit=!q||c.textContent.toLowerCase().indexOf(q)!==-1;c.style.display=hit?'':'none';if(hit)any++;});
+      g.style.display=any?'':'none';n+=any;if(q&&any)op(g);
+    });
+    cnt.textContent='Найдено: '+n;sync();
+  }
+  qi.addEventListener('input',filter);filter();
+
+  /* --- коды старого каталога, совпадающие по смыслу с карточками 2499р --- */
+  var MAP={'53.1':'53.1','21.2.Н':'21.1-2','21.2':'21.1-2','56.3':'56.3-4','26.3':'26.3-4','66.3':'66.3-4','46.3':'46.3-4','30Г':'30.1-2','30В':'31.1-2'};
+  var RX=/(^|[^\d.,А-Яа-яЁё])(53\.1|21\.2\.Н|21\.2|56\.3|26\.3|66\.3|46\.3|30Г|30В)(?![\d])/g;
+  function linkify(scope){
+    var w=document.createTreeWalker(scope,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+      var p=n.parentNode;if(!p||p.closest('summary,svg,a,script,style'))return NodeFilter.FILTER_REJECT;
+      RX.lastIndex=0;return RX.test(n.nodeValue)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_SKIP;}});
+    var list=[];while(w.nextNode())list.push(w.currentNode);
+    list.forEach(function(n){
+      var t=n.nodeValue,frag=document.createDocumentFragment(),last=0,m;RX.lastIndex=0;
+      while((m=RX.exec(t))){var st=m.index+m[1].length;frag.appendChild(document.createTextNode(t.slice(last,st)));
+        var a=document.createElement('a');a.className='xref';a.href='#'+MAP[m[2]];a.dataset.to2499=MAP[m[2]];a.textContent=m[2];
+        a.title='Карточка '+MAP[m[2]]+' в распоряжении 2499р';frag.appendChild(a);last=st+m[2].length;}
+      frag.appendChild(document.createTextNode(t.slice(last)));n.parentNode.replaceChild(frag,n);
+    });
+  }
+  linkify(root);
+  /* «(69)» и строка «50 — расслоение шейки» */
+  root.querySelectorAll('p,li,td').forEach(function(el){
+    if(el.closest('svg'))return;
+    if(el.tagName==='TD'&&el.textContent.trim()==='50'&&el.nextElementSibling&&/Расслоение шейки/.test(el.nextElementSibling.textContent)){el.innerHTML='<a class="xref" href="#50.1-2" data-to2499="50.1-2" title="Карточка 50.1-2 в распоряжении 2499р">50</a>';}
+    if(/\(69\)/.test(el.innerHTML)&&!el.querySelector('a[data-to2499="69.1-2"]'))el.innerHTML=el.innerHTML.replace('(69)','(<a class="xref" href="#69.1-2" data-to2499="69.1-2" title="Карточка 69.1-2 в распоряжении 2499р">69</a>)');
+  });
+
+  function show(doc){var b=document.querySelector('.sitem[data-doc="'+doc+'"]');if(b)b.click();}
+  function to2499(code){
+    show('2499');
+    setTimeout(function(){var tmp=document.createElement('a');tmp.dataset.go=code;tmp.hidden=true;document.body.appendChild(tmp);tmp.click();tmp.remove();
+      var c=[].find.call(document.querySelectorAll('#groups details.sub'),function(d){var k=d.querySelector('summary code');return k&&k.textContent.trim()===code;});
+      if(c)setTimeout(function(){c.classList.add('xref-flash');setTimeout(function(){c.classList.remove('xref-flash');},1700);},350);},80);
+  }
+  function toOdt(id){
+    show('odt');
+    setTimeout(function(){var c=document.getElementById(id);if(!c)return;qi.value='';filter();
+      op(c.closest('#groupsOdt > details'));op(c);
+      setTimeout(function(){c.scrollIntoView({behavior:'smooth',block:'start'});c.classList.add('xref-flash');setTimeout(function(){c.classList.remove('xref-flash');},1700);},120);},80);
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-to2499]');if(a){e.preventDefault();to2499(a.dataset.to2499);return;}
+    var o=e.target.closest('a[data-toodt]');if(o){e.preventDefault();toOdt(o.dataset.toodt);}
+  });
+
+  /* --- обратные ссылки: в карточке 2499р — разделы справочника ОДТ --- */
+  var back={};
+  root.querySelectorAll('a[data-to2499]').forEach(function(a){
+    var sec=a.closest('details.sub');if(!sec)return;var k=a.dataset.to2499;
+    (back[k]=back[k]||{})[sec.id]=sec.querySelector('summary .st').textContent;
+  });
+  Object.keys(back).forEach(function(code){
+    var card=[].find.call(document.querySelectorAll('#groups details.sub'),function(d){var k=d.querySelector('summary code');return k&&k.textContent.trim()===code;});
+    if(!card)return;
+    var box=document.createElement('div');box.className='xref-box';
+    box.innerHTML='<b>Справочник оператора ОДТ</b>'+Object.keys(back[code]).map(function(id){return '<a class="xref" href="#'+id+'" data-toodt="'+id+'">'+back[code][id]+'</a>';}).join('');
+    var host=card.querySelector(':scope > .details-body > .details-content')||card;host.appendChild(box);
+  });
+  /* в описании 2499р — ссылка на справочник */
+  var src2499=document.querySelector('#doc-2499 .source');
+  if(src2499){var p=document.createElement('p');p.className='note';p.innerHTML='Как дефекты находят ультразвуком — в <a class="xref" href="#odt-1" data-toodt="odt-1">справочнике оператора дефектоскопной тележки</a>.';src2499.insertAdjacentElement('afterend',p);}
 })();
 </script>
 </body>
