@@ -16,7 +16,7 @@
 :root{--bg:#f2f4f5;--surface:#fff;--ink:#14232b;--muted:#53656e;--line:#cbd5d9;--accent:#1f5c7a;--c1:#1f5c7a;--c2:#2e7d5b;--c3:#8a5a00;--odr:#b3261e;--dr:#8a5a00;--warn:#8a5a00;--g1:#1f5c7a;--g2:#b3261e;--g3:#6a4c93;--g4:#a05a00;--g5:#28745b;--g6:#007c91;--g7:#8b3a62;--g8:#53656e;--g9:#7a6b2b;
 --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="light"]){--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a;--g1:#6db3d6;--g2:#ff8a80;--g3:#b79ce0;--g4:#e0a04a;--g5:#6fcf9f;--g6:#5fc4d8;--g7:#e08fb4;--g8:#93a7b0;--g9:#cdbb6a;}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="amoled"]){--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a;--g1:#6db3d6;--g2:#ff8a80;--g3:#b79ce0;--g4:#e0a04a;--g5:#6fcf9f;--g6:#5fc4d8;--g7:#e08fb4;--g8:#93a7b0;--g9:#cdbb6a;}}
 :root[data-theme="dark"]{--bg:#0f1a1f;--surface:#16252b;--ink:#e4edf0;--muted:#93a7b0;--line:#2a3b43;--accent:#6db3d6;--c1:#6db3d6;--c2:#6fcf9f;--c3:#e0b04a;--odr:#ff8a80;--dr:#e0b04a;--warn:#e0b04a;--g1:#6db3d6;--g2:#ff8a80;--g3:#b79ce0;--g4:#e0a04a;--g5:#6fcf9f;--g6:#5fc4d8;--g7:#e08fb4;--g8:#93a7b0;--g9:#cdbb6a;}
 :root[data-theme="amoled"]{--bg:#000;--surface:#0d0e10;--ink:#e6e8ea;--muted:#71787f;--line:#202225;--accent:#ff9500;--c1:#ff9500;--c2:#ffb84d;--c3:#b96a00;--odr:#ff7a00;--dr:#ffc24d;--warn:#ffc24d;--g1:#ff9500;--g2:#ff9500;--g3:#ff9500;--g4:#ff9500;--g5:#ff9500;--g6:#ff9500;--g7:#ff9500;--g8:#ff9500;--g9:#ff9500;}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
@@ -363,6 +363,116 @@ body.landing-open{overflow:hidden}
 .fig2143{margin:0 0 12px;padding:8px;background:#fff;border:1px solid #d0d7de;border-radius:6px;display:inline-block;max-width:100%}
 .fig2143 img{display:block;max-width:100%;height:auto;margin:0 auto}
 .fig2143 figcaption{font-size:12px;color:#57606a;text-align:center;margin-top:4px}
+/* ===== 2143р: таблицы с цветовыми зонами, как в распоряжении ===== */
+:root{--zod:#b3261e;--zd:#9a6400;--zun:#2e7d5b}
+:root[data-theme="dark"]{--zod:#ff8a80;--zd:#e0b04a;--zun:#6fcf9f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="amoled"]){--zod:#ff8a80;--zd:#e0b04a;--zun:#6fcf9f}}
+:root[data-theme="amoled"]{--zod:#ff7a00;--zd:#ffc24d;--zun:#8fd19e}
+.zt{border-collapse:separate;border-spacing:3px;width:100%;font-size:.9rem;margin:0 -3px}
+.zt th,.zt td{border:0;border-radius:6px;padding:7px 6px;text-align:center;vertical-align:middle}
+.zt thead th{background:transparent;color:var(--muted);font-weight:600;font-size:.78rem;padding:4px 6px}
+.zt thead tr:first-child th[colspan]{border-bottom:2px solid var(--line);border-radius:0}
+.zt .zt-h0{text-align:left;max-width:12rem;line-height:1.3}
+.zt tbody th{background:var(--bg);text-align:left;font:500 .86rem var(--sans);white-space:nowrap;position:sticky;left:0;z-index:1}
+.zt td{font:600 .82rem var(--mono);min-width:2.6rem}
+.zt td.z-od{background:color-mix(in srgb,var(--zod) 20%,var(--surface));color:var(--zod)}
+.zt td.z-d{background:color-mix(in srgb,var(--zd) 20%,var(--surface));color:var(--zd)}
+.zt td.z-un{background:color-mix(in srgb,var(--zun) 18%,var(--surface));color:var(--zun)}
+.zt td.z-no{background:var(--bg);color:var(--muted);font-weight:400}
+.tnote{font-size:.8rem;color:var(--muted);margin:6px 0 0;max-width:72ch}
+.tnote.approx{border-left:3px solid var(--zd);padding-left:9px}
+table.plain th[scope=row]{background:transparent;font-weight:500}
+.zlegend{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;font-size:.86rem;color:var(--muted);margin:4px 0 10px;max-width:640px}
+.zl{display:inline-grid;place-items:center;min-width:2.6rem;padding:4px 6px;border-radius:6px;font:600 .8rem var(--mono)}
+.zl.z-od{background:color-mix(in srgb,var(--zod) 20%,var(--surface));color:var(--zod)}
+.zl.z-d{background:color-mix(in srgb,var(--zd) 20%,var(--surface));color:var(--zd)}
+.zl.z-un{background:color-mix(in srgb,var(--zun) 18%,var(--surface));color:var(--zun)}
+
+/* нормы износа (таблица 4) */
+table.wear{font-size:.85rem;min-width:760px}
+table.wear th,table.wear td{text-align:center;vertical-align:middle;padding:6px 7px}
+table.wear thead th{font-size:.76rem;line-height:1.25}
+table.wear .wl{text-align:left}
+table.wear tbody th.wl{background:var(--surface);font-weight:500;min-width:12rem}
+table.wear td.wl{white-space:nowrap;font:500 .84rem var(--sans)}
+table.wear td{font:500 .86rem var(--mono)}
+table.wear td.na{color:var(--muted);font-weight:400}
+table.wear tbody tr:hover td{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.mark{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.mark p{margin:0 0 10px}.mark p:last-child{margin:0}
+
+/* группы 2143р — та же цветовая маркировка, что у 2499р */
+#groups2143>details{border-left:4px solid var(--group-color,var(--line))}
+#groups2143>details.group-1{--group-color:var(--g1)}#groups2143>details.group-2{--group-color:var(--g2)}
+#groups2143>details.group-3{--group-color:var(--g3)}#groups2143>details.group-4{--group-color:var(--g4)}
+#groups2143>details.group-5{--group-color:var(--g5)}#groups2143>details.group-6{--group-color:var(--g6)}
+#groups2143>details.group-7{--group-color:var(--g7)}#groups2143>details.group-8{--group-color:var(--g8)}
+#groups2143>details.group-9{--group-color:var(--g9)}
+.k-mix{color:var(--accent);border-color:var(--accent)}
+
+/* конструктор кода: неактивные поля для буквенных кодов */
+.pickers>div.is-off{opacity:.38;pointer-events:none}
+.mean[hidden]{display:none}
+ul.codeparts{margin:-4px 0 14px;padding-left:1.2em;color:var(--ink)}
+ul.codeparts li{margin:2px 0}
+.mono{font-family:var(--mono)}
+.verdict.un{color:var(--zun);border-color:var(--zun);background:color-mix(in srgb,var(--zun) 12%,transparent)}
+
+/* экзамен 2143р использует оформление экзамена 2499р */
+.exam-box{position:fixed;inset:0;z-index:200;background:var(--bg);overflow:auto;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px));animation:examIn .28s cubic-bezier(.22,1,.36,1) backwards}
+.exam-box:focus{outline:none}
+.ex-top{padding-right:56px}
+.ex-q h3.mono{font-size:1.6rem;letter-spacing:.02em;color:var(--accent)}
+
+/* общий ритм страницы */
+h2{letter-spacing:-.005em;padding-top:4px}
+h2::before{content:"";display:block;width:36px;height:3px;border-radius:2px;background:var(--accent);margin-bottom:10px;opacity:.85}
+.lead{font-size:1.04rem}
+a{color:var(--accent)}
+@media (max-width:520px){.zt{border-spacing:2px;margin:0 -2px}.zt tbody th{font-size:.76rem;padding:5px 4px}.zt td{min-width:1.7rem;padding:6px 0;font-size:.66rem}.zt thead th{font-size:.7rem;padding:3px 2px}.zt .zt-h0{font-size:.7rem}#groups2143 details.sub .details-content{padding:0 8px 10px}}
+@media print{.zt td{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+/* --- 2499р: таблицы скоростей в виде путевых знаков ограничения --- */
+.spt-wrap{overflow-x:auto;margin:4px 0 12px}
+.spt{border-collapse:separate;border-spacing:4px;width:100%;margin:0 -4px;font-size:.88rem}
+.spt th,.spt td{border:0;border-radius:8px;padding:6px 6px;vertical-align:middle;text-align:center}
+.spt thead th{background:transparent;color:var(--muted);font-weight:600;font-size:.76rem;line-height:1.25;padding:2px 4px 6px;border-bottom:2px solid var(--line);border-radius:0}
+.spt .spt-h0{text-align:left}
+.spt tbody th{background:var(--bg);text-align:left;font:500 .84rem var(--mono);white-space:nowrap}
+.spt td{min-width:4.2rem;white-space:nowrap}
+.spt td.s-hi{background:color-mix(in srgb,var(--c2) 13%,var(--surface))}
+.spt td.s-mid{background:color-mix(in srgb,var(--accent) 12%,var(--surface))}
+.spt td.s-lo{background:color-mix(in srgb,var(--dr) 16%,var(--surface))}
+.spt td.s-min{background:color-mix(in srgb,var(--odr) 15%,var(--surface))}
+.spt td.s-none{background:var(--bg);color:var(--muted)}
+.sgn{display:inline-grid;place-items:center;width:2.15rem;height:2.15rem;border-radius:50%;background:#fff;border:3.5px solid #d32f2f;box-shadow:0 1px 0 rgba(0,0,0,.18),inset 0 0 0 1px rgba(0,0,0,.06);vertical-align:middle;transition:transform .2s cubic-bezier(.22,1,.36,1)}
+.sgn b{font:700 .78rem/1 var(--mono);color:#111;letter-spacing:-.03em}
+.spt td:hover .sgn{transform:scale(1.12) rotate(-4deg)}
+.sgn-big{width:3rem;height:3rem;border-width:5px}
+.sgn-big b{font-size:1.05rem}
+.stag{display:inline-block;margin-left:5px;vertical-align:middle;font:600 .62rem/1 var(--mono);padding:3px 5px;border-radius:4px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.stag.s-zpp{color:var(--odr);border-color:color-mix(in srgb,var(--odr) 55%,transparent);background:color-mix(in srgb,var(--odr) 8%,var(--surface))}
+.spd-sign{display:inline-flex;align-items:center;gap:6px}
+.spd-l{font-size:.75rem;color:var(--muted)}
+:root[data-theme="amoled"] .sgn{border-color:#ff9500}
+@media (max-width:520px){.spt{border-spacing:2px;margin:0 -2px}.spt td{min-width:3.1rem;padding:5px 2px}.sgn{width:1.85rem;height:1.85rem;border-width:3px}.sgn b{font-size:.68rem}.stag{display:block;margin:3px auto 0;width:max-content}}
+@media(prefers-reduced-motion:reduce){.sgn{transition:none}}
+@media print{.spt td,.sgn{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.zt td.z-no{background:transparent;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--line) 70%,transparent)}
+.zt td.z-od,.zt td.z-d,.zt td.z-un{box-shadow:inset 0 0 0 1.5px currentColor}
+
+.zt td{opacity:.78}
+.zt td.z-mark{opacity:1;box-shadow:inset 0 0 0 2px currentColor;font-weight:700}
+.zt td.z-od:not(.z-mark),.zt td.z-d:not(.z-mark),.zt td.z-un:not(.z-mark){box-shadow:none;font-weight:500}
+.zt td.e-r{position:relative}
+.zt td.e-r::after{content:"";position:absolute;top:-2px;bottom:-2px;right:-3.5px;width:2px;border-radius:1px;background:var(--ink);opacity:.55}
+.zt td.e-b{position:relative}
+.zt td.e-b::before{content:"";position:absolute;left:-2px;right:-2px;bottom:-3.5px;height:2px;border-radius:1px;background:var(--ink);opacity:.55}
+
+.spt td.s-odr{background:color-mix(in srgb,var(--odr) 18%,var(--surface))}
+.stag.s-big{font-size:.72rem;padding:5px 8px}
+.stag.s-odr-t{color:var(--odr);border-color:var(--odr);font-size:.72rem;padding:5px 8px}
+.stag.s-dr-t{color:var(--dr);border-color:var(--dr);font-size:.72rem;padding:5px 8px}
 </style>
 </head>
 <body class="landing-open">
@@ -381,7 +491,7 @@ body.landing-open{overflow:hidden}
 <button type="button" class="lcard" data-doc="2143">
   <span class="lcard-code">2143р</span>
   <span class="lcard-title">Классификатор дефектов стрелочных переводов</span>
-  <span class="lcard-note">Распоряжение ОАО «РЖД» № 2143р</span>
+  <span class="lcard-note">Распоряжение ОАО «РЖД» от 27.09.2019 № 2143/р</span>
   <span class="lcard-open">Открыть →</span>
       </button>
     </div>
@@ -400,12 +510,12 @@ body.landing-open{overflow:hidden}
     <button type="button" class="sitem is-active" data-doc="2499">
       <span class="sitem-code">2499р</span>
       <span class="sitem-title">Классификатор дефектов рельсов</span>
-      <span class="sitem-tag">Активно</span>
+      <span class="sitem-tag">Открыт</span>
     </button>
 <button type="button" class="sitem" data-doc="2143">
   <span class="sitem-code">2143р</span>
   <span class="sitem-title">Классификатор дефектов стрелочных переводов</span>
-  <span class="sitem-tag">Доступно</span>
+  <span class="sitem-tag">Открыть</span>
 </button>
   </nav>
   <div class="side-sec">
@@ -423,10 +533,11 @@ body.landing-open{overflow:hidden}
 <main>
 <div id="doc-2143" hidden>
   <h1>Дефекты стрелочных переводов: коды и группы</h1>
-  <p class="lead">Справочник по классификатору дефектов стрелочных переводов (распоряжение ОАО «РЖД» № 2143р).</p>
+  <p class="lead">Справочник по «Классификатору дефектов и повреждений элементов стрелочных переводов» (распоряжение ОАО «РЖД» от 27.09.2019 № 2143/р, действует с 01.10.2019).</p>
+  <p class="source" style="margin-top:8px">Источник текста, таблиц и схем: <a href="https://www.tdesant.ru/info/item/289" target="_blank" rel="noopener">tdesant.ru/info/item/289</a>.</p>
 
   <h2>Структура условного обозначения</h2>
-  <p>Код состоит из трёх блоков: <code>Д</code> — буква дефекта, затем <code>[элемент][индекс]</code>, затем <code>XY.Z</code> — цифровой код.</p>
+  <p>Код состоит из трёх блоков: <code>Д</code> — дефект по этому классификатору, затем буквы элемента перевода, затем цифровой код <code>XY.Z</code> — так же, как в 2499р. У подкладок и элементов переводных устройств вместо цифр ставится строчный индекс: <code>ДППзт</code>, <code>ДТРиз</code>.</p>
   <div class="decoder">
     <div class="big" id="big2143" aria-live="polite"></div>
     <div class="pickers">
@@ -466,24 +577,43 @@ body.landing-open{overflow:hidden}
     <button class="chip" data-f="d" aria-pressed="false">Д</button>
     <button class="chip" data-f="un" aria-pressed="false">УН</button>
     <button class="btn" id="expb2143">Раскрыть всё</button>
-    <button class="btn" id="examb2143">Экзамен</button>
     <span id="cnt2143" aria-live="polite"></span>
   </div>
   <p class="note">Карточки повторяют структуру распоряжения: в одном пункте каталога перечислены коды, которые вводятся одной чертой (<code>ДО.26.3/ДС.26.3/ДС.26.4/ДСН.26.3</code>), поэтому они сведены в одну карточку. Причина дефекта указана в самом наименовании; строки «Причины появления и развития», «Способы выявления» и «Способы устранения» приведены там, где они есть в документе.</p>
+  <div class="zlegend" aria-label="Обозначения в таблицах">
+    <span class="zl z-od">ОД</span><span>остродефектный — замена без промедления</span>
+    <span class="zl z-d">Д</span><span>дефектный — плановая замена, до неё усиленное наблюдение</span>
+    <span class="zl z-un">УН</span><span>требует усиленного наблюдения (не реже раза в неделю)</span>
+  </div>
+  <p class="note">В таблицах каталога столбцы — группа пути (В — высокоскоростная, С — скоростная) и класс пути 1–5. Для своего пути берите <b>один</b> столбец.</p>
   <div id="groups2143"></div>
+
+  <h2 id="t4-2143">Нормы износа металлических частей (таблица 4)</h2>
+  <p class="note">Предельный износ, мм. Если износ больше — остряки, рамные рельсы и крестовины относятся к дефектным (п. 3.3).</p>
+  <div class="wrap"><table class="wear">
+    <thead><tr><th rowspan="2" class="wl">Параметр</th><th rowspan="2" class="wl">Тип перевода</th><th colspan="8">Главные пути при скорости, км/ч</th><th rowspan="2">Главные ≤40 км/ч и приёмо-отправочные</th><th rowspan="2">Станционные, подъездные и прочие</th></tr>
+    <tr><th>200–250</th><th>160–200</th><th>140–160</th><th>121–140</th><th>101–120</th><th>81–100</th><th>61–80</th><th>41–60</th></tr></thead><tbody><tr><th class="wl" rowspan="3">Вертикальный износ сборных и цельнолитых крестовин</th><td class="wl">Р65 и тяжелее</td><td>4</td><td>5</td><td>5</td><td>5</td><td>5</td><td>6</td><td>6</td><td>8</td><td>10</td><td>12</td></tr><tr><td class="wl">Р50</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>5</td><td>6</td><td>6</td><td>8</td><td>10</td><td>12</td></tr><tr><td class="wl">Р43 и легче</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>5</td><td>6</td><td>6</td><td>10</td><td>12</td></tr><tr><th class="wl" rowspan="1">Вертикальный износ крестовин с непрерывной поверхностью катания</th><td class="wl">Р65</td><td>4</td><td>5</td><td>5</td><td>5</td><td>6</td><td>8</td><td>9</td><td>9</td><td>10</td><td class="na">—</td></tr><tr><th class="wl" rowspan="3">Вертикальный износ рамных рельсов и остряков</th><td class="wl">Р65 и тяжелее</td><td>4</td><td>5</td><td>5</td><td>5</td><td>6</td><td>8</td><td>9</td><td>9</td><td>10</td><td>12</td></tr><tr><td class="wl">Р50</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>5</td><td>8</td><td>8</td><td>8</td><td>9</td><td>10</td></tr><tr><td class="wl">Р43 и легче</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>5</td><td>6</td><td>6</td><td>8</td><td>10</td></tr><tr><th class="wl" rowspan="3">Боковой износ рамных рельсов и остряков</th><td class="wl">Р65 и тяжелее</td><td>4</td><td>5</td><td>5</td><td>5</td><td>6</td><td>8</td><td>8</td><td>8</td><td>8</td><td>11</td></tr><tr><td class="wl">Р50</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>6</td><td>8</td><td>8</td><td>8</td><td>8</td><td>11</td></tr><tr><td class="wl">Р43 и легче</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>6</td><td>8</td><td>8</td><td>8</td><td>11</td></tr><tr><th class="wl" rowspan="3">Боковой износ рамного рельса в острие остряка</th><td class="wl">Р65 и тяжелее</td><td>4</td><td>5</td><td>5</td><td>5</td><td>6</td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td></tr><tr><td class="wl">Р50</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>6</td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td></tr><tr><td class="wl">Р43 и легче</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td class="na">—</td><td>6</td><td>6</td><td>6<sup>*</sup></td><td>6<sup>*</sup></td><td>6<sup>*</sup></td></tr></tbody></table></div>
+  <p class="note"><sup>*</sup> Допустимый износ можно увеличить до значений, допустимых вне острия остряка, если взаимное положение остряка и рамного рельса проходит проверку шаблоном КОР. Для скоростных и высокоскоростных линий нормы износа задаются специальными документами. Износ крестовин и остряков контролируется в местах, указанных инструкцией по текущему содержанию пути. Пропуск поездов по лопнувшим острякам и острякам с поперечными трещинами подошвы запрещён во всех случаях.</p>
+
+  <h2>Маркировка и порядок замены</h2>
+  <div class="mark">
+    <p><b>Остродефектные</b> элементы заменяют без промедления; если замена невозможна, скорость по переводу ограничивают до значения для группы или класса пути, при котором элемент уже не остродефектный. Исключение — дефекты из перечня п. 3.6 (трещины, изломы, ДТРр…ДПЗиз): они остродефектные при любой скорости, поезда пропускают как по остродефектным рельсам.</p>
+    <p><b>Дефектные</b> заменяют в плановом порядке, до замены — усиленное наблюдение. Скорость по переводу с дефектными элементами может пересмотреть начальник дистанции пути.</p>
+    <p><b>Где ставят маркировку:</b> остряки — с внутренней стороны колеи в 1 м от корневого стыка и против дефекта; рамные рельсы — с внутренней стороны около 1 м от переднего стыка, против дефекта — с наружной; крестовины — на обоих хвостовых концах усовиков и против дефекта на той стороне, где он появился; подкладки с подушками — с наружной стороны колеи; элементы переводных устройств — против дефекта.</p>
+  </div>
 
   <h2>Термины и сокращения</h2>
   <dl>
     <dt>Остродефектный элемент (ОД)</dt><dd>Элемент, который прямо угрожает безопасности движения: подлежит замене без промедления.</dd>
     <dt>Дефектный элемент (Д)</dt><dd>Элемент, у которого служебные свойства постепенно снижаются, но поезда ещё идут безопасно, иногда с ограничением скорости.</dd>
-    <dt>Усиленное наблюдение (УН)</dt><dd>Элемент, требующий усиленного наблюдения с последующей заменой.</dd>
-    <dt>ЗПП</dt><dd>Замена в плановом порядке.</dd>
-    <dt>Группа пути: В, С</dt><dd>Группы железнодорожных путей; в таблицах значения приведены отдельно для групп В и С.</dd>
-    <dt>Класс пути 1–5</dt><dd>Класс железнодорожного пути; чем выше номер класса, тем больший размер дефекта допускается.</dd>
+    <dt>Усиленное наблюдение (УН)</dt><dd>Элемент, за которым устанавливается усиленное наблюдение (не реже одного раза в неделю); эксплуатируется без дополнительных работ.</dd>
+        <dt>Группа пути: В, С</dt><dd>В — высокоскоростная, С — скоростная (таблица 3 классификатора). В таблицах каталога для них отдельные столбцы.</dd>
+    <dt>Класс пути 1–5</dt><dd>Класс главного пути по таблице 1 приложения № 1 ПТЭ (зависит от скоростей и грузонапряжённости). Чем больше номер класса, тем больший размер дефекта допускается.</dd><dt>КОР</dt><dd>Шаблон для контроля взаимного положения остряка и рамного рельса.</dd>
     <dt>СН</dt><dd>Сердечник крестовины с непрерывной поверхностью катания.</dd>
     <dt>УН (в коде)</dt><dd>Усовик крестовины с непрерывной поверхностью катания.</dd>
   </dl>
 </div>
+<div id="doc-2499">
 <h1>Дефекты рельсов: коды и группы</h1>
 <p class="lead">Справочник по инструкции «Дефекты рельсов. Классификация, каталог и параметры дефектных и остродефектных рельсов» (распоряжение ОАО «РЖД» от 23.10.2014 № 2499р).</p>
 <p class="source" style="margin-top:8px">Источник: <a href="https://www.tdesant.ru/info/item/144" target="_blank" rel="noopener">tdesant.ru</a> — схемы из таблицы 2 инструкции 2499р.</p>
@@ -499,10 +629,12 @@ body.landing-open{overflow:hidden}
 </ol>
 
 <h2>Как читать код</h2>
-<p>Код состоит из трёх цифр: <code>XY.Z</code> 
-<li>Первая цифра — группа (где в сечении рельса дефект)</li> 
-<li>Вторая — тип (основная причина)</li> 
-<li>Третья, после точки, — место по длине рельса</li> </p>
+<p>Код состоит из трёх цифр: <code>XY.Z</code></p>
+<ul class="codeparts">
+<li>первая цифра — группа: где в сечении рельса дефект;</li>
+<li>вторая — тип: основная причина;</li>
+<li>третья, после точки, — место по длине рельса.</li>
+</ul>
 <div class="decoder">
 <div class="big" id="big" aria-live="polite"></div>
 <div class="pickers">
@@ -521,33 +653,22 @@ body.landing-open{overflow:hidden}
 <div class="mean m3"><b id="mp"></b><span id="mpt"></span></div>
 <div class="status" id="st"></div>
 </div>
-<p class="note" style="margin-top:12px"><code>Если у дефекта несколько мест, их пишут через дефис: 21.1<span class="odr">-</span>2 значит 21.1 или 21.2. Буква Н в конце (21.2.<span class="odr">Н</span>) — дефект взят в накладки. Если дефект относится к двум кодам, их пишут через дробь: 71.2<span class="odr">/</span>21.2 — излом из-за поперечной трещины.</p></code>
+<p class="note" style="margin-top:12px">Если у дефекта несколько мест, их пишут через дефис: 21.1<span class="odr">-</span>2 значит 21.1 или 21.2. Буква Н в конце (21.2.<span class="odr">Н</span>) — дефект взят в накладки. Если дефект относится к двум кодам, их пишут через дробь: 71.2<span class="odr">/</span>21.2 — излом из-за поперечной трещины.</p>
 <h2>Калькулятор: класс и допускаемая скорость</h2>
-<p class="note"><code>Выберите дефект и введите размеры — калькулятор покажет класс (ДР/ОДР) и допускаемую скорость по таблицам раздела 7 инструкции 2499р. Учебный инструмент: в работе сверяйтесь с действующей редакцией.</p></code>
+<p class="note">Выберите дефект и введите размеры — калькулятор покажет класс (ДР/ОДР) и допускаемую скорость по таблицам раздела 7 инструкции 2499р. Учебный инструмент: в работе сверяйтесь с действующей редакцией.</p>
 <div class="calc" id="calc"></div>
 
 <h2>Группы дефектов</h2>
-<p class="note"><code>Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа, ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p></code>
+<p class="note">Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа, ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
 <div class="toolbar" role="search">
 <input type="search" id="qi" placeholder="Поиск: код, название, причина…" aria-label="Поиск по дефектам">
 <button class="chip" data-f="all" aria-pressed="true">Все</button>
 <button class="chip" data-f="odr" aria-pressed="false">ОДР</button>
 <button class="chip" data-f="dr" aria-pressed="false">ДР</button>
-<button class="btn" id="pinb" aria-pressed="false" title="Выключено: при открытии нового дефекта предыдущие карточки закрываются"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 9V4h1c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1h1v5c0 1.66-1.34 3-3 3v2h5.97v7l1 1 1-1v-7H19v-2c-1.66 0-3-1.34-3-3z"/></svg>Закрепить</button>
 <button class="btn" id="expb">Раскрыть всё</button>
-<button class="btn" id="examb"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>Экзамен</button>
 <span id="cnt" aria-live="polite"></span>
 </div>
 <div id="groups"></div>
-<div id="exam" tabindex="-1" hidden role="dialog" aria-modal="true" aria-label="Режим экзамен"><div class="ex-in">
-<div class="ex-top"><b><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>Экзамен</b>
-<select id="ek" aria-label="Какие дефекты"><option value="all">Все дефекты</option><option value="odr">Только ОДР</option><option value="dr">Только ДР</option><option value="mine">Мои ошибки (0)</option></select>
-<label class="ex-l"><input type="checkbox" id="es" checked> Перемешать</label>
-<button class="btn" data-a="restart">Заново</button><button class="btn" data-a="close"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Закрыть</button></div>
-<div class="ex-groups" id="eg" role="group" aria-label="Группы дефектов для теста"></div>
-<div id="eprog" aria-live="polite"></div><div class="ex-bar"><i id="ebar"></i></div>
-<div id="ecard" class="ex-card"></div><div id="eend" class="ex-card ex-end" hidden></div>
-</div></div>
 
 <h2>Термины и сокращения</h2>
 <dl>
@@ -568,8 +689,9 @@ body.landing-open{overflow:hidden}
 <dt>Фокус трещины и долом</dt><dd>Фокус — очаг, откуда началось разрушение. Долом — зона конечной стадии разрушения, она отличается от зоны усталостного роста трещины.</dd>
 <dt>Фрагмент и проба</dt><dd>Фрагмент — часть рельса, разрушившегося на три и более куска. Проба — часть разрушенного рельса, вырезанная на исследование.</dd>
 </dl>
-
+</div>
 </main>
+
 <script>
 var GROUPS=[
 [1,"Трещины и выкрашивания на поверхности катания головки","головка",[
@@ -744,50 +866,50 @@ r:"На ранних стадиях (до ~150–250 млн т брутто) —
 v:"Внешний осмотр, контроль линейных размеров (линейка, штангенциркуль с глубиномером, шаблон «измерон»), УЗК в пределах ±300 мм от дефектного сечения. Убедиться в отсутствии под дефектом поперечной трещины.",
 u:"Периодическая шлифовка головки (начиная с первой шлифовки сразу после укладки новых рельсов), наплавка, замена рельса.",
 e:"ДР: «узкие» (a<35 мм) при h>2 мм и l>25 мм; «широкие» (a≥35 мм) при h>1 мм и l>25 мм; «короткие» при h 6–8 мм и l до 25 мм. ОДР: поперечная трещина; горизонтальная трещина длиной более 70 мм (по пропаданию донного сигнала). Глубину и ширину измеряют в месте наибольшего развития, длину — по протяжению; цепочку смежных дефектов считают одним дефектом, если расстояние между ними меньше длины наименьшего. При гарантии — рекламация заводу.",
-h:T10[0],b:T10[1]},
+h:T10[0],b:T10[1],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}]},
 {codes:["11.1-2"],t:"Трещины и выкрашивания на выкружке или середине головки в болтовом стыке и вне стыка, после гарантии",
 r:"Возникают изнутри от местных скоплений неметаллических включений, вытянутых вдоль прокатки (дорожки-«строчки»), или от наружной поверхности из-за недостаточной контактно-усталостной прочности металла; чаще на наружной нити кривых. От дефекта могут развиться поперечные трещины 21.1-2.",
 v:"Осмотр, замеры h, l, a, УЗК в пределах ±300 мм; убедиться в отсутствии поперечной трещины под выкрашиванием или горизонтальной трещиной.",
 u:"Профильная шлифовка, наплавка, замена рельса.",
 e:"ДР: «узкие» (a<35 мм) при h>2 мм и l>25 мм; «широкие» (a≥35 мм) при h>1 мм и l>25 мм; «короткие» (l≤25 мм) при h 6–8 мм. ОДР: поперечная трещина, замена без промедления; горизонтальная трещина длиной более 70 мм. Скорость по таблице ниже. Глубину и ширину измеряют в месте наибольшего развития, длину — по протяжению.",
-h:T10[0],b:T10[1]},
+h:T10[0],b:T10[1],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}]},
 {codes:["12.1-2"],t:"Трещины и выкрашивания на выкружке или середине головки в болтовом стыке и вне стыка, до гарантии",
 r:"Возникают изнутри от местных скоплений неметаллических включений, вытянутых вдоль прокатки (дорожки-«строчки»), или от наружной поверхности из-за недостаточной контактно-усталостной прочности металла; чаще на наружной нити кривых. Дефект проявился до пропуска гарантийного тоннажа (отказ в пределах гарантии). От него могут развиться поперечные трещины 22.1-2.",
 v:"Осмотр, замеры h, l, a, УЗК ±300 мм; убедиться в отсутствии поперечной трещины.",
 u:"Профильная шлифовка, наплавка, замена рельса.",
 e:"ДР: «узкие» (a<35 мм) при h>2 мм и l>25 мм; «широкие» (a≥35 мм) при h>1 мм и l>25 мм; «короткие» (l≤25 мм) при h 6–8 мм. ОДР: поперечная трещина, замена без промедления; горизонтальная трещина длиной более 70 мм. Скорость по таблице ниже. Глубину и ширину измеряют в месте наибольшего развития, длину — по протяжению. Дополнительно ОДР при h≥8 мм. Рекламация заводу-изготовителю обязательна.",
-h:T10[0],b:T10[1]},
+h:T10[0],b:[["1–2", "—", "120", "—"], ["2–3", "120", "100", "—"], ["3–4", "100", "100", "—"], ["4–6", "70, плановая замена", "70, плановая замена", "—"], ["6–8", "40, ЗПП", "40, ЗПП", "ДР"], [">8", "25", "25", "ОДР"]],n:"Для «коротких» дефектов 12.1-2 (длина 6,1–25 мм) скорость в инструкции не задана: при глубине более 6 мм — ДР, при 8 мм и более — ОДР, замена без промедления.",x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}]},
 {codes:["13.1"],t:"Выкрашивание головки в болтовом стыке",
 r:"Повышенное динамическое воздействие колёс у торца. Усиливают искривлённые концы, растянутые зазоры, плохая обработка торцов. Бывает после сплыва металла.",
 v:"Осмотр, замеры, УЗК; проверить отсутствие поперечной трещины.",
 u:"Наплавка конца рельса или плановая замена.",
 e:"ДР: h>2 мм при l>25 мм или h>6 мм при l до 25 мм. При h>6 мм и l>25 мм замена или восстановление в первоочередном порядке. Если выкрашивание мешает УЗК, рельс относят к дефекту 19. Скорость при l>25 мм:",
-h:["h, мм","Скорость, км/ч"],b:[["2–4","100"],["4–6","70"],["6–8","40, ЗПП"],[">8","25"]]},
+h:["h, мм","Скорость, км/ч"],b:[["2–4", "100"], ["4–6", "70"], ["6–8", "40, ЗПП"], [">8", "25, ЗПП"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}],n:"Скорости — для дефектов длиной более 25 мм. При глубине более 6 мм и длине более 25 мм — замена или восстановление в первоочередном порядке (ЗПП)."},
 {codes:["14.1-2"],t:"Пробоксовки головки (местный износ и выкрашивание) в болтовом стыке и вне стыка",
 r:"Боксование и юз колёс (или нарушение режимов шлифования) создают термомеханические повреждения: местный износ, хрупкий слой, трещины. Опасность: поперечная трещина 24.",
 v:"Осмотр, замер глубины пробоксовки h и выкрашивания h1, УЗК ±300 мм.",
 u:"Наплавка отдельных пробоксовок; шлифовка или фрезерование при массовых; плановая замена.",
 e:"ДР при h>1 мм. Поперечная трещина: ОДР, замена без промедления. До устранения чаще проверять и дефектоскопировать по графику начальника дистанции. Претензии депо или подразделению с рельсошлифовальным поездом.",
 h:["h, мм","Нет выкрашивания","h1 ≤ 2 мм","h1 > 2 мм"],
-b:[["1–2","120","70","25, ЗПП"],["2–3","70","40, ЗПП","25, ЗПП"],["3–4","40, ЗПП","25, ЗПП","25, ЗПП"],[">4","25, ЗПП","25, ЗПП","25, ЗПП"]]},
+b:[["1–2","120","70","25, ЗПП"],["2–3","70","40, ЗПП","25, ЗПП"],["3–4","40, ЗПП","25, ЗПП","25, ЗПП"],[">4","25, ЗПП","25, ЗПП","25, ЗПП"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Пробуксовка", "0,5", "0,3"]]}]},
 {codes:["16.3-4"],t:"Выкрашивание головки у сварного стыка, после гарантии",
 r:"Нарушения технологии сварки и обработки стыка: в головке участки мартенсита и неоднородности, от них растут трещины контактной усталости.",
 v:"Осмотр, замеры (линейка, штангенциркуль с глубиномером, «измерон»), УЗК ±300 мм; убедиться в отсутствии поперечной трещины.",
 u:"Шлифовка, плановая замена или вырезка участка с вваркой вставки.",
 e:"ДР при глубине выкрашивания более 2,0 мм. Поперечная трещина — ОДР, замена без промедления. Наблюдения за развитием — при очередных проверках рельсов. При нарастании числа таких рельсов информировать предприятие, выполнившее сварку.",
-h:["h, мм","Скорость, км/ч"],b:[["2–3","120"],["3–4","100"],["4–6","70"],["6–8","40"],[">8","25"]]},
+h:["h, мм","Скорость, км/ч"],b:[["2–3","120"],["3–4","100"],["4–6","70"],["6–8","40"],[">8","25"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}]},
 {codes:["17.3-4"],t:"Выкрашивание головки у сварного стыка, до гарантии",
 r:"Нарушения технологии сварки и обработки стыка: в головке участки мартенсита и неоднородности, от них растут трещины контактной усталости. Дефект образовался до пропуска гарантийного тоннажа.",
 v:"Осмотр, замеры, УЗК ±300 мм; убедиться в отсутствии поперечной трещины.",
 u:"Шлифовка, плановая замена или вырезка участка с вваркой вставки.",
 e:"ДР при глубине выкрашивания более 2,0 мм. Поперечная трещина — ОДР. Наблюдения за развитием — при очередных проверках рельсов. При образовании в условиях, отвечающих гарантийным обязательствам, предъявить рекламацию изготовителю сварного стыка.",
-h:["h, мм","Скорость, км/ч"],b:[["2–3","120"],["3–4","100"],["4–6","70"],["6–8","40"],[">8","25"]]},
+h:["h, мм","Скорость, км/ч"],b:[["2–3","120"],["3–4","100"],["4–6","70"],["6–8","40"],[">8","25"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}]},
 {codes:["18.1-2"],t:"Выкрашивание наплавленного слоя головки в болтовом стыке и вне стыка",
 r:"При нарушении технологии наплавки не обеспечивается прочность соединения наплавленного и основного металла; в эксплуатации под колёсами наплавленный слой выкрашивается.",
 v:"Осмотр, контроль линейных размеров (линейка, штангенциркуль с глубиномером), УЗК; убедиться в отсутствии под выкрашиванием поперечной трещины.",
 u:"Повторная (очередная) наплавка головки по типовому технологическому процессу; при невозможности — плановая замена.",
 e:"ДР: h>2 мм при l>25 мм, а также h>6 мм при l до 25 мм включительно. Если выкрашивания препятствуют УЗК головки и шейки — контроленепригодность (дефект 19). Поперечная трещина — ОДР. Рекламация производителю наплавочных работ.",
-h:["h, мм (l>25 мм)","Скорость, км/ч"],b:[["2–3","120"],["3–4","100"],["4–6","70"],["6–8","40"],[">8","25"]]},
+h:["h, мм (l>25 мм)","Скорость, км/ч"],b:[["2–3","120"],["3–4","100"],["4–6","70"],["6–8","40"],[">8","25"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма износа / неровности, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Выкрашивания: «широкий» / «узкий»*", "0,5 / 1,5", "0,3 / 1,3"]], "n": "* При длине более 25 мм; «широкий» — шириной более 35 мм, «узкий» — от 6 до 35 мм."}]},
 {codes:["19.0-1-2"],t:"Контроленепригодность головки (поверхность катания) по всей длине, в болтовом стыке и вне стыка",
 r:"Выкрашивания и трещины на поверхности катания, рябизна, отпечатки или сильная коррозия на нижней поверхности головки мешают УЗК.",
 v:"Нет акустического контакта: на 12,5 м три и более места с пропаданием донного сигнала 20–70 мм при суммарной длине более 140 мм. Либо дефектоскоп срабатывает при минимальной чувствительности («шумящий» рельс).",
@@ -850,36 +972,36 @@ r:"Начальная волнообразная деформация (длин�
 v:"Внешний осмотр, жёсткая линейка 1 м с набором щупов, штангенциркуль с глубиномером, шаблон «измерон», рельсоизмерительные тележки.",
 u:"Шлифовка (в т.ч. рельсошлифовальными поездами по графику), замена.",
 e:"ДР при глубине волны более 1,0 мм на базе 1 м. При преждевременном образовании длинных волн в гарантийных условиях — рекламация изготовителю. До удаления неровностей или замены — ограничение скорости (для длинных волн и рифлей одинаковое); при h>3 мм — ЗПП.",
-h:["h, мм","Скорость, км/ч"],b:[["1–1,5","140"],["1,5–2","100"],["2–3","70"],[">3","40, ЗПП"]]},
+h:["h, мм","Скорость, км/ч"],b:[["1–1,5","140"],["1,5–2","100"],["2–3","70"],[">3","40, ЗПП"]],n:"Одинаково для длинных (25–150 см) волн и коротких (2,5–25 см) волн — рифлей. При глубине более 3 мм — замена в первоочередном порядке (ЗПП).",x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Глубина волнообразной неровности", "1,0 (длина до 1 м)", "1,0 (длина до 2 м)"]]}]},
 {codes:["41.0, 41.2"],t:"Смятие и вертикальный износ головки по всей длине и вне болтового стыка",
 r:"При несоответствии прочности металла нагружению головка деформируется, сплывает на боковую грань или изнашивается. Смятию по всей длине способствует увеличенное давление колёс на внутреннюю нить кривых из-за снижения фактических скоростей грузовых поездов относительно расчётных при возвышении. При раздавливании возникают растягивающие напряжения → продольные вертикальные трещины 31.1-2.",
 v:"Равномерное: осмотр, штангенциркуль. Местное: осмотр, отклонение от линейки 1 м по оси головки (щупы, концевые меры), штангенциркуль с глубиномером, «измерон».",
 u:"Шлифовка, фрезерование или наплавка; плановая замена.",
 e:"Р50, Р65, Р75 с равномерным износом сверх предельных значений таблицы 3 (раздел 7.1) — ДР, плановая замена. ДР и при неравномерном местном смятии, затрудняющем содержание ширины колеи. Скорость по глубине местных неровностей h (таблица); при h>6 мм — ЗПП. Р65/Р75 с шириной головки ≥90 мм и Р50 ≥85 мм — ДР, плановая замена. При такой ширине головки, наплывах на боковой грани ≥5 мм, тёмном желобке глубиной >1 мм, осыпании окалины и полоске красноты у шейки — УЗК ручными ПЭП; эхо-сигнал от трещины (31.1-2) — ОДР; затруднение контроля — контроленепригодность (19). Восстановить соответствие возвышения наружного рельса скоростям.",
-h:["h, мм","Скорость, км/ч"],b:[["1,5–2","140"],["2–3","120"],["3–4","100"],["4–6","70"],[">6","40, ЗПП"]]},
+h:["h, мм","Скорость, км/ч"],b:[["1,5–2","140"],["2–3","120"],["3–4","100"],["4–6","70"],[">6","40, ЗПП"]],x:[{"cap": "Ширина головки — дефектный рельс (ДР), плановая замена", "h": ["Тип рельса", "Ширина головки"], "b": [["Р65, Р75", "90,0 мм и более"], ["Р50", "85,0 мм и более"]]}, {"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Вертикальный износ", "6,0", "6,0"]]}]},
 {codes:["43.1"],t:"Смятие головки в виде седловины в зоне болтового стыка",
 r:"Особенности динамического воздействия колеса при прохождении зоны стыка и недостаточное сопротивление смятию; изношенные накладки, вышедшие из строя прокладки и подкладки, просадки в стыках, нарушение подуклонки.",
 v:"Осмотр, линейка 1 м с щупами или концевыми мерами, штангенциркуль с глубиномером, «измерон». Дефектоскопирование затруднено (ухудшен акустический контакт); убедиться в отсутствии под седловиной поперечных трещин 31.1.",
 u:"Шлифовка поверхности катания, наплавка, местная шлифовка для пологих уклонов; замена изношенных накладок, подкладок, прокладок годными; подбивка шпал стыка; выправка провисших концов (при наличии машины).",
 e:"ДР при глубине седловины более 1,5 мм (по оси головки от линейки 1 м). До выполнения работ или плановой замены — ограничение скорости (таблица); при h>6 мм — ЗПП.",
-h:["h, мм","Скорость, км/ч"],b:[["1,5–2","140"],["2–3","120"],["3–4","100"],["4–6","70"],[">6","40, ЗПП"]]},
+h:["h, мм","Скорость, км/ч"],b:[["1,5–2","140"],["2–3","120"],["3–4","100"],["4–6","70"],[">6","40, ЗПП"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Провисание концов, смятие, седловины", "1,0", "1,0"]]}]},
 {codes:["44.0"],t:"Боковой износ головки сверх допускаемых норм по всей длине рельса",
 r:"Работа рельсов в кривых: боковое давление фланцев колёс на рабочую грань; развитие усиливает недостаточная лубрикация боковой грани головки.",
 v:"Внешний осмотр, измерение штангенциркулем, шаблонами.",
 u:"Плановая замена; допускается перекладка на пути меньшей категории.",
-e:"ДР при боковом износе, превышающем нормированные значения таблицы 3 (раздел 7.1); замена в плановом порядке."},
+e:"ДР при боковом износе, превышающем нормированные значения таблицы 3 (раздел 7.1); замена в плановом порядке.",h:["Боковой износ hб, мм (Р65, Р75)", "Скорость, км/ч"],b:[["15 < hб ≤ 20, радиус кривой более 350 м", "70"], ["15 < hб ≤ 20, радиус кривой 350 м и менее", "50"], ["hб > 20", "ЗПП"]],n:"Таблица 3 инструкции. Для рельсов Р50 и легче значения износа уменьшаются на 3 мм: 12 < hб ≤ 17 и hб > 17. При боковом износе более 15 мм — ежемесячные замеры дорожным мастером.",x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Боковой износ", "6,0", "4,0"]]}]},
 {codes:["46.3-4"],t:"Смятие и износ головки у сварного стыка, после гарантии",
 r:"Неоднородность механических свойств металла при сварке → местное одиночное (одна седловина) или двойное смятие. Способствуют начальная неровность от сварки рельсов с концевой искривлённостью, отсутствие или нарушение упрочняющей термообработки стыков.",
 v:"Осмотр, измерительные приборы, «измерон»; контроль стыков по ТИ на УЗК сварных стыков и Правилам контроля алюминотермитной сварки.",
 u:"Местное шлифование; шлифовка по всей длине рельсошлифовальными поездами; полное устранение — вырезка дефектного участка с вваркой вставки; замена.",
 e:"ДР при смятии более 1,0 мм (по оси головки от линейки 1 м). До выполнения работ, плановой замены или восстановления стыка — ограничение скорости (таблица); при h>4 мм — замена или восстановление в первоочередном порядке. При нарастании числа дефектов в нормативных условиях — информировать предприятие, выполнившее сварку.",
-h:["h, мм","Скорость, км/ч"],b:[["1–2","120"],["2–3","70"],["3–4","40"],[">4","25"]]},
+h:["h, мм","Скорость, км/ч"],b:[["1–2", "120"], ["2–3", "70"], ["3–4", "40"], [">4", "25, ЗПП"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Провисание концов, смятие, седловины", "1,0", "1,0"]]}]},
 {codes:["47.3-4"],t:"Смятие и износ головки у сварного стыка, до гарантии",
 r:"Неоднородность механических свойств металла при сварке → местное одиночное (одна седловина) или двойное смятие. Способствуют начальная неровность от сварки рельсов с концевой искривлённостью, отсутствие или нарушение упрочняющей термообработки стыков. Дефект образовался до пропуска гарантийного тоннажа.",
 v:"Осмотр, измерительные приборы, «измерон»; контроль стыков по ТИ на УЗК и Правилам контроля алюминотермитной сварки.",
 u:"Местное шлифование; шлифовка рельсошлифовальными поездами; восстановление стыка вырезкой участка с вваркой вставки; замена.",
 e:"ДР при смятии более 1,0 мм. Ограничение скорости по таблице ниже; при h>4 мм — замена или восстановление в первоочередном порядке. При образовании в гарантийных условиях — рекламация изготовителю сварного стыка.",
-h:["h, мм","Скорость, км/ч"],b:[["1–2","120"],["2–3","70"],["3–4","40"],[">4","25"]]},
+h:["h, мм","Скорость, км/ч"],b:[["1–2", "120"], ["2–3", "70"], ["3–4", "40"], [">4", "25, ЗПП"]],x:[{"cap": "Для скоростей 141–250 км/ч (таблица 5)", "h": ["Норма, мм", "Более 140 до 200 км/ч", "Более 200 до 250 км/ч"], "b": [["Провисание концов, смятие, седловины", "1,0", "1,0"]]}]},
 {codes:["50.1-2"],t:"Вертикальные расслоения шейки в болтовом стыке и вне стыка",
 r:"Дефекты изготовления: остатки усадочной раковины, центральная пористость, резко выраженная ликвация в шейке, скопления неметаллических включений — приводят к расслоению шейки в эксплуатации.",
 v:"Внешний осмотр, ультразвуковое дефектоскопирование.",
@@ -908,7 +1030,7 @@ e:"ОДР, замена без промедления. Излом от дефе�
 r:"Трение и давление элементов скреплений на подошву (местные выработки), коррозия кромки подошвы во влажной среде.",
 v:"Внешний осмотр, замеры глубины выработок и коррозии.",
 u:"Замена в плановом порядке; защита подошвы (смазка).",
-e:"ДР: местные выработки сбоку или сверху подошвы глубиной более 5,0 мм в местах контакта со скреплениями; местная коррозия кромки подошвы глубиной у края 3,0 мм и более (Р50 и легче), 4,0 мм и более (Р65), 5,0 мм и более (Р75). Скорость до плановой замены по местным выработкам (Р65, Р75): 120 км/ч при 5,0<h≤6,0 мм, 100 при 6,0<h≤7,0 мм, 70 при 7,0<h≤8,0 мм (ЗПП), 25 при h>8,0 мм; для Р50 при h>6,0 мм — замена в первоочередном порядке, до замены не более 40 км/ч. По коррозии кромки: 100 км/ч при 5,0<h≤6,0 мм (Р75), 4,0<h≤5,0 (Р65), 3,0<h≤4,0 (Р50); 70 км/ч при 6,0<h≤8,0 (Р75), 5,0<h≤7,0 (Р65), 4,0<h≤6,0 (Р50). ОДР: коррозия кромки более 8,0 мм (Р75), 7,0 мм (Р65), 6,0 мм (Р50), а также поперечная трещина от коррозии. Излом от выработки — 74.1-2/64.1-2."},
+e:"ДР: местные выработки сбоку или сверху подошвы глубиной более 5,0 мм в местах контакта со скреплениями; местная коррозия кромки подошвы глубиной у края 3,0 мм и более (Р50 и легче), 4,0 мм и более (Р65), 5,0 мм и более (Р75). Скорость до плановой замены по местным выработкам (Р65, Р75): 120 км/ч при 5,0<h≤6,0 мм, 100 при 6,0<h≤7,0 мм, 70 при 7,0<h≤8,0 мм (ЗПП), 25 при h>8,0 мм; для Р50 при h>6,0 мм — замена в первоочередном порядке, до замены не более 40 км/ч. По коррозии кромки: 100 км/ч при 5,0<h≤6,0 мм (Р75), 4,0<h≤5,0 (Р65), 3,0<h≤4,0 (Р50); 70 км/ч при 6,0<h≤8,0 (Р75), 5,0<h≤7,0 (Р65), 4,0<h≤6,0 (Р50). ОДР: коррозия кромки более 8,0 мм (Р75), 7,0 мм (Р65), 6,0 мм (Р50), а также поперечная трещина от коррозии. Излом от выработки — 74.1-2/64.1-2.",h:["Выработка hи, мм", "Р65, Р75", "Р50"],b:[["5–6", "120", "ДР"], ["6–7", "100", "40, ЗПП"], ["7–8", "70, ЗПП", "40, ЗПП"], [">8", "25, ЗПП", "40, ЗПП"]],n:"Выработка более 5 мм — ДР. Р65 и Р75 с выработкой более 7 мм и Р50 более 6 мм — замена в первоочередном порядке.",x:[{"cap": "Местная коррозия кромки подошвы hк, мм", "h": ["Скорость / оценка", "Р75", "Р65", "Р50"], "b": [["100 км/ч", "5–6", "4–5", "3–4"], ["70 км/ч", "6–8", "5–7", "4–6"], ["ОДР, замена без промедления", "более 8", "более 7", "более 6"]], "n": "Трещина от коррозии кромки подошвы — ОДР при любой глубине."}, {"cap": "Для скоростей 141–250 км/ч (раздел 8.2.2)", "h": ["Глубина, мм", "Выработка hи", "Коррозия hк"], "b": [["1,5–2", "250", "250"], ["2–3", "200", "200"], ["3–4", "160", "160"], ["4–5", "140", "—"]]}]},
 {codes:["65.1-2"],t:"Трещины и выколы в подошве от ударов в болтовом стыке и вне стыка",
 r:"Удары и другие механические повреждения создают концентраторы напряжений в подошве; от них трещины и выколы. Возможен излом 75.1-2/65.1-2.",
 v:"Внешний осмотр, ультразвуковое дефектоскопирование.",
@@ -983,7 +1105,7 @@ e:"Рельсы в пути с неровностями выше допусти�
 r:"Дефекты и повреждения, не вошедшие в классификацию (коды 98.1–98.4 — по месту: в стыке, вне стыка, в сварном стыке); 98.0 — общая коррозия рельсов, оставленных в пути. Опасность оценивают по ближайшему типоразмеру дефекта; сюда же относят сварной стык на расстоянии от 750 до 3000 мм от торца рельса или менее 3000 мм между стыками.",
 v:"Внешний осмотр, измерительный контроль, УЗК — по характеру дефекта.",
 u:"Замена в плановом порядке; меры по защите от коррозии (98.0).",
-e:"Отнесение к ДР и условия эксплуатации определяются по характеру дефекта в каждом случае."},
+e:"Отнесение к ДР и условия эксплуатации определяются по характеру дефекта в каждом случае.",x:[{"cap": "Общая равномерная коррозия — дефектный рельс (ДР), плановая замена", "h": ["Тип рельса", "Глубина коррозии"], "b": [["Р50", "более 2,0 мм"], ["Р65", "более 3,0 мм"], ["Р75", "более 4,0 мм"]], "n": "Трещина в месте коррозии — ОДР, замена без промедления."}]},
 {codes:["99.1-2-3-4"],t:"Прочие дефекты изъятых ОДР в любом элементе сечения (в болтовом и сварном стыке и вне стыка; лишние отверстия, вдавленная маркировка, изломы без видимых дефектов)",
 r:"Дефекты изъятых рельсов: лишние отверстия, вдавленная маркировка, изломы без видимых дефектов (коды 99.1–99.4 — по месту). Торцы и отверстия, выполненные газопламенным способом, относят к коду 99.1; болтовое или технологическое отверстие в зоне сварного стыка — к коду 99.3-4.",
 v:"Внешний осмотр, измерительный контроль; изломы — вскрытие и исследование.",
@@ -994,16 +1116,36 @@ var MAP={};
 CAT.forEach(function(c){c.codes.forEach(function(x){expand(x).forEach(function(k){MAP[k]=c;});});});
 EXIST={};CAT.forEach(function(c){c.codes.forEach(function(x){expand(x).forEach(function(k){EXIST[k]=c.t;});});});
 upd();
-function tbl(h,b){return '<div class="wrap"><table><tr>'+h.map(function(x){return '<th>'+x+'</th>';}).join("")+'</tr>'+b.map(function(r){return '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join("")+'</tr>';}).join("")+'</table></div>';}
+var CH2499=Array.prototype.filter.call(document.querySelectorAll('.toolbar .chip'),function(c){return !c.closest('#doc-2143');});
+/* Знак ограничения скорости: «40, ЗПП» → круглый знак 40 + метка */
+function spdParts(v){var m=String(v).trim().match(/^(\d{2,3})(?:\s*,\s*(.+))?$/);return m?{n:+m[1],t:m[2]||''}:null;}
+function spdTier(n){return n>=100?'s-hi':n>=60?'s-mid':n>=40?'s-lo':'s-min';}
+function speedSign(v,big){var p=spdParts(v);if(!p)return null;
+  var tag=p.t?(/ЗПП/.test(p.t)?'<span class="stag s-zpp" title="Замена в первоочередном порядке (14 суток)">ЗПП</span>':'<span class="stag">'+p.t.replace(/плановая замена/i,'план. замена')+'</span>'):'';
+  return '<span class="sgn'+(big?' sgn-big':'')+'" role="img" aria-label="Ограничение скорости '+p.n+' км/ч"><b>'+p.n+'</b></span>'+tag;}
+window.speedSign=speedSign;
+function isTok(x){return /^(ЗПП|ДР|ОДР)$/.test(String(x).trim());}
+function isSpeedTbl(b){var n=0,k=0,sp=0;b.forEach(function(r){r.slice(1).forEach(function(x){n++;if(spdParts(x)){k++;sp++;}else if(/^[—–-]$/.test(String(x).trim())||isTok(x))k++;});});return n&&sp&&k/n>.6;}
+function tokCell(x){x=String(x).trim();return x==='ЗПП'?'<td class="s-min"><span class="stag s-zpp s-big" title="Замена в первоочередном порядке">ЗПП</span></td>':x==='ОДР'?'<td class="s-odr"><span class="stag s-odr-t">ОДР</span></td>':'<td class="s-lo"><span class="stag s-dr-t">ДР</span></td>';}
+function tbl(h,b){
+  if(isSpeedTbl(b)){
+    return '<div class="spt-wrap"><table class="spt"><thead><tr>'+h.map(function(x,i){return '<th'+(i?'':' class="spt-h0"')+'>'+x+'</th>';}).join("")+'</tr></thead><tbody>'+b.map(function(r){return '<tr><th>'+r[0]+'</th>'+r.slice(1).map(function(x){var p=spdParts(x);
+      return p?'<td class="'+spdTier(p.n)+'">'+speedSign(x)+'</td>':isTok(x)?tokCell(x):'<td class="s-none">—</td>';}).join("")+'</tr>';}).join("")+'</tbody></table></div>';
+  }
+  return '<div class="wrap"><table class="dt"><tr>'+h.map(function(x){return '<th>'+x+'</th>';}).join("")+'</tr>'+b.map(function(r){return '<tr>'+r.map(function(x){return '<td>'+x+'</td>';}).join("")+'</tr>';}).join("")+'</table></div>';}
+function lt(x){return String(x).replace(/<(?!\/?(?:b|i|br|span|code|a|sub|sup|em|strong|abbr|p|ul|ol|li|small)[\s>\/])/g,'&lt;');}
+window.lt=lt;
 function body(c,code){
 var k=[["Причины появления и развития",c.r],["Способы выявления",c.v]];
 if(c.u)k.push(["Способы устранения",c.u]);
 k.push(["Указания по эксплуатации",c.e]);
-var cp=c.h?'<p class="cap">Допустимая скорость, км/ч</p>'+tbl(c.h,c.b):"";
+var cp=c.h?'<p class="cap">'+(isSpeedTbl(c.b)?'Допустимая скорость, км/ч':(/Срок/.test(c.h[0])?'Сроки':'Ограничения'))+'</p>'+tbl(c.h,c.b):"";
+if(c.n)cp+='<p class="tnote">'+c.n+'</p>';
+(c.x||[]).forEach(function(x){cp+='<p class="cap">'+x.cap+'</p>'+tbl(x.h,x.b)+(x.n?'<p class="tnote">'+x.n+'</p>':'');});
 var all=c.codes.some(function(x){return expand(x).indexOf(code)>=0;});
 var sh="";
 if(c.codes.length>1){sh='<p class="cap">В инструкции коды объединены в одну карточку: '+c.codes.join(", ")+'.</p>';}
-return sh+'<div class="wrap"><table class="k">'+k.map(function(x){return '<tr><th>'+x[0]+'</th><td>'+x[1]+'</td></tr>';}).join("")+'</table></div>'+cp;}
+return sh+'<div class="wrap"><table class="k">'+k.map(function(x){return '<tr><th>'+x[0]+'</th><td>'+lt(x[1])+'</td></tr>';}).join("")+'</table></div>'+cp;}
 el("groups").innerHTML=GROUPS.map(function(g){
 return '<details class="group group-'+g[0]+'"><summary>'+g[0]+' — '+g[1]+' <span class="where">('+g[2]+')</span></summary><div class="codes">'+
 g[3].map(function(c){
@@ -1085,7 +1227,7 @@ document.querySelectorAll('#groups details.sub').forEach(function(sub){
   ks.forEach(function(k){IDX[k]=sub;});sub.dataset.first=ks[0]||'';
   sub.querySelector('summary').addEventListener('click',function(){if(!sub.classList.contains('is-open')&&sub.dataset.first){try{history.replaceState(null,'','#'+sub.dataset.first);}catch(e){}}});
   sub.dataset.code=cd.textContent.trim();
-  var rows=ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+d[i+2]+'</span></div>';}).join('');
+  var rows=ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+window.lt(d[i+2])+'</span></div>';}).join('');
   var card='<div class="cheat"><div class="cheat-h"><b>Краткий ответ</b></div>'+rows+'</div><p class="sub-h">Подробно по инструкции</p>';
   sub.querySelector('.in').insertAdjacentHTML('afterbegin',card);
   sub.querySelector('.in').insertAdjacentHTML('afterbegin',pics(cd.textContent.trim())||fig(d[1],ks));
@@ -1166,7 +1308,7 @@ qi.addEventListener('input',apply);
 function setO(d){d.setAttribute('open','');d.classList.add('is-open');}
 function setC(d){d.classList.remove('is-open');d.removeAttribute('open');}
 function goCode(c){c=decodeURIComponent(String(c).replace(/^#/,'')).trim();var s=IDX[c]||IDX[(expand(c)||[])[0]];if(!s)return false;
-  qi.value='';kind='all';document.querySelectorAll('.toolbar .chip').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.f==='all'?'true':'false');});apply();
+  qi.value='';kind='all';CH2499.forEach(function(x){x.setAttribute('aria-pressed',x.dataset.f==='all'?'true':'false');});apply();
   if(!window.PIN_ON)document.querySelectorAll('#groups details.sub.is-open').forEach(function(o){if(o!==s)setC(o);});
   setO(s.closest('#groups > details'));setO(s);
   setTimeout(function(){s.scrollIntoView({behavior:'smooth',block:'start'});},60);return true;}
@@ -1179,118 +1321,11 @@ el('expb').addEventListener('click',function(){
   gs.forEach(function(g){if(allOpen){setC(g);g.querySelectorAll('details').forEach(setC);}else setO(g);});
   syncExpb();});
 new MutationObserver(syncExpb).observe(el('groups'),{subtree:true,attributes:true,attributeFilter:['class','open','style']});
-(function(){var b=el('pinb');window.PIN_ON=ls('pin')==='1';
-  function sy(){b.setAttribute('aria-pressed',window.PIN_ON?'true':'false');b.title=window.PIN_ON?'Включено: открытые карточки остаются открытыми':'Выключено: при открытии нового дефекта предыдущие карточки закрываются';}
-  sy();b.addEventListener('click',function(){window.PIN_ON=!window.PIN_ON;ls('pin',window.PIN_ON?'1':'0');sy();});})();
+window.PIN_ON=true; /* карточки не сворачиваются при открытии другой */
 syncExpb();
 if(location.hash.length>1)goCode(location.hash.slice(1));
-document.querySelectorAll('.toolbar .chip').forEach(function(c){c.addEventListener('click',function(){
-  kind=c.dataset.f;document.querySelectorAll('.toolbar .chip').forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
-/* экзамен */
-var ex=el('exam');document.body.appendChild(ex);
-var SAVED={};try{SAVED=JSON.parse(ls('hard')||'{}')||{};}catch(e){}
-function sv(){ls('hard',JSON.stringify(SAVED));var o=el('ek').querySelector('[value=mine]');if(o)o.textContent='Мои ошибки ('+Object.keys(SAVED).length+')';}sv();
-var GSEL={},GL=['Трещины и выкрашивания','Поперечные трещины','Продольные трещины','Смятие и износ','Шейка','Подошва','Изломы','Изгибы','Прочие'];var ALL=[],Q=[],hard={},TOT=0,DONE=0,cur=null,ans=false,okNow=false;
-var KL={odr:'ОДР',dr:'ДР',mix:'ДР, при поперечной трещине — ОДР'};
-function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function buildGroups(){var h='';document.querySelectorAll('#groups > details').forEach(function(g,i){
-  var n=g.querySelector('summary').textContent.trim().charAt(0),cnt=g.querySelectorAll('details.sub').length;
-  GSEL[n]=1;h+='<button class="chip" type="button" data-g="'+n+'" aria-pressed="true" title="'+esc(g.querySelector('summary').textContent.trim())+'">'+n+' · '+esc(GL[i]||'Группа')+' ('+cnt+')</button>';});
-  el('eg').innerHTML=h+'<button class="btn" type="button" data-g="all">Все группы</button>';}
-function buildAll(){if(ALL.length)return;buildGroups();document.querySelectorAll('#groups details.sub').forEach(function(sub){
-  var d=S[sub.dataset.code];if(!d)return;var c=sub.querySelector('summary').cloneNode(true);
-  c.querySelectorAll('code,.kb,.tag').forEach(function(x){x.remove();});
-  ALL.push({code:sub.dataset.code,kind:d[1],title:c.textContent.trim(),d:d});});}
-function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function fw(t){return t.toLowerCase().replace(/[^а-яё ]/g,'').split(/\s+/).slice(0,2).join(' ');}
-function pickD(c,f,ok){var out=[],seen={};seen[f(c)]=1;
-  function add(list){shuffle(list).forEach(function(x){var k=f(x);if(out.length<3&&!seen[k]){seen[k]=1;out.push(x);}});}
-  var rest=ALL.filter(function(x){return x!==c&&ok(x);});
-  add(rest.filter(function(x){return GSEL[x.code.charAt(0)];}));
-  if(out.length<3)add(rest.filter(function(x){return !GSEL[x.code.charAt(0)];}));
-  return out;}
-function nm(x){return x.code+' — '+x.title;}
-function cut(s){return s.length>120?s.slice(0,s.lastIndexOf(' ',117))+'…':s;}
-function findDef(code){for(var i=0;i<ALL.length;i++){if(ALL[i].code===code)return ALL[i];}return null;}
-function why(q,chosen){
-  if(q.t==='cls'){var s='Дефект <code>'+esc(cur.code)+'</code> («'+esc(cur.title)+'») — класс «'+esc(KL[cur.kind]||cur.kind)+'».';
-    if(chosen!==q.ok)s+=' Выбранный класс «'+esc(KL[chosen]||chosen)+'» описывает другие дефекты.';
-    return s+'<br><b>Почему так:</b> '+esc(cur.d[2]);}
-  var good=findDef(q.ok),bad=findDef(chosen);
-  if(q.t==='why')return 'Причина из вопроса — у дефекта <code>'+esc(q.ok)+'</code>'+(good?' («'+esc(good.title)+'»).':'')+' Ваш вариант — про <code>'+esc(chosen)+'</code>'+(bad?' («'+esc(bad.title)+'»).':'.');
-  if(q.t==='use')return 'Правильное указание по эксплуатации — для <code>'+esc(q.ok)+'</code>'+(good?' («'+esc(good.title)+'»).':'')+(chosen!==q.ok?' Ваш вариант относится к <code>'+esc(chosen)+'</code>'+(bad?' («'+esc(bad.title)+'»).':'.'):'');
-  return 'Причину из вопроса описывает дефект <code>'+esc(q.ok)+'</code>'+(good?' («'+esc(good.title)+'»).':'')+(chosen!==q.ok?' Ваш вариант — <code>'+esc(chosen)+'</code>'+(bad?' («'+esc(bad.title)+'»).':'.'):'');
-}
-function make(c){
-  var T=['cls','why','use','name'],t,r;
-  do{r=Math.random();t=r<.2?'cls':r<.45?'why':r<.7?'use':'name';}while(t===c.last);
-  c.last=t;var head='<code>'+esc(c.code)+'</code><h3>'+esc(c.title)+'</h3>',q={t:t,ok:c.code};
-  if(t==='cls'){q.head=head;q.ask='К какому классу относится дефект?';q.ok=c.kind;
-    q.opts=[{id:'odr',t:KL.odr},{id:'dr',t:KL.dr},{id:'mix',t:KL.mix}];return q;}
-  var f,ok=function(){return true;},n=function(x){return x.d[2];};
-  if(t==='why'){q.head=head;q.ask='Почему происходит этот дефект?';ok=function(x){return fw(x.d[2])!==fw(c.d[2]);};}
-  if(t==='use'){q.head=head;q.ask='Как эксплуатировать рельс с этим дефектом?';n=function(x){return cut(x.d[5]);};
-    ok=function(x){return c.kind==='odr'?x.kind==='dr':x.kind==='odr';};}
-  if(t==='name'){q.head='';q.ask='Какому дефекту соответствует эта причина?';q.quote=c.d[2];n=nm;
-    ok=function(x){return fw(x.d[2])!==fw(c.d[2]);};}
-  var o=[c].concat(pickD(c,t==='name'?nm:n,ok));
-  q.opts=shuffle(o.map(function(x){return {id:x.code,t:t==='name'?nm(x):n(x)};}));return q;}
-function start(list){buildAll();var k=el('ek').value;
-  Q=(list||ALL.filter(function(c){return GSEL[c.code.charAt(0)]&&(k==='mine'?SAVED[c.code]:(k==='all'||c.kind===k||c.kind==='mix'));})).slice();
-  Q.forEach(function(c){c.last='';});
-  if(el('es').checked)shuffle(Q);hard={};TOT=Q.length;DONE=0;render();}
-function render(){
-  var card=el('ecard'),end=el('eend'),h=Object.keys(hard);
-  el('ebar').style.width=(TOT?DONE/TOT*100:0)+'%';
-  el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+h.length;
-  if(!Q.length){card.hidden=true;end.hidden=false;
-    if(!TOT){end.innerHTML=el('ek').value==='mine'?'<p>Сохранённых ошибок пока нет.</p>':'<p>Нет дефектов по выбранным настройкам. Выберите хотя бы одну группу.</p>';return;}
-    var lst=ALL.filter(function(c){return hard[c.code];});
-    end.innerHTML='<h3>Готово!</h3><p>С первого раза верно: <b>'+(TOT-h.length)+' из '+TOT+'</b>.</p>'+
-      (lst.length?'<p>Где были ошибки:</p><ul>'+lst.map(function(c){return '<li><code>'+esc(c.code)+'</code> '+esc(c.title)+'</li>';}).join('')+'</ul>':'<p>Без единой ошибки!</p>')+
-      '<div class="ex-act"><button class="btn pri" data-a="restart">Заново</button>'+(lst.length?'<button class="btn" data-a="hard">Только ошибки</button>':'')+'</div>';
-    return;}
-  end.hidden=true;card.hidden=false;ans=false;cur=Q[0];var q=cur.q=make(cur);
-  card.innerHTML='<div class="ex-q">'+q.head+(q.head?'<p class="ex-ask">'+esc(q.ask)+'</p>':'<h3>'+esc(q.ask)+'</h3>')+
-    (q.quote?'<blockquote class="ex-quote">'+esc(q.quote)+'</blockquote>':'')+'</div>'+
-    '<div class="tiles">'+q.opts.map(function(o,i){return '<button class="tile" style="--i:'+i+'" data-i="'+i+'"><b>'+(i+1)+'</b><span>'+esc(o.t)+'</span></button>';}).join('')+'</div>'+
-    '<div id="efb" class="ex-fb" hidden></div>'+
-    '<div id="eans" hidden><p class="sub-h">'+esc(nm(cur))+'</p>'+ROWS.map(function(r,i){return '<div class="cr '+r[1]+'"><b>'+r[0]+'</b><span>'+esc(cur.d[i+2])+'</span></div>';}).join('')+'</div>'+
-    '<div class="ex-act"><button class="btn pri" data-a="next" hidden>Дальше →</button></div>'+
-    '<p class="ex-hint">Нажмите плитку или клавишу 1–'+q.opts.length+' · Enter — дальше · Esc — выйти</p>';
-}
-function pick(i){
-  if(ans||!Q.length)return;var q=cur.q,o=q.opts[i];if(!o)return;ans=true;okNow=o.id===q.ok;
-  ex.querySelectorAll('.tile').forEach(function(b,j){b.disabled=true;
-    if(q.opts[j].id===q.ok)b.classList.add('ok');else if(j===i)b.classList.add('bad');else b.classList.add('dim');});
-  var fb=el('efb');fb.hidden=false;fb.className='ex-fb '+(okNow?'good':'wrong');
-  fb.textContent=okNow?'Верно!':'Неверно. Правильный ответ выделен зелёным.';
-  if(!okNow)fb.insertAdjacentHTML('beforeend','<div class="why-exp">'+why(q,o.id)+'</div>');
-  if(!okNow){hard[cur.code]=1;SAVED[cur.code]=1;}else if(!hard[cur.code])delete SAVED[cur.code];sv();
-  el('eans').hidden=false;var nb=ex.querySelector('[data-a=next]');nb.hidden=false;nb.focus();
-  el('eprog').textContent='Осталось: '+Q.length+' из '+TOT+' · Ошибок: '+Object.keys(hard).length;}
-function act(a){
-  if(a==='close'){ex.hidden=true;document.body.style.overflow='';document.querySelector('main').inert=false;if(ex._pf&&ex._pf.focus)ex._pf.focus();return;}
-  if(a==='restart'){el('eend').hidden=true;start();return;}
-  if(a==='hard'){start(ALL.filter(function(c){return hard[c.code];}));return;}
-  if(a==='next'&&ans){if(okNow){Q.shift();DONE++;}else Q.push(Q.shift());render();ex.scrollTop=0;}}
-ex.addEventListener('click',function(e){
-  var g=e.target.closest('[data-g]');if(g){var v=g.dataset.g;
-    if(v==='all'){Object.keys(GSEL).forEach(function(k){GSEL[k]=1;});}else GSEL[v]=GSEL[v]?0:1;
-    ex.querySelectorAll('.chip[data-g]').forEach(function(c){c.setAttribute('aria-pressed',GSEL[c.dataset.g]?'true':'false');});
-    start();return;}
-  var t=e.target.closest('.tile');if(t){pick(+t.dataset.i);return;}
-  var b=e.target.closest('[data-a]');if(b)act(b.dataset.a);});
-el('ek').addEventListener('change',function(){start();});
-el('es').addEventListener('change',function(){start();});
-el('examb').addEventListener('click',function(){ex._pf=document.activeElement;ex.hidden=false;document.body.style.overflow='hidden';document.querySelector('main').inert=true;start();ex.focus();});
-document.addEventListener('keydown',function(e){
-  if(ex.hidden)return;
-  if(e.key==='Escape'){act('close');return;}
-  var t=e.target.tagName;if(t==='SELECT'||t==='INPUT')return;
-  if(/^[1-4]$/.test(e.key)){pick(+e.key-1);}
-  else if(e.key==='ArrowRight'&&ans)act('next');
-  else if((e.key==='Enter'||e.key===' ')&&ans&&t!=='BUTTON'){e.preventDefault();act('next');}});
+CH2499.forEach(function(c){c.addEventListener('click',function(){
+  kind=c.dataset.f;CH2499.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});apply();});});
 /* тема */
 var root=document.documentElement,t0=ls('theme');if(t0)root.setAttribute('data-theme',t0);
 var THEME_NAMES={light:'Светлая',dark:'Тёмная',amoled:'AMOLED'};
@@ -1492,15 +1527,15 @@ var GL={
  function res(c,s,n){return {c:c,s:s||'—',n:n||''};}
  var DEFS=[
   {label:'10 / 11 / 12 — трещины и выкрашивания головки',fields:['a','h'],run:function(v){
-    if(v.a==='короткие'){if(!(v.h>=6))return res('none','—','Короткие (l≤25 мм): ДР при h 6–8 мм.');return res(v.h>=8?'odr':'dr',rng([[6,8,'40'],[8,1e9,'25']],v.h),v.h>=8?'При h≥8 мм — ОДР (для 12.1-2).':'');}
+    if(v.a==='короткие'){if(!(v.h>6))return res('none','—','Короткие (l≤25 мм): ДР при h более 6 мм.');return res('dr',rng([[6,8,'40, ЗПП'],[8,1e9,'25']],v.h),'Для 10 и 11. Для дефекта 12.1-2 скорость для «коротких» не задана, а при h ≥ 8 мм рельс — ОДР, замена без промедления.');}
     if(v.l)return res('none','—','При l≤25 мм это «короткий» дефект — выберите «Короткие (l≤25 мм)».');
     var thr=v.a==='узкие'?2:1;
     if(!(v.h>thr))return res('none','—','ДР при h>'+thr+' мм ('+v.a+', l>25 мм).');
     return res('dr',rng(v.a==='узкие'?[[2,3,'120'],[3,4,'100'],[4,6,'70'],[6,8,'40'],[8,1e9,'25']]:[[1,2,'120'],[2,4,'100'],[4,6,'70'],[6,8,'40'],[8,1e9,'25']],v.h));}},
   {label:'13 — выкрашивание в болтовом стыке',fields:['h','l'],run:function(v){
-    if(v.l){if(v.h>6)return res('dr','40 (ЗПП)','При h>6 мм — замена/восстановление в первоочередном порядке.');return res('none','—','При l до 25 мм ДР только при h>6 мм.');}
+    if(v.l){if(v.h>6)return res('dr','—','ДР. Скорости в инструкции даны только для дефектов длиной более 25 мм.');return res('none','—','При l до 25 мм ДР только при h>6 мм.');}
     if(!(v.h>2))return res('none','—','ДР при h>2 мм (l>25 мм).');
-    return res('dr',rng([[2,4,'100'],[4,6,'70'],[6,8,'40, ЗПП'],[8,1e9,'25']],v.h),v.h>6?'При h>6 мм — замена/восстановление в первоочередном порядке.':'');}},
+    return res('dr',rng([[2,4,'100'],[4,6,'70'],[6,8,'40, ЗПП'],[8,1e9,'25, ЗПП']],v.h),v.h>6?'При h>6 мм — замена/восстановление в первоочередном порядке.':'');}},
   {label:'14 — пробоксовки (местный износ и выкрашивание)',fields:['h','h1'],run:function(v){
     if(!(v.h>1))return res('none','—','ДР при h>1 мм.');
     var g=[['120','70','25, ЗПП'],['70','40, ЗПП','25, ЗПП'],['40, ЗПП','25, ЗПП','25, ЗПП'],['25, ЗПП','25, ЗПП','25, ЗПП']];
@@ -1526,15 +1561,20 @@ var GL={
     return res('dr',rng([[1.5,2,'140'],[2,3,'120'],[3,4,'100'],[4,6,'70'],[6,1e9,'40, ЗПП']],v.h));}},
   {label:'46 / 47 — смятие и износ у сварного стыка',fields:['h'],run:function(v){
     if(!(v.h>1))return res('none','—','ДР при смятии >1 мм.');
-    return res('dr',rng([[1,2,'120'],[2,3,'70'],[3,4,'40'],[4,1e9,'25']],v.h),v.h>4?'При h>4 мм — первоочередная замена.':'');}},
+    return res('dr',rng([[1,2,'120'],[2,3,'70'],[3,4,'40'],[4,1e9,'25, ЗПП']],v.h),v.h>4?'При h>4 мм — первоочередная замена.':'');}},
   {label:'64 — выработки или коррозия подошвы под скреплениями',fields:['rail','kind','h'],run:function(v){
     if(v.kind==='c'){var low={'Р50':3.1,'Р65':4.1,'Р75':5.1}[v.rail],mid={'Р50':4,'Р65':5,'Р75':6}[v.rail],hi={'Р50':6,'Р65':7,'Р75':8}[v.rail];
       if(!(v.h>=low))return res('none','—','Коррозия кромки '+v.rail+': ДР при глубине >= '+low+' мм.');
       if(v.h>hi)return res('odr','замена без промедления','Коррозия кромки >'+hi+' мм ('+v.rail+').');
       if(v.h>mid)return res('dr','70');return res('dr','100');}
-    if(v.rail==='Р50'){if(!(v.h>6))return res('none','—','Выработка Р50: ДР при h>5 мм.');return res('dr','40 (ЗПП)','Замена в первоочередном порядке.');}
+    if(v.rail==='Р50'){if(!(v.h>5))return res('none','—','Выработка Р50: ДР при h>5 мм.');if(!(v.h>6))return res('dr','—','ДР, замена в плановом порядке.');return res('dr','40, ЗПП','Замена в первоочередном порядке.');}
     if(!(v.h>5))return res('none','—','Выработка '+v.rail+': ДР при h>5 мм.');
-    return res('dr',rng([[5,6,'120'],[6,7,'100'],[7,8,'70, ЗПП'],[8,1e9,'25']],v.h));}}
+    return res('dr',rng([[5,6,'120'],[6,7,'100'],[7,8,'70, ЗПП'],[8,1e9,'25, ЗПП']],v.h));}},
+  {label:'44 — боковой износ головки',fields:['rail','rad','h'],run:function(v){
+    var d=v.rail==='Р50'?3:0,lo=15-d,hi=20-d;
+    if(!(v.h>lo))return res('none','—','Ограничения по таблице 3 начинаются при боковом износе более '+lo+' мм ('+v.rail+').');
+    if(v.h>hi)return res('dr','замена в первоочередном порядке','Боковой износ более '+hi+' мм ('+v.rail+').');
+    return res('dr',v.rad==='gt'?'70':'50','Таблица 3: '+lo+' < hб ≤ '+hi+' мм. Ежемесячные замеры износа.');}}
  ];
  root.innerHTML='<div class="calc-row"><label id="cdef-lb">Дефект</label><div class="dd" id="cdd"></div></div><div class="calc-row" id="cparams"></div><div class="calc-out" id="cout" aria-live="polite"></div>';
  var dsel=makeDD(root.querySelector('#cdd'),DEFS.map(function(d,i){var s=d.label.split(' — ');return {v:i,p:s[0],t:s.length>1?s.slice(1).join(' — '):''};}),0,'Дефект');
@@ -1543,7 +1583,8 @@ var SPECS={
     a:{lab:'Вид',o:[['узкие','Узкие (a<35 мм)'],['широкие','Широкие (a≥35 мм)'],['короткие','Короткие (l≤25 мм)']],d:'широкие'},
     h1:{lab:'Выкрашивание h1',o:[['0','нет'],['le2','≤2 мм'],['gt2','>2 мм']],d:'0'},
     rail:{lab:'Тип рельса',o:RAILS.map(function(r){return [r,r];}),d:'Р65'},
-    kind:{lab:'Вид',o:[['w','Выработка'],['c','Коррозия кромки']],d:'w'}
+    kind:{lab:'Вид',o:[['w','Выработка'],['c','Коррозия кромки']],d:'w'},
+    rad:{lab:'Радиус кривой',o:[['gt','более 350 м'],['le','350 м и менее']],d:'gt'}
   };
   function elc(tag,cls){var e=document.createElement(tag);if(cls)e.className=cls;return e;}
   var els={};
@@ -1574,12 +1615,13 @@ var SPECS={
     else if(f==='h1')v.h1=els.h1._dd.value;
     else if(f==='rail')v.rail=els.rail._dd.value;
     else if(f==='kind')v.kind=els.kind._dd.value;
+    else if(f==='rad')v.rad=els.rad._dd.value;
     else if(f==='trans')v.trans=els.trans.checked;
   });return v;}
   function run(){var d=curDef,r=d.run(vals());
     var cls=r.c==='odr'?'odr':r.c==='dr'?'dr':'none',lab=r.c==='odr'?'ОДР':r.c==='dr'?'ДР':'дефектом не является';
     out.innerHTML='<span class="verdict '+cls+'">'+lab+'</span>'+
-      (r.s&&r.s!=='—'?'<span class="spd">Скорость: <b>'+GESC(r.s)+'</b> км/ч</span>':'')+
+      (r.s&&r.s!=='—'?(window.speedSign&&window.speedSign(r.s,true)?'<span class="spd spd-sign">'+window.speedSign(r.s,true)+'<span class="spd-l">км/ч</span></span>':(/^\d/.test(r.s)?'<span class="spd">Скорость: <b>'+GESC(r.s)+'</b> км/ч</span>':'<span class="spd"><b>'+GESC(r.s)+'</b></span>')):'')+
       (r.n?'<p>'+GESC(r.n)+'</p>':'');}
   function build(){curDef=DEFS[dsel.value];
     while(params.firstChild)params.removeChild(params.firstChild);
@@ -1591,6 +1633,7 @@ var SPECS={
       else if(f==='h1')params.appendChild(ddField('h1',SPECS.h1));
       else if(f==='rail')params.appendChild(ddField('rail',SPECS.rail));
       else if(f==='kind')params.appendChild(ddField('kind',SPECS.kind));
+      else if(f==='rad')params.appendChild(ddField('rad',SPECS.rad));
       else if(f==='trans')params.appendChild(chkField('trans',' есть поперечная трещина'));
     });
     run();}
@@ -1770,17 +1813,14 @@ document.addEventListener('click',function(e){
   if(doc === '2499' || doc === '2143'){
     enter();
     closeMenu();
-    // Показать/скрыть нужный документ: прячем ВСЕ прямые элементы main, кроме блока 2143р,
-    // и возвращаем исходное состояние при переключении обратно на 2499р
-    Array.prototype.forEach.call(document.querySelector('main').children, function(el){
-      if (el.id === 'doc-2143') return;
-      if (el.dataset.h0 === undefined) el.dataset.h0 = el.hidden ? '1' : '0';
-      el.hidden = (doc === '2143') ? true : (el.dataset.h0 === '1');
-    });
+    document.getElementById('doc-2499').hidden = (doc !== '2499');
     document.getElementById('doc-2143').hidden = (doc !== '2143');
+    document.title = doc === '2143' ? 'Дефекты стрелочных переводов — распоряжение 2143р' : 'Дефекты рельсов: коды и группы — распоряжение 2499р';
     // Обновить активный пункт меню
     document.querySelectorAll('.sitem').forEach(function(s){
-      s.classList.toggle('is-active', s.getAttribute('data-doc') === doc);
+      var on = s.getAttribute('data-doc') === doc;
+      s.classList.toggle('is-active', on);
+      var tg = s.querySelector('.sitem-tag'); if (tg) tg.textContent = on ? 'Открыт' : 'Открыть';
     });
   }
 });
@@ -1877,14 +1917,14 @@ document.addEventListener('click',function(e){
   "r": "Гребнеобразный наплыв, образующийся на остряке в зоне боковой строжки из-за недостаточной прочности металла, выкрашивается при взаимных перемещениях остряка и рамного рельса под воздействием колёс подвижного состава при несвоевременном его удалении шлифованием.",
   "v": "Внешний осмотр, контроль линейных параметров измерительными приборами.",
   "u": "Остродефектный остряк заменяют без промедления. Наплыв и зону выкрашивания зашлифовывают.",
-  "e": "В зависимости от группы или класса пути и глубины выкрашивания остряк считается остродефектным (ОД), дефектным (Д) или требующим усиленного наблюдения (УН). ОД — замена без промедления. При невозможности замены остряка по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых остряка не считается остродефектным. Д — после шлифования наплыва и зоны выкрашивания остряк эксплуатируется до плановой замены под усиленным наблюдением. УН — усиленное наблюдение, остряк эксплуатируется без дополнительных работ.",
+  "e": "В зависимости от группы или класса пути и глубины выкрашивания остряк считается остродефектным (ОД), дефектным (Д) или требующим усиленного наблюдения (УН). ОД — замена без промедления. При невозможности замены остряка по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых остряк не считается остродефектным. Д — после шлифования наплыва и зоны выкрашивания остряк эксплуатируется до плановой замены под усиленным наблюдением. УН — усиленное наблюдение, остряк эксплуатируется без дополнительных работ.",
   "k": [
    "ОД",
    "Д",
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина выкрашивания, мм",
     "Группа В",
@@ -1946,7 +1986,55 @@ document.addEventListener('click',function(e){
      "ОД",
      "Д"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -1959,15 +2047,15 @@ document.addEventListener('click',function(e){
   "r": "При интенсивном боковом воздействии тонкая часть головки элемента вблизи острия подвергается усиленному износу и затем выкрашиванию. Явление наблюдается на криволинейных остряках стрелочных переводов с интенсивным движением на боковой путь и на прямолинейных остряках переводов, эксплуатирующихся в кривых. Выкрашиванию способствует неплотное прилегание острия остряка к рамному рельсу и подвижного сердечника к усовику.",
   "v": "Внешний осмотр, контроль линейных параметров измерительными приборами.",
   "u": "Остродефектные элементы заменяют без промедления. Дефектные элементы зашлифовывают с проверкой шаблоном КОР.",
-  "e": "В зависимости от группы или класса пути и длины выкрашивания элемент считается остродефектным (ОД) или дефектным (Д). ОД — замена без промедления. При невозможности замены элемента по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых элемента не считается остродефектным. Д — после шлифования с проверкой шаблоном КОР элемент эксплуатируется до плановой замены под наблюдением; за развитием дефекта наблюдают при очередных проверках рельсов.",
+  "e": "В зависимости от группы или класса пути и длины выкрашивания элемент считается остродефектным (ОД) или дефектным (Д). ОД — замена без промедления. При невозможности замены элемента по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых элемент не считается остродефектным. Д — после шлифования с проверкой шаблоном КОР элемент эксплуатируется до плановой замены под наблюдением; за развитием дефекта наблюдают при очередных проверках рельсов.",
   "k": [
    "ОД",
    "Д"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
-    "Длина выкрашивания при глубине более 3 мм, мм",
+    "Глубина выкрашивания более 3 мм на длине, мм",
     "Группа В",
     "Группа С",
     "Класс 1",
@@ -1990,7 +2078,7 @@ document.addEventListener('click',function(e){
     [
      "От 101 до 200",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "Д",
@@ -2004,7 +2092,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "Д",
+     "ОД",
      "Д"
     ],
     [
@@ -2015,7 +2103,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД"
+     "Д"
     ],
     [
      "> 400",
@@ -2027,7 +2115,55 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     true,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2120,14 +2256,14 @@ document.addEventListener('click',function(e){
   "r": "Вследствие неоднородности механических свойств металла в месте сварки образуется местное смятие головки (седловина). Интенсивному развитию седловин в эксплуатации способствует начальная неровность в сварном стыке, образовавшаяся при сварке рельсов с концевой искривлённостью.",
   "v": "Внешний осмотр, контроль линейных параметров измерительными приборами.",
   "u": "Остродефектные элементы заменяют без промедления; дефектные — в плановом порядке.",
-  "e": "В зависимости от группы или класса пути и глубины смятия элемент считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены элемента по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых элемента не считается остродефектным. Д — эксплуатация до плановой замены под усиленным наблюдением. УН — усиленное наблюдение, элемент эксплуатируется без дополнительных работ.",
+  "e": "В зависимости от группы или класса пути и глубины смятия элемент считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены элемента по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых элемент не считается остродефектным. Д — эксплуатация до плановой замены под усиленным наблюдением. УН — усиленное наблюдение, элемент эксплуатируется без дополнительных работ.",
   "k": [
    "ОД",
    "Д",
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина смятия, мм",
     "Группа В",
@@ -2187,7 +2323,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД"
+     "Д"
     ],
     [
      "> 5,0",
@@ -2197,9 +2333,66 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД"
+     "Д"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2229,14 +2422,14 @@ document.addEventListener('click',function(e){
   "r": "Под воздействием сил, передаваемых от колёс подвижного состава, подошва остряка или сердечника перемещается по подушкам; в результате трения возникает местный износ. Этому способствует неприлегание подошвы остряков и сердечников к подушкам, а также попадание на их поверхности засорителей.",
   "v": "Внешний осмотр, контроль линейных параметров измерительными приборами.",
   "u": "Остродефектные элементы заменяют без промедления; дефектные — в плановом порядке.",
-  "e": "В зависимости от группы или класса пути и величины износа подошвы элемент считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены элемента по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых элемента не считается остродефектным. Д — эксплуатация до плановой замены под усиленным наблюдением. УН — усиленное наблюдение без дополнительных работ.",
+  "e": "В зависимости от группы или класса пути и величины износа подошвы элемент считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены элемента по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых элемент не считается остродефектным. Д — эксплуатация до плановой замены под усиленным наблюдением. УН — усиленное наблюдение без дополнительных работ.",
   "k": [
    "ОД",
    "Д",
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Износ подошвы, мм",
     "Группа В",
@@ -2298,7 +2491,55 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2358,14 +2599,14 @@ document.addEventListener('click',function(e){
   "r": "Из-за недостаточной контактно-усталостной прочности металла на боковой выкружке, к которой прилегает остряк, образуется гребнеобразный наплыв. При взаимных перемещениях остряка и рамного рельса под воздействием колёс и несвоевременном шлифовании наплыв отрывается с выкрашиванием металла головки рамного рельса по выкружке; выкрашивание может распространяться вглубь головки.",
   "v": "Внешний осмотр, контроль линейных параметров измерительными приборами.",
   "u": "Наплыв и зону выкрашивания зашлифовывают; остродефектные рельсы заменяют без промедления.",
-  "e": "В зависимости от группы или класса пути и глубины выкрашивания рамный рельс (усовик) считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены рельса по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых рельса не считается остродефектным. Д — после шлифования элемент эксплуатируется до плановой замены под усиленным наблюдением. УН — усиленное наблюдение без дополнительных работ.",
+  "e": "В зависимости от группы или класса пути и глубины выкрашивания рамный рельс (усовик) считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены рельса по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых рельс не считается остродефектным. Д — после шлифования элемент эксплуатируется до плановой замены под усиленным наблюдением. УН — усиленное наблюдение без дополнительных работ.",
   "k": [
    "ОД",
    "Д",
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина выкрашивания, мм",
     "Группа В",
@@ -2437,7 +2678,64 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2486,7 +2784,7 @@ document.addEventListener('click',function(e){
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина выкрашивания при длине более 30 мм, мм",
     "Группа В",
@@ -2502,7 +2800,7 @@ document.addEventListener('click',function(e){
      "От 2,0 до 3,0",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "Д",
@@ -2525,7 +2823,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д"
     ],
     [
@@ -2548,7 +2846,55 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     true,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2567,7 +2913,7 @@ document.addEventListener('click',function(e){
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина выкрашивания, мм",
     "Группа В",
@@ -2594,7 +2940,7 @@ document.addEventListener('click',function(e){
      "Д",
      "Д",
      "Д",
-     "УН",
+     "Д",
      "УН",
      "УН",
      "УН"
@@ -2619,7 +2965,46 @@ document.addEventListener('click',function(e){
      "Д",
      "УН"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     true,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     false
+    ],
+    [
+     true,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2639,7 +3024,7 @@ document.addEventListener('click',function(e){
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина выкрашивания при длине более 50 мм, мм",
     "Группа В",
@@ -2655,10 +3040,10 @@ document.addEventListener('click',function(e){
      "От 1,0 до 2,0",
      "ОД",
      "ОД",
-     "ОД",
      "Д",
      "Д",
      "Д",
+     "УН",
      "УН"
     ],
     [
@@ -2666,7 +3051,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "УН"
@@ -2677,7 +3062,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "УН"
     ],
@@ -2688,10 +3073,50 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "УН"
     ]
-   ]
+   ],
+   "note": "Строка «от 2,1 до 3,0» в распоряжении отсутствует — таблица приведена как в документе.",
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     true
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2711,9 +3136,9 @@ document.addEventListener('click',function(e){
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
-    "Длина выкрашивания при глубине более 3 мм, мм",
+    "Глубина выкрашивания более 3 мм на длине, мм",
     "Группа В",
     "Группа С",
     "Класс 1",
@@ -2728,7 +3153,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "УН"
@@ -2738,7 +3163,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "УН"
@@ -2749,7 +3174,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "УН"
     ],
@@ -2783,7 +3208,64 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     true
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -2935,7 +3417,7 @@ document.addEventListener('click',function(e){
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина седловины, мм",
     "Группа В",
@@ -2973,7 +3455,7 @@ document.addEventListener('click',function(e){
      "Д",
      "Д",
      "Д",
-     "Д",
+     "УН",
      "УН",
      "УН"
     ],
@@ -2987,7 +3469,46 @@ document.addEventListener('click',function(e){
      "Д",
      "УН"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -3043,14 +3564,14 @@ document.addEventListener('click',function(e){
   "r": "Дефекты появляются из-за поперечных перемещений колёс в зоне крестовинного узла, а также «наведённых» ударов по ходовому рельсу, вызванных резким вертикальным перемещением колёс, проходящих через неровность на крестовине.",
   "v": "Внешний осмотр, контроль линейных параметров измерительными приборами.",
   "u": "Остродефектные рельсы заменяют без промедления; дефектные — в плановом порядке.",
-  "e": "В зависимости от группы или класса пути и глубины седловины (на длине 1 м) рельс считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены рельса по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых рельса не считается остродефектным. Д — эксплуатация до плановой замены под усиленным наблюдением. УН — усиленное наблюдение, рельс эксплуатируется.",
+  "e": "В зависимости от группы или класса пути и глубины седловины (на длине 1 м) рельс считается ОД, Д или УН. ОД — замена без промедления. При невозможности замены рельса по стрелочному переводу ограничивают скорости движения поездов до скоростей, соответствующих группе или классу пути, при которых рельс не считается остродефектным. Д — эксплуатация до плановой замены под усиленным наблюдением. УН — усиленное наблюдение, рельс эксплуатируется.",
   "k": [
    "ОД",
    "Д",
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина седловины на длине 1 м, мм",
     "Группа В",
@@ -3067,7 +3588,7 @@ document.addEventListener('click',function(e){
      "Д",
      "Д",
      "Д",
-     "УН",
+     "Д",
      "УН",
      "УН",
      "УН"
@@ -3075,7 +3596,7 @@ document.addEventListener('click',function(e){
     [
      "От 1,1 до 1,4",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "УН",
@@ -3086,7 +3607,7 @@ document.addEventListener('click',function(e){
      "От 1,5 до 2,0",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "УН",
@@ -3097,7 +3618,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "УН"
@@ -3108,7 +3629,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "УН"
     ],
@@ -3119,7 +3640,7 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД",
+     "Д",
      "Д"
     ],
     [
@@ -3142,7 +3663,82 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     true,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -3215,7 +3811,7 @@ document.addEventListener('click',function(e){
    "УН"
   ],
   "table": {
-   "cap": "Допустимые параметры. Столбцы — категория пути: группа (В или С) либо класс (1–5)",
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
    "head": [
     "Глубина выкрашивания, мм",
     "Группа В",
@@ -3240,7 +3836,7 @@ document.addEventListener('click',function(e){
     [
      "От 1,1 до 3,0",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "Д",
@@ -3250,7 +3846,7 @@ document.addEventListener('click',function(e){
     [
      "От 3,1 до 5,0",
      "ОД",
-     "ОД",
+     "Д",
      "Д",
      "Д",
      "Д",
@@ -3275,9 +3871,57 @@ document.addEventListener('click',function(e){
      "ОД",
      "ОД",
      "ОД",
-     "ОД"
+     "Д"
     ]
-   ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     true,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     true,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
   }
  },
  {
@@ -3345,7 +3989,120 @@ document.addEventListener('click',function(e){
    "Д",
    "УН"
   ],
-  "t2": true
+  "t2": true,
+  "table": {
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
+   "head": [
+    "Количество изломавшихся подкладок с подушками подряд, шт",
+    "Группа В",
+    "Группа С",
+    "Класс 1",
+    "Класс 2",
+    "Класс 3",
+    "Класс 4",
+    "Класс 5"
+   ],
+   "rows": [
+    [
+     "1",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН"
+    ],
+    [
+     "2",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "УН",
+     "УН"
+    ],
+    [
+     "3",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д",
+     "Д",
+     "УН"
+    ],
+    [
+     "4",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д"
+    ],
+    [
+     "5",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД"
+    ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     true,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
+  }
  },
  {
   "codes": [
@@ -3363,7 +4120,120 @@ document.addEventListener('click',function(e){
    "Д",
    "УН"
   ],
-  "t2": true
+  "t2": true,
+  "table": {
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
+   "head": [
+    "Количество изломавшихся подкладок с подушками подряд, шт",
+    "Группа В",
+    "Группа С",
+    "Класс 1",
+    "Класс 2",
+    "Класс 3",
+    "Класс 4",
+    "Класс 5"
+   ],
+   "rows": [
+    [
+     "1",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН"
+    ],
+    [
+     "2",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "УН",
+     "УН"
+    ],
+    [
+     "3",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д",
+     "Д",
+     "УН"
+    ],
+    [
+     "4",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д"
+    ],
+    [
+     "5",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД"
+    ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     true,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
+  }
  },
  {
   "codes": [
@@ -3381,7 +4251,120 @@ document.addEventListener('click',function(e){
    "Д",
    "УН"
   ],
-  "t2": true
+  "t2": true,
+  "table": {
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
+   "head": [
+    "Количество изломавшихся подкладок с подушками подряд, шт",
+    "Группа В",
+    "Группа С",
+    "Класс 1",
+    "Класс 2",
+    "Класс 3",
+    "Класс 4",
+    "Класс 5"
+   ],
+   "rows": [
+    [
+     "1",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН"
+    ],
+    [
+     "2",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "УН",
+     "УН"
+    ],
+    [
+     "3",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д",
+     "Д",
+     "УН"
+    ],
+    [
+     "4",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д"
+    ],
+    [
+     "5",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД"
+    ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
+  }
  },
  {
   "codes": [
@@ -3399,7 +4382,120 @@ document.addEventListener('click',function(e){
    "Д",
    "УН"
   ],
-  "t2": true
+  "t2": true,
+  "table": {
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
+   "head": [
+    "Количество изломавшихся подкладок подряд, шт",
+    "Группа В",
+    "Группа С",
+    "Класс 1",
+    "Класс 2",
+    "Класс 3",
+    "Класс 4",
+    "Класс 5"
+   ],
+   "rows": [
+    [
+     "1",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН"
+    ],
+    [
+     "2",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "УН",
+     "УН"
+    ],
+    [
+     "3",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д",
+     "Д",
+     "УН"
+    ],
+    [
+     "4",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д"
+    ],
+    [
+     "5",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД"
+    ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
+  }
  },
  {
   "codes": [
@@ -3417,7 +4513,120 @@ document.addEventListener('click',function(e){
    "Д",
    "УН"
   ],
-  "t2": true
+  "t2": true,
+  "table": {
+   "cap": "Столбцы — группа пути (В, С) и класс пути (1–5)",
+   "head": [
+    "Количество изломавшихся подкладок с упорками подряд, шт",
+    "Группа В",
+    "Группа С",
+    "Класс 1",
+    "Класс 2",
+    "Класс 3",
+    "Класс 4",
+    "Класс 5"
+   ],
+   "rows": [
+    [
+     "1",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН",
+     "УН"
+    ],
+    [
+     "2",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "Д",
+     "УН",
+     "УН"
+    ],
+    [
+     "3",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д",
+     "Д",
+     "УН"
+    ],
+    [
+     "4",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "Д",
+     "Д"
+    ],
+    [
+     "5",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД",
+     "ОД"
+    ]
+   ],
+   "marks": [
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     true,
+     false,
+     false,
+     true
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     true,
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    [
+     false,
+     false,
+     false,
+     false,
+     false,
+     false,
+     false
+    ]
+   ],
+   "zones": true
+  }
  },
  {
   "codes": [
@@ -3537,8 +4746,8 @@ document.addEventListener('click',function(e){
   function kindsText2143(c){
     var s = kindsOf2143(c);
     var out = [];
-    if (s['Д']) out.push('Д');
     if (s['ОД']) out.push('ОД');
+    if (s['Д']) out.push('Д');
     if (s['УН']) out.push('УН');
     return out;
   }
@@ -3556,16 +4765,19 @@ document.addEventListener('click',function(e){
     var g = +gSel2143.value;
     var t = +tSel2143.value;
     var p = +pSel2143.value;
-    var code = 'Д' + el + (idx ? '.' + idx : '') + '.' + g + t + '.' + p;
-
-    document.getElementById('big2143').innerHTML =
-      '<span class="d d1">Д</span>' +
+    /* У подкладок и элементов переводных устройств код буквенный: Д + элемент + индекс (ДППзт, ДТРиз);
+       у остальных элементов: Д + элемент + .XY.Z (ДО.11.2) */
+    var code = idx ? ('Д' + el + idx) : ('Д' + el + '.' + g + t + '.' + p);
+    document.getElementById('big2143').innerHTML = idx ?
+      ('<span class="d d1">Д</span><span class="d d2">' + el + '</span><span class="d d3">' + idx + '</span>') :
+      ('<span class="d d1">Д</span>' +
       '<span class="d d2">' + el + '</span>' +
-      (idx ? '<span class="p">.' + idx + '</span>' : '') +
       '<span class="p">.</span>' +
       '<span class="d d3">' + g + t + '</span>' +
       '<span class="p">.</span>' +
-      '<span class="d d3">' + p + '</span>';
+      '<span class="d d3">' + p + '</span>');
+    ['mg2143','mt2143','mp2143'].forEach(function(id){ document.getElementById(id).parentNode.hidden = !!idx; });
+    ['g2143','t2143','p2143'].forEach(function(n){ var dd = document.querySelector('.dd[data-dd="' + n + '"]'); if (dd) dd.parentNode.classList.toggle('is-off', !!idx); });
 
     var elInfo = ELEMENTS.find(function(e){return e.v === el;});
     document.getElementById('mel').textContent = 'Элемент: ' + el;
@@ -3573,7 +4785,7 @@ document.addEventListener('click',function(e){
 
     var idxInfo = INDICES.find(function(i){return i.v === idx;});
     document.getElementById('midx').textContent = idx ? 'Индекс: ' + idx : 'Без индекса';
-    document.getElementById('midxt').textContent = idxInfo ? idxInfo.t : '';
+    document.getElementById('midxt').textContent = idx ? idxInfo.t + ' — код записывается без цифр' : 'дальше идёт цифровой код XY.Z';
 
     var gInfo = GROUPS2143[g-1];
     document.getElementById('mg2143').textContent = 'Группа ' + g + ' (' + gInfo[2] + ')';
@@ -3589,11 +4801,26 @@ document.addEventListener('click',function(e){
     var found = MAP2143[code];
     if (found) {
       st.className = 'status ok';
-      st.innerHTML = 'Код ' + code + ' есть в справочнике: ' + found.t;
+      st.innerHTML = 'Код <b>' + code + '</b> есть в классификаторе: ' + found.t + ' <a href="#" data-goto="' + code + '">Открыть карточку</a>';
     } else {
       st.className = 'status no';
       st.textContent = 'Кода ' + code + ' в справочнике нет: такая комбинация не описана.';
     }
+  }
+
+  document.getElementById('st2143').addEventListener('click', function(e){
+    var a = e.target.closest('[data-goto]'); if (!a) return;
+    e.preventDefault(); openCard2143(a.getAttribute('data-goto'));
+  });
+  function openCard2143(code){
+    var sub = groupsContainer.querySelector('details.sub[data-code~="' + code + '"]');
+    if (!sub) return;
+    var grp = sub.closest('details.group');
+    if (grp && !grp.classList.contains('is-open')) grp.querySelector(':scope > summary').click();
+    setTimeout(function(){
+      if (!sub.classList.contains('is-open')) sub.querySelector(':scope > summary').click();
+      setTimeout(function(){ sub.scrollIntoView({behavior:'smooth', block:'start'}); }, 250);
+    }, 120);
   }
 
   elSel.onchange = update2143;
@@ -3601,7 +4828,6 @@ document.addEventListener('click',function(e){
   gSel2143.onchange = update2143;
   tSel2143.onchange = update2143;
   pSel2143.onchange = update2143;
-  update2143();
 
   /* ---------- Карточки в группах ---------- */
   var groupsContainer = document.getElementById('groups2143');
@@ -3621,11 +4847,47 @@ document.addEventListener('click',function(e){
     return v;
   }
 
+  var ZCLS = { 'ОД':'z-od', 'Д':'z-d', 'УН':'z-un' };
+  function tableHtml2143(tb){
+    var h = '';
+    if (tb.head.length === 8) {
+      h += '<p class="cap">' + tb.cap + '</p><div class="wrap"><table class="zt">';
+      h += '<thead><tr><th rowspan="2" class="zt-h0">' + tb.head[0] + '</th><th colspan="2">Группа пути</th><th colspan="5">Класс пути</th></tr>';
+      h += '<tr>' + tb.head.slice(1).map(function(x){ return '<th>' + x.replace(/^(Группа|Класс)\s/, '') + '</th>'; }).join('') + '</tr></thead><tbody>';
+      tb.rows.forEach(function(row, ri){
+        var lab = String(row[0]).replace(/^От\s+(.+?)\s+до\s+(.+)$/i, '$1–$2').replace(/^(\d+)-(\d+)$/, '$1–$2');
+        h += '<tr><th scope="row" title="' + row[0] + '">' + lab + '</th>' + row.slice(1).map(function(v, ci){
+          var mk = tb.marks && tb.marks[ri] && tb.marks[ri][ci];
+          var nb = function(r2, c2){ var rr = tb.rows[r2]; return rr ? rr[1 + c2] : null; };
+          var edge = '';
+          if (tb.zones) {
+            if (ci < 6 && nb(ri, ci + 1) !== v) edge += ' e-r';
+            if (nb(ri + 1, ci) && nb(ri + 1, ci) !== v) edge += ' e-b';
+          }
+          return ZCLS[v] ? '<td class="' + ZCLS[v] + (mk ? ' z-mark' : '') + edge + '"' + (mk ? ' title="Отметка зоны в документе"' : '') + '>' + v + '</td>' : '<td class="z-no" aria-label="пусто"></td>';
+        }).join('') + '</tr>';
+      });
+      h += '</tbody></table></div>';
+    } else {
+      h += '<p class="cap">' + (tb.cap || 'Параметры') + '</p><div class="wrap"><table class="plain">';
+      h += '<tr>' + tb.head.map(function(x){ return '<th>' + x + '</th>'; }).join('') + '</tr>';
+      tb.rows.forEach(function(row){
+        h += '<tr>' + row.map(function(cell, i){ return i ? '<td>' + cell2143(cell) + '</td>' : '<th scope="row">' + cell + '</th>'; }).join('') + '</tr>';
+      });
+      h += '</table></div>';
+    }
+    if (tb.note) h += '<p class="tnote">' + tb.note + '</p>';
+    if (tb.zones) h += '<p class="tnote">Зоны перенесены из распоряжения по разделительным линиям таблицы. Плитка с рамкой — клетка, где в документе стоит подпись зоны.</p>';
+    if (tb.src) h += '<p class="tnote">Таблица перенесена из распоряжения клетка в клетку. В документе в каждой зоне ОД, Д, УН стоит одна отметка, остальные клетки зоны не подписаны — по тексту распоряжения на tdesant.ru нельзя точно сказать, где проходят границы зон.</p>';
+    if (tb.approx) h += '<p class="tnote approx">В распоряжении зоны ОД / Д / УН этой таблицы выделены цветом без подписи в каждой ячейке. Строки и состав зон взяты из документа, границы зон по столбцам восстановлены — перед ответом сверьте с цветной таблицей на tdesant.ru.</p>';
+    return h;
+  }
+
   function cardHtml2143(c){
     var kt = kindsText2143(c);
     var kindClass = kt.length > 1 ? 'k-mix' : (kt[0] === 'ОД' ? 'k-odr' : (kt[0] === 'Д' ? 'k-dr' : ''));
     var kindLabel = kt.join(' · ');
-    var h = '<details class="sub"><summary><code>' + c.codes.join('</code> / <code>') + '</code>' + (kindLabel ? ' <span class="kb ' + kindClass + '">' + kindLabel + '</span>' : '') + ' ' + c.t + '</summary><div class="in">';
+    var h = '<details class="sub" data-code="' + c.codes.join(' ') + '"><summary><code>' + c.codes.join('</code> / <code>') + '</code>' + (kindLabel ? ' <span class="kb ' + kindClass + '">' + kindLabel + '</span>' : '') + ' ' + c.t + '</summary><div class="in">';
     if (IMG2143[c.codes[0]]) h += '<figure class="fig2143"><img src="' + IMG2143[c.codes[0]] + '" alt="Схема дефекта ' + c.codes[0] + '"><figcaption>Схематическое изображение дефекта</figcaption></figure>';
     var sh = SHORT2143[c.codes[0]];
     if (sh) {
@@ -3638,14 +4900,7 @@ document.addEventListener('click',function(e){
     h += '<tr><th>Способы устранения</th><td>' + c.u + '</td></tr>';
     h += '<tr><th>Указания по эксплуатации</th><td>' + c.e + '</td></tr>';
     h += '</table></div>';
-    if (c.table) {
-      h += '<p class="cap">' + (c.table.cap || 'Допустимые параметры') + '</p><div class="wrap"><table>';
-      h += '<tr>' + c.table.head.map(function(x){ return '<th>' + x + '</th>'; }).join('') + '</tr>';
-      c.table.rows.forEach(function(row){
-        h += '<tr>' + row.map(function(cell){ return '<td>' + cell2143(cell) + '</td>'; }).join('') + '</tr>';
-      });
-      h += '</table></div>';
-    }
+    if (c.table) h += tableHtml2143(c.table);
     return h + '</div></details>';
   }
 
@@ -3663,6 +4918,7 @@ document.addEventListener('click',function(e){
     html += '</div></details>';
   }
   groupsContainer.innerHTML = html;
+  update2143();
 
 
   /* ---------- Поиск и фильтр ---------- */
@@ -3687,6 +4943,7 @@ document.addEventListener('click',function(e){
         if (ok) n++;
       });
       g.style.display = n ? '' : 'none';
+      if ((q || kind) && n && !g.classList.contains('is-open')) { g.setAttribute('open', ''); g.classList.add('is-open'); }
       total += n;
     });
     document.getElementById('cnt2143').textContent = (q || kindFilter !== 'all') ? ('Найдено: ' + total) : '';
@@ -3748,6 +5005,8 @@ document.addEventListener('click',function(e){
     if (m) return { min:+m[1].replace(',', '.'), max:Infinity, open:true };
     m = s.match(/^([\d,.]+)\s*-\s*([\d,.]+)$/);
     if (m) return { min:+m[1].replace(',', '.'), max:+m[2].replace(',', '.') };
+    m = s.match(/^(\d+)$/);
+    if (m) return { min:+m[1], max:+m[1], count:true };
     return null;
   }
   function isStepTable2143(c){
@@ -3769,13 +5028,16 @@ document.addEventListener('click',function(e){
     }
     var first = parseRange2143(tb.rows[0][0]);
     if (first && val < first.min) return { below:first.min };
+    /* в таблицах подкладок последняя строка (5 шт) действует и для большего количества */
+    var last = parseRange2143(tb.rows[tb.rows.length - 1][0]);
+    if (last && last.count && val > last.max) return { row:tb.rows[tb.rows.length - 1] };
     return null;
   }
 
   var calcRoot = document.getElementById('calc2143');
   if (calcRoot) {
     calcRoot.innerHTML = '<div class="calc-row"><label>Дефект</label><div class="dd" id="cdd2143"></div></div><div class="calc-row" id="cparams2143"></div><div class="calc-out" id="cout2143" aria-live="polite"></div>';
-    var calcList2143 = CAT2143.filter(function(c){ return !c.t2; });
+    var calcList2143 = CAT2143.slice();
     var dsel2143 = makeDD(calcRoot.querySelector('#cdd2143'), calcList2143.map(function(c,i){return {v:i, p:false, t:c.codes.join(' / ') + ' — ' + c.t};}), 0, 'Дефект');
     var params2143 = calcRoot.querySelector('#cparams2143');
     var out2143 = calcRoot.querySelector('#cout2143');
@@ -3824,9 +5086,19 @@ document.addEventListener('click',function(e){
           var res = pickRow2143(tb, val);
           if (res && res.row) {
             var idx = CATS2143.map(function(o){ return o.v; }).indexOf(catSel2143.value);
-            status = res.row[1 + idx];
-            note = tb.head[0] + ': ' + val.toString().replace('.', ',') + ' (строка «' + res.row[0] + '»), ' + catSel2143.value + ' → ' + status + '.';
-            action = ACTION2143[status] || '';
+            status = res.row[1 + idx] || '';
+            var rowMarks = [];
+            res.row.slice(1).forEach(function(v, k){ if (v) rowMarks.push(v + ' (' + CATS2143[k].v.toLowerCase() + ')'); });
+            if (status) {
+              note = 'Строка «' + res.row[0] + '», ' + catSel2143.value.toLowerCase() + ': по таблице распоряжения — ' + status + '.';
+              action = ACTION2143[status] || '';
+            } else {
+              status = '?';
+              note = 'Строка «' + res.row[0] + '», ' + catSel2143.value.toLowerCase() + ': в этой клетке распоряжение отметки не ставит. ' +
+                (rowMarks.length ? 'Отметки в этой строке: ' + rowMarks.join(', ') + '.' : 'В этой строке отметок нет.') +
+                ' Оценка определяется зоной таблицы, в которую входит клетка, — посмотрите таблицу в карточке дефекта.';
+            }
+            if (tb.approx) action += ' Границы зон этой таблицы восстановлены — сверьте с документом.';
           } else if (res && res.below !== undefined) {
             note = 'Значение меньше нижней границы таблицы (' + String(res.below).replace('.', ',') + '): по таблице распоряжения такой размер не классифицируется.';
           } else {
@@ -3840,7 +5112,8 @@ document.addEventListener('click',function(e){
         status = kt.length ? kt.join(' · ') : '—';
         note = curDef2143.e;
       }
-      var cls = status.indexOf('ОД') !== -1 ? 'odr' : (status.indexOf('Д') !== -1 || status === 'УН') ? 'dr' : 'none';
+      if (status === '?') status = 'зона не подписана';
+      var cls = status === 'ОД' ? 'odr' : status === 'Д' ? 'dr' : status === 'УН' ? 'un' : status.indexOf('ОД') !== -1 ? 'odr' : status.indexOf('Д') !== -1 ? 'dr' : 'none';
       out2143.innerHTML = '<span class="verdict ' + cls + '">' + status + '</span><p>' + note + '</p>' + (action ? '<p>' + action + '</p>' : '');
     }
 
@@ -3849,10 +5122,6 @@ document.addEventListener('click',function(e){
   }
 
 
-  /* ---------- Экзамен (заглушка) ---------- */
-  document.getElementById('examb2143').addEventListener('click', function(){
-    alert('Экзамен для документа 2143р будет добавлен позже.');
-  });
 
 })();
 </script>
