@@ -482,23 +482,132 @@ a{color:var(--accent)}
 :root[data-theme="dark"] .spt td.sp,:root[data-theme="amoled"] .spt td.sp{background:hsl(var(--h) 55% 45% / .22)}
 :root[data-theme="amoled"] .sgn{border-color:hsl(var(--h,0) 68% 45%)}
 .spd-sign .sgn{border-radius:6px}
+
+/* ================= Оформление и мобильный вид ================= */
+/* закрытая боковая панель не отбрасывает тень на край экрана */
+.side-panel{visibility:hidden;box-shadow:none;transition:transform .36s cubic-bezier(.22,1,.36,1),box-shadow .36s ease,visibility 0s linear .36s}
+.side-panel.is-open{visibility:visible;box-shadow:-14px 0 34px rgba(0,0,0,.28);transition-delay:0s}
+.side-grip{display:none}
+
+/* стартовая страница */
+.landing{background:radial-gradient(110% 60% at 50% 0%,color-mix(in srgb,var(--accent) 12%,var(--bg)) 0%,var(--bg) 62%)}
+.landing-rails{display:block;width:min(260px,70vw);height:auto;margin:0 auto 6px;color:var(--accent)}
+.lr-sleepers{opacity:.55}
+.lr-signal rect{fill:var(--ink);opacity:.85}
+.lr-signal .lr-g{fill:#2fbf71;filter:drop-shadow(0 0 4px #2fbf71);animation:lrBlink 2.4s ease-in-out infinite}
+.lr-signal .lr-r{fill:#4a2a2a}
+@keyframes lrBlink{0%,100%{opacity:1}50%{opacity:.55}}
+.landing-now{display:inline-flex;align-items:center;gap:8px;max-width:100%;margin:0 auto 22px;padding:7px 14px;border-radius:999px;background:#0d1317;color:#c8e3ef;font:600 .74rem/1.3 var(--mono);letter-spacing:.06em;border:1px solid #27323a;box-shadow:inset 0 1px rgba(255,255,255,.05)}
+.landing-now .ln-txt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.landing-now .ln-dot{width:8px;height:8px;border-radius:50%;flex:none;background:#8ea6b4}
+.landing-now.is-class{color:#ff7b75}.landing-now.is-class .ln-dot{background:#e53935;box-shadow:0 0 8px #e53935}
+.landing-now.is-break{color:#ffd166}.landing-now.is-break .ln-dot{background:#ffc247;box-shadow:0 0 8px #ffc247}
+.landing-sub{margin-bottom:14px}
+.lcard{--lc:var(--c1);overflow:hidden;padding-left:20px;border-width:1.5px}
+.lcard.lc-2143{--lc:var(--c2)}
+.lcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--lc)}
+.lcard-ico{position:absolute;right:14px;top:14px;width:44px;height:44px;display:grid;place-items:center;border-radius:12px;color:var(--lc);background:color-mix(in srgb,var(--lc) 12%,transparent)}
+.lcard-ico svg{width:26px;height:26px}
+.lcard-code{color:var(--lc);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lcard-title{padding-right:52px}
+.lcard-cnt{font:600 .66rem var(--mono);letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.lcard-cnt:empty{display:none}
+.lcard-open{color:var(--lc);display:inline-flex;align-items:center;gap:4px;transition:gap .2s ease}
+.lcard:hover .lcard-open{gap:9px}
+.lcard:hover:not(:disabled){border-color:var(--lc)}
+.lcard.is-last::after{content:"последний открытый";position:absolute;right:14px;bottom:14px;font:600 .6rem var(--mono);letter-spacing:.05em;text-transform:uppercase;color:var(--lc);border:1px solid color-mix(in srgb,var(--lc) 50%,transparent);border-radius:999px;padding:2px 7px}
+
+/* шапка документа: счётчики */
+.doc-stats{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.doc-stats span{font:600 .72rem var(--mono);letter-spacing:.03em;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
+.doc-stats b{color:var(--accent);font-weight:700}
+
+/* нижняя панель — только на телефонах */
+.tabbar{display:none}
+@media (max-width:760px){
+  .menu-btn{display:none}
+  .schedule-board .board-head{padding-right:9px}
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
+  .tabbar{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:380;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));
+    background:color-mix(in srgb,var(--surface) 86%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);
+    border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(0,0,0,.08)}
+  body.landing-open .tabbar{display:none}
+  .tb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;padding:4px 2px;border:0;border-radius:12px;background:transparent;color:var(--muted);font:600 .66rem var(--sans);letter-spacing:.01em;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .2s,background .2s,transform .15s}
+  .tb svg{width:23px;height:23px}
+  .tb:active{transform:scale(.93)}
+  .tb.is-on{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+  .tb:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .tb-code{display:grid;place-items:center;height:23px;padding:0 6px;border-radius:7px;font:700 .7rem var(--mono);color:var(--bg);background:var(--accent)}
+
+  /* меню — нижняя шторка */
+  .side-panel{top:auto;bottom:0;left:0;right:0;width:100%;height:auto;max-height:84vh;overflow-y:auto;border-left:0;border-top:1px solid var(--line);border-radius:20px 20px 0 0;transform:translateY(104%);padding-top:10px}
+  .side-panel.is-open{box-shadow:0 -14px 40px rgba(0,0,0,.3)}
+  .side-grip{display:block;width:42px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 10px;flex:none}
+  .snav{flex-direction:row;gap:8px}
+  .snav .sitem{flex:1}
+  .sitem{padding:14px}
+  .sitem:hover:not(:disabled){transform:none}
+
+  /* крупнее под палец */
+  summary{padding:14px 44px 14px 14px;min-height:50px}
+  details.sub summary{padding-top:13px;padding-bottom:13px}
+  .chip,.btn{padding:9px 14px;min-height:40px}
+  .toolbar{gap:7px;padding:8px 0}
+  .toolbar input[type=search]{flex-basis:100%;padding:11px 14px;font-size:16px}
+  h1{font-size:1.65rem;line-height:1.2}
+  .lead{font-size:1rem}
+  .landing{padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+  .lcard{padding:16px 16px 16px 20px}
+  .lcard.is-last::after{position:static;align-self:flex-start;margin-top:6px}
+}
+@media (max-width:760px) and (prefers-reduced-motion:no-preference){
+  .tabbar{animation:tbIn .45s cubic-bezier(.22,1,.36,1) backwards}
+}
+@keyframes tbIn{from{transform:translateY(100%)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.lr-signal .lr-g{animation:none}.lcard-open{transition:none}}
+@media print{.tabbar,.landing-now{display:none!important}}
+
+.doc-stats button{font:600 .74rem var(--mono);letter-spacing:.02em;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;transition:border-color .2s,color .2s,transform .15s}
+.doc-stats button:hover{border-color:var(--accent);color:var(--accent)}
+.doc-stats button:active{transform:scale(.96)}
+.doc-stats b{color:var(--accent)}
+details.sub > summary code{margin-right:6px}
+@media (max-width:760px){
+  details.sub > summary .st{display:block;margin-top:6px;line-height:1.4}
+  details.sub > summary .kb{vertical-align:2px}
+  .side-sec .sitem-theme{width:100%}
+}
+.landing-kicker{max-width:none;margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body class="landing-open">
 <div id="landing" class="landing" role="dialog" aria-label="Выбор классификатора дефектов">
   <div class="landing-in">
+    <svg class="landing-rails" viewBox="0 0 320 120" aria-hidden="true" focusable="false">
+      <defs><linearGradient id="lrFade" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="currentColor" stop-opacity=".9"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
+      <g class="lr-sleepers" fill="url(#lrFade)">
+        <rect x="52" y="108" width="216" height="7" rx="2"/><rect x="78" y="90" width="164" height="6" rx="2"/><rect x="99" y="75" width="122" height="5" rx="2"/>
+        <rect x="116" y="63" width="88" height="4" rx="1.5"/><rect x="129" y="53" width="62" height="3" rx="1.5"/><rect x="139" y="45" width="42" height="2.5" rx="1"/><rect x="146" y="39" width="28" height="2" rx="1"/>
+      </g>
+      <path class="lr-rail" d="M96 120 L157 30 M224 120 L163 30" fill="none" stroke="url(#lrFade)" stroke-width="4" stroke-linecap="round"/>
+      <g class="lr-signal"><rect x="252" y="20" width="3" height="64" rx="1.5"/><rect x="243" y="8" width="21" height="34" rx="6"/><circle class="lr-g" cx="253.5" cy="18" r="4.5"/><circle class="lr-r" cx="253.5" cy="32" r="4.5"/></g>
+    </svg>
     <p class="landing-kicker">ОАО «РЖД» · справочник</p>
     <h1 class="landing-title">Классификаторы дефектов</h1>
     <p class="landing-sub">Выберите документ, с которым будете работать</p>
+    <div class="landing-now" id="landingNow" hidden><span class="ln-dot"></span><span class="ln-txt"></span></div>
     <div class="landing-cards">
-      <button type="button" class="lcard" data-doc="2499">
-        <span class="lcard-code">2499р</span>
+      <button type="button" class="lcard lc-2499" data-doc="2499">
+        <span class="lcard-ico" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M13 7h14v5h-4.5v14H27v7H13v-7h4.5V12H13z" fill="currentColor"/></svg></span>
+        <span class="lcard-code">2499р <span class="lcard-cnt" data-cnt="2499"></span></span>
         <span class="lcard-title">Классификатор дефектов рельсов</span>
         <span class="lcard-note">Распоряжение ОАО «РЖД» от 23.10.2014 № 2499р</span>
         <span class="lcard-open">Открыть →</span>
       </button>
-<button type="button" class="lcard" data-doc="2143">
-  <span class="lcard-code">2143р</span>
+<button type="button" class="lcard lc-2143" data-doc="2143">
+  <span class="lcard-ico" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M8 33 L19 7 M16 33 L23 17 M32 33 L21 7" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg></span>
+  <span class="lcard-code">2143р <span class="lcard-cnt" data-cnt="2143"></span></span>
   <span class="lcard-title">Классификатор дефектов стрелочных переводов</span>
   <span class="lcard-note">Распоряжение ОАО «РЖД» от 27.09.2019 № 2143/р</span>
   <span class="lcard-open">Открыть →</span>
@@ -509,8 +618,16 @@ a{color:var(--accent)}
 <button id="menuBtn" class="menu-btn" type="button" aria-label="Меню документов" aria-expanded="false" aria-controls="sidePanel" title="Меню">
   <span class="mb" aria-hidden="true"></span><span class="mb" aria-hidden="true"></span><span class="mb" aria-hidden="true"></span>
 </button>
+<nav class="tabbar" id="tabbar" aria-label="Быстрые переходы">
+  <button type="button" class="tb" data-act="list"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Дефекты</span></button>
+  <button type="button" class="tb" data-act="calc"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="16.5" r="1.2" fill="currentColor"/><circle cx="15" cy="16.5" r="1.2" fill="currentColor"/></svg><span>Расчёт</span></button>
+  <button type="button" class="tb tb-doc" data-act="doc" data-doc="2143"><span class="tb-code">2143р</span><span>Документ</span></button>
+  <button type="button" class="tb" data-act="top"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 19h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Наверх</span></button>
+  <button type="button" class="tb" data-act="menu" aria-controls="sidePanel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Меню</span></button>
+</nav>
 <div id="sideBack" class="side-back" hidden></div>
 <aside id="sidePanel" class="side-panel" aria-hidden="true" aria-label="Документы">
+  <span class="side-grip" aria-hidden="true"></span>
   <div class="side-head">
     <span class="side-title">Документы</span>
     <button id="menuClose" class="side-close" type="button" aria-label="Закрыть меню">×</button>
@@ -1834,7 +1951,7 @@ document.addEventListener('click',function(e){
     document.getElementById('doc-2143').hidden = (doc !== '2143');
     document.title = doc === '2143' ? 'Дефекты стрелочных переводов — распоряжение 2143р' : 'Дефекты рельсов: коды и группы — распоряжение 2499р';
     // Обновить активный пункт меню
-    document.querySelectorAll('.sitem').forEach(function(s){
+    document.querySelectorAll('.sitem[data-doc]').forEach(function(s){
       var on = s.getAttribute('data-doc') === doc;
       s.classList.toggle('is-active', on);
       var tg = s.querySelector('.sitem-tag'); if (tg) tg.textContent = on ? 'Открыт' : 'Открыть';
@@ -5147,6 +5264,87 @@ document.addEventListener('click',function(e){
 
 
 
+})();
+</script>
+
+<script>
+/* ---------- Оформление и мобильная навигация ---------- */
+(function(){
+  function cur(){ return document.getElementById('doc-2143').hidden ? '2499' : '2143'; }
+  function plural(n,a,b,c){var m=n%10,h=n%100;return (m===1&&h!==11)?a:(m>=2&&m<=4&&(h<12||h>14))?b:c;}
+  /* счётчики на старте и в шапке документа */
+  function stats(){
+    [['2499','#groups'],['2143','#groups2143']].forEach(function(d){
+      var cards=document.querySelectorAll(d[1]+' details.sub').length, groups=document.querySelectorAll(d[1]+' > details').length;
+      var c=document.querySelector('.lcard-cnt[data-cnt="'+d[0]+'"]');
+      if(c&&cards)c.textContent=cards+' '+plural(cards,'дефект','дефекта','дефектов');
+      var sec=document.getElementById('doc-'+d[0]);
+      if(sec&&cards&&!sec.querySelector('.doc-stats')){
+        var lead=sec.querySelector('.lead'); if(!lead)return;
+        var box=document.createElement('div');box.className='doc-stats';
+        box.innerHTML='<button type="button" data-jump="list"><b>'+cards+'</b> '+plural(cards,'карточка','карточки','карточек')+' · '+groups+' '+plural(groups,'группа','группы','групп')+' →</button><button type="button" data-jump="calc">Калькулятор →</button>';
+        lead.insertAdjacentElement('afterend',box);
+      }
+    });
+  }
+  /* последний открытый документ */
+  function remember(doc){try{localStorage.setItem('lastDoc',doc);}catch(e){}}
+  function markLast(){var d=null;try{d=localStorage.getItem('lastDoc');}catch(e){}
+    document.querySelectorAll('.lcard').forEach(function(c){c.classList.toggle('is-last',!!d&&c.dataset.doc===d);});}
+  /* «Сейчас» на стартовой странице — повторяет табло */
+  var ln=document.getElementById('landingNow'),board=document.getElementById('scheduleBoard'),msg=document.getElementById('scheduleMessage');
+  function now(){
+    if(!ln||!board||!msg)return;
+    var t=msg.querySelector('.schedule-text'); if(!t)return;
+    ln.hidden=false; ln.querySelector('.ln-txt').textContent=t.textContent;
+    ln.classList.toggle('is-class',board.classList.contains('is-class'));
+    ln.classList.toggle('is-break',board.classList.contains('is-break'));
+  }
+  /* нижняя панель */
+  var bar=document.getElementById('tabbar');
+  function target(act){
+    var d=cur();
+    if(act==='list')return document.querySelector('#doc-'+d+' .toolbar');
+    if(act==='calc'){var c=document.getElementById(d==='2143'?'calc2143':'calc');var h=c&&c.previousElementSibling;while(h&&h.tagName!=='H2')h=h.previousElementSibling;return h||c;}
+  }
+  function go(el){if(!el)return;var y=el.getBoundingClientRect().top+window.scrollY-8;window.scrollTo({top:y,behavior:'smooth'});}
+  function syncDocBtn(){
+    if(!bar)return;var other=cur()==='2499'?'2143':'2499';
+    var b=bar.querySelector('.tb-doc');b.dataset.doc=other;b.querySelector('.tb-code').textContent=other+'р';
+    b.setAttribute('aria-label','Открыть распоряжение '+other+'р');
+  }
+  function syncActive(){
+    if(!bar)return;var vh=window.innerHeight,on=null;
+    var l=target('list'),c=document.getElementById(cur()==='2143'?'calc2143':'calc');
+    if(l&&l.getBoundingClientRect().top<vh*0.45)on='list';
+    else if(c){var r=c.getBoundingClientRect();if(r.top<vh*0.7&&r.bottom>0)on='calc';}
+    bar.querySelectorAll('.tb[data-act]').forEach(function(b){b.classList.toggle('is-on',b.dataset.act===on);});
+  }
+  if(bar){
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest('.tb');if(!b)return;var a=b.dataset.act;
+      if(a==='list'||a==='calc')go(target(a));
+      else if(a==='top')window.scrollTo({top:0,behavior:'smooth'});
+      else if(a==='menu'){var m=document.getElementById('menuBtn');if(m)m.click();}
+      /* «Документ» обрабатывает общий обработчик [data-doc] */
+    });
+    var tk=false;window.addEventListener('scroll',function(){if(tk)return;tk=true;requestAnimationFrame(function(){tk=false;syncActive();});},{passive:true});
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-doc]');if(!t||t.disabled)return;
+    var d=t.getAttribute('data-doc');
+    if(d==='2499'||d==='2143'){remember(d);setTimeout(function(){syncDocBtn();syncActive();},0);}
+  });
+  document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j)go(target(j.dataset.jump));});
+  /* название дефекта — отдельным блоком, чтобы на телефоне шло под кодом */
+  document.querySelectorAll('details.sub > summary').forEach(function(sm){
+    var nodes=[],n=sm.lastChild;
+    while(n&&(n.nodeType===3)){nodes.unshift(n);n=n.previousSibling;}
+    var txt=nodes.map(function(x){return x.textContent;}).join('').trim();
+    if(!txt)return;nodes.forEach(function(x){sm.removeChild(x);});
+    var sp=document.createElement('span');sp.className='st';sp.textContent=' '+txt;sm.appendChild(sp);
+  });
+  stats();markLast();syncDocBtn();now();setInterval(now,1000);
 })();
 </script>
 </body>
