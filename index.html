@@ -668,6 +668,119 @@ a.xref::after{content:"↗";font-size:.72em;margin-left:1px;opacity:.7}
   .snav .sitem-title{font-size:.9rem}
   .snav .sitem-tag{margin:0}
 }
+
+/* ================= Визуальный слой v2: токены, иерархия, плоские вложения ================= */
+:root{
+  --r-sm:8px;--r-md:12px;--r-lg:16px;
+  --sh-1:0 1px 2px rgba(20,35,43,.06),0 1px 1px rgba(20,35,43,.04);
+  --sh-2:0 4px 14px rgba(20,35,43,.08),0 1px 3px rgba(20,35,43,.06);
+  --sh-3:0 14px 34px rgba(20,35,43,.14);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --hair:color-mix(in srgb,var(--line) 75%,transparent);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sh-1:0 1px 2px rgba(0,0,0,.35);--sh-2:0 6px 18px rgba(0,0,0,.35);--sh-3:0 16px 38px rgba(0,0,0,.5)}}
+:root[data-theme="dark"],:root[data-theme="amoled"]{--sh-1:0 1px 2px rgba(0,0,0,.35);--sh-2:0 6px 18px rgba(0,0,0,.35);--sh-3:0 16px 38px rgba(0,0,0,.5)}
+:root[data-theme="amoled"]{--muted:#858d94}
+
+/* фон страницы: лёгкое свечение сверху */
+body{background:radial-gradient(1200px 420px at 50% -120px,color-mix(in srgb,var(--accent) 9%,transparent),transparent 70%) no-repeat,var(--bg)}
+::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)}
+
+/* заголовок документа: надзаголовок с номером распоряжения */
+#doc-2499>h1::before,#doc-2143>h1::before,#doc-odt>h1::before{display:block;width:max-content;max-width:100%;margin-bottom:10px;font:600 .74rem/1 var(--mono);letter-spacing:.04em;padding:6px 10px;border-radius:999px;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+#doc-2499>h1::before{content:"Распоряжение № 2499р · 2014"}
+#doc-2143>h1::before{content:"Распоряжение № 2143/р · 2019";color:var(--c2);background:color-mix(in srgb,var(--c2) 10%,transparent);border-color:color-mix(in srgb,var(--c2) 30%,transparent)}
+#doc-odt>h1::before{content:"Учебное пособие · 1999";color:var(--g3);background:color-mix(in srgb,var(--g3) 10%,transparent);border-color:color-mix(in srgb,var(--g3) 30%,transparent)}
+#doc-2499>h1,#doc-2143>h1,#doc-odt>h1{letter-spacing:-.015em;line-height:1.12;margin-top:28px}
+.lead{max-width:62ch}
+
+/* заголовки разделов: короткая планка над текстом, без двойных полос */
+h2{padding-left:0;letter-spacing:-.005em;margin-top:2.2em}
+h2::before{position:static;display:block;width:28px;height:3px;border-radius:2px;margin-bottom:10px;opacity:1;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 30%,transparent))}
+
+/* группы: карточка с цветным краем; открытая — мягкая подложка вместо рамки-в-рамке */
+#groups>details,#groups2143>details,#groupsOdt>details{border-radius:var(--r-md);border:1px solid var(--hair);border-left:4px solid var(--group-color,var(--line));background:var(--surface);box-shadow:var(--sh-1);margin:10px 0}
+#groups>details:hover,#groups2143>details:hover,#groupsOdt>details:hover{box-shadow:var(--sh-2);transform:none}
+#groups>details>summary,#groups2143>details>summary,#groupsOdt>details>summary{font-weight:600;padding-top:14px;padding-bottom:14px}
+#groups>details.is-open,#groups2143>details.is-open,#groupsOdt>details.is-open{background:color-mix(in srgb,var(--group-color,var(--accent)) 4%,var(--bg));box-shadow:var(--sh-2)}
+#groups>details.is-open>summary,#groups2143>details.is-open>summary,#groupsOdt>details.is-open>summary{border-bottom:1px solid var(--hair)}
+#groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content{padding:4px 10px 10px}
+
+/* карточки дефектов: белый лист с тенью, тонкий цветной край */
+details.sub{background:var(--surface);border:1px solid var(--hair);border-left:3px solid color-mix(in srgb,var(--group-color,var(--accent)) 70%,transparent);border-radius:var(--r-sm);box-shadow:var(--sh-1);margin:8px 0}
+details.sub.is-open{box-shadow:var(--sh-2);border-color:color-mix(in srgb,var(--group-color,var(--accent)) 35%,var(--hair));border-left-color:var(--group-color,var(--accent))}
+details.sub>summary code{font-size:.98rem}
+details.sub .in{padding:2px 4px 8px}
+
+/* краткий ответ: компактная сетка без рамки-в-рамке */
+.cheat{border:0;background:color-mix(in srgb,var(--group-color,var(--accent)) 5%,var(--bg));border-radius:var(--r-sm);padding:12px 14px}
+.cheat-h b{font:600 .68rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* подробная таблица: только горизонтальные линии */
+table.k{border-collapse:collapse}
+table.k th,table.k td{border:0;border-top:1px solid var(--hair);padding:10px 12px}
+table.k tr:first-child th,table.k tr:first-child td{border-top:0}
+table.k th{background:transparent;color:var(--muted);font:600 .74rem/1.35 var(--sans);letter-spacing:.04em;text-transform:uppercase;width:24%;min-width:8.5rem}
+.wrap:has(>table.k){background:var(--surface);border-radius:var(--r-sm)}
+.sub-h,p.cap{font:600 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
+
+/* панель поиска: поле с лупой, фильтры как сегменты */
+.toolbar{border-bottom:0;padding:10px 0 12px;margin-bottom:6px}
+.toolbar::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--hair) 12%,var(--hair) 88%,transparent)}
+.toolbar input[type=search]{border-radius:999px;padding-left:40px;background:var(--surface) no-repeat 14px 50%/17px 17px;box-shadow:var(--sh-1);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5' fill='none' stroke='%2378909c' stroke-width='2'/%3E%3Cpath d='M15.5 15.5L20 20' stroke='%2378909c' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")}
+.chip,.btn{box-shadow:var(--sh-1);font-weight:600}
+.chip[aria-pressed=true]{box-shadow:0 2px 8px color-mix(in srgb,var(--accent) 35%,transparent)}
+#cnt,#cnt2143,#cntOdt{margin-left:auto;font:600 .74rem var(--mono);letter-spacing:.04em;color:var(--muted)}
+
+/* калькуляторы: приподнятая карточка с акцентной кромкой */
+.calc{border-radius:var(--r-lg);border:1px solid var(--hair);box-shadow:var(--sh-2);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 5%,var(--surface)),var(--surface) 90px);position:relative;overflow:visible}
+.calc::before{content:"";position:absolute;left:18px;right:18px;top:-1px;height:3px;border-radius:0 0 3px 3px;background:linear-gradient(90deg,var(--accent),var(--c2))}
+.calc-out{border-top:1px dashed var(--hair)}
+
+/* заметки и источники */
+p.note{border-left:3px solid color-mix(in srgb,var(--accent) 40%,transparent);padding:2px 0 2px 12px;color:var(--muted)}
+p.source{font-size:.85rem}
+
+/* таблицы данных: скруглённые контейнеры */
+.wrap{border-radius:var(--r-sm)}
+table.dt th{font-size:.8rem}
+
+/* меню и шторка */
+.side-panel{border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.sitem{border-radius:var(--r-md)}
+.menu-btn{border-radius:var(--r-md);box-shadow:var(--sh-2)}
+
+/* фокус — единый вид */
+:where(a,button,summary,input,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+@media (max-width:760px){
+  .side-panel{border-radius:20px 20px 0 0}
+  #groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content{padding:2px 6px 8px}
+  table.k th,table.k td{display:block;width:auto;border-top:0;padding:8px 10px 2px}
+  table.k td{padding:2px 10px 10px;border-bottom:1px solid var(--hair)}
+  table.k tr:last-child td{border-bottom:0}
+  #doc-2499>h1,#doc-2143>h1,#doc-odt>h1{margin-top:18px}
+  .toolbar::after{left:-16px;right:-16px}
+}
+@media (prefers-reduced-motion:reduce){#groups>details,#groups2143>details,#groupsOdt>details,details.sub{transition:none}}
+
+@media (max-width:760px){
+  #groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content{padding:2px 4px 6px}
+  details.sub .in{padding:0 0 6px}
+  details.sub>summary{padding-left:12px}
+  details.sub>.details-body>.details-content{padding-left:10px;padding-right:10px}
+  .cheat{padding:10px 10px}
+  .cheat .cr{padding-left:10px}
+}
+
+/* поля калькуляторов — одинаковые по высоте и виду */
+.calc select,.calc input[type=number]{height:44px;min-width:9.5rem;padding:0 12px;font:500 1rem var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);box-shadow:var(--sh-1);transition:border-color .2s,box-shadow .2s}
+.calc select{appearance:none;-webkit-appearance:none;padding-right:34px;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%2378909c' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center/12px 8px}
+.calc select:focus,.calc input[type=number]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+.calc label{display:flex;flex-direction:column;gap:6px}
+.calc input[type=number]{min-width:11.5rem}
+@media (max-width:760px){.calc label{flex:1 1 100%;min-width:0}.calc select,.calc input[type=number]{width:100%;min-width:0}}
 </style>
 </head>
 <body class="landing-open">
