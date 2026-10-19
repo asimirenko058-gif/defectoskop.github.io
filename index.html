@@ -1193,6 +1193,214 @@ html,body{overflow-x:clip}
 @media (max-width:760px){:root.px .px-scene{height:230px}}
 @media (max-height:640px){:root.px .px-scene{height:190px}}
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style id="ui-v3">
+/* ================= UI v3 — мягкий современный стиль (только обычный режим, пиксель-стиль не затронут) ================= */
+:root:not(.px){
+  --sans:"Onest","IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono","IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --bg:#f3f4f7;--surface:#ffffff;--surface-2:#f8f9fb;--ink:#171a21;--muted:#6a7280;--line:#e3e6ec;--hair:#eceef2;
+  --accent:#3b5bdb;--accent-soft:#e8edff;--c1:#3b5bdb;--c2:#1f9d6b;--c3:#c27a0e;
+  --odr:#d8344a;--dr:#c27a0e;--warn:#c27a0e;--zod:#d8344a;--zd:#c27a0e;--zun:#1f9d6b;
+  --g1:#3b5bdb;--g2:#d8344a;--g3:#7c4ddb;--g4:#d9771a;--g5:#1f9d6b;--g6:#0f8ea8;--g7:#c23a83;--g8:#6a7280;--g9:#8a7a1c;
+  --r-sm:12px;--r-md:16px;--r-lg:22px;
+  --sh-1:0 1px 2px rgba(23,26,33,.04),0 1px 3px rgba(23,26,33,.04);
+  --sh-2:0 2px 6px rgba(23,26,33,.04),0 8px 24px rgba(23,26,33,.06);
+  --sh-3:0 12px 40px rgba(23,26,33,.12);
+}
+@media (prefers-color-scheme:dark){:root:not(.px):not([data-theme="light"]):not([data-theme="amoled"]){
+  --bg:#0f1115;--surface:#181b21;--surface-2:#1e2229;--ink:#e9ecf1;--muted:#98a0ae;--line:#2a2f38;--hair:#242931;
+  --accent:#7b93ff;--accent-soft:rgba(123,147,255,.14);--c1:#7b93ff;--c2:#4fd19c;--c3:#f0b44c;
+  --odr:#ff7184;--dr:#f0b44c;--warn:#f0b44c;--zod:#ff7184;--zd:#f0b44c;--zun:#4fd19c;
+  --g1:#7b93ff;--g2:#ff7184;--g3:#b394ff;--g4:#ffa45c;--g5:#4fd19c;--g6:#4fcbe3;--g7:#f08ac0;--g8:#98a0ae;--g9:#d6c36a;
+  --sh-1:0 1px 2px rgba(0,0,0,.3);--sh-2:0 6px 20px rgba(0,0,0,.35);--sh-3:0 16px 44px rgba(0,0,0,.5)}}
+:root:not(.px)[data-theme="dark"]{
+  --bg:#0f1115;--surface:#181b21;--surface-2:#1e2229;--ink:#e9ecf1;--muted:#98a0ae;--line:#2a2f38;--hair:#242931;
+  --accent:#7b93ff;--accent-soft:rgba(123,147,255,.14);--c1:#7b93ff;--c2:#4fd19c;--c3:#f0b44c;
+  --odr:#ff7184;--dr:#f0b44c;--warn:#f0b44c;--zod:#ff7184;--zd:#f0b44c;--zun:#4fd19c;
+  --g1:#7b93ff;--g2:#ff7184;--g3:#b394ff;--g4:#ffa45c;--g5:#4fd19c;--g6:#4fcbe3;--g7:#f08ac0;--g8:#98a0ae;--g9:#d6c36a;
+  --sh-1:0 1px 2px rgba(0,0,0,.3);--sh-2:0 6px 20px rgba(0,0,0,.35);--sh-3:0 16px 44px rgba(0,0,0,.5)}
+:root:not(.px)[data-theme="amoled"]{
+  --bg:#000;--surface:#0e0f11;--surface-2:#141518;--ink:#eceae6;--muted:#8d9198;--line:#24262a;--hair:#1c1d20;
+  --accent:#ff9f2e;--accent-soft:rgba(255,159,46,.14);
+  --sh-1:none;--sh-2:0 0 0 1px #1c1d20;--sh-3:0 0 0 1px #24262a}
+
+/* --- основа --- */
+:root:not(.px) body{font-family:var(--sans);font-size:16px;line-height:1.6;background:var(--bg);-webkit-font-smoothing:antialiased}
+:root:not(.px) main{max-width:900px;padding:28px 20px 72px}
+:root:not(.px) code,:root:not(.px) .mono{font-family:var(--mono);font-weight:500;font-size:.92em}
+:root:not(.px) a{color:var(--accent)}
+:root:not(.px) p{max-width:70ch}
+
+/* заголовки */
+:root:not(.px) #doc-2499>h1,:root:not(.px) #doc-2143>h1,:root:not(.px) #doc-odt>h1{font-size:clamp(1.75rem,4.6vw,2.6rem);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin:24px 0 12px}
+:root:not(.px) #doc-2499>h1::before,:root:not(.px) #doc-2143>h1::before,:root:not(.px) #doc-odt>h1::before{font:600 .78rem/1 var(--sans);letter-spacing:0;text-transform:none;padding:7px 12px;border-radius:999px;border:0;margin-bottom:14px;background:var(--accent-soft);color:var(--accent)}
+:root:not(.px) h2{font-size:1.35rem;font-weight:700;letter-spacing:-.015em;margin:2.6em 0 .7em;padding:0}
+:root:not(.px) h2::before{display:none}
+:root:not(.px) h3{font-weight:650;letter-spacing:-.01em}
+:root:not(.px) .lead{font-size:1.06rem;color:var(--muted);line-height:1.6}
+:root:not(.px) .source{font-size:.85rem;color:var(--muted)}
+
+/* заметки — мягкие плашки вместо полосок */
+:root:not(.px) p.note{border:0;background:var(--surface);border-radius:var(--r-md);padding:12px 16px;color:var(--muted);box-shadow:var(--sh-1);font-size:.92rem}
+:root:not(.px) .tnote{font-size:.82rem}
+:root:not(.px) .tnote.approx{border-left:0;background:color-mix(in srgb,var(--warn) 10%,transparent);border-radius:10px;padding:8px 12px}
+:root:not(.px) .disclaimer,:root:not(.px) #doc-odt .odt-warn{border:0;border-radius:var(--r-md);background:color-mix(in srgb,var(--odr) 8%,var(--surface));padding:14px 16px;color:var(--ink)}
+:root:not(.px) .doc-stats button{background:var(--surface);border:1px solid var(--line);border-radius:999px;font:500 .82rem var(--sans);padding:8px 14px;box-shadow:var(--sh-1)}
+:root:not(.px) .doc-stats button b{font-weight:700}
+:root:not(.px) ol.parts{background:var(--surface);border-radius:var(--r-md);padding:14px 16px 14px 36px;box-shadow:var(--sh-1)}
+:root:not(.px) ol.parts li{margin:6px 0}
+
+/* --- декодер кода --- */
+:root:not(.px) .decoder{background:var(--surface);border:0;border-radius:var(--r-lg);padding:24px;box-shadow:var(--sh-2)}
+:root:not(.px) .big{font-family:var(--mono);font-weight:700;letter-spacing:-.02em;margin-bottom:8px}
+:root:not(.px) .big .d{border-bottom-width:4px;border-radius:2px}
+:root:not(.px) .pickers{gap:14px}
+:root:not(.px) label{font-size:.8rem;font-weight:500}
+:root:not(.px) .dd-btn{min-height:48px;padding:10px 14px;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-sm)}
+:root:not(.px) .dd-btn:hover{border-color:color-mix(in srgb,var(--accent) 50%,var(--line))}
+:root:not(.px) .dd.open .dd-btn{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+:root:not(.px) .dd-list{border:1px solid var(--line);border-radius:var(--r-md);padding:6px;box-shadow:var(--sh-3)}
+:root:not(.px) .dd-list li{border-radius:10px;padding:9px 11px}
+:root:not(.px) .dd-list li[aria-selected=true]{background:var(--accent-soft)}
+:root:not(.px) .mean{border-left:0;background:var(--surface-2);border-radius:var(--r-sm);padding:10px 14px;margin:8px 0;position:relative}
+:root:not(.px) .mean::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:currentColor}
+:root:not(.px) .mean.m1{color:var(--c1)}:root:not(.px) .mean.m2{color:var(--c2)}:root:not(.px) .mean.m3{color:var(--c3)}
+:root:not(.px) .mean b{color:var(--ink);font-weight:600}
+:root:not(.px) .mean span{color:var(--muted)}
+:root:not(.px) .status{border-radius:var(--r-sm);padding:10px 14px;background:var(--surface-2)}
+:root:not(.px) .status.ok{background:color-mix(in srgb,var(--c2) 10%,transparent)}
+:root:not(.px) .status.no{background:color-mix(in srgb,var(--odr) 9%,transparent)}
+
+/* --- калькуляторы --- */
+:root:not(.px) .calc{background:var(--surface);border:0;border-radius:var(--r-lg);padding:20px;box-shadow:var(--sh-2)}
+:root:not(.px) .calc::before{display:none}
+:root:not(.px) .calc select,:root:not(.px) .calc input[type=number]{height:48px;border-radius:var(--r-sm);background:var(--surface-2);border:1px solid var(--line);box-shadow:none;font:500 1rem var(--sans)}
+:root:not(.px) .calc select:focus,:root:not(.px) .calc input[type=number]:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+:root:not(.px) .calc-out{border-top:1px solid var(--hair);padding-top:16px;margin-top:4px}
+:root:not(.px) .verdict{border:0;padding:8px 16px;font-size:.95rem}
+:root:not(.px) .verdict.odr{background:color-mix(in srgb,var(--odr) 14%,transparent)}
+:root:not(.px) .verdict.dr{background:color-mix(in srgb,var(--dr) 15%,transparent)}
+:root:not(.px) .verdict.un{background:color-mix(in srgb,var(--zun) 14%,transparent)}
+:root:not(.px) .verdict.none{background:var(--surface-2)}
+
+/* --- панель поиска --- */
+:root:not(.px) .toolbar{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(14px) saturate(1.6);-webkit-backdrop-filter:blur(14px) saturate(1.6);padding:12px 0;gap:8px;border:0}
+:root:not(.px) .toolbar::after{background:var(--hair)}
+:root:not(.px) .toolbar input[type=search]{height:46px;border-radius:999px;border:1px solid var(--line);background-color:var(--surface);box-shadow:var(--sh-1);font-size:15px}
+:root:not(.px) .toolbar input[type=search]:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+:root:not(.px) .chip,:root:not(.px) .btn{border:1px solid var(--line);background:var(--surface);box-shadow:none;font:500 .86rem var(--sans);padding:8px 14px;min-height:38px}
+:root:not(.px) .chip:hover,:root:not(.px) .btn:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:var(--surface-2)}
+:root:not(.px) .chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink);box-shadow:none}
+:root:not(.px) .hitnav button{border-color:var(--line);background:var(--surface)}
+
+/* --- группы дефектов: карточка с цветной точкой --- */
+:root:not(.px) #groups>details,:root:not(.px) #groups2143>details,:root:not(.px) #groupsOdt>details{border:0;border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-1);margin:12px 0}
+:root:not(.px) #groups>details:hover,:root:not(.px) #groups2143>details:hover,:root:not(.px) #groupsOdt>details:hover{box-shadow:var(--sh-2);transform:none}
+:root:not(.px) #groups>details.is-open,:root:not(.px) #groups2143>details.is-open,:root:not(.px) #groupsOdt>details.is-open{background:var(--surface);box-shadow:var(--sh-2)}
+:root:not(.px) #groups>details>summary,:root:not(.px) #groups2143>details>summary,:root:not(.px) #groupsOdt>details>summary{padding:18px 56px 18px 46px;font-weight:650;font-size:1.02rem;line-height:1.4;border-radius:var(--r-lg)}
+:root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before{content:"";position:absolute;left:18px;top:22px;width:14px;height:14px;border-radius:5px;background:var(--group-color,var(--accent));box-shadow:0 0 0 4px color-mix(in srgb,var(--group-color,var(--accent)) 16%,transparent)}
+:root:not(.px) #groups>details.is-open>summary,:root:not(.px) #groups2143>details.is-open>summary,:root:not(.px) #groupsOdt>details.is-open>summary{border-bottom:0}
+:root:not(.px) summary .where{display:block;font-weight:400;font-size:.84rem;margin-top:2px}
+:root:not(.px) #groups>details>.details-body>.details-content,:root:not(.px) #groups2143>details>.details-body>.details-content,:root:not(.px) #groupsOdt>details>.details-body>.details-content{padding:0 14px 14px}
+:root:not(.px) summary:hover{background:transparent}
+
+/* шеврон вместо плюса */
+:root:not(.px) details>summary::after{content:"";width:9px;height:9px;top:50%;right:22px;margin-top:-7px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);border-radius:1px;transform:rotate(45deg);opacity:.8;font-size:0}
+:root:not(.px) details.is-open>summary::after{content:"";transform:rotate(225deg);margin-top:-2px;opacity:1}
+:root:not(.px) details.sub>summary::after{right:18px}
+
+/* карточки дефектов внутри группы */
+:root:not(.px) details.sub{background:var(--surface-2);border:1px solid var(--hair);border-radius:var(--r-md);box-shadow:none;margin:8px 0}
+:root:not(.px) details.sub:hover{border-color:var(--line)}
+:root:not(.px) details.sub.is-open{background:var(--surface);border-color:var(--line);box-shadow:var(--sh-2)}
+:root:not(.px) details.sub>summary{padding:14px 48px 14px 16px;font-weight:500;line-height:1.45}
+:root:not(.px) details.sub>summary code{display:inline-block;font-size:.84rem;font-weight:600;padding:3px 8px;border-radius:8px;color:var(--group-color,var(--accent));background:color-mix(in srgb,var(--group-color,var(--accent)) 12%,transparent);margin-right:6px}
+:root:not(.px) #groupsOdt details.sub summary .onum{display:inline-block;font:600 .84rem var(--mono);padding:3px 8px;border-radius:8px;background:color-mix(in srgb,var(--group-color,var(--accent)) 12%,transparent)}
+:root:not(.px) .kb{border:0;border-radius:999px;padding:4px 9px;font:600 .7rem var(--sans)}
+:root:not(.px) .k-odr{background:color-mix(in srgb,var(--odr) 13%,transparent)}
+:root:not(.px) .k-dr{background:color-mix(in srgb,var(--dr) 15%,transparent)}
+:root:not(.px) .k-mix{background:var(--accent-soft)}
+:root:not(.px) details.sub .in{padding:4px 2px 8px}
+:root:not(.px) details.sub>.details-body>.details-content{padding:0 16px 16px}
+
+/* краткий ответ */
+:root:not(.px) .cheat{background:var(--surface-2);border-radius:var(--r-md);padding:14px;border:0}
+:root:not(.px) .cheat-h b{font:600 .72rem var(--sans);letter-spacing:.08em}
+:root:not(.px) .cr{border-left:0;border-radius:12px;background:var(--surface);padding:10px 12px;margin:6px 0;box-shadow:var(--sh-1);position:relative;padding-left:20px}
+:root:not(.px) .cr::before{content:"";position:absolute;left:8px;top:12px;bottom:12px;width:3px;border-radius:3px;background:var(--rc)}
+:root:not(.px) .sub-h,:root:not(.px) p.cap{font:600 .72rem var(--sans);letter-spacing:.08em}
+
+/* таблицы */
+:root:not(.px) .wrap{border-radius:var(--r-md)}
+:root:not(.px) .wrap:has(>table.k){background:var(--surface);border:1px solid var(--hair)}
+:root:not(.px) table.k th{font:600 .72rem/1.4 var(--sans);letter-spacing:.06em}
+:root:not(.px) table.dt,:root:not(.px) table.plain,:root:not(.px) table.wear,:root:not(.px) .odt table{border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
+:root:not(.px) table.dt th,:root:not(.px) table.dt td,:root:not(.px) table.plain th,:root:not(.px) table.plain td,:root:not(.px) table.wear th,:root:not(.px) table.wear td,:root:not(.px) .odt th,:root:not(.px) .odt td{border:0;border-bottom:1px solid var(--hair)}
+:root:not(.px) table.dt th,:root:not(.px) table.plain thead th,:root:not(.px) table.wear thead th,:root:not(.px) .odt th{background:var(--surface-2)}
+:root:not(.px) .zt td,:root:not(.px) .spt td{border-radius:8px}
+:root:not(.px) .sgn{border-radius:8px}
+:root:not(.px) .fig2143,:root:not(.px) .fig-img img{border-radius:var(--r-sm)}
+:root:not(.px) #doc-odt figure svg{border-radius:var(--r-md);border:1px solid var(--hair)}
+:root:not(.px) .odt .odt-note{border-left:0;border-radius:var(--r-sm);background:var(--accent-soft);padding:10px 14px}
+:root:not(.px) .odt .odt-easy{border:0;border-radius:var(--r-sm);background:color-mix(in srgb,var(--c2) 9%,transparent);padding:10px 14px}
+:root:not(.px) .xref-box{border:0;border-radius:var(--r-sm);background:color-mix(in srgb,var(--g3) 9%,transparent)}
+:root:not(.px) .mark{border:0;border-radius:var(--r-lg);box-shadow:var(--sh-1);padding:18px 20px}
+:root:not(.px) dl{background:var(--surface);border-radius:var(--r-lg);padding:6px 20px 18px;box-shadow:var(--sh-1)}
+:root:not(.px) dt{font-weight:650;margin-top:16px}
+:root:not(.px) dd{color:var(--muted)}
+:root:not(.px) .odt dl.odt-gl{background:transparent;box-shadow:none;padding:0}
+
+/* --- стартовая страница --- */
+:root:not(.px) .landing{background:radial-gradient(90% 50% at 50% 0%,var(--accent-soft),transparent 70%),var(--bg)}
+:root:not(.px) .landing-title{font-weight:700;letter-spacing:-.03em;font-size:clamp(2rem,6vw,3rem)}
+:root:not(.px) .landing-kicker{font:600 .74rem var(--sans);letter-spacing:.12em}
+:root:not(.px) .landing-now{border-radius:999px}
+:root:not(.px) .lcard{border:0;border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-2);padding:22px 22px 20px;gap:8px}
+:root:not(.px) .lcard::before{display:none}
+:root:not(.px) .lcard:hover:not(:disabled){transform:translateY(-4px);box-shadow:var(--sh-3)}
+:root:not(.px) .lcard-ico{width:48px;height:48px;border-radius:14px;position:static;margin-bottom:8px}
+:root:not(.px) .lcard-code{font:700 1.05rem var(--sans);letter-spacing:-.01em}
+:root:not(.px) .lcard-title{padding-right:0;font-weight:650;font-size:1.12rem}
+:root:not(.px) .lcard-cnt{border:0;background:var(--surface-2);font:600 .7rem var(--sans)}
+:root:not(.px) .lcard-open{margin-top:10px;font-weight:600}
+:root:not(.px) .lcard.is-last::after{border:0;background:color-mix(in srgb,var(--lc) 12%,transparent);font:600 .64rem var(--sans);top:22px;right:22px;bottom:auto}
+
+/* --- меню и кнопки --- */
+:root:not(.px) .menu-btn{border:0;border-radius:14px;box-shadow:var(--sh-2);background:var(--surface)}
+:root:not(.px) .side-panel{border:0;box-shadow:none;border-radius:var(--r-lg) 0 0 var(--r-lg)}
+:root:not(.px) .side-panel.is-open{box-shadow:var(--sh-3)}
+:root:not(.px) .side-back{background:rgba(10,12,16,.4);backdrop-filter:blur(2px)}
+:root:not(.px) .sitem{border:0;background:var(--surface-2);border-radius:var(--r-md)}
+:root:not(.px) .sitem:hover:not(:disabled){transform:none;background:color-mix(in srgb,var(--accent) 6%,var(--surface-2))}
+:root:not(.px) .sitem.is-active{background:var(--accent-soft);box-shadow:inset 0 0 0 1.5px var(--accent)}
+:root:not(.px) .sitem-code{font-family:var(--sans);font-weight:700}
+:root:not(.px) .sitem-tag{border:0;background:var(--surface);font:600 .64rem var(--sans)}
+:root:not(.px) .side-close{border:0;border-radius:12px}
+:root:not(.px) .side-sec{border-top:1px solid var(--hair)}
+:root:not(.px) .side-sec-title{font:600 .7rem var(--sans);letter-spacing:.08em}
+
+/* --- мобильный вид: плавающая нижняя панель --- */
+@media (max-width:760px){
+  :root:not(.px) main{padding:14px 14px 24px}
+  :root:not(.px) body{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+  :root:not(.px) .tabbar{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));padding:6px;border:1px solid var(--hair);border-radius:24px;background:color-mix(in srgb,var(--surface) 88%,transparent);box-shadow:var(--sh-3)}
+  :root:not(.px) .tb{border-radius:18px;font:600 .68rem var(--sans);min-height:52px}
+  :root:not(.px) .tb.is-on{background:var(--accent-soft);color:var(--accent)}
+  :root:not(.px) .tb-code{border-radius:8px;font-family:var(--sans)}
+  :root:not(.px) .side-panel{border-radius:24px 24px 0 0}
+  :root:not(.px) #groups>details>summary,:root:not(.px) #groups2143>details>summary,:root:not(.px) #groupsOdt>details>summary{padding:16px 48px 16px 42px}
+  :root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before{left:16px;top:20px}
+  :root:not(.px) #groups>details>.details-body>.details-content,:root:not(.px) #groups2143>details>.details-body>.details-content,:root:not(.px) #groupsOdt>details>.details-body>.details-content{padding:0 8px 10px}
+  :root:not(.px) details.sub>.details-body>.details-content{padding:0 12px 12px}
+  :root:not(.px) .decoder,:root:not(.px) .calc{padding:16px;border-radius:var(--r-md)}
+  :root:not(.px) .lcard{padding:18px}
+  :root:not(.px) .lcard.is-last::after{position:static}
+  :root:not(.px) table.k th,:root:not(.px) table.k td{border-bottom:0}
+  :root:not(.px) table.k td{border-bottom:1px solid var(--hair)}
+}
+
+</style>
 </head>
 <body class="landing-open">
 <div id="landing" class="landing" role="dialog" aria-label="Выбор классификатора дефектов">
