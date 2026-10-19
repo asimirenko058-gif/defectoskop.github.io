@@ -1401,6 +1401,296 @@ html,body{overflow-x:clip}
 }
 
 </style>
+<script>/* wow: прячем стартовую страницу до начала интро (страховка — 4 с) */(function(){try{var r=document.documentElement;if(!r.classList.contains('px')&&!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)){r.classList.add('wow-pre');setTimeout(function(){r.classList.remove('wow-pre');},4000);}}catch(e){}})();</script>
+<style id="wow">
+/* =====================================================================
+   WOW-слой: анимации, переходы и интерактив.
+   Работает поверх UI v3 (обычный режим). Пиксель-режим (html.px) не трогаем.
+   Всё движение — только при prefers-reduced-motion: no-preference.
+   ===================================================================== */
+@property --wow-spot{syntax:'<percentage>';inherits:false;initial-value:0%}
+:root{--wow-ease:cubic-bezier(.22,1,.36,1);--wow-io:cubic-bezier(.76,0,.24,1);--wow-spring:cubic-bezier(.34,1.56,.64,1)}
+
+/* ---------- мелочи: выделение, скроллбар ---------- */
+:root:not(.px) ::selection{background:color-mix(in srgb,var(--accent) 26%,transparent)}
+:root:not(.px){scrollbar-color:color-mix(in srgb,var(--muted) 42%,transparent) transparent}
+
+/* ---------- до старта анимации стартовая страница скрыта (ставит скрипт в <head>) ---------- */
+html.wow-pre:not(.px) .landing-in>*{opacity:0}
+html.wow-pre:not(.px) .landing-in{animation:none}
+
+/* ---------- живой фон стартовой страницы ---------- */
+.wow-sky,.wow-glare,.wow-edge,.wow-prog,.wow-top,.wow-sheen,.wow-tb-ind{display:none}
+:root:not(.px) .wow-sky{display:block;position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;contain:strict}
+:root:not(.px) .landing-in{position:relative;z-index:1}
+.wow-sky .wb{position:absolute;border-radius:50%;opacity:var(--wo,.62);will-change:transform}
+.wow-sky .wb1{width:64vmax;height:64vmax;left:-20vmax;top:-32vmax;background:radial-gradient(closest-side,color-mix(in srgb,var(--c1) 50%,transparent),transparent)}
+.wow-sky .wb2{width:56vmax;height:56vmax;right:-22vmax;top:-8vmax;background:radial-gradient(closest-side,color-mix(in srgb,var(--g3) 44%,transparent),transparent)}
+.wow-sky .wb3{width:60vmax;height:60vmax;left:6vmax;bottom:-36vmax;background:radial-gradient(closest-side,color-mix(in srgb,var(--c2) 40%,transparent),transparent)}
+.wow-sky .wb4{width:38vmax;height:38vmax;right:6vmax;bottom:-12vmax;background:radial-gradient(closest-side,color-mix(in srgb,var(--g6) 36%,transparent),transparent)}
+.wow-sky canvas{position:absolute;inset:0;width:100%;height:100%}
+.wow-sky .wcur{position:absolute;left:0;top:0;width:680px;height:680px;margin:-340px 0 0 -340px;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--accent) 17%,transparent),transparent);opacity:0;transition:opacity .8s ease;will-change:transform}
+.wow-sky.has-cur .wcur{opacity:1}
+.wow-sky::after{content:"";position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+:root:not(.px)[data-theme="amoled"] .wow-sky{--wo:.34}
+:root:not(.px)[data-theme="amoled"] .wow-sky::after{opacity:.035}
+.landing.is-hidden .wow-sky .wb{animation-play-state:paused!important}
+
+/* ---------- 3D-карточки документов ---------- */
+:root:not(.px) .lcard .wow-glare,:root:not(.px) .lcard .wow-edge{display:block;position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .5s ease}
+:root:not(.px) .lcard .wow-glare{background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--lc) 15%,transparent),transparent 44%),radial-gradient(240px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.16),transparent 60%)}
+:root:not(.px) .lcard .wow-edge{padding:1.5px;background:radial-gradient(300px circle at var(--mx,50%) var(--my,50%),var(--lc),transparent 72%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude}
+:root:not(.px) .lcard.wow-hover .wow-glare,:root:not(.px) .lcard.wow-hover .wow-edge{opacity:1}
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  :root:not(.px) .landing .lcard{overflow:visible;transform-style:preserve-3d;transition:transform .9s var(--wow-spring),box-shadow .5s ease}
+  :root:not(.px) .landing .lcard.wow-hover{transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-8px) scale(var(--wps,1.01));transition:transform .2s ease-out,box-shadow .5s ease;box-shadow:0 34px 70px -24px color-mix(in srgb,var(--lc) 50%,transparent),var(--sh-3)}
+  :root:not(.px) .landing .lcard.wow-hover.wow-press{--wps:.985}
+  :root:not(.px) .landing .lcard>.lcard-ico,:root:not(.px) .landing .lcard>.lcard-code,:root:not(.px) .landing .lcard>.lcard-title,:root:not(.px) .landing .lcard>.lcard-note{transition:transform .6s var(--wow-ease)}
+  :root:not(.px) .landing .lcard>.lcard-open{transition:transform .6s var(--wow-ease),gap .25s ease}
+  :root:not(.px) .landing .lcard.wow-hover>.lcard-ico{transform:translateZ(44px) scale(1.04)}
+  :root:not(.px) .landing .lcard.wow-hover>.lcard-code{transform:translateZ(26px)}
+  :root:not(.px) .landing .lcard.wow-hover>.lcard-title{transform:translateZ(18px)}
+  :root:not(.px) .landing .lcard.wow-hover>.lcard-note{transform:translateZ(12px)}
+  :root:not(.px) .landing .lcard.wow-hover>.lcard-open{transform:translateZ(30px)}
+  :root:not(.px) .landing .lcard .lcard-ico svg{transition:transform .7s var(--wow-spring)}
+  :root:not(.px) .landing .lcard.wow-hover .lcard-ico svg{transform:rotate(-9deg) scale(1.1)}
+}
+
+/* ---------- полоса прогресса чтения и кнопка «наверх» ---------- */
+:root:not(.px) .wow-prog{display:block;position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:420;pointer-events:none;transition:opacity .4s ease}
+:root:not(.px) .wow-prog i{display:block;height:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--c1),var(--g3),var(--g7),var(--c2));box-shadow:0 0 14px color-mix(in srgb,var(--accent) 65%,transparent);border-radius:0 3px 3px 0}
+body.landing-open .wow-prog{opacity:0}
+@media (min-width:761px){
+  :root:not(.px) .wow-top{display:grid;place-items:center;position:fixed;right:26px;bottom:26px;z-index:390;width:54px;height:54px;padding:0;border:0;border-radius:50%;cursor:pointer;color:var(--accent);background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(12px) saturate(1.5);-webkit-backdrop-filter:blur(12px) saturate(1.5);box-shadow:var(--sh-3);opacity:0;transform:translateY(18px) scale(.6);pointer-events:none;transition:opacity .35s ease,transform .55s var(--wow-spring),box-shadow .3s ease}
+  :root:not(.px) .wow-top.on{opacity:1;transform:none;pointer-events:auto}
+  :root:not(.px) .wow-top:hover{box-shadow:0 14px 40px -8px color-mix(in srgb,var(--accent) 55%,transparent),var(--sh-3)}
+  :root:not(.px) .wow-top:active{transform:scale(.92)}
+  :root:not(.px) .wow-top:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  :root:not(.px) .wow-top svg{width:54px;height:54px;overflow:visible}
+  :root:not(.px) .wow-top .wt-bg{fill:none;stroke:var(--hair);stroke-width:3}
+  :root:not(.px) .wow-top .wt-fg{fill:none;stroke:url(#wowTopGrad);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transform:rotate(-90deg);transform-origin:24px 24px}
+  :root:not(.px) .wow-top .wt-ar{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--wow-spring)}
+  :root:not(.px) .wow-top:hover .wt-ar{transform:translateY(-3px)}
+  body.landing-open .wow-top{opacity:0!important;pointer-events:none!important}
+}
+
+/* ---------- мягкое свечение в шапке документа ---------- */
+:root:not(.px) body::before{content:"";position:absolute;left:0;right:0;top:0;height:min(720px,90vh);z-index:-1;pointer-events:none;background:radial-gradient(48% 68% at 12% 0%,color-mix(in srgb,var(--c1) 11%,transparent),transparent 70%),radial-gradient(42% 58% at 92% 6%,color-mix(in srgb,var(--g3) 10%,transparent),transparent 70%),radial-gradient(36% 40% at 55% 0%,color-mix(in srgb,var(--c2) 6%,transparent),transparent 70%)}
+:root:not(.px)[data-theme="amoled"] body::before{display:none}
+
+/* ---------- блик на табло расписания ---------- */
+:root:not(.px) .wow-sheen{display:block;position:absolute;top:0;bottom:0;left:0;width:36%;z-index:5;pointer-events:none;background:linear-gradient(100deg,transparent 0,rgba(255,255,255,.05) 35%,rgba(255,255,255,.12) 50%,rgba(255,255,255,.05) 65%,transparent 100%);transform:translateX(-130%) skewX(-18deg)}
+
+/* ---------- заголовки разделов: полоска-акцент ---------- */
+:root:not(.px) main>*>h2{position:relative}
+:root:not(.px) main>*>h2::after{content:"";position:absolute;left:0;bottom:-.32em;width:46px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--g3) 80%,var(--accent)));transform-origin:0 50%;transition:transform 1s var(--wow-ease) .25s}
+:root:not(.px) main>*>h2.wow-rv::after{transform:scaleX(0)}
+:root:not(.px) .wow-w{display:inline-block}
+
+/* ---------- скрытое до появления в зоне видимости ---------- */
+:root:not(.px) .wow-rv{opacity:0}
+
+/* ---------- прожектор под курсором на группах, декодере, калькуляторе ---------- */
+@media (hover:hover) and (pointer:fine){
+  :root:not(.px) #groups>details,:root:not(.px) #groups2143>details,:root:not(.px) #groupsOdt>details,:root:not(.px) .decoder,:root:not(.px) .calc{background-image:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--group-color,var(--accent)) var(--wow-spot),transparent),transparent 55%);transition:--wow-spot .6s ease,transform .22s var(--wow-ease),box-shadow .35s ease,border-color .2s ease,background-color .3s ease}
+  :root:not(.px) #groups>details:hover,:root:not(.px) #groups2143>details:hover,:root:not(.px) #groupsOdt>details:hover{--wow-spot:9%}
+  :root:not(.px) .decoder:hover,:root:not(.px) .calc:hover{--wow-spot:7%}
+}
+
+/* ---------- группы: точка-маркер, шеврон, карточки ---------- */
+:root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before{transition:transform .6s var(--wow-spring),border-radius .4s ease,box-shadow .4s ease}
+:root:not(.px) #groups>details:hover>summary::before,:root:not(.px) #groups2143>details:hover>summary::before,:root:not(.px) #groupsOdt>details:hover>summary::before{transform:scale(1.18)}
+:root:not(.px) #groups>details.is-open>summary::before,:root:not(.px) #groups2143>details.is-open>summary::before,:root:not(.px) #groupsOdt>details.is-open>summary::before{transform:rotate(45deg) scale(.9);border-radius:4px}
+:root:not(.px) details>summary::after{transition:transform .5s var(--wow-spring),margin .35s var(--wow-ease),opacity .3s}
+:root:not(.px) details.sub{transition:border-color .25s ease,box-shadow .4s var(--wow-ease),background-color .3s ease,transform .25s var(--wow-ease)}
+:root:not(.px) details.sub:not(.is-open):hover{box-shadow:inset 3px 0 0 var(--group-color,var(--accent)),var(--sh-1)}
+:root:not(.px) details.sub>summary code{transition:transform .45s var(--wow-spring),box-shadow .3s ease}
+:root:not(.px) details.sub:hover>summary code{transform:scale(1.07);box-shadow:0 4px 14px -4px color-mix(in srgb,var(--group-color,var(--accent)) 55%,transparent)}
+
+/* ---------- кнопки, чипы, поиск ---------- */
+:root:not(.px) .chip,:root:not(.px) .btn,:root:not(.px) .doc-stats button,:root:not(.px) .hitnav button{transition:background-color .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease,transform .35s var(--wow-spring)}
+:root:not(.px) .chip:active,:root:not(.px) .btn:active,:root:not(.px) .doc-stats button:active,:root:not(.px) .hitnav button:active{transform:scale(.93)}
+:root:not(.px) .doc-stats button:hover{transform:translateY(-2px);box-shadow:0 10px 24px -10px color-mix(in srgb,var(--accent) 55%,transparent)}
+:root:not(.px) .chip[aria-pressed=true]{box-shadow:0 8px 20px -8px color-mix(in srgb,var(--ink) 55%,transparent)}
+:root:not(.px) .toolbar input[type=search]{transition:border-color .25s ease,box-shadow .45s var(--wow-ease),background-color .3s ease}
+:root:not(.px) .toolbar input[type=search]:focus{box-shadow:0 0 0 4px var(--accent-soft),0 14px 34px -14px color-mix(in srgb,var(--accent) 60%,transparent)}
+:root:not(.px) .zt td{transition:transform .3s var(--wow-spring),box-shadow .3s ease}
+@media (hover:hover){:root:not(.px) .zt td:hover{transform:scale(1.1);position:relative;z-index:2;box-shadow:0 8px 22px -8px rgba(0,0,0,.35)}}
+
+/* ---------- нижняя панель: «пилюля» активной вкладки ---------- */
+@media (max-width:760px){
+  :root:not(.px) .wow-tb-ind{display:block;position:absolute;left:0;top:0;width:0;height:0;border-radius:18px;background:var(--accent-soft);opacity:0;pointer-events:none;z-index:0;transition:transform .6s var(--wow-spring),width .45s var(--wow-ease),height .45s var(--wow-ease),opacity .3s ease}
+  :root:not(.px) .wow-tb-ind.on{opacity:1}
+  :root:not(.px) .wow-tb-ind.no-tr{transition:none}
+  :root:not(.px) #tabbar.wow-has-ind .tb{position:relative;z-index:1}
+  :root:not(.px) #tabbar.wow-has-ind .tb.is-on{background:transparent}
+}
+
+/* ---------- переходы View Transitions ---------- */
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+html.wow-vt-home::view-transition-old(root){z-index:2}
+html.wow-vt-home::view-transition-new(root){z-index:1}
+html:is(.wow-vt-swap,.wow-vt-xref) #tabbar{view-transition-name:wow-tabbar}
+html:is(.wow-vt-swap,.wow-vt-xref) #scheduleBoard{view-transition-name:wow-board}
+html:is(.wow-vt-swap,.wow-vt-xref) #menuBtn{view-transition-name:wow-menu}
+html.wow-vt .landing,html.wow-vt body{transition:none!important}
+html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.wow-vt-px *,html.wow-vt-px *::before,html.wow-vt-px *::after{transition:none!important}
+
+/* ---------- рябь от нажатия ---------- */
+.wow-ripple{position:fixed;z-index:2147483000;pointer-events:none;overflow:hidden;contain:strict}
+.wow-ripple i{position:absolute;border-radius:50%;opacity:0}
+
+/* ==================== движение ==================== */
+@media (prefers-reduced-motion:no-preference){
+  /* фон */
+  :root:not(.px) .wow-sky .wb1{animation:wowDriftA 26s ease-in-out infinite alternate}
+  :root:not(.px) .wow-sky .wb2{animation:wowDriftB 31s ease-in-out infinite alternate}
+  :root:not(.px) .wow-sky .wb3{animation:wowDriftC 35s ease-in-out infinite alternate}
+  :root:not(.px) .wow-sky .wb4{animation:wowDriftB 23s ease-in-out -9s infinite alternate-reverse}
+
+  /* интро стартовой страницы */
+  :root:not(.px) .landing:is(.wow-play,.wow-lite) .landing-in{animation:none}
+  :root:not(.px) .landing:is(.wow-play,.wow-lite) .landing-rails{animation:wowFade 1s var(--wow-ease) backwards}
+  :root:not(.px) .landing:is(.wow-play,.wow-lite) .landing-kicker{animation:wowUp .7s var(--wow-ease) .12s backwards}
+  :root:not(.px) .landing-title{perspective:700px}
+  :root:not(.px) .landing-title .wwd{display:inline-block;white-space:nowrap}
+  :root:not(.px) .landing-title .wch{display:inline-block;white-space:pre;transform-origin:50% 100%}
+  :root:not(.px) .landing:is(.wow-play,.wow-lite) .landing-title .wch{animation:wowChar .9s var(--wow-ease) backwards;animation-delay:calc(.28s + var(--i)*26ms)}
+  :root:not(.px) .landing:is(.wow-play,.wow-lite) .landing-sub{animation:wowUp .8s var(--wow-ease) .7s backwards}
+  :root:not(.px) .landing:is(.wow-play,.wow-lite) .landing-now{animation:wowUp .8s var(--wow-ease) .8s backwards}
+  :root:not(.px) .landing.wow-play .lcard{animation:wowCardIn 1.1s var(--wow-ease) backwards}
+  :root:not(.px) .landing.wow-play .lcard:nth-child(1){animation-delay:.72s}
+  :root:not(.px) .landing.wow-play .lcard:nth-child(2){animation-delay:.84s}
+  :root:not(.px) .landing.wow-play .lcard:nth-child(3){animation-delay:.96s}
+  :root:not(.px) .landing.wow-play .lcard:nth-child(4){animation-delay:1.08s}
+  :root:not(.px) .landing .lcard-ico{animation:wowFloat 5.5s ease-in-out infinite}
+  :root:not(.px) .landing .lcard:nth-child(2) .lcard-ico{animation-delay:-1.8s}
+  :root:not(.px) .landing .lcard:nth-child(3) .lcard-ico{animation-delay:-3.6s}
+  :root:not(.px) .landing.wow-play .lcard .lcard-ico{animation:wowIcoIn .9s var(--wow-spring) 1.05s backwards,wowFloat 5.5s ease-in-out 2s infinite}
+  :root:not(.px) .landing.wow-play .lcard:nth-child(2) .lcard-ico{animation-delay:1.17s,2.6s}
+  :root:not(.px) .landing.wow-play .lcard:nth-child(3) .lcard-ico{animation-delay:1.29s,3.2s}
+
+  /* рельсы: укладка пути, бегущий импульс, светофор */
+  :root:not(.px) .landing .lr-sleepers rect{transform-box:fill-box;transform-origin:50% 50%;animation:wowSleeperFlow 2.8s ease-in-out infinite}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(1){animation-delay:-.0s}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(2){animation-delay:-.4s}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(3){animation-delay:-.8s}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(4){animation-delay:-1.2s}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(5){animation-delay:-1.6s}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(6){animation-delay:-2s}
+  :root:not(.px) .landing .lr-sleepers rect:nth-child(7){animation-delay:-2.4s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect{animation:wowSleeper .7s var(--wow-ease) backwards,wowSleeperFlow 2.8s ease-in-out 1.6s infinite}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(1){animation-delay:.1s,1.6s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(2){animation-delay:.17s,1.2s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(3){animation-delay:.24s,.8s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(4){animation-delay:.31s,.4s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(5){animation-delay:.38s,0s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(6){animation-delay:.45s,-.4s}
+  :root:not(.px) .landing.wow-play .lr-sleepers rect:nth-child(7){animation-delay:.52s,-.8s}
+  :root:not(.px) .landing.wow-play .lr-rail.wow-len{stroke-dasharray:1 1;animation:wowRail 1.1s var(--wow-io) .05s backwards}
+  :root:not(.px) .landing .lr-pulse{stroke-dasharray:.16 1.2;stroke-dashoffset:.16;stroke:color-mix(in srgb,var(--accent) 55%,#fff);stroke-width:5;filter:drop-shadow(0 0 5px var(--accent));animation:wowPulse 3.6s cubic-bezier(.45,0,.2,1) 1.4s infinite}
+  :root:not(.px) .landing.wow-play .lr-signal .lr-r{animation:wowSigR 1.5s steps(1,end) both}
+  :root:not(.px) .landing.wow-play .lr-signal .lr-g{animation:wowSigG 1.5s steps(1,end) both,lrBlink 2.4s ease-in-out 1.5s infinite}
+
+  /* градиентное слово в заголовке */
+  :root:not(.px) .landing-title .wwd.is-g .wch{color:var(--wc,var(--c1))}
+  :root:not(.px) .landing-title .wwd.is-g.wow-grad{background:linear-gradient(100deg,var(--c1) 0%,var(--g3) 30%,var(--g7) 50%,var(--g3) 70%,var(--c1) 100%) 0 0/200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:wowGradFlow 9s linear infinite}
+  :root:not(.px) .landing-title .wwd.is-g.wow-grad .wch{color:transparent}
+
+  /* шапка документа */
+  :root:not(.px) h1.wow-h1 .wow-w{animation:wowWord .95s var(--wow-ease) backwards;animation-delay:calc(.14s + var(--i)*65ms)}
+  :root:not(.px) h1.wow-h1::before{animation:wowBadge .8s var(--wow-spring) backwards}
+
+  /* группы: импульс точки, каскад карточек внутри */
+  :root:not(.px) #groups>details.is-open>summary::before,:root:not(.px) #groups2143>details.is-open>summary::before,:root:not(.px) #groupsOdt>details.is-open>summary::before{animation:wowPing 1s ease-out}
+  :root:not(.px) details.is-open>.details-body>.details-content>.codes>details.sub,
+  :root:not(.px) details.is-open>.details-body>.details-content>details.sub{animation:wowSubIn .65s var(--wow-ease) backwards}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(1){animation-delay:.06s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(2){animation-delay:.1s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(3){animation-delay:.14s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(4){animation-delay:.18s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(5){animation-delay:.22s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(6){animation-delay:.26s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(7){animation-delay:.3s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(8){animation-delay:.34s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(9){animation-delay:.38s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(10){animation-delay:.42s}
+  :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(n+11){animation-delay:.46s}
+  :root:not(.px) details.sub.is-open .cheat .cr{animation:wowCr .6s var(--wow-ease) backwards}
+  :root:not(.px) details.sub.is-open .cheat .cr:nth-child(2){animation-delay:.08s}
+  :root:not(.px) details.sub.is-open .cheat .cr:nth-child(3){animation-delay:.14s}
+  :root:not(.px) details.sub.is-open .cheat .cr:nth-child(4){animation-delay:.2s}
+  :root:not(.px) details.sub.is-open .cheat .cr:nth-child(5){animation-delay:.26s}
+  :root:not(.px) details.sub.is-open .cheat .cr:nth-child(n+6){animation-delay:.32s}
+
+  /* декодер: цифры «перелистываются», пояснения вспыхивают */
+  :root:not(.px) .big{perspective:600px}
+  :root:not(.px) .big .d{animation:wowDigit .75s var(--wow-spring) backwards;transform-origin:50% 100%;text-shadow:0 12px 34px color-mix(in srgb,currentColor 28%,transparent)}
+  :root:not(.px) .big .d2{animation-delay:.06s}
+  :root:not(.px) .big .d3{animation-delay:.12s}
+  :root:not(.px) .big .d.wow-same{animation:none}
+  :root:not(.px) .mean.wow-flash{animation:wowMean .8s var(--wow-ease)}
+  :root:not(.px) .status.wow-flash{animation:wowPop .55s var(--wow-spring)}
+  :root:not(.px) .verdict.odr{animation:popIn .35s cubic-bezier(.22,1,.36,1) backwards,wowAlarm 1.5s .35s ease-out 2}
+  :root:not(.px) .dd.open .dd-list li{animation:wowLi .38s var(--wow-ease) backwards}
+  :root:not(.px) .dd.open .dd-list li:nth-child(2){animation-delay:.02s}
+  :root:not(.px) .dd.open .dd-list li:nth-child(3){animation-delay:.04s}
+  :root:not(.px) .dd.open .dd-list li:nth-child(4){animation-delay:.06s}
+  :root:not(.px) .dd.open .dd-list li:nth-child(5){animation-delay:.08s}
+  :root:not(.px) .dd.open .dd-list li:nth-child(6){animation-delay:.1s}
+  :root:not(.px) .dd.open .dd-list li:nth-child(7){animation-delay:.12s}
+  :root:not(.px) .dd.open .dd-list li:nth-child(n+8){animation-delay:.14s}
+
+  /* поиск: найденные фрагменты «прокрашиваются» */
+  :root:not(.px) mark.hit{animation:wowMark .6s var(--wow-ease) backwards}
+  :root:not(.px) mark.hit.cur{animation:wowMarkCur 1.1s ease-out}
+
+  /* табло, меню, нижняя панель */
+  :root:not(.px) .wow-sheen{animation:wowSheen 9s cubic-bezier(.45,0,.25,1) 2.5s infinite}
+  :root:not(.px) .landing-now.is-class .ln-dot,:root:not(.px) .landing-now.is-break .ln-dot{animation:wowDot 1.8s ease-in-out infinite}
+  :root:not(.px) .side-panel.is-open .sitem,:root:not(.px) .side-panel.is-open .side-sec-title{animation:wowSideIn .6s var(--wow-ease) backwards;animation-delay:calc(.08s + var(--wi,0)*45ms)}
+  :root:not(.px) #tabbar .tb.wow-tap svg,:root:not(.px) #tabbar .tb.wow-tap .tb-code{animation:wowTap .55s var(--wow-spring)}
+}
+@media (prefers-reduced-motion:no-preference) and (max-width:760px){
+  :root:not(.px) .side-panel.is-open .sitem,:root:not(.px) .side-panel.is-open .side-sec-title{animation-name:wowSideUp}
+}
+
+@keyframes wowDriftA{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(9vmax,6vmax,0) scale(1.14)}100%{transform:translate3d(-3vmax,11vmax,0) scale(.94)}}
+@keyframes wowDriftB{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-10vmax,7vmax,0) scale(.9)}100%{transform:translate3d(-4vmax,-6vmax,0) scale(1.12)}}
+@keyframes wowDriftC{0%{transform:translate3d(0,0,0) scale(1.05)}50%{transform:translate3d(8vmax,-8vmax,0) scale(.92)}100%{transform:translate3d(14vmax,-2vmax,0) scale(1.1)}}
+@keyframes wowFade{from{opacity:0}}
+@keyframes wowUp{from{opacity:0;transform:translateY(18px);filter:blur(6px)}}
+@keyframes wowChar{from{opacity:0;transform:translateY(.6em) rotateX(-95deg);filter:blur(8px)}}
+@keyframes wowCardIn{from{opacity:0;transform:perspective(900px) translateY(80px) rotateX(26deg) scale(.92);filter:blur(10px)}}
+@keyframes wowIcoIn{from{opacity:0;transform:scale(.2) rotate(-35deg)}}
+@keyframes wowFloat{0%,100%{translate:0 0}50%{translate:0 -5px}}
+@keyframes wowSleeper{from{opacity:0;transform:scaleX(.15)}}
+@keyframes wowSleeperFlow{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes wowRail{from{stroke-dashoffset:1}}
+@keyframes wowPulse{0%{stroke-dashoffset:.16;opacity:0}12%{opacity:1}62%{stroke-dashoffset:-1;opacity:.15}100%{stroke-dashoffset:-1;opacity:0}}
+@keyframes wowSigR{0%{fill:#ff453a;filter:drop-shadow(0 0 5px #ff453a)}100%{fill:#4a2a2a;filter:none}}
+@keyframes wowSigG{0%{fill:#1e3a2c;filter:none}100%{fill:#2fbf71;filter:drop-shadow(0 0 5px #2fbf71)}}
+@keyframes wowGradFlow{to{background-position:200% 0}}
+@keyframes wowWord{from{opacity:0;transform:translateY(.55em) rotate(2deg);filter:blur(10px)}}
+@keyframes wowBadge{from{opacity:0;transform:translateY(10px) scale(.86)}}
+@keyframes wowPing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--group-color,var(--accent)) 60%,transparent)}100%{box-shadow:0 0 0 18px transparent}}
+@keyframes wowSubIn{from{opacity:0;transform:translateY(16px) scale(.97)}}
+@keyframes wowCr{from{opacity:0;transform:translateX(-12px)}}
+@keyframes wowDigit{from{opacity:0;transform:translateY(.35em) rotateX(-85deg);filter:blur(6px)}}
+@keyframes wowMean{0%{background-color:color-mix(in srgb,currentColor 18%,var(--surface-2,var(--surface)));transform:translateX(6px)}}
+@keyframes wowPop{0%{transform:scale(.95);opacity:.5}}
+@keyframes wowAlarm{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--odr) 55%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@keyframes wowLi{from{opacity:0;transform:translateY(-6px)}}
+@keyframes wowMark{from{background-color:transparent;box-shadow:0 0 0 7px transparent}}
+@keyframes wowMarkCur{0%{box-shadow:0 0 0 0 rgba(255,193,7,.85)}100%{box-shadow:0 0 0 14px rgba(255,193,7,0)}}
+@keyframes wowSheen{0%{transform:translateX(-130%) skewX(-18deg)}24%,100%{transform:translateX(330%) skewX(-18deg)}}
+@keyframes wowDot{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+@keyframes wowSideIn{from{opacity:0;transform:translateX(30px)}}
+@keyframes wowSideUp{from{opacity:0;transform:translateY(18px)}}
+@keyframes wowTap{0%{transform:scale(1)}35%{transform:scale(.78) translateY(2px)}100%{transform:scale(1)}}
+
+@media print{.wow-sky,.wow-prog,.wow-top,.wow-ripple,.wow-sheen,.wow-tb-ind{display:none!important}.wow-rv{opacity:1!important}body::before{display:none!important}}
+</style>
 </head>
 <body class="landing-open">
 <div id="landing" class="landing" role="dialog" aria-label="Выбор классификатора дефектов">
@@ -8255,6 +8545,518 @@ document.addEventListener('click',function(e){
   requestAnimationFrame(function(){resize();kick();});
 })();
 
+</script>
+<script id="wow-js">
+/* =====================================================================
+   WOW-слой: интро стартовой страницы, 3D-карточки, частицы, переходы
+   между документами (View Transitions), смена темы «волной», появление
+   блоков при прокрутке, рябь, прогресс чтения, счётчики.
+   Всё отключается при prefers-reduced-motion и в пиксель-режиме.
+   ===================================================================== */
+(function(){
+'use strict';
+var root=document.documentElement,body=document.body;
+var landing=document.getElementById('landing');
+var mqReduce=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):{matches:false};
+var mqFine=window.matchMedia?matchMedia('(hover: hover) and (pointer: fine)'):{matches:false};
+function reduce(){return mqReduce.matches;}
+function px(){return root.classList.contains('px');}
+function fancy(){return !reduce()&&!px();}
+function $(s,c){return (c||document).querySelector(s);}
+function $$(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s));}
+function raf(f){return requestAnimationFrame(f);}
+function safe(name,fn){try{fn();}catch(e){if(window.console)console.warn('[wow] '+name,e);}}
+function landingOpen(){return !!landing&&!landing.classList.contains('is-hidden');}
+function curDoc(){var o=document.getElementById('doc-odt'),t=document.getElementById('doc-2143');return o&&!o.hidden?'odt':t&&!t.hidden?'2143':'2499';}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var EASE='cubic-bezier(.22,1,.36,1)',EASE_IO='cubic-bezier(.76,0,.24,1)';
+
+/* ---------- счётчик «от нуля» ---------- */
+function countUp(el,dur,delay){
+  if(!el||el.__wowCnt)return;
+  var orig=el.textContent,m=orig.match(/^(\D*?)(\d+)([\s\S]*)$/);
+  if(!m)return;var n=+m[2];if(!n||n<3)return;
+  el.__wowCnt=1;el.textContent=m[1]+'0'+m[3];
+  setTimeout(function(){
+    var t0=performance.now();
+    (function step(t){
+      var k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,4);
+      el.textContent=k<1?m[1]+Math.round(n*e)+m[3]:orig;
+      if(k<1)raf(step);else el.__wowCnt=0;
+    })(t0);
+  },delay||0);
+}
+
+/* ---------- «табло»: буквы перебираются и встают на место ---------- */
+var SCR='АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЭЮЯ0123456789#%+·';
+function scramble(el,dur){
+  if(!el)return;
+  var fin=el.__wowTxt||(el.__wowTxt=el.textContent);
+  if(el.__wowScr)clearInterval(el.__wowScr);
+  el.textContent='';var sp=document.createElement('span');sp.textContent=fin;el.appendChild(sp);
+  sp.style.display='inline-block';var w=sp.getBoundingClientRect().width;
+  sp.style.cssText='display:inline-block;white-space:pre;text-align:left;width:'+Math.ceil(w)+'px';
+  var t0=performance.now(),N=fin.length,at=[];
+  for(var i=0;i<N;i++)at.push(dur*.25+dur*.75*(i/N)+Math.random()*90);
+  el.__wowScr=setInterval(function(){
+    var t=performance.now()-t0,s='',done=true;
+    for(var i=0;i<N;i++){var c=fin[i];if(c===' '||t>=at[i])s+=c;else{done=false;s+=SCR[(Math.random()*SCR.length)|0];}}
+    sp.textContent=s;
+    if(done){clearInterval(el.__wowScr);el.__wowScr=0;el.textContent=fin;}
+  },45);
+}
+
+/* =====================================================================
+   1. Стартовая страница: фон, частицы, курсор, параллакс, интро
+   ===================================================================== */
+var sky=null,field=null;
+safe('sky',function(){
+  if(!landing)return;
+  sky=document.createElement('div');sky.className='wow-sky';sky.setAttribute('aria-hidden','true');
+  sky.innerHTML='<i class="wb wb1"></i><i class="wb wb2"></i><i class="wb wb3"></i><i class="wb wb4"></i><canvas></canvas><i class="wcur"></i>';
+  landing.insertBefore(sky,landing.firstChild);
+});
+
+/* частицы-«искры» с паутиной связей; курсор их расталкивает */
+function Field(cv){
+  var ctx=cv.getContext&&cv.getContext('2d');if(!ctx)return null;
+  var W=0,H=0,P=[],run=false,id=0,last=0,mx=-1e4,my=-1e4,col='#3b5bdb',LINK=118;
+  function color(){var c=getComputedStyle(root).getPropertyValue('--accent').trim();if(c)col=c;}
+  function size(){
+    var dpr=Math.min(2,window.devicePixelRatio||1);W=innerWidth;H=innerHeight;
+    cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.max(22,Math.min(78,W*H/17000)));P=[];
+    for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,r:.7+Math.random()*1.9,vx:(Math.random()-.5)*.18,vy:-(.06+Math.random()*.26),a:.18+Math.random()*.5,t:Math.random()*6.28});
+  }
+  function frame(t){
+    if(!run)return;id=raf(frame);
+    var k=Math.min(3,(t-(last||t))/16.67);last=t;
+    ctx.clearRect(0,0,W,H);ctx.fillStyle=col;ctx.strokeStyle=col;
+    var i,j,p,q,dx,dy,d;
+    for(i=0;i<P.length;i++){
+      p=P[i];p.x+=p.vx*k;p.y+=p.vy*k;p.t+=.025*k;
+      dx=p.x-mx;dy=p.y-my;d=dx*dx+dy*dy;
+      if(d<19600){d=Math.sqrt(d)||1;var f=(140-d)/140*1.6*k;p.x+=dx/d*f;p.y+=dy/d*f;}
+      if(p.y<-12){p.y=H+12;p.x=Math.random()*W;}else if(p.y>H+12)p.y=-12;
+      if(p.x<-12)p.x=W+12;else if(p.x>W+12)p.x=-12;
+      ctx.globalAlpha=p.a*(.55+.45*Math.sin(p.t));
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.2832);ctx.fill();
+    }
+    ctx.lineWidth=1;
+    for(i=0;i<P.length;i++){p=P[i];
+      for(j=i+1;j<P.length;j++){q=P[j];dx=p.x-q.x;if(dx>LINK||dx<-LINK)continue;dy=p.y-q.y;if(dy>LINK||dy<-LINK)continue;
+        d=Math.sqrt(dx*dx+dy*dy);if(d<LINK){ctx.globalAlpha=(1-d/LINK)*.13;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.stroke();}}
+      dx=p.x-mx;dy=p.y-my;d=Math.sqrt(dx*dx+dy*dy);
+      if(d<190){ctx.globalAlpha=(1-d/190)*.32;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(mx,my);ctx.stroke();}
+    }
+    ctx.globalAlpha=1;
+  }
+  var api={
+    start:function(){if(run)return;run=true;last=0;color();id=raf(frame);},
+    stop:function(){run=false;cancelAnimationFrame(id);ctx.clearRect(0,0,W,H);},
+    size:size,color:color,
+    mouse:function(x,y){mx=x;my=y;}
+  };
+  size();return api;
+}
+safe('field',function(){if(sky)field=Field(sky.querySelector('canvas'));});
+function syncField(){
+  if(!field)return;
+  if(fancy()&&landingOpen()&&!document.hidden)field.start();else field.stop();
+}
+
+/* курсор-прожектор и параллакс слоёв */
+safe('parallax',function(){
+  if(!sky)return;
+  var cur=sky.querySelector('.wcur'),blobs=$$('.wb',sky);
+  var rails=$('.landing-rails'),title=$('.landing-title'),cards=$('.landing-cards');
+  var tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,on=false,loop=0;
+  function tick(){
+    loop=0;x+=(tx-x)*.12;y+=(ty-y)*.12;
+    cur.style.transform='translate3d('+x.toFixed(1)+'px,'+y.toFixed(1)+'px,0)';
+    var nx=(x/innerWidth-.5)*2,ny=(y/innerHeight-.5)*2;
+    blobs.forEach(function(b,i){var k=(i+1)*9;b.style.translate=(nx*k).toFixed(1)+'px '+(ny*k).toFixed(1)+'px';});
+    if(rails)rails.style.translate=(nx*-12).toFixed(1)+'px '+(ny*-7).toFixed(1)+'px';
+    if(title)title.style.translate=(nx*5).toFixed(1)+'px '+(ny*3).toFixed(1)+'px';
+    if(cards)cards.style.translate=(nx*-4).toFixed(1)+'px '+(ny*-3).toFixed(1)+'px';
+    if(Math.abs(tx-x)>.4||Math.abs(ty-y)>.4)loop=raf(tick);
+  }
+  window.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'||!landingOpen()||!fancy())return;
+    tx=e.clientX;ty=e.clientY;if(field)field.mouse(tx,ty);
+    if(!on){on=true;sky.classList.add('has-cur');}
+    if(!loop)loop=raf(tick);
+  },{passive:true});
+  document.addEventListener('mouseout',function(e){if(e.relatedTarget)return;on=false;sky.classList.remove('has-cur');if(field)field.mouse(-1e4,-1e4);});
+});
+
+/* рельсы: разделить на две линии (для «укладки»), добавить бегущий импульс */
+safe('rails',function(){
+  var rail=$('.landing-rails .lr-rail');if(!rail)return;
+  var segs=(rail.getAttribute('d')||'').match(/M[^M]+/g);
+  if(segs&&segs.length>1){
+    rail.setAttribute('d',segs[0].trim());
+    var after=rail;
+    for(var k=1;k<segs.length;k++){var c=rail.cloneNode(false);c.setAttribute('d',segs[k].trim());after.parentNode.insertBefore(c,after.nextSibling);after=c;}
+  }
+  $$('.landing-rails .lr-rail').forEach(function(p){
+    p.setAttribute('pathLength','1');p.classList.add('wow-len');
+    var q=p.cloneNode(false);q.setAttribute('class','lr-pulse');q.removeAttribute('stroke');q.setAttribute('fill','none');
+    q.setAttribute('stroke-linecap','round');q.setAttribute('pathLength','1');q.setAttribute('stroke','none');
+    p.parentNode.insertBefore(q,p.nextSibling);
+  });
+});
+
+/* заголовок: каждая буква — отдельный элемент, последнее слово — градиентом */
+var titleEl=$('.landing-title'),gradWord=null,introT=0,titleEnd=1800;
+safe('title',function(){
+  if(!titleEl||titleEl.children.length)return;
+  var txt=titleEl.textContent.trim(),words=txt.split(/\s+/),i=0,html='<span class="wow-sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">'+esc(txt)+'</span>';
+  words.forEach(function(w,wi){
+    var g=wi===words.length-1&&words.length>1,n=w.length;
+    html+='<span class="wwd'+(g?' is-g':'')+'" aria-hidden="true">';
+    for(var k=0;k<n;k++){
+      var st='--i:'+(i++);
+      if(g){var t=n>1?k/(n-1):0,pos=t*50,c;
+        c=pos<=30?'color-mix(in srgb,var(--g3) '+(pos/30*100).toFixed(1)+'%,var(--c1))':'color-mix(in srgb,var(--g7) '+((pos-30)/20*100).toFixed(1)+'%,var(--g3))';
+        st+=';--wc:'+c;}
+      html+='<span class="wch" style="'+st+'">'+esc(w[k])+'</span>';
+    }
+    html+='</span>'+(wi<words.length-1?' ':'');
+  });
+  titleEl.innerHTML=html;gradWord=titleEl.querySelector('.wwd.is-g');
+  titleEnd=280+i*26+900;
+});
+
+var kicker=$('.landing-kicker');
+function playLanding(full){
+  root.classList.remove('wow-pre');
+  if(!landing||!fancy())return;
+  if(gradWord)gradWord.classList.remove('wow-grad');
+  landing.classList.remove('wow-play','wow-lite');void landing.offsetWidth;
+  landing.classList.add(full?'wow-play':'wow-lite');
+  scramble(kicker,full?1000:800);
+  if(full)$$('.lcard-cnt').forEach(function(c,i){countUp(c,1300,1150+i*120);});
+  clearTimeout(introT);introT=setTimeout(function(){if(gradWord)gradWord.classList.add('wow-grad');},titleEnd);
+}
+
+/* 3D-наклон карточек, блик и светящаяся кромка за курсором */
+safe('tilt',function(){
+  if(!mqFine.matches)return;
+  $$('.lcard').forEach(function(card){
+    card.insertAdjacentHTML('beforeend','<span class="wow-glare" aria-hidden="true"></span><span class="wow-edge" aria-hidden="true"></span>');
+    var r=null,st0=0,ex=0,ey=0,id=0;
+    function apply(){
+      id=0;if(!r)return;var top=r.top-(landing.scrollTop-st0);
+      var x=Math.max(0,Math.min(1,(ex-r.left)/r.width)),y=Math.max(0,Math.min(1,(ey-top)/r.height));
+      card.style.setProperty('--mx',(x*100).toFixed(1)+'%');card.style.setProperty('--my',(y*100).toFixed(1)+'%');
+      card.style.setProperty('--ry',((x-.5)*16).toFixed(2)+'deg');card.style.setProperty('--rx',((.5-y)*13).toFixed(2)+'deg');
+    }
+    card.addEventListener('pointerenter',function(e){
+      if(e.pointerType!=='mouse'||!fancy())return;
+      card.classList.remove('wow-hover');r=card.getBoundingClientRect();st0=landing.scrollTop;
+      ex=e.clientX;ey=e.clientY;apply();card.classList.add('wow-hover');
+    });
+    card.addEventListener('pointermove',function(e){if(!r)return;ex=e.clientX;ey=e.clientY;if(!id)id=raf(apply);});
+    function leave(){r=null;card.classList.remove('wow-hover','wow-press');card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg');}
+    card.addEventListener('pointerleave',leave);
+    card.addEventListener('pointerdown',function(){if(r)card.classList.add('wow-press');});
+    card.addEventListener('pointerup',function(){card.classList.remove('wow-press');});
+    card.__wowLeave=leave;
+  });
+});
+function resetCards(){$$('.lcard').forEach(function(c){if(c.__wowLeave)c.__wowLeave();});}
+
+/* =====================================================================
+   2. Переходы: документ «вырастает» из карточки, смена темы «волной»
+   ===================================================================== */
+var VT=typeof document.startViewTransition==='function',vtBusy=false,passing=false;
+function cover(x,y){return Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));}
+function insetOf(r,rad){
+  return 'inset('+r.top.toFixed(1)+'px '+(innerWidth-r.right).toFixed(1)+'px '+(innerHeight-r.bottom).toFixed(1)+'px '+r.left.toFixed(1)+'px round '+rad+')';
+}
+/* геометрия «зума»: весь экран вписывается в прямоугольник карточки */
+function zoom(r,rad){
+  var W=innerWidth,H=innerHeight,s=Math.max(r.width/W,r.height/H)||1;
+  var lw=r.width/s,lh=r.height/s,il=(W-lw)/2,it=(H-lh)/2,rr=(parseFloat(rad)||22)/s;
+  return{
+    clip:'inset('+it.toFixed(1)+'px '+il.toFixed(1)+'px '+it.toFixed(1)+'px '+il.toFixed(1)+'px round '+rr.toFixed(1)+'px)',
+    tf:'translate('+(r.left+r.width/2-W/2).toFixed(1)+'px,'+(r.top+r.height/2-H/2).toFixed(1)+'px) scale('+s.toFixed(4)+')',
+    org:(r.left+r.width/2).toFixed(1)+'px '+(r.top+r.height/2).toFixed(1)+'px',
+    back:Math.min(2.2,1+.6/s).toFixed(3)
+  };
+}
+function animVT(kind,info){
+  var NEW='::view-transition-new(root)',OLD='::view-transition-old(root)',pxm=px();
+  var x=info.x,y=info.y,R=cover(x,y);
+  if(kind==='open'&&info.rect){
+    var z=zoom(info.rect,info.rad),ez=pxm?'steps(9,end)':EASE_IO,dz=pxm?720:950;
+    root.animate({clipPath:[z.clip,'inset(0px 0px 0px 0px round 0px)'],transform:[z.tf,'none'],transformOrigin:['50% 50%','50% 50%']},{duration:dz,easing:ez,pseudoElement:NEW,fill:'both'});
+    root.animate(pxm?{transform:['scale(1)','scale('+z.back+')'],transformOrigin:[z.org,z.org],opacity:[1,0]}:{transform:['scale(1)','scale('+z.back+')'],transformOrigin:[z.org,z.org],opacity:[1,0],filter:['blur(0px)','blur(8px)']},{duration:dz,easing:ez,pseudoElement:OLD,fill:'both'});
+  }else if(kind==='home'){
+    var card=$('.lcard[data-doc="'+info.doc+'"]');
+    if(card){
+      var z2=zoom(card.getBoundingClientRect(),getComputedStyle(card).borderRadius),ez2=pxm?'steps(9,end)':EASE_IO,dz2=pxm?720:900;
+      root.animate({clipPath:['inset(0px 0px 0px 0px round 0px)',z2.clip],transform:['none',z2.tf],opacity:[1,1,0]},{duration:dz2,easing:ez2,pseudoElement:OLD,fill:'both'});
+      root.animate({transform:['scale('+z2.back+')','scale(1)'],transformOrigin:[z2.org,z2.org],opacity:[0,1],filter:['blur(8px)','blur(0px)']},{duration:dz2,easing:ez2,pseudoElement:NEW,fill:'both'});
+    }else root.animate({opacity:[0,1]},{duration:500,pseudoElement:NEW,fill:'both'});
+  }else if(kind==='swap'&&!pxm){
+    root.animate({filter:['blur(0px) brightness(1)','blur(8px) brightness(.85)']},{duration:700,easing:EASE_IO,pseudoElement:OLD,fill:'both'});
+    root.animate({transform:['translateX(7%)','translateX(0)'],opacity:[0,1],filter:['blur(10px)','blur(0px)']},{duration:760,easing:EASE,pseudoElement:NEW,fill:'both'});
+  }else{
+    var dur=kind==='xref'?760:kind==='px'?720:680;
+    root.animate({clipPath:['circle(0px at '+x+'px '+y+'px)','circle('+R.toFixed(0)+'px at '+x+'px '+y+'px)']},{duration:dur,easing:(pxm||kind==='px')?'steps(10,end)':'cubic-bezier(.65,0,.35,1)',pseudoElement:NEW,fill:'both'});
+    if(kind==='xref')root.animate({transform:['scale(1)','scale(.96)'],filter:['blur(0px)','blur(6px)']},{duration:dur,easing:EASE_IO,pseudoElement:OLD,fill:'both'});
+  }
+}
+function vt(kind,update,info){
+  if(!VT||reduce()||vtBusy){update();return;}
+  vtBusy=true;root.classList.add('wow-vt','wow-vt-'+kind);
+  var done=function(){vtBusy=false;root.classList.remove('wow-vt','wow-vt-'+kind);};
+  var t;
+  try{t=document.startViewTransition(function(){update();});}
+  catch(e){done();update();return;}
+  t.ready.then(function(){try{animVT(kind,info||{x:innerWidth/2,y:innerHeight/2});}catch(e){}}).catch(function(){});
+  t.finished.then(done,done);
+}
+
+/* перехват нажатий: запускаем переход и внутри него «повторяем» клик */
+safe('vt-click',function(){
+  if(!VT)return;
+  window.addEventListener('click',function(e){
+    if(!e.isTrusted||passing||reduce()||vtBusy)return;
+    if(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    var t=e.target&&e.target.closest&&e.target.closest('[data-doc],#theme,#pxToggle,a[data-to2499],a[data-toodt]');
+    if(!t||t.disabled)return;
+    var kind,info={x:e.clientX,y:e.clientY},r=t.getBoundingClientRect();
+    if(t.id==='theme')kind='theme';
+    else if(t.id==='pxToggle')kind='px';
+    else if(t.matches('a[data-to2499],a[data-toodt]'))kind='xref';
+    else{
+      var d=t.getAttribute('data-doc');if(d!=='2499'&&d!=='2143'&&d!=='odt')return;
+      if(landingOpen()){kind='open';info.rect=r;info.rad=getComputedStyle(t).borderRadius;}
+      else{if(d===curDoc())return;kind='swap';}
+    }
+    if(kind==='theme'||kind==='px'||(!info.x&&!info.y)){info.x=r.left+r.width/2;info.y=r.top+r.height/2;}
+    e.preventDefault();e.stopImmediatePropagation();
+    if(kind==='open')resetCards();
+    vt(kind,function(){passing=true;try{t.click();}finally{passing=false;}},info);
+  },true);
+});
+
+/* возврат на главную: документ «сворачивается» в свою карточку */
+safe('home',function(){
+  var orig=window.__goHome;if(typeof orig!=='function')return;
+  window.__goHome=function(fromHistory){
+    if(landingOpen())return orig.apply(window,arguments);
+    var doc=curDoc(),args=arguments;
+    vt('home',function(){orig.apply(window,args);playLanding(false);},{doc:doc,x:innerWidth/2,y:innerHeight/2});
+  };
+});
+
+/* =====================================================================
+   3. Документ: шапка, счётчики, появление блоков при прокрутке
+   ===================================================================== */
+function splitWords(h){
+  if(!h||h.__wowSplit||h.children.length)return;
+  h.__wowSplit=1;var parts=h.textContent.split(/(\s+)/),i=0;h.textContent='';
+  parts.forEach(function(p){
+    if(!p)return;
+    if(/^\s+$/.test(p)){h.appendChild(document.createTextNode(p));return;}
+    var s=document.createElement('span');s.className='wow-w';s.style.setProperty('--i',i++);s.textContent=p;h.appendChild(s);
+  });
+}
+var io=null;
+function reveal(el,delay){
+  el.__wowArmed=0;
+  if(!fancy()){el.classList.remove('wow-rv');return;}
+  var big=el.offsetHeight>260;
+  var kf=big?[{opacity:0,transform:'translateY(34px)'},{opacity:1,transform:'none'}]
+            :[{opacity:0,transform:'translateY(26px)',filter:'blur(6px)'},{opacity:1,transform:'none',filter:'blur(0px)'}];
+  try{el.animate(kf,{duration:big?900:800,delay:delay,easing:EASE,fill:'backwards'});}catch(e){}
+  el.classList.remove('wow-rv');
+}
+safe('io',function(){
+  if(!('IntersectionObserver' in window))return;
+  io=new IntersectionObserver(function(entries){
+    var vis=entries.filter(function(en){return en.isIntersecting;}).map(function(en){return en.target;});
+    vis.sort(function(a,b){return a.compareDocumentPosition(b)&4?-1:1;});
+    vis.forEach(function(el,i){io.unobserve(el);reveal(el,Math.min(i,9)*75);});
+  },{rootMargin:'0px 0px -7% 0px',threshold:0});
+});
+function armReveal(sec){
+  if(!io||!sec)return;
+  var list=[];
+  Array.prototype.forEach.call(sec.children,function(c){
+    if(c.tagName==='H1'||c.classList.contains('toolbar'))return;
+    if(/^groups/.test(c.id)){Array.prototype.forEach.call(c.children,function(g){if(g.tagName==='DETAILS')list.push(g);});return;}
+    list.push(c);
+  });
+  list.forEach(function(el){if(el.__wowArmed)return;el.__wowArmed=1;el.classList.add('wow-rv');io.observe(el);});
+}
+function docEnter(d){
+  if(!fancy())return;
+  var sec=document.getElementById('doc-'+d);if(!sec)return;
+  var h=sec.querySelector(':scope > h1');
+  if(h){splitWords(h);h.classList.remove('wow-h1');void h.offsetWidth;h.classList.add('wow-h1');}
+  $$(':scope > .doc-stats b',sec).forEach(function(b,i){countUp(b,1000,350+i*120);});
+  armReveal(sec);
+}
+safe('doc-watch',function(){
+  var last=null,q=false;
+  function check(){
+    q=false;
+    if(landingOpen()){last=null;return;}
+    resetCards();
+    var d=curDoc();if(d!==last){last=d;docEnter(d);}
+  }
+  function queue(){if(!q){q=true;raf(check);}}
+  if(landing)new MutationObserver(queue).observe(landing,{attributes:true,attributeFilter:['class']});
+  ['doc-2499','doc-2143','doc-odt'].forEach(function(id){var el=document.getElementById(id);if(el)new MutationObserver(queue).observe(el,{attributes:true,attributeFilter:['hidden']});});
+  if(!landingOpen())queue();
+});
+
+/* =====================================================================
+   4. Микро-взаимодействия
+   ===================================================================== */
+/* прожектор под курсором на группах, декодере и калькуляторе */
+safe('spot',function(){
+  if(!mqFine.matches)return;
+  var tgt=null,cx=0,cy=0,id=0;
+  document.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse'||px())return;
+    var t=e.target&&e.target.closest&&e.target.closest('#groups>details,#groups2143>details,#groupsOdt>details,.decoder,.calc');
+    if(!t)return;tgt=t;cx=e.clientX;cy=e.clientY;
+    if(!id)id=raf(function(){id=0;if(!tgt)return;var r=tgt.getBoundingClientRect();
+      tgt.style.setProperty('--mx',(cx-r.left).toFixed(0)+'px');tgt.style.setProperty('--my',(cy-r.top).toFixed(0)+'px');});
+  },{passive:true});
+});
+
+/* рябь от нажатия (без вмешательства в разметку кнопки) */
+safe('ripple',function(){
+  var SEL='.chip,.btn,.tb,.sitem,.doc-stats button,.dd-btn,.hitnav button,.menu-btn,summary,.wow-top';
+  document.addEventListener('pointerdown',function(e){
+    if(!fancy()||(e.button&&e.button!==0))return;
+    var t=e.target&&e.target.closest&&e.target.closest(SEL);
+    if(!t||t.disabled||t.matches('[data-doc],#theme,#pxToggle,#goHome'))return;
+    var r=t.getBoundingClientRect();if(r.width<8||r.height<8)return;
+    var cs=getComputedStyle(t),gc=cs.getPropertyValue('--group-color').trim();
+    var col=t.tagName==='SUMMARY'&&gc?gc:cs.color;
+    var host=document.createElement('span');host.className='wow-ripple';host.setAttribute('aria-hidden','true');
+    host.style.cssText='left:'+r.left+'px;top:'+r.top+'px;width:'+r.width+'px;height:'+r.height+'px;border-radius:'+cs.borderRadius;
+    var D=Math.hypot(Math.max(e.clientX-r.left,r.right-e.clientX),Math.max(e.clientY-r.top,r.bottom-e.clientY))*2;
+    var dot=document.createElement('i');
+    dot.style.cssText='left:'+(e.clientX-r.left-D/2)+'px;top:'+(e.clientY-r.top-D/2)+'px;width:'+D+'px;height:'+D+'px;background:'+col;
+    host.appendChild(dot);body.appendChild(host);
+    var kill=function(){if(host.parentNode)host.parentNode.removeChild(host);};
+    try{var a=dot.animate([{transform:'scale(0)',opacity:.24},{transform:'scale(1)',opacity:0}],{duration:680,easing:EASE});a.onfinish=kill;a.oncancel=kill;}catch(err){kill();}
+    setTimeout(kill,1500);
+  },{passive:true});
+});
+
+/* декодер: «перелистывается» только изменившаяся цифра; пояснения вспыхивают */
+safe('decoder',function(){
+  $$('.big').forEach(function(big){
+    var prev=$$('.d',big).map(function(d){return d.textContent;});
+    new MutationObserver(function(){
+      var ds=$$('.d',big),now=ds.map(function(d){return d.textContent;});
+      if(now.length===prev.length)ds.forEach(function(d,i){if(now[i]===prev[i])d.classList.add('wow-same');});
+      prev=now;
+    }).observe(big,{childList:true});
+  });
+  $$('.decoder').forEach(function(dec){
+    var els=$$('.mean,.status',dec);els.forEach(function(el){el.__wowTxt=el.textContent;});
+    var sch=false;
+    new MutationObserver(function(){
+      if(sch)return;sch=true;
+      raf(function(){sch=false;if(!fancy())return;
+        els.forEach(function(el){var t=el.textContent;if(t!==el.__wowTxt){el.__wowTxt=t;el.classList.remove('wow-flash');void el.offsetWidth;el.classList.add('wow-flash');}});
+      });
+    }).observe(dec,{subtree:true,childList:true,characterData:true});
+  });
+});
+
+/* нижняя панель: «пилюля» перетекает к активной вкладке, иконки пружинят */
+safe('tabbar',function(){
+  var bar=document.getElementById('tabbar');if(!bar)return;
+  var ind=document.createElement('span');ind.className='wow-tb-ind no-tr';ind.setAttribute('aria-hidden','true');
+  bar.insertBefore(ind,bar.firstChild);bar.classList.add('wow-has-ind');
+  var q=false,first=true;
+  function place(){
+    q=false;var br=bar.getBoundingClientRect();if(!br.width)return;
+    var on=bar.querySelector('.tb.is-on:not([hidden])');
+    if(!on){ind.classList.remove('on');return;}
+    var r=on.getBoundingClientRect();
+    ind.style.width=r.width+'px';ind.style.height=r.height+'px';
+    ind.style.transform='translate('+(r.left-br.left-bar.clientLeft).toFixed(1)+'px,'+(r.top-br.top-bar.clientTop).toFixed(1)+'px)';
+    ind.classList.add('on');
+    if(first){first=false;raf(function(){raf(function(){ind.classList.remove('no-tr');});});}
+  }
+  function queue(){if(!q){q=true;raf(place);}}
+  new MutationObserver(queue).observe(bar,{subtree:true,attributes:true,attributeFilter:['class','hidden']});
+  window.addEventListener('resize',queue);queue();
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('.tb');if(!b||!fancy())return;
+    b.classList.remove('wow-tap');void b.offsetWidth;b.classList.add('wow-tap');
+    setTimeout(function(){b.classList.remove('wow-tap');},600);
+  });
+});
+
+/* боковое меню: пункты выезжают по очереди */
+safe('side',function(){
+  var i=0;$$('#sidePanel .sitem,#sidePanel .side-sec-title').forEach(function(el){el.style.setProperty('--wi',i++);});
+});
+
+/* блик на табло */
+safe('sheen',function(){
+  var b=document.getElementById('scheduleBoard');if(!b)return;
+  var s=document.createElement('span');s.className='wow-sheen';s.setAttribute('aria-hidden','true');b.appendChild(s);
+});
+
+/* прогресс чтения и кнопка «наверх» с кольцом прогресса */
+safe('progress',function(){
+  var bar=document.createElement('div');bar.className='wow-prog';bar.setAttribute('aria-hidden','true');bar.innerHTML='<i></i>';
+  var top=document.createElement('button');top.type='button';top.className='wow-top';top.title='Наверх';top.setAttribute('aria-label','Наверх');
+  top.innerHTML='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><defs><linearGradient id="wowTopGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--c1)"/><stop offset=".55" style="stop-color:var(--g3)"/><stop offset="1" style="stop-color:var(--c2)"/></linearGradient></defs><circle class="wt-bg" cx="24" cy="24" r="21"/><circle class="wt-fg" cx="24" cy="24" r="21" pathLength="1"/><path class="wt-ar" d="M17 27 24 20 31 27"/></svg>';
+  body.appendChild(bar);body.appendChild(top);
+  var fill=bar.firstChild,ring=top.querySelector('.wt-fg'),q=false;
+  top.addEventListener('click',function(){window.scrollTo({top:0,behavior:reduce()?'auto':'smooth'});});
+  function upd(){
+    q=false;var h=document.documentElement.scrollHeight-innerHeight,y=window.scrollY||0,p=h>0?Math.min(1,Math.max(0,y/h)):0;
+    fill.style.transform='scaleX('+p.toFixed(4)+')';ring.style.strokeDashoffset=(1-p).toFixed(4);
+    top.classList.toggle('on',y>520&&!landingOpen());
+  }
+  function queue(){if(!q){q=true;raf(upd);}}
+  window.addEventListener('scroll',queue,{passive:true});window.addEventListener('resize',queue);
+  if(landing)new MutationObserver(queue).observe(landing,{attributes:true,attributeFilter:['class']});
+  upd();
+});
+
+/* =====================================================================
+   5. Состояние: тема, пиксель-режим, видимость вкладки
+   ===================================================================== */
+safe('state',function(){
+  var wasPx=px();
+  new MutationObserver(function(){
+    if(field)field.color();
+    var p=px();
+    if(p!==wasPx){wasPx=p;if(!p&&landingOpen())playLanding(false);}
+    syncField();
+  }).observe(root,{attributes:true,attributeFilter:['class','data-theme']});
+  if(landing)new MutationObserver(syncField).observe(landing,{attributes:true,attributeFilter:['class']});
+  document.addEventListener('visibilitychange',syncField);
+  var rt=0;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(field)field.size();},150);});
+  if(mqReduce.addEventListener)mqReduce.addEventListener('change',function(){syncField();root.classList.remove('wow-pre');});
+  if(window.matchMedia){var mqDark=matchMedia('(prefers-color-scheme: dark)');if(mqDark.addEventListener)mqDark.addEventListener('change',function(){if(field)field.color();});}
+});
+
+/* =====================================================================
+   Старт: ждём шрифты (не дольше 600 мс) и запускаем интро
+   ===================================================================== */
+var started=false;
+function go(){if(started)return;started=true;safe('intro',function(){playLanding(true);});syncField();}
+try{if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go,go);setTimeout(go,600);}else go();}catch(e){go();}
+})();
 </script>
 </body>
 </html>
