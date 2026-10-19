@@ -3757,7 +3757,6 @@ var SPECS={
   var clock=document.getElementById('scheduleClock');
   if(!board||!message||!clock)return;
   // Расписание и кабинеты по таблице на изображении.
-  // Кабинет для 5-й пары в исходной таблице не указан.
   var events=[
     {start:8*60,end:9*60+30,type:'class',num:1},
     {start:9*60+30,end:9*60+40,type:'break'},
@@ -3772,23 +3771,25 @@ var SPECS={
   var weekdayNames=['ВОСКРЕСЕНЬЕ','ПОНЕДЕЛЬНИК','ВТОРНИК','СРЕДА','ЧЕТВЕРГ','ПЯТНИЦА','СУББОТА'];
   // Индексы: 0=воскресенье, 1=понедельник ... 6=суббота.
   var rooms={
-    1:{1:'24',2:'24',3:'44',4:'44'},
-    2:{1:'24',2:'24',3:'24',4:'24',5:'24'},
+    1:{1:'42',2:'42',3:'42'},
+    2:{1:'46',2:'46',3:'46',4:'46'},
     3:{1:'46',2:'46',3:'46',4:'46'},
-    4:{1:'24',2:'24',3:'44',4:'44'},
-    5:{1:'46',2:'46',3:'44',4:'44'}
+    4:{1:'11',2:'11',3:'11',4:'11'},
+    5:{1:'46',2:'46',3:'24',4:'24'}
   };
-  // Названия пар по таблице на изображении (неделя 12.10–16.10.2026).
+  // Названия пар по таблице на изображении (неделя 19.10–23.10.2026).
   // Если название изменится — правьте только этот блок.
   var US='Средства ультразвукового';
-  var BD='Безопасность движения';
-  var PTE='ПТЭ, инструкции и безопасность';
+  var FS='Формирование сигналов «В»';
+  var TU='Технология ультразвукового';
+  var BP='Безопасность производства';
+  var PB='Пожарная безопасность';
   var subjects={
-    1:{1:US,2:US,3:BD,4:BD},
+    1:{1:US,2:US,3:US},
     2:{1:US,2:US,3:US,4:US},
-    3:{1:US,2:US,3:US,4:US},
-    4:{1:US,2:US,3:PTE,4:PTE},
-    5:{1:US,2:US,3:PTE,4:PTE}
+    3:{1:US,2:US,3:FS,4:FS},
+    4:{1:FS,2:FS,3:FS,4:FS},
+    5:{1:TU,2:TU,3:BP,4:PB}
   };
   function classDetails(day,num){
     var room=rooms[day]&&rooms[day][num];
@@ -3796,9 +3797,9 @@ var SPECS={
     return weekdayNames[day]+' · ПАРА '+num+(subj?' · '+subj.toUpperCase():'')+(room?' · КАБИНЕТ '+room:' · КАБИНЕТ НЕ УКАЗАН');
   }
   // Полное расписание (раскрывается по нажатию на бегущую строку).
-  var GR='Григорьев Б.Г.',AB='Абакумов В.В.';
-  var teachers={1:{1:GR,2:GR,3:AB,4:AB},2:{1:GR,2:GR,3:GR,4:GR},3:{1:GR,2:GR,3:GR,4:GR},4:{1:GR,2:GR,3:AB,4:AB},5:{1:GR,2:GR,3:AB,4:AB}};
-  var dayDates={1:'12.10',2:'13.10',3:'14.10',4:'15.10',5:'16.10'};
+  var GR='Григорьев Б.Г.',MT='Матвеев Э.В.';
+  var teachers={1:{1:GR,2:GR,3:GR},2:{1:GR,2:GR,3:GR,4:GR},3:{1:GR,2:GR,3:GR,4:GR},4:{1:GR,2:GR,3:GR,4:GR},5:{1:GR,2:GR,3:MT,4:MT}};
+  var dayDates={1:'19.10',2:'20.10',3:'21.10',4:'22.10',5:'23.10'};
   function hm(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
   var panel=document.getElementById('schedulePanel'),track=document.getElementById('scheduleTrack'),head=board.querySelector('.board-head');
   function esc2(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
