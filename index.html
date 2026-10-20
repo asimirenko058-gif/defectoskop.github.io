@@ -1705,6 +1705,132 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
 #doc-trn>h1::before{content:"Практика · по конспектам курса"}
 #trn-host{margin-top:18px;min-height:60vh}
 </style>
+<style id="gs-css">
+/* ================= ИИ-поиск по всем разделам ================= */
+html.gs-lock,html.gs-lock body{overflow:hidden}
+.gs{position:fixed;inset:0;z-index:1000;--gs-r:var(--r-lg,16px)}
+.gs[hidden]{display:none}
+.gs-back{position:absolute;inset:0;background:color-mix(in srgb,#06141b 46%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .22s ease}
+.gs.on .gs-back{opacity:1}
+.gs-panel{position:absolute;left:50%;top:7vh;width:min(780px,calc(100% - 32px));max-height:86vh;display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--gs-r);box-shadow:var(--sh-3,0 16px 40px rgba(0,0,0,.25)),0 2px 0 color-mix(in srgb,var(--accent) 30%,transparent) inset;overflow:hidden;transform:translate(-50%,10px) scale(.985);opacity:0;transition:transform .26s cubic-bezier(.22,1,.36,1),opacity .2s ease}
+.gs.on .gs-panel{transform:translate(-50%,0);opacity:1}
+.gs-head,.gs-chips,.gs-why,.gs-foot{flex:none}
+.gs-head{display:flex;gap:8px;align-items:center;padding:12px 12px 10px}
+.gs-field{flex:1;min-width:0;display:flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:0 8px 0 12px;transition:border-color .2s,box-shadow .2s;cursor:text}
+.gs-field:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+.gs-field>svg{width:21px;height:21px;flex:none;color:var(--accent)}
+.gs-field input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--ink);font:400 1.02rem var(--sans);padding:12px 0}
+.gs-field input::placeholder{color:var(--muted);opacity:1}
+.gs-field input::-webkit-search-cancel-button{cursor:pointer}
+.gs-ai{flex:none;font:700 .6rem var(--mono);letter-spacing:.08em;color:var(--surface);background:linear-gradient(135deg,var(--accent),var(--g3,var(--accent)));border-radius:6px;padding:3px 6px}
+.gs-x{flex:none;font:500 .85rem var(--sans);color:var(--ink);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 14px;cursor:pointer}
+.gs-x:hover{border-color:var(--accent)}
+.gs-chips{display:flex;gap:6px;padding:0 12px 8px;overflow-x:auto;scrollbar-width:none}
+.gs-chips::-webkit-scrollbar{display:none}
+.gs-chip{flex:none;display:inline-flex;align-items:center;gap:6px;font:500 .82rem var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.gs-chip b{font:600 .7rem var(--mono);color:var(--muted)}
+.gs-chip:hover:not(:disabled){border-color:var(--accent)}
+.gs-chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.gs-chip[aria-pressed=true] b{color:inherit;opacity:.85}
+.gs-chip:disabled{opacity:.42;cursor:default}
+.gs-why{display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:0 12px 8px;font-size:.78rem;color:var(--muted);min-height:0}
+.gs-why:empty{display:none}
+.gs-why-l{font:600 .64rem var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-right:2px}
+.gs-tag{display:inline-flex;align-items:baseline;gap:4px;background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);border-radius:999px;padding:2px 9px;color:var(--ink)}
+.gs-tag b{font-weight:600}
+.gs-tag s{color:var(--muted)}
+.gs-syn{color:var(--muted)}
+.gs-tag-code{background:color-mix(in srgb,var(--c2,var(--accent)) 12%,transparent);border-color:color-mix(in srgb,var(--c2,var(--accent)) 35%,transparent)}
+.gs-tag-no{background:transparent;border-style:dashed;color:var(--muted)}
+.gs-list{flex:1;min-height:120px;overflow-y:auto;overscroll-behavior:contain;padding:4px 8px 10px;border-top:1px solid var(--hair,var(--line))}
+.gs-r{display:block;position:relative;padding:11px 12px 12px;margin:4px 0;border-radius:12px;border:1px solid transparent;cursor:pointer;outline:0;transition:background .15s,border-color .15s;--dc:var(--c1,var(--accent))}
+.gs-r.is-act{background:color-mix(in srgb,var(--accent) 7%,var(--surface));border-color:color-mix(in srgb,var(--accent) 28%,var(--line))}
+.gs-d-2499{--dc:var(--c1,var(--accent))}.gs-d-2143{--dc:var(--c2,var(--accent))}.gs-d-odt{--dc:var(--g3,var(--accent))}.gs-d-trn{--dc:var(--g4,var(--accent))}
+.gs-r-top{display:flex;align-items:center;gap:7px;font:500 .72rem var(--sans);color:var(--muted);min-width:0}
+.gs-doc{flex:none;font:700 .66rem var(--mono);letter-spacing:.03em;color:var(--dc);background:color-mix(in srgb,var(--dc) 11%,transparent);border:1px solid color-mix(in srgb,var(--dc) 38%,transparent);border-radius:6px;padding:1px 6px}
+.gs-kind{flex:none;font-weight:600}
+.gs-path{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-sim{flex:none;display:inline-flex;align-items:center;gap:6px;font:600 .68rem var(--mono);color:var(--muted)}
+.gs-sim i{display:block;width:34px;height:5px;border-radius:3px;background:var(--hair,var(--line));overflow:hidden;position:relative}
+.gs-sim i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--p);background:var(--dc);border-radius:inherit}
+.gs-r-title{display:block;margin:5px 0 3px;font:600 1rem/1.35 var(--sans);color:var(--ink)}
+.gs-r-title code{font:600 .95rem var(--mono);color:var(--dc)}
+.gs-lab{display:block;margin:2px 0 1px;font:600 .64rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.gs-snip,.gs-ex{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:.9rem;line-height:1.5;color:color-mix(in srgb,var(--ink) 86%,var(--muted))}
+.gs-ans{display:block;margin-top:2px;font-size:.92rem;line-height:1.45}
+.gs-ans b{font-weight:600;color:var(--dc)}
+.gs-ex{margin-top:3px;font-size:.84rem;color:var(--muted);-webkit-line-clamp:2}
+.gs-r.is-open .gs-ex{-webkit-line-clamp:unset;display:block}
+.gs-acts{display:flex;gap:6px;margin-top:8px}
+.gs-mini{font:500 .78rem var(--sans);color:var(--dc);background:transparent;border:1px solid color-mix(in srgb,var(--dc) 40%,transparent);border-radius:999px;padding:4px 10px;cursor:pointer}
+.gs-mini:hover{background:color-mix(in srgb,var(--dc) 10%,transparent)}
+.gs-src{display:inline-flex;align-items:center;cursor:pointer}
+.gs-acts{flex-wrap:wrap}
+.gs mark,mark.gsx{background:color-mix(in srgb,#ffd54a 55%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.gs-r-title mark{background:none;padding:0;border-radius:0;box-shadow:inset 0 -.34em 0 color-mix(in srgb,#ffc928 55%,transparent)}
+mark.gsx{box-shadow:0 0 0 1px color-mix(in srgb,#e0a800 45%,transparent)}
+.gs-none,.gs-hello{padding:18px 8px 8px;color:var(--muted);font-size:.92rem;line-height:1.5}
+.gs-none b{display:block;color:var(--ink);margin-bottom:4px}
+.gs-hello-t{margin:0 4px 14px;max-width:62ch}
+.gs-hello-h{font:600 .64rem var(--mono);letter-spacing:.1em;text-transform:uppercase;margin:10px 4px 6px}
+.gs-ex-row{display:flex;flex-wrap:wrap;gap:6px}
+.gs-exq{font:400 .86rem var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 12px;cursor:pointer;text-align:left}
+.gs-exq:hover{border-color:var(--accent)}
+.gs-rec{border-style:dashed}
+.gs-foot{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;border-top:1px solid var(--hair,var(--line));font:500 .7rem var(--mono);color:var(--muted)}
+.gs-st{display:inline-flex;align-items:center;gap:7px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--muted)}
+.gs-dot.gs-ready{background:var(--c2,#2e7d5b)}
+.gs-dot.gs-busy,.gs-dot.gs-wait{background:var(--warn,#8a5a00);animation:gsPulse 1s ease-in-out infinite}
+.gs-dot.gs-fail{background:var(--odr,#b3261e)}
+@keyframes gsPulse{50%{opacity:.35}}
+.gs-keys kbd{font:600 .66rem var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 4px;background:var(--bg)}
+/* подсветка и вспышка на месте найденного */
+.gs-flash{animation:gsFlash 2.4s ease}
+@keyframes gsFlash{0%,35%{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 55%,transparent);background-color:color-mix(in srgb,var(--accent) 9%,transparent)}100%{box-shadow:0 0 0 0 transparent}}
+/* вход: поле на стартовой странице */
+.gs-land{display:flex;align-items:center;gap:10px;width:min(580px,100%);margin:0 auto 22px;padding:13px 12px 13px 16px;font:400 1rem var(--sans);color:var(--muted);text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh-1,0 2px 8px rgba(0,0,0,.06));cursor:text;transition:border-color .2s,box-shadow .2s,transform .15s}
+.gs-land:hover{border-color:var(--accent);box-shadow:var(--sh-2,0 6px 18px rgba(0,0,0,.1))}
+.gs-land:active{transform:scale(.99)}
+.gs-land:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.gs-land svg{width:22px;height:22px;flex:none;color:var(--accent)}
+.gs-land span.t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gs-land kbd{font:600 .68rem var(--mono);color:var(--muted);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;background:var(--bg)}
+/* вход: кнопка рядом с меню на компьютере */
+.gs-fab{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);right:64px;z-index:400;height:40px;display:flex;align-items:center;gap:7px;padding:0 12px 0 10px;font:600 .85rem var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md,10px);box-shadow:var(--sh-2,0 4px 14px rgba(20,35,43,.12));cursor:pointer;transition:border-color .2s,transform .15s}
+.gs-fab:hover{border-color:var(--accent)}
+.gs-fab:active{transform:scale(.96)}
+.gs-fab svg{width:20px;height:20px;color:var(--accent)}
+.gs-fab kbd{font:600 .62rem var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+body.landing-open .gs-fab{display:none}
+/* вход: кнопка в тулбаре документа */
+.toolbar .gs-tbtn{display:inline-flex;align-items:center;gap:5px;color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.toolbar .gs-tbtn svg{width:15px;height:15px}
+.tb[data-act="gsearch"] .ico-smooth{color:var(--accent)}
+@media (max-width:760px){
+  .tabbar{grid-template-columns:repeat(5,1fr)}
+  .tabbar.no-calc{grid-template-columns:repeat(4,1fr)}
+  .gs-fab{display:none}
+  .gs-panel{left:0;top:0;width:100%;height:100%;max-height:none;border:0;border-radius:0;transform:translateY(14px);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  .gs.on .gs-panel{transform:none}
+  .gs-head{padding:10px 10px 8px}
+  .gs-field input{font-size:16px}
+  .gs-x{padding:10px 12px}
+  .gs-chips{padding:0 10px 8px}
+  .gs-why{padding:0 10px 8px}
+  .gs-list{padding:4px 4px 16px}
+  .gs-r{padding:11px 10px 12px;margin:2px 0}
+  .gs-keys{display:none}
+  .gs-land{margin-bottom:16px}
+  .gs-land kbd{display:none}
+}
+@media (hover:none){.gs-keys,.gs-fab kbd,.gs-land kbd{display:none}}
+@media (prefers-reduced-motion:reduce){.gs-back,.gs-panel{transition:none}.gs-flash{animation:none}.gs-dot{animation:none!important}}
+:root.px .gs-panel{border-width:2px;box-shadow:var(--sh-3)}
+:root.px .gs-r.is-act{border-width:2px;border-style:dashed}
+:root.px .gs-sim i::after{background:repeating-linear-gradient(90deg,var(--dc) 0 4px,transparent 4px 6px)}
+@media print{.gs,.gs-fab,.gs-land,.gs-tbtn{display:none!important}}
+</style>
 </head>
 <body class="landing-open">
 <div id="landing" class="landing" role="dialog" aria-label="Выбор классификатора дефектов">
@@ -1722,6 +1848,7 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
     <p class="landing-kicker">ОАО «РЖД» · справочник</p>
     <h1 class="landing-title">Классификаторы дефектов</h1>
     <p class="landing-sub">Выберите документ, с которым будете работать</p>
+    <button type="button" class="gs-land" data-gs-open aria-label="ИИ-поиск по всем разделам"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg><span class="t">Найти по смыслу во всех разделах…</span><span class="gs-ai">ИИ</span><kbd>Ctrl K</kbd></button>
     <div class="landing-now" id="landingNow" hidden><span class="ln-dot"></span><span class="ln-txt"></span></div>
     <div class="landing-cards">
       <button type="button" class="lcard lc-2499" data-doc="2499">
@@ -1758,9 +1885,11 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
 <button id="menuBtn" class="menu-btn" type="button" aria-label="Меню документов" aria-expanded="false" aria-controls="sidePanel" title="Меню">
   <span class="mb" aria-hidden="true"></span><span class="mb" aria-hidden="true"></span><span class="mb" aria-hidden="true"></span>
 </button>
+<button type="button" class="gs-fab" data-gs-open aria-label="ИИ-поиск по всем разделам" title="ИИ-поиск по всем разделам · Ctrl+K"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg><span>Поиск</span><kbd>Ctrl K</kbd></button>
 <nav class="tabbar" id="tabbar" aria-label="Быстрые переходы">
   <button type="button" class="tb" data-act="list"><svg class="ico-smooth" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><svg class="ico-px" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="2" y="0" width="4" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="0" y="2" width="1" height="1" fill="currentColor"/><rect x="7" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="1" height="1" fill="currentColor"/><rect x="7" y="3" width="1" height="1" fill="currentColor"/><rect x="0" y="4" width="1" height="1" fill="currentColor"/><rect x="7" y="4" width="1" height="1" fill="currentColor"/><rect x="0" y="5" width="1" height="1" fill="currentColor"/><rect x="7" y="5" width="1" height="1" fill="currentColor"/><rect x="1" y="6" width="1" height="1" fill="currentColor"/><rect x="6" y="6" width="1" height="1" fill="currentColor"/><rect x="2" y="7" width="6" height="1" fill="currentColor"/><rect x="6" y="8" width="3" height="1" fill="currentColor"/><rect x="7" y="9" width="3" height="1" fill="currentColor"/><rect x="8" y="10" width="3" height="1" fill="currentColor"/><rect x="9" y="11" width="2" height="1" fill="currentColor"/></svg><span>Дефекты</span></button>
   <button type="button" class="tb" data-act="calc"><svg class="ico-smooth" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="5" y="3" width="14" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 7h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="12" r="1.2" fill="currentColor"/><circle cx="15" cy="12" r="1.2" fill="currentColor"/><circle cx="9" cy="16.5" r="1.2" fill="currentColor"/><circle cx="15" cy="16.5" r="1.2" fill="currentColor"/></svg><svg class="ico-px" viewBox="0 0 10 11" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="0" y="0" width="10" height="1" fill="currentColor"/><rect x="0" y="1" width="1" height="1" fill="currentColor"/><rect x="9" y="1" width="1" height="1" fill="currentColor"/><rect x="0" y="2" width="1" height="1" fill="currentColor"/><rect x="2" y="2" width="6" height="1" fill="currentColor"/><rect x="9" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="1" height="1" fill="currentColor"/><rect x="9" y="3" width="1" height="1" fill="currentColor"/><rect x="0" y="4" width="1" height="1" fill="currentColor"/><rect x="2" y="4" width="2" height="1" fill="currentColor"/><rect x="6" y="4" width="2" height="1" fill="currentColor"/><rect x="9" y="4" width="1" height="1" fill="currentColor"/><rect x="0" y="5" width="1" height="1" fill="currentColor"/><rect x="2" y="5" width="2" height="1" fill="currentColor"/><rect x="6" y="5" width="2" height="1" fill="currentColor"/><rect x="9" y="5" width="1" height="1" fill="currentColor"/><rect x="0" y="6" width="1" height="1" fill="currentColor"/><rect x="9" y="6" width="1" height="1" fill="currentColor"/><rect x="0" y="7" width="1" height="1" fill="currentColor"/><rect x="2" y="7" width="2" height="1" fill="currentColor"/><rect x="6" y="7" width="2" height="1" fill="currentColor"/><rect x="9" y="7" width="1" height="1" fill="currentColor"/><rect x="0" y="8" width="1" height="1" fill="currentColor"/><rect x="2" y="8" width="2" height="1" fill="currentColor"/><rect x="6" y="8" width="2" height="1" fill="currentColor"/><rect x="9" y="8" width="1" height="1" fill="currentColor"/><rect x="0" y="9" width="1" height="1" fill="currentColor"/><rect x="9" y="9" width="1" height="1" fill="currentColor"/><rect x="0" y="10" width="10" height="1" fill="currentColor"/></svg><span>Расчёт</span></button>
+  <button type="button" class="tb" data-act="gsearch" aria-label="ИИ-поиск по всем разделам"><svg class="ico-smooth" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg><svg class="ico-px" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="2" y="0" width="4" height="1" fill="currentColor"/><rect x="1" y="1" width="1" height="1" fill="currentColor"/><rect x="6" y="1" width="1" height="1" fill="currentColor"/><rect x="0" y="2" width="1" height="1" fill="currentColor"/><rect x="7" y="2" width="1" height="1" fill="currentColor"/><rect x="0" y="3" width="1" height="1" fill="currentColor"/><rect x="3" y="3" width="1" height="1" fill="currentColor"/><rect x="7" y="3" width="1" height="1" fill="currentColor"/><rect x="0" y="4" width="1" height="1" fill="currentColor"/><rect x="2" y="4" width="3" height="1" fill="currentColor"/><rect x="7" y="4" width="1" height="1" fill="currentColor"/><rect x="0" y="5" width="1" height="1" fill="currentColor"/><rect x="3" y="5" width="1" height="1" fill="currentColor"/><rect x="7" y="5" width="1" height="1" fill="currentColor"/><rect x="1" y="6" width="1" height="1" fill="currentColor"/><rect x="6" y="6" width="1" height="1" fill="currentColor"/><rect x="2" y="7" width="6" height="1" fill="currentColor"/><rect x="6" y="8" width="3" height="1" fill="currentColor"/><rect x="7" y="9" width="3" height="1" fill="currentColor"/><rect x="8" y="10" width="3" height="1" fill="currentColor"/><rect x="9" y="11" width="2" height="1" fill="currentColor"/></svg><span>Поиск</span></button>
   <button type="button" class="tb tb-doc" data-act="docs" aria-label="Выбрать документ"><span class="tb-code">2499р</span><span>Документ</span></button>
   <button type="button" class="tb" data-act="top"><svg class="ico-smooth" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 14l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 19h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><svg class="ico-px" viewBox="0 0 10 9" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="4" y="0" width="2" height="1" fill="currentColor"/><rect x="3" y="1" width="4" height="1" fill="currentColor"/><rect x="2" y="2" width="6" height="1" fill="currentColor"/><rect x="1" y="3" width="3" height="1" fill="currentColor"/><rect x="6" y="3" width="3" height="1" fill="currentColor"/><rect x="0" y="4" width="3" height="1" fill="currentColor"/><rect x="7" y="4" width="3" height="1" fill="currentColor"/><rect x="0" y="5" width="2" height="1" fill="currentColor"/><rect x="8" y="5" width="2" height="1" fill="currentColor"/><rect x="0" y="7" width="10" height="1" fill="currentColor"/><rect x="0" y="8" width="10" height="1" fill="currentColor"/></svg><span>Наверх</span></button>
   <button type="button" class="tb" data-act="menu" aria-controls="sidePanel" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Меню</span></button>
@@ -1857,6 +1986,7 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
   <h2>Группы дефектов</h2>
   <div class="toolbar" role="search">
     <input type="search" id="qi2143" placeholder="Поиск: код, название, причина…" aria-label="Поиск по дефектам">
+<button type="button" class="btn gs-tbtn" data-gs-open="qi2143" title="Искать по смыслу во всех разделах"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg>Везде</button>
     <button class="chip" data-f="all" aria-pressed="true">Все</button>
     <button class="chip" data-f="od" aria-pressed="false">ОД</button>
     <button class="chip" data-f="d" aria-pressed="false">Д</button>
@@ -1947,6 +2077,7 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
 <p class="note">Откройте группу, затем нажмите на код дефекта: сверху — краткий ответ для устного ответа, ниже — подробно по инструкции. «Гарантия» — гарантийный тоннаж рельса, ЗПП — замена в первоочередном порядке (в течение 14 суток).</p>
 <div class="toolbar" role="search">
 <input type="search" id="qi" placeholder="Поиск: код, название, причина…" aria-label="Поиск по дефектам">
+<button type="button" class="btn gs-tbtn" data-gs-open="qi" title="Искать по смыслу во всех разделах"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg>Везде</button>
 <button class="chip" data-f="all" aria-pressed="true">Все</button>
 <button class="chip" data-f="odr" aria-pressed="false">ОДР</button>
 <button class="chip" data-f="dr" aria-pressed="false">ДР</button>
@@ -1983,6 +2114,7 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
   <h2>Разделы</h2>
   <div class="toolbar" role="search">
     <input type="search" id="qiOdt" placeholder="Поиск: строб, 53.1, СО-3Р, калибр, мёртвая зона…" aria-label="Поиск по справочнику ОДТ">
+<button type="button" class="btn gs-tbtn" data-gs-open="qiOdt" title="Искать по смыслу во всех разделах"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg>Везде</button>
     <button class="btn" id="expbOdt" type="button">Раскрыть всё</button>
     <span id="cntOdt" aria-live="polite"></span>
   </div>
@@ -10202,7 +10334,7 @@ WG.so3r = {
 const SO_STEPS = ["Точка выхода", "Угол ввода", "Порог", "Глубиномер", "Мёртвая зона"];
 function soDyn(st) {
   if (st === 0) { const A = Math.exp(-Math.pow(SO.pos + SO.e, 2) / (2 * 1.7 * 1.7));
-    return `<div class="svgbox">${soBlock0(SO.pos)}</div>${ascan([{ x: .04, h: .9, w: .012 }, { x: .58, h: A * .95, w: .012 }])}<div style="margin-top:6px">Положение риски ПЭП: <span class="readout">${SO.pos > 0 ? "+" : ""}${fmt(SO.pos, 1)} мм</span></div>`; }
+    return `<div class="svgbox">${soBlock0(SO.pos)}</div>${ascan([{ x: .04, h: .9, w: .012 }, { x: .58, h: A * .95, w: .012 }])}<div style="margin-top:6px">Метка на ПЭП против деления: <span class="readout">${SO.pos > 0 ? "+" : ""}${fmt(SO.pos, 1)} мм</span></div>`; }
   if (st === 1) { const A = Math.exp(-Math.pow(SO.ang - SO.a, 2) / (2 * 1.3 * 1.3));
     return `<div class="svgbox">${soBlock1(SO.ang)}</div>${ascan([{ x: .04, h: .9, w: .012 }, { x: .46, h: A * .9, w: .012 }])}<div style="margin-top:6px">Отсчёт по шкале углов: <span class="readout">${fmt(SO.ang, 2)}°</span></div>`; }
   if (st === 3) { const fr = SO.front / 100, read = 42 + SO.de + (SO.mk - SO.front) * 0.9, onF = Math.abs(SO.mk - SO.front) <= 0.8;
@@ -10214,11 +10346,11 @@ function soRender(el) {
   let h = `<div class="sim-steps">${SO_STEPS.map((t, i) => `<button data-a="soStep" data-i="${i}" aria-current="${i === st ? "step" : "false"}" class="${SO.res[i] ? "ok" : ""}">${i + 1}. ${t}</button>`).join("")}</div>`;
   const verdict = SO.res["v" + st];
   if (st === 0) {
-    h += `<p style="margin:0 0 8px">Наклонный ПЭП стоит на шкале «20–10–0–10–20». Двигайте его, пока эхо-сигнал от округлой поверхности не станет максимальным, и посмотрите, против какого деления оказалась риска на ПЭП. Чувствительность минимальная.</p>
+    h += `<p style="margin:0 0 8px">ПЭП ставят на рабочую грань у шкалы «20–10–0–10–20» и направляют на цилиндрическую поверхность R 55 мм — её центр совпадает с делением «0». Двигайте ПЭП, пока эхо от этой поверхности не станет максимальным: тогда луч идёт по радиусу, падает на поверхность под прямым углом и возвращается в ПЭП. Посмотрите, против какого деления оказалась метка на ПЭП. Чувствительность минимальная.</p>
       <div class="so-dyn">${soDyn(0)}</div><label for="sop" class="small">Двигайте ПЭП</label><input id="sop" type="range" min="-12" max="12" step="0.5" value="${SO.pos}">
       <div class="row" style="margin-top:8px"><button class="btn btn-sm" data-a="soAns" data-v="1">Метка в допуске ±1 мм</button><button class="btn btn-sm" data-a="soAns" data-v="0">Нужна новая метка</button></div>`;
   } else if (st === 1) {
-    h += `<p style="margin:0 0 8px">Ищите максимум сигнала от отверстия Ø6 мм на глубине 44 мм. Угол ввода читайте по шкале образца против точки выхода. Номинал ПЭП — 50°.</p>
+    h += `<p style="margin:0 0 8px">ПЭП ставят на рабочую грань над шкалой углов α° и направляют на отверстие Ø6 мм на глубине 44 мм — ноль шкалы находится прямо над ним. Двигайте ПЭП, пока эхо от отверстия не станет максимальным, и читайте угол ввода по шкале против точки выхода. Чувствительность минимальная, номинал ПЭП — 50°.</p>
       <div class="so-dyn">${soDyn(1)}</div><label for="soa" class="small">Двигайте ПЭП вдоль шкалы углов</label><input id="soa" type="range" min="40" max="60" step="0.25" value="${SO.ang}">
       <div class="row" style="margin-top:8px"><button class="btn btn-sm" data-a="soAns" data-v="1">В допуске 50 ± 2°</button><button class="btn btn-sm" data-a="soAns" data-v="0">Вне допуска</button></div>`;
   } else if (st === 2) {
@@ -10243,19 +10375,74 @@ function soRender(el) {
   const bind = (id, key) => { const i = $(id, host); if (i) i.addEventListener("input", () => { SO[key] = +i.value; const d = $(".so-dyn", host); if (d) d.innerHTML = soDyn(SO.step); }); };
   bind("#sop", "pos"); bind("#soa", "ang"); bind("#som", "mk");
 }
-function soBlock0(pos) {
-  const ox = 300, k = 9; let g = `<svg viewBox="0 0 600 150" role="img" aria-label="ПЭП на шкале точки выхода"><path d="M40 60 H560 V120 H40 Z" class="so-body"/>`;
-  for (let m = -20; m <= 20; m += 2) { const x = ox + m * k; g += `<line x1="${x}" x2="${x}" y1="60" y2="${m % 10 === 0 ? 72 : 66}" class="so-tick"/>`; if (m % 10 === 0) g += `<text x="${x}" y="86" text-anchor="middle" class="svg-s">${Math.abs(m)}</text>`; }
-  const px = ox + pos * k; g += `<rect x="${px - 44}" y="22" width="88" height="38" rx="4" class="so-pep"/><line x1="${px}" x2="${px}" y1="22" y2="66" class="svg-run" stroke-width="2"/><text x="${px}" y="16" text-anchor="middle" class="svg-t" style="fill:var(--run)">риска</text>`;
-  return g + `<path d="M${ox} 120 A 60 60 0 0 1 ${ox + 60} 60" class="so-arc"/><text x="${ox + 70}" y="112" class="svg-s">R — центр шкалы «0»</text></svg>`;
+/* СО-3Р по конспекту. Общее: рабочая грань сверху, торец — цилиндрическая поверхность R 55 мм с центром на рабочей грани */
+function soArrow(x, y, dx, dy, color) { // наконечник стрелки в точке (x, y) по направлению (dx, dy)
+  const l = Math.hypot(dx, dy) || 1, ux = dx / l, uy = dy / l, s = 9, w = 4.5;
+  const bx = x - ux * s, by = y - uy * s;
+  return `<path d="M${x.toFixed(1)} ${y.toFixed(1)} L${(bx - uy * w).toFixed(1)} ${(by + ux * w).toFixed(1)} L${(bx + uy * w).toFixed(1)} ${(by - ux * w).toFixed(1)} Z" style="fill:${color}"/>`;
 }
+function soPep(x, top, k, label) { // наклонный ПЭП, смотрит влево; x — метка (точка выхода) на рабочей грани
+  const f = (n) => n.toFixed(1), h = 12 * k, b = 38.8 * Math.PI / 180, pcx = x + 14 * k, pcy = top - 6 * k, L = 10 * k;
+  return `<rect x="${f(x - 6 * k)}" y="${f(top - h)}" width="${f(30 * k)}" height="${f(h)}" rx="3" class="so-pep"/>`
+    + `<line x1="${f(pcx - Math.cos(b) * L / 2)}" y1="${f(pcy - Math.sin(b) * L / 2)}" x2="${f(pcx + Math.cos(b) * L / 2)}" y2="${f(pcy + Math.sin(b) * L / 2)}" class="svg-ink" stroke-width="3.2" stroke-linecap="round"/>`
+    + `<line x1="${f(x)}" x2="${f(x)}" y1="${f(top - h - 4)}" y2="${f(top + 5)}" class="svg-run" stroke-width="2.4"/>`
+    + `<text x="${f(x)}" y="${f(top - h - 9)}" text-anchor="middle" class="svg-t" style="fill:var(--run)">${label}</text>`;
+}
+/* Точка выхода: ПЭП на шкале «20–10–0–10–20» направлен на цилиндрическую поверхность R 55; её центр — деление «0».
+   Эхо максимально, когда точка выхода в центре: луч идёт по радиусу, падает на поверхность по нормали и возвращается в ПЭП */
+function soBlock0(pos) {
+  const k = 3.3, R = 55, Rp = R * k, top = 78, cx = 22 + Rp, rx = 590, bot = top + Rp, X = (mm) => cx + mm * k, f = (n) => n.toFixed(1);
+  const a = (SO.a || 50) * Math.PI / 180, sa = Math.sin(a), ca = Math.cos(a), xm = X(pos), xt = X(pos + SO.e);
+  let g = `<svg class="so-fig" viewBox="0 0 600 ${Math.round(bot + 12)}" role="img" aria-label="СО-3Р, точка выхода: наклонный ПЭП на шкале 20–10–0–10–20 направлен на цилиндрическую поверхность R 55 мм, центр которой — деление 0"><style>.so-fig .svg-s{font-size:14px;paint-order:stroke;stroke:var(--sunk);stroke-width:4px;stroke-linejoin:round}.so-fig .svg-t{font-size:15.5px}</style>`;
+  g += `<path d="M${f(cx - Rp)} ${top} H${rx} q-9 ${f(Rp / 4)} 0 ${f(Rp / 2)} t0 ${f(Rp / 2)} H${f(cx)} A${f(Rp)} ${f(Rp)} 0 0 1 ${f(cx - Rp)} ${top} Z" class="so-body"/>`;
+  g += `<circle cx="${f(X(68))}" cy="${f(top + 26 * k)}" r="6" class="so-hole"/><circle cx="${f(X(95))}" cy="${f(top + 44 * k)}" r="6" class="so-hole"/>`;
+  g += `<text x="${f(X(50))}" y="${f(bot - 12)}" class="svg-s">СО-3Р · зав. №</text>`;
+  // радиус R 55 от «0» до поверхности
+  const th = 116 * Math.PI / 180, r0 = 40, ex = cx + Rp * Math.cos(th), ey = top + Rp * Math.sin(th);
+  g += `<line x1="${f(cx + r0 * Math.cos(th))}" y1="${f(top + r0 * Math.sin(th))}" x2="${f(ex)}" y2="${f(ey)}" class="svg-ax"/>` + soArrow(ex, ey, Math.cos(th), Math.sin(th), "var(--muted)");
+  g += `<text x="${f(cx + Rp * 0.62 * Math.cos(th) + 8)}" y="${f(top + Rp * 0.62 * Math.sin(th))}" class="svg-t">R 55</text>`;
+  // луч от точки выхода до поверхности и отражённый луч
+  const u = xt - cx, t = u * sa + Math.sqrt(Math.max(0, u * u * sa * sa - u * u + Rp * Rp)), hx = xt - t * sa, hy = top + t * ca;
+  const nx = (hx - cx) / Rp, ny = (hy - top) / Rp, dn = -sa * nx + ca * ny, rx2 = -sa - 2 * dn * nx, ry2 = ca - 2 * dn * ny;
+  let s = ry2 < -1e-6 ? (hy - top) / -ry2 : 120; let ex2 = hx + rx2 * s, ey2 = hy + ry2 * s;
+  if (ex2 < cx - Rp + 4) { s = (hx - (cx - Rp + 4)) / -rx2; ex2 = hx + rx2 * s; ey2 = hy + ry2 * s; }
+  g += `<line x1="${f(xt)}" y1="${top}" x2="${f(hx)}" y2="${f(hy)}" class="svg-run" stroke-width="2.4"/>` + soArrow(hx, hy, -sa, ca, "var(--acc)");
+  g += `<line x1="${f(hx)}" y1="${f(hy)}" x2="${f(ex2)}" y2="${f(ey2)}" class="svg-back" stroke-width="2" stroke-dasharray="6 4"/>` + soArrow(ex2, ey2, rx2, ry2, "var(--ray-t)");
+  g += (() => { let g = "";
+  for (let m = -20; m <= 20; m += 2) {
+    const x = X(m), big = m % 10 === 0;
+    g += `<line x1="${f(x)}" x2="${f(x)}" y1="${top}" y2="${top + (big ? 13 : 7)}" class="so-tick"/>`;
+    if (big) g += `<text x="${f(x)}" y="${top + 28}" text-anchor="middle" class="svg-s">${Math.abs(m)}</text>`;
+  }
+  return g; })();
+  return g + soPep(xm, top, k, "метка на ПЭП") + `</svg>`;
+}
+/* Угол ввода: шкала α° (0…70) на рабочей грани, ноль — над отверстием Ø6 мм на глубине 44 мм.
+   ПЭП направлен на отверстие; угол читают по шкале против точки выхода в положении максимума эха */
 function soBlock1(ang) {
-  const hx = 380, hy = 60 + 44 * 1.6, x = hx - 44 * 1.6 * Math.tan(ang * Math.PI / 180);
-  let g = `<svg viewBox="0 0 600 190" role="img" aria-label="ПЭП над отверстием Ø6 мм"><path d="M20 60 H580 V180 H20 Z" class="so-body"/><circle cx="${hx}" cy="${hy}" r="5" class="so-hole"/><text x="${hx + 10}" y="${hy + 4}" class="svg-s">Ø6, глубина 44 мм</text>`;
-  for (let a = 40; a <= 60; a += 1) { const xx = hx - 44 * 1.6 * Math.tan(a * Math.PI / 180); g += `<line x1="${xx}" x2="${xx}" y1="60" y2="${a % 5 === 0 ? 72 : 66}" class="so-tick"/>`; if (a % 5 === 0) g += `<text x="${xx}" y="86" text-anchor="middle" class="svg-s">${a}°</text>`; }
-  const ex = x, ey = 60, tx = ex + Math.sin(SO.a * Math.PI / 180) * 160, ty = ey + Math.cos(SO.a * Math.PI / 180) * 160;
-  g += `<rect x="${x - 60}" y="24" width="80" height="36" rx="4" class="so-pep"/><line x1="${ex}" y1="${ey}" x2="${tx}" y2="${ty}" class="svg-back" stroke-width="2" stroke-dasharray="5 4"/><line x1="${x}" x2="${x}" y1="24" y2="66" class="svg-run" stroke-width="2"/>`;
-  return g + `</svg>`;
+  const k = 3.05, Lb = 182, Hb = 55, R = 55, top = 76, X = (mm) => 10 + mm * k, Y = (mm) => top + mm * k, f = (n) => n.toFixed(1);
+  const hX = 13, hD = 44, tg = (d) => Math.tan(d * Math.PI / 180), sx = (d) => X(hX + hD * tg(d)), xc = Lb - R;
+  let g = `<svg class="so-fig" viewBox="0 0 600 ${Math.round(Y(Hb) + 12)}" role="img" aria-label="СО-3Р, угол ввода: наклонный ПЭП на шкале углов направлен на отверстие Ø6 мм на глубине 44 мм"><style>.so-fig .svg-s{font-size:14px;paint-order:stroke;stroke:var(--sunk);stroke-width:4px;stroke-linejoin:round}.so-fig .svg-t{font-size:15.5px}</style>`;
+  g += `<path d="M${f(X(0))} ${top} H${f(X(Lb))} A${f(R * k)} ${f(R * k)} 0 0 1 ${f(X(xc))} ${f(Y(Hb))} H${f(X(0))} Z" class="so-body"/>`;
+  g += `<circle cx="${f(X(hX))}" cy="${f(Y(hD))}" r="${f(3 * k)}" class="so-hole"/><text x="${f(X(hX) + 12)}" y="${f(Y(hD) + 21)}" class="svg-s">Ø6 мм, глубина 44 мм</text>`;
+  [[72, 3], [90, 6], [107, 8], [122, 12]].forEach(([x, d]) => { g += `<circle cx="${f(X(x))}" cy="${f(Y(Hb - d))}" r="${f(1.2 * k)}" class="so-hole"/>`; });
+  g += `<text x="${f(X(122) + 10)}" y="${f(Y(Hb - 12) + 5)}" class="svg-s">Ø2 мм</text>`;
+  g += `<text x="${f(X(Lb) - 8)}" y="${f(Y(Hb) - 10)}" text-anchor="end" class="svg-s">R 55</text>`;
+  // луч под истинным углом ввода: проходит через отверстие, когда точка выхода стоит против этого угла на шкале
+  const xe = sx(ang), a = SO.a * Math.PI / 180, sa = Math.sin(a), ca = Math.cos(a);
+  const t = Math.min((xe - X(0) - 2) / sa, (Y(Hb - 3) - top) / ca), bx = xe - t * sa, by = top + t * ca;
+  g += `<line x1="${f(xe)}" y1="${top}" x2="${f(bx)}" y2="${f(by)}" class="svg-run" stroke-width="2.4"/>` + soArrow(bx, by, -sa, ca, "var(--acc)");
+  g += (() => { let g = "";
+  for (let d = 0; d <= 70; d++) {
+    const major = d % 10 === 0, mid = d % 5 === 0;
+    if (!major && !mid && (d < 30 || d > 66)) continue;
+    const x = sx(d);
+    g += `<line x1="${f(x)}" x2="${f(x)}" y1="${top}" y2="${top + (major ? 13 : mid ? 9 : 5)}" class="so-tick"/>`;
+    if (major) g += `<text x="${f(x)}" y="${top + 28}" text-anchor="middle" class="svg-s">${d}</text>`;
+  }
+  g += `<text x="${f(sx(0) - 12)}" y="${top + 28}" text-anchor="end" class="svg-s">α°</text>`;
+  return g; })();
+  return g + soPep(xe, top, k, "точка выхода") + `</svg>`;
 }
 ACT.soStep = (el) => { SO.step = +el.dataset.i; soRender(el.closest("[data-w=so3r]")); };
 ACT.soNew = (el) => { soNew(); soRender(el.closest("[data-w=so3r]")); };
@@ -10578,6 +10765,20 @@ if (DOC) new MutationObserver(() => { if (!DOC.hidden) render(); else tipHide();
 /* кнопки «Разделы» и «Расчёт» в нижней панели сайта */
 window.__trnGo = (v) => go(v);
 window.__trnSec = () => R.sec;
+/* для ИИ-поиска по всем разделам: данные уроков и словаря, разметка страниц, переходы */
+window.__trnSearch = {
+  data: () => ({ LESSONS, ORDERS, GLOSS, GLG, QBANK, TOPICS, NUMS }),
+  html: (sec, extra) => { try {
+    if (sec === "read") return `<h2 class="h1">Как читать Б-развёртку</h2>${SCREEN_HELP}${BS_HOW.map(([h, ps]) => `<h4 class="h3">${h}</h4>${ps.map((p) => `<p>${p}</p>`).join("")}`).join("")}`
+      + BS.types.map((t) => { const sc = BS.SC[t]; let s = 7; const r = () => (s = (s * 16807) % 2147483647) / 2147483647; let ex = []; try { ex = sc.explain(sc.build(r)); } catch (e) {}
+        return `<div class="h3">${esc(sc.short)}</div><ul>${ex.map((x) => `<li data-find="${esc(sc.short)}">${x}</li>`).join("")}</ul>`; }).join("");
+    const ok = ["so3r", "calc"].includes(sec) || (sec === "tech" && extra && extra.sub === "dev");
+    return ok ? VIEWS[sec](Object.assign({ sec }, extra || {})) : "";
+  } catch (e) { return ""; } },
+  open: (sec, extra) => go(sec, Object.assign({}, extra || {})),
+  quiz: (tp) => { if (ACT.topicQuiz) ACT.topicQuiz({ dataset: { tp } }); },
+  root: ROOT
+};
 /* системная «Назад» внутри «Теста» — на уровень выше, а не сразу на стартовую страницу сайта.
    Обработчик сайта сначала спрашивает модуль: true — шаг назад обработан здесь */
 window.__trnPop = (e) => {
@@ -11112,6 +11313,1166 @@ safe('state',function(){
 var started=false;
 function go(){if(started)return;started=true;safe('intro',function(){playLanding(true);});syncField();}
 try{if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go,go);setTimeout(go,600);}else go();}catch(e){go();}
+})();
+</script>
+<script id="gs-js">
+/* ================= ИИ-поиск по всем разделам: движок =================
+   Работает целиком в браузере, без интернета. Индекс строится из текста страницы при каждом открытии,
+   поэтому любые правки в карточках, справочнике ОДТ и уроках попадают в поиск сами.
+   Как ранжируется результат:
+   • слова приводятся к основе (стеммер Портера для русского), учитываются опечатки, раскладка и недописанное слово;
+   • синонимы предметной области («лопнул» ≈ излом, «датчик» ≈ ПЭП);
+   • BM25 — насколько плотно слова запроса встречаются во фрагменте;
+   • смысловая модель LSA (латентно-семантический анализ): обучается на текстах справочника и находит
+     фрагменты, близкие по теме, даже если в них другие слова;
+   • коды дефектов (53.1, 21.2, ДО.11.2) находятся точно. */
+var GSE = (function () {
+  'use strict';
+
+  /* ---------- текст ---------- */
+  // нормализация сохраняет длину строки — позиции совпадений переносятся на исходный текст
+  function norm(s) { return String(s).toLowerCase().replace(/ё/g, 'е'); }
+  var TOK_RE = /[a-zа-я0-9]+(?:[.,\-\/][a-zа-я0-9]+)*/g;
+  var CODE_RE = /^\d\d\.\d(?:[-.]\d)*(?:\.н)?$/;
+
+  var STOP = new Set(('и в во не ни что он она оно они на я с со как а то все всё так его но да ты к у же вы за бы по только ее мне было вот от меня еще нет о об из ему теперь когда даже ну вдруг ли если уже или быть был него вас нибудь опять уж вам ведь там потом себя ничего ей может тут где есть надо ней для мы тебя их чем была сам чтоб будто чего раз тоже себе под будет ж тогда кто этот того потому этого какой какая какое какие каких каком каким какую совсем ним здесь этом почти мой тем чтобы нее сейчас были куда зачем всех никогда можно при наконец хоть над больше тот через эти нас про всего них много разве эту моя впрочем хорошо свою этой перед иногда лучше чуть том нельзя такой такие такое таких им более всегда конечно всю это эта который которая которое которые которых которой котором которым сколько почему также либо этих этим этими нужно нужен нужна нужны чему такая свой своей своего свои своих же ли бывает делать сделать значит означает есть т е то есть см рис др пр').split(' '));
+
+  /* стеммер Портера (Snowball) для русского языка — без lookbehind, чтобы работал и в старых Safari */
+  var ST = {
+    RV: /^(.*?[аеиоуыэюя])(.*)$/,
+    PG1: /(ив|ивши|ившись|ыв|ывши|ывшись)$/, PG2: /([ая])(в|вши|вшись)$/,
+    REFL: /(ся|сь)$/,
+    ADJ: /(ее|ие|ые|ое|ими|ыми|ей|ий|ый|ой|ем|им|ым|ом|его|ого|ему|ому|их|ых|ую|юю|ая|яя|ою|ею)$/,
+    PART1: /(ивш|ывш|ующ)$/, PART2: /([ая])(ем|нн|вш|ющ|щ)$/,
+    VERB1: /(ила|ыла|ена|ейте|уйте|ите|или|ыли|ей|уй|ил|ыл|им|ым|ен|ило|ыло|ено|ят|ует|уют|ит|ыт|ены|ить|ыть|ишь|ую|ю)$/,
+    VERB2: /([ая])(ла|на|ете|йте|ли|й|л|ем|н|ло|но|ет|ют|ны|ть|ешь|нно)$/,
+    NOUN: /(а|ев|ов|ие|ье|е|иями|ями|ами|еи|ии|и|ией|ей|ой|ий|й|иям|ям|ием|ем|ам|ом|о|у|ах|иях|ях|ы|ь|ию|ью|ю|ия|ья|я)$/,
+    DER: /ость?$/, SUP: /(ейше|ейш)$/
+  };
+  // заменяет самое длинное окончание из двух групп (вторая группа — после «а»/«я», сама буква остаётся)
+  function cut2(s, r1, r2) {
+    var m1 = r1.exec(s), m2 = r2.exec(s);
+    if (!m1 && !m2) return null;
+    var i1 = m1 ? m1.index : 1e9, i2 = m2 ? m2.index + 1 : 1e9;
+    return i1 <= i2 ? s.slice(0, i1) : s.slice(0, i2);
+  }
+  // начало зоны R2 (после второго сочетания «гласная + согласная»)
+  function r2(w) {
+    var V = 'аеиоуыэюя', i = 0, n = w.length, pass;
+    for (pass = 0; pass < 2; pass++) {
+      while (i < n && V.indexOf(w[i]) < 0) i++;
+      while (i < n && V.indexOf(w[i]) >= 0) i++;
+      i++;
+    }
+    return i;
+  }
+  var stemCache = new Map();
+  function stem(w) {
+    var c = stemCache.get(w); if (c !== undefined) return c;
+    var r = w;
+    if (w.length > 3 && /^[а-я]+$/.test(w)) {
+      var m = ST.RV.exec(w);
+      if (m) {
+        var pre = m[1], rv = m[2], t = cut2(rv, ST.PG1, ST.PG2);
+        if (t !== null) rv = t;
+        else {
+          rv = rv.replace(ST.REFL, '');
+          var a = rv.replace(ST.ADJ, '');
+          if (a !== rv) { rv = a; t = cut2(rv, ST.PART1, ST.PART2); if (t !== null) rv = t; }
+          else { t = cut2(rv, ST.VERB1, ST.VERB2); rv = t !== null ? t : rv.replace(ST.NOUN, ''); }
+        }
+        rv = rv.replace(/и$/, '');
+        var dm = ST.DER.exec(rv);
+        if (dm && pre.length + dm.index >= r2(pre + rv)) rv = rv.slice(0, dm.index);
+        if (/ь$/.test(rv)) rv = rv.slice(0, -1);
+        else { rv = rv.replace(ST.SUP, ''); rv = rv.replace(/нн$/, 'н'); }
+        r = pre + rv;
+        if (r.length < 2) r = w;
+      }
+    }
+    stemCache.set(w, r);
+    return r;
+  }
+
+  /* разбор текста на термины. На выходе — массив основ; коды дефектов раскрываются: 21.1-2 → 21.1, 21.2 */
+  function expandCode(c) {
+    var m = /^(\d\d)\.(.+)$/.exec(c); if (!m) return [];
+    var ds = m[2].replace(/\d\d\./g, '').replace(/\.н$/, '').match(/\d/g) || [];
+    return ds.map(function (d) { return m[1] + '.' + d; });
+  }
+  function terms(text, withPos) {
+    var s = norm(text), out = [], m;
+    TOK_RE.lastIndex = 0;
+    while ((m = TOK_RE.exec(s))) {
+      var tok = m[0], pos = m.index;
+      if (/\d/.test(tok)) {
+        var t2 = tok.replace(/,/g, '.');
+        if (CODE_RE.test(t2)) {
+          var ex = expandCode(t2);
+          push(t2, tok); ex.forEach(function (e) { if (e !== t2) push(e, tok, 1); });
+          push('#' + t2.slice(0, 2), tok, 1);
+        } else {
+          push(t2, tok);
+          if (/[а-яa-z]/.test(t2)) t2.split(/[.\-\/]/).forEach(function (p) { if (p.length > 1 && p !== t2) push(/^[а-я]+$/.test(p) ? stem(p) : p, p, 1); });
+        }
+      } else {
+        var parts = tok.split(/[.,\-\/]/);
+        for (var i = 0; i < parts.length; i++) {
+          var p = parts[i]; if (!p || STOP.has(p)) continue;
+          if (p.length === 1 && !/[а-я]/.test(p)) continue;
+          push(stem(p), p);
+        }
+      }
+      // pt — часть составного токена (СО-3Р → со, 3р; 21.1-2 → 21.1, 21.2)
+      function push(t, surf, pt) { out.push(withPos ? { t: t, s: surf, p: pos, pt: !!pt } : t); }
+    }
+    return out;
+  }
+
+  /* ---------- синонимы предметной области ---------- */
+  var SYN_SRC = [
+    'излом лопнул лопнуть лопается лопнувший сломался сломан сломалась поломка перелом разрыв разрушение разрушился разломился',
+    'трещина трещины надрыв',
+    'выкрашивание выщербина выкрошка отслоение отслаивание шелушение скол',
+    'выкол откол отколы',
+    'смятие вмятина сплющивание осадка просадка седловина',
+    'износ истирание стертость изношенность изношен стерся',
+    'шейка стенка',
+    'подошва низ',
+    'головка поверхность катания',
+    'отверстие отверстия дырка дыра',
+    'болтовой болт болтовые',
+    'стык стыке стыки соединение накладка накладки',
+    'сварной сварка сварочный шов сварное термитный алюминотермитный электроконтактный',
+    'одр остродефектный остродефектные остродефектного остродефектным опасный',
+    'др дефектный дефектные дефектного',
+    'зпп первоочередная первоочередной первоочередном',
+    'скорость ограничение ограничить ограничивают допускаемая',
+    'датчик датчики пэп преобразователь преобразователи пьезопреобразователь искатель',
+    'наклонный угловой',
+    'тележка дефектоскоп дефектоскопы прибор приборы рдм авикон',
+    'эхо отражение отраженный',
+    'зтм зеркально теневой донный',
+    'чувствительность усиление децибел децибелы',
+    'строб стробы селекция',
+    'развертка дефектограмма',
+    'образец образцы эталон со-3р',
+    'стрелочный стрелка стрелки перевод переводы',
+    'остряк остряки',
+    'крестовина крестовины сердечник усовик',
+    'гарантия гарантийный тоннаж наработка',
+    'маркировка маркировать краска метка пометка разметка',
+    'коррозия ржавчина ржавый коррозионный',
+    'боксование буксование юз ползун пробоксовка',
+    'наплавка наплавленный',
+    'контроленепригодность контроленепригодный',
+    'замена заменить заменяют',
+    'шлифовка шлифование шлифовать',
+    'осмотр визуальный визуально',
+    'частота мгц герц',
+    'настройка настроить калибровка',
+    'запищало писк сигнализация',
+    'изгиб кривизна искривление',
+    'пропуск пропустить пропускают',
+    'найти нашел нашла нашли найден найдена найдено обнаружен обнаружить обнаружил обнаружении'
+  ];
+  var SYN = new Map(); // основа → массив основ-синонимов
+  SYN_SRC.forEach(function (line) {
+    var g = []; line.split(' ').forEach(function (w) { terms(w, true).forEach(function (o) { if (!o.pt && g.indexOf(o.t) < 0) g.push(o.t); }); });
+    g.forEach(function (t) { var a = SYN.get(t) || []; g.forEach(function (u) { if (u !== t && a.indexOf(u) < 0) a.push(u); }); SYN.set(t, a); });
+  });
+
+  /* раскладка: «nhtobyf» → «трещина» */
+  var LAT = 'qwertyuiop[]asdfghjkl;\'zxcvbnm,.`', CYR = 'йцукенгшщзхъфывапролджэячсмитьбюё';
+  function fixLayout(s) { var o = ''; for (var i = 0; i < s.length; i++) { var k = LAT.indexOf(s[i]); o += k >= 0 ? CYR[k] : s[i]; } return o; }
+
+  function damerau(a, b, max) {
+    var la = a.length, lb = b.length; if (Math.abs(la - lb) > max) return max + 1;
+    var d = [], i, j;
+    for (i = 0; i <= la; i++) { d[i] = [i]; }
+    for (j = 1; j <= lb; j++) d[0][j] = j;
+    for (i = 1; i <= la; i++) {
+      var best = 1e9;
+      for (j = 1; j <= lb; j++) {
+        var c = a[i - 1] === b[j - 1] ? 0 : 1;
+        var v = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+        if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, d[i - 2][j - 2] + 1);
+        d[i][j] = v; if (v < best) best = v;
+      }
+      if (best > max) return max + 1;
+    }
+    return d[la][lb];
+  }
+
+  /* ---------- индекс ---------- */
+  var WT = 2.2, K1 = 1.2, B = 0.55;
+  /* индекс строится порциями (step), чтобы не подвешивать телефон; buildAll — сразу целиком */
+  function Index(targets, passages) {
+    this.targets = targets; this.passages = passages; this.N = passages.length;
+    this.df = new Map(); this.post = new Map(); this.surf = new Map(); this._i = 0; this._tot = 0; this.ready = false;
+  }
+  Index.prototype.step = function (budget) {
+    var P = this.passages, df = this.df, post = this.post, surf = this.surf, t0 = Date.now();
+    while (this._i < P.length) {
+      var pid = this._i++, p = P[pid], tt = new Map(), tb = new Map(), lt = 0, lb = 0;
+      terms(p.ttl, true).forEach(function (o) { tt.set(o.t, (tt.get(o.t) || 0) + 1); lt++; });
+      terms(p.text, true).forEach(function (o) { tb.set(o.t, (tb.get(o.t) || 0) + 1); lb++; var fm = surf.get(o.t); if (!fm) surf.set(o.t, fm = new Map()); fm.set(o.s, (fm.get(o.s) || 0) + 1); });
+      p.tt = tt; p.tb = tb; p.len = WT * lt + lb; this._tot += p.len;
+      var seen = new Set();
+      tt.forEach(function (_, t) { seen.add(t); }); tb.forEach(function (_, t) { seen.add(t); });
+      seen.forEach(function (t) { df.set(t, (df.get(t) || 0) + 1); var a = post.get(t); if (!a) post.set(t, a = []); a.push(pid); });
+      if (budget && Date.now() - t0 > budget) return false;
+    }
+    if (!this.ready) this._finish();
+    return true;
+  };
+  Index.prototype.buildAll = function () { this.step(0); return this; };
+  Index.prototype._finish = function () {
+    var self = this, targets = this.targets, passages = this.passages, df = this.df;
+    this.avg = this._tot / Math.max(1, passages.length);
+    // для показа — самая частая форма слова в тексте
+    this.surf.forEach(function (fm, t, m) { var best = '', bc = -1; fm.forEach(function (c, f) { if (c > bc) { bc = c; best = f; } }); m.set(t, best); });
+    // словарь для опечаток и префиксов
+    this.vocab = Array.from(df.keys()).filter(function (t) { return /^[а-яa-z]/.test(t); }).sort();
+    // термины по карточкам/разделам (для покрытия запроса)
+    targets.forEach(function (T) { T.all = new Set(); T.ttlSet = new Set(); terms(T.title + ' ' + (T.code || '')).forEach(function (t) { T.ttlSet.add(t); T.all.add(t); }); });
+    passages.forEach(function (p) { var T = targets[p.t]; p.tb.forEach(function (_, t) { T.all.add(t); }); p.tt.forEach(function (_, t) { T.all.add(t); }); });
+    // коды дефектов → карточки
+    this.codes = new Map();
+    targets.forEach(function (T, ti) {
+      (T.codes || []).forEach(function (c) {
+        var k = norm(c).replace(/,/g, '.');
+        var keys = [k].concat(expandCode(k));
+        keys.forEach(function (x) { var a = self.codes.get(x) || []; if (a.indexOf(ti) < 0) a.push(ti); self.codes.set(x, a); });
+      });
+    });
+    this.ready = true;
+  };
+  Index.prototype.idf = function (t) { var n = this.df.get(t) || 0; return Math.log(1 + (this.N - n + 0.5) / (n + 0.5)); };
+  Index.prototype.has = function (t) { return this.df.has(t); };
+  Index.prototype.prefix = function (pre, lim) {
+    var v = this.vocab, lo = 0, hi = v.length;
+    while (lo < hi) { var mid = (lo + hi) >> 1; if (v[mid] < pre) lo = mid + 1; else hi = mid; }
+    var out = [];
+    for (var i = lo; i < v.length && v[i].indexOf(pre) === 0; i++) out.push(v[i]);
+    var df = this.df; out.sort(function (a, b) { return df.get(b) - df.get(a); });
+    return out.slice(0, lim || 8);
+  };
+  Index.prototype.fuzzy = function (t) {
+    var max = t.length <= 5 ? 1 : 2, best = [], v = this.vocab;
+    for (var i = 0; i < v.length; i++) {
+      var w = v[i]; if (Math.abs(w.length - t.length) > max || w[0] !== t[0] && max < 2) continue;
+      var d = damerau(t, w, max); if (d <= max) best.push([w, d]);
+    }
+    var df = this.df;
+    best.sort(function (a, b) { return a[1] - b[1] || df.get(b[0]) - df.get(a[0]); });
+    return best.slice(0, 3);
+  };
+
+  /* ---------- разбор запроса: понятия и их варианты ---------- */
+  Index.prototype.parse = function (q) {
+    var self = this, nq = norm(q).trim(), concepts = [], codes = [], notes = [];
+    var open = /[a-zа-я0-9]$/.test(nq) && !/\s$/.test(q);
+    // коды 2143р вида «ДО 11.2», «до11.2»
+    nq.replace(/([а-я]{1,4})[\s.]?(\d\d)[.\s]?(\d)(?![\d])/g, function (m, a, b, c) { var k = a + '.' + b + '.' + c; if (self.codes.has(k)) codes.push(k); return m; });
+    var toks = terms(nq, true);
+    var seen = new Set(), prev = null;
+    toks.forEach(function (o, i) {
+      var t = o.t;
+      if (self.codes.has(t) && /\d/.test(t) && codes.indexOf(t) < 0) codes.push(t);
+      if (o.pt) { // часть составного токена — вариант предыдущего понятия, а не отдельное слово
+        if (prev && t[0] !== '#' && self.has(t) && !prev.alts.has(t)) prev.alts.set(t, 0.5);
+        return;
+      }
+      if (seen.has(t)) return; seen.add(t);
+      var alts = new Map(), how = '';
+      var isLast = open && i === toks.length - 1;
+      if (self.has(t)) alts.set(t, 1);
+      if (!alts.size && /^[a-z;'\[\],.`]+$/.test(o.s)) { // латиница — возможно, не та раскладка
+        terms(fixLayout(o.s)).forEach(function (u) { if (self.has(u)) { alts.set(u, 0.95); how = 'layout'; } });
+      }
+      // недописанное последнее слово
+      if (isLast && /[а-я]/.test(o.s) && o.s.length >= 2 && (!self.has(t) || o.s.length <= 3)) {
+        self.prefix(norm(o.s), 8).forEach(function (u) { if (!alts.has(u)) alts.set(u, 0.8); });
+        if (!how && alts.size && !self.has(t)) how = 'prefix';
+      }
+      // слова нет в тексте, но есть синонимы из словаря предметной области
+      if (!alts.size && SYN.has(t)) {
+        SYN.get(t).forEach(function (s) { if (self.has(s)) alts.set(s, 0.7); });
+        if (alts.size) how = 'syn';
+      }
+      if (!alts.size && t.length >= 4 && /^[а-я]+$/.test(t)) {
+        var fz = self.fuzzy(t), d1 = fz.some(function (x) { return x[1] === 1; });
+        fz.forEach(function (x) { if (d1 && x[1] > 1) return; if (!alts.has(x[0])) alts.set(x[0], x[1] === 1 ? 0.8 : 0.62); });
+        if (alts.size) how = 'typo';
+      }
+      // синонимы найденных основ
+      Array.from(alts.keys()).forEach(function (b) {
+        (SYN.get(b) || []).forEach(function (s) { if (self.has(s) && !alts.has(s)) alts.set(s, 0.6 * alts.get(b)); });
+      });
+      if (!alts.size) { if (/[а-яa-z0-9]/.test(t)) notes.push({ w: o.s, how: 'none' }); prev = null; return; }
+      var w = 0; alts.forEach(function (aw, u) { w = Math.max(w, aw * self.idf(u)); });
+      concepts.push(prev = { w: w, src: o.s, stem: t, alts: alts, how: how });
+    });
+    // «ДО 11.2» — код 2143р; одинокое «11.2» в этом случае не считаем кодом 2499р
+    var lc = codes.filter(function (c) { return /^[а-я]/.test(c); });
+    if (lc.length) codes = codes.filter(function (c) { return /^[а-я]/.test(c) || !lc.some(function (l) { return l.slice(-c.length) === c; }); });
+    return { q: q, nq: nq, concepts: concepts, codes: codes, notes: notes };
+  };
+
+  /* ---------- поиск ---------- */
+  Index.prototype.search = function (q, opt) {
+    opt = opt || {};
+    var self = this, P = this.passages, Tg = this.targets;
+    var pq = this.parse(q);
+    var C = pq.concepts, nC = C.length;
+    if (!nC && !pq.codes.length) return { parsed: pq, items: [] };
+    var sumW = 0; C.forEach(function (c) { sumW += c.w; });
+    // BM25F по фрагментам: для каждого понятия берётся лучший из его вариантов
+    var pscore = new Float64Array(P.length), pmask = new Map();
+    C.forEach(function (c, ci) {
+      var best = new Map();
+      c.alts.forEach(function (aw, u) {
+        var idf = self.idf(u), list = self.post.get(u) || [];
+        for (var k = 0; k < list.length; k++) {
+          var pid = list[k], p = P[pid];
+          var tf = WT * (p.tt.get(u) || 0) + (p.tb.get(u) || 0);
+          var s = aw * idf * tf * (K1 + 1) / (tf + K1 * (1 - B + B * p.len / self.avg));
+          if (s > (best.get(pid) || 0)) best.set(pid, s);
+        }
+      });
+      best.forEach(function (s, pid) { pscore[pid] += s; var m = pmask.get(pid) || 0; pmask.set(pid, m | (1 << Math.min(ci, 30))); });
+    });
+    // смысловая близость (LSA)
+    var sem = null;
+    if (this.lsa && nC) sem = this.lsa.query(C, this);
+    // сборка по карточкам/разделам
+    var agg = new Map();
+    function T(ti) { var a = agg.get(ti); if (!a) agg.set(ti, a = { ti: ti, bm: 0, bp: -1, sem: 0, sp: -1 }); return a; }
+    pmask.forEach(function (_, pid) { var a = T(P[pid].t); if (pscore[pid] > a.bm) { a.bm = pscore[pid]; a.bp = pid; } });
+    if (sem) {
+      // кандидаты по смыслу: лучшие фрагменты, даже без общих слов
+      var order = Array.from(sem.keys());
+      for (var i = 0; i < order.length; i++) { var pid = order[i], v = sem.get(pid); var a = T(P[pid].t); if (v > a.sem) { a.sem = v; a.sp = pid; } }
+    }
+    pq.codes.forEach(function (k) { (self.codes.get(k) || []).forEach(function (ti) { T(ti).code = 1; }); });
+    var maxBm = 0; agg.forEach(function (a) { if (a.bm > maxBm) maxBm = a.bm; });
+    var phrase = pq.nq.split(/\s+/).length >= 2 && pq.nq.length >= 8 ? pq.nq : '';
+    var items = [];
+    agg.forEach(function (a) {
+      var Tt = Tg[a.ti];
+      var cov = 0, tcov = 0;
+      C.forEach(function (c) {
+        var bc = 0, bt = 0;
+        c.alts.forEach(function (aw, u) { if (Tt.all.has(u) && aw > bc) bc = aw; if (Tt.ttlSet.has(u) && aw > bt) bt = aw; });
+        cov += c.w * bc; tcov += c.w * bt;
+      });
+      cov = sumW ? cov / sumW : 0; tcov = sumW ? tcov / sumW : 0;
+      var bmr = maxBm ? a.bm / maxBm : 0;
+      var s = 0.42 * cov + 0.2 * bmr + 0.24 * a.sem + 0.14 * tcov;
+      var ph = 0;
+      if (phrase) { var bp = a.bp >= 0 ? P[a.bp] : null; if (bp && norm(bp.text).indexOf(phrase) >= 0) ph = 1; else if (norm(Tt.title).indexOf(phrase) >= 0) ph = 1; }
+      s += 0.12 * ph + (a.code ? 0.7 : 0);
+      s *= Tt.kw || 1;
+      // «насколько похоже» для показа
+      var sim = a.code ? 1 : Math.min(1, 0.62 * cov + 0.26 * Math.sqrt(Math.max(0, a.sem)) + 0.12 * Math.max(tcov, ph));
+      if (!nC && !a.code) return;
+      items.push({ t: Tt, ti: a.ti, score: s, sim: sim, cov: cov, sem: a.sem, bm: bmr, tcov: tcov, pid: a.bp >= 0 ? a.bp : a.sp, code: !!a.code });
+    });
+    items.sort(function (x, y) { return y.score - x.score; });
+    var top = items.length ? items[0].score : 0;
+    var lim = opt.limit || 60;
+    items = items.filter(function (it, i) { return i < 3 ? it.score > 0.12 : it.score >= Math.max(0.17, top * 0.34); }).slice(0, lim);
+    // лучший фрагмент внутри карточки: по словам и по смыслу
+    items.forEach(function (it) { it.pid = self.bestPassage(it.ti, C, sem, pscore); });
+    return { parsed: pq, items: items };
+  };
+  Index.prototype.bestPassage = function (ti, C, sem, pscore) {
+    var T = this.targets[ti], best = -1, bs = -1;
+    for (var i = 0; i < T.ps.length; i++) {
+      var pid = T.ps[i], s = (pscore ? pscore[pid] : 0) + 2.2 * (sem ? (sem.get(pid) || 0) : 0);
+      if (s > bs) { bs = s; best = pid; }
+    }
+    return best;
+  };
+
+  /* подсветка: регулярное выражение по всем вариантам понятий запроса */
+  function hiRegex(parsed) {
+    var stems = [];
+    parsed.concepts.forEach(function (c) { c.alts.forEach(function (w, u) { if (u[0] !== '#' && u.length >= 2) stems.push(u); }); });
+    parsed.codes.forEach(function (c) { stems.push(c); });
+    if (!stems.length) return null;
+    stems.sort(function (a, b) { return b.length - a.length; });
+    var esc = stems.map(function (s) { return s.replace(/[.*+?^${}()|[\]\\\/-]/g, '\\$&'); });
+    // слово, начинающееся с основы; для коротких основ (ПЭП, ОДР) — только целое слово
+    return new RegExp('(^|[^a-zа-я0-9])((?:' + esc.join('|') + ')[a-zа-я0-9]*)', 'g');
+  }
+  function hiRanges(text, re) {
+    if (!re) return [];
+    var s = norm(text), out = [], m; re.lastIndex = 0;
+    while ((m = re.exec(s))) {
+      var st = m.index + m[1].length, w = m[2];
+      out.push([st, st + w.length]);
+      if (m[0].length === 0) re.lastIndex++;
+    }
+    return out;
+  }
+
+  /* ---------- LSA: рандомизированное SVD по матрице «термин × фрагмент» ---------- */
+  function rng(seed) { var s = seed >>> 0; return function () { s = (s + 0x6D2B79F5) >>> 0; var t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function gauss(r) { var u = 0, v = 0; while (u === 0) u = r(); v = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
+  // ортонормирование столбцов (m×l, по столбцам) — модифицированный Грам — Шмидт
+  function orth(Y, m, l) {
+    for (var j = 0; j < l; j++) {
+      var oj = j * m, i, k;
+      for (k = 0; k < j; k++) {
+        var ok = k * m, d = 0;
+        for (i = 0; i < m; i++) d += Y[ok + i] * Y[oj + i];
+        for (i = 0; i < m; i++) Y[oj + i] -= d * Y[ok + i];
+      }
+      var n = 0; for (i = 0; i < m; i++) n += Y[oj + i] * Y[oj + i];
+      n = Math.sqrt(n) || 1; for (i = 0; i < m; i++) Y[oj + i] /= n;
+    }
+  }
+  // собственные векторы симметричной матрицы (метод Якоби)
+  function jacobi(A, n) {
+    var V = new Float64Array(n * n), i, j, k;
+    for (i = 0; i < n; i++) V[i * n + i] = 1;
+    for (var sweep = 0; sweep < 30; sweep++) {
+      var off = 0;
+      for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) off += A[i * n + j] * A[i * n + j];
+      if (off < 1e-18) break;
+      for (var p = 0; p < n; p++) for (var q = p + 1; q < n; q++) {
+        var apq = A[p * n + q]; if (Math.abs(apq) < 1e-15) continue;
+        var app = A[p * n + p], aqq = A[q * n + q], th = (aqq - app) / (2 * apq);
+        var t = (th >= 0 ? 1 : -1) / (Math.abs(th) + Math.sqrt(th * th + 1)), c = 1 / Math.sqrt(t * t + 1), s = t * c;
+        for (k = 0; k < n; k++) {
+          var akp = A[k * n + p], akq = A[k * n + q];
+          A[k * n + p] = c * akp - s * akq; A[k * n + q] = s * akp + c * akq;
+        }
+        for (k = 0; k < n; k++) {
+          var apk = A[p * n + k], aqk = A[q * n + k];
+          A[p * n + k] = c * apk - s * aqk; A[q * n + k] = s * apk + c * aqk;
+        }
+        for (k = 0; k < n; k++) {
+          var vkp = V[k * n + p], vkq = V[k * n + q];
+          V[k * n + p] = c * vkp - s * vkq; V[k * n + q] = s * vkp + c * vkq;
+        }
+      }
+    }
+    var ev = []; for (i = 0; i < n; i++) ev.push([A[i * n + i], i]);
+    ev.sort(function (a, b) { return b[0] - a[0]; });
+    return { vals: ev.map(function (e) { return e[0]; }), vecs: V, order: ev.map(function (e) { return e[1]; }) };
+  }
+  /* matrix: столбцы-фрагменты в разреженном виде: colPtr, rowIdx, val; m терминов, n фрагментов */
+  function svd(M, k, seedN) {
+    var m = M.m, n = M.n, cp = M.cp, ri = M.ri, va = M.va, l = Math.min(k + 14, n, m), r = rng(seedN || 7), i, j, c;
+    var Y = new Float64Array(m * l), Z = new Float64Array(n * l);
+    // Y = A·Ω
+    for (c = 0; c < n; c++) {
+      for (j = 0; j < l; j++) {
+        var g = gauss(r);
+        for (var e = cp[c]; e < cp[c + 1]; e++) Y[j * m + ri[e]] += va[e] * g;
+      }
+    }
+    for (var it = 0; it < 2; it++) {
+      orth(Y, m, l);
+      // Z = Aᵀ·Y
+      Z.fill(0);
+      for (c = 0; c < n; c++) for (j = 0; j < l; j++) { var s = 0, oj = j * m; for (var e2 = cp[c]; e2 < cp[c + 1]; e2++) s += va[e2] * Y[oj + ri[e2]]; Z[j * n + c] = s; }
+      orth(Z, n, l);
+      // Y = A·Z
+      Y.fill(0);
+      for (c = 0; c < n; c++) for (j = 0; j < l; j++) { var z = Z[j * n + c]; if (!z) continue; var oy = j * m; for (var e3 = cp[c]; e3 < cp[c + 1]; e3++) Y[oy + ri[e3]] += va[e3] * z; }
+    }
+    orth(Y, m, l);
+    // Bᵀ = Aᵀ·Q (n×l), затем B·Bᵀ (l×l)
+    var Bt = new Float64Array(n * l);
+    for (c = 0; c < n; c++) for (j = 0; j < l; j++) { var s2 = 0, oq = j * m; for (var e4 = cp[c]; e4 < cp[c + 1]; e4++) s2 += va[e4] * Y[oq + ri[e4]]; Bt[j * n + c] = s2; }
+    var G = new Float64Array(l * l);
+    for (i = 0; i < l; i++) for (j = i; j < l; j++) { var s3 = 0, oi = i * n, oj2 = j * n; for (c = 0; c < n; c++) s3 += Bt[oi + c] * Bt[oj2 + c]; G[i * l + j] = G[j * l + i] = s3; }
+    var E = jacobi(G, l), kk = Math.min(k, l);
+    // U = Q·W (m×kk), строки — векторы терминов
+    var U = new Float32Array(m * kk);
+    for (var d = 0; d < kk; d++) {
+      var col = E.order[d];
+      for (j = 0; j < l; j++) { var w = E.vecs[j * l + col]; if (!w) continue; var oq2 = j * m; for (i = 0; i < m; i++) U[i * kk + d] += w * Y[oq2 + i]; }
+    }
+    return { U: U, k: kk, sv: E.vals.slice(0, kk).map(Math.sqrt) };
+  }
+
+  function LSA(index, k) {
+    var df = index.df, N = index.N, P = index.passages, self = this;
+    var tid = new Map(), tl = [];
+    df.forEach(function (n, t) { if (n >= 2 && n <= N * 0.5 && /^[а-яa-z]/.test(t) && t.length > 1) { tid.set(t, tl.length); tl.push(t); } });
+    var m = tl.length, n = P.length, cp = new Int32Array(n + 1), ri = [], va = [];
+    var idf = new Float64Array(m); tl.forEach(function (t, i) { idf[i] = index.idf(t); });
+    P.forEach(function (p, c) {
+      var acc = new Map();
+      p.tt.forEach(function (f, t) { var i = tid.get(t); if (i !== undefined) acc.set(i, (acc.get(i) || 0) + WT * f); });
+      p.tb.forEach(function (f, t) { var i = tid.get(t); if (i !== undefined) acc.set(i, (acc.get(i) || 0) + f); });
+      var ent = [], nn = 0;
+      acc.forEach(function (f, i) { var w = (1 + Math.log(f)) * idf[i]; ent.push([i, w]); nn += w * w; });
+      nn = Math.sqrt(nn) || 1;
+      ent.forEach(function (e) { ri.push(e[0]); va.push(e[1] / nn); });
+      cp[c + 1] = ri.length;
+    });
+    this.M = { m: m, n: n, cp: cp, ri: Int32Array.from(ri), va: Float64Array.from(va), k: k || 72 };
+    this.tid = tid; this.idf = idf; this.n = n; this.m = m;
+  }
+  // SVD считается отдельно (в фоновом потоке, если он доступен), затем — векторы фрагментов Uᵀ·d
+  LSA.prototype.train = function () { this.finish(svd(this.M, this.M.k, 11)); return this; };
+  LSA.prototype.finish = function (R) {
+    var M = this.M, n = this.n, K = R.k, U = R.U, PV = new Float32Array(n * K);
+    for (var c = 0; c < n; c++) {
+      var o = c * K, s = 0, d;
+      for (var e = M.cp[c]; e < M.cp[c + 1]; e++) { var i = M.ri[e], v = M.va[e]; for (d = 0; d < K; d++) PV[o + d] += v * U[i * K + d]; }
+      for (d = 0; d < K; d++) s += PV[o + d] * PV[o + d];
+      s = Math.sqrt(s) || 1; for (d = 0; d < K; d++) PV[o + d] /= s;
+    }
+    this.U = U; this.k = K; this.PV = PV;
+    return this;
+  };
+  // исходный код SVD для фонового потока (Web Worker)
+  var SVD_SRC = [rng, gauss, orth, jacobi, svd].map(String).join('\n') +
+    '\nonmessage=function(e){var M=e.data;try{var R=svd(M,M.k,11);postMessage({U:R.U,k:R.k},[R.U.buffer]);}catch(x){postMessage({err:String(x)});}};';
+  LSA.prototype.query = function (C, index) {
+    var K = this.k, q = new Float64Array(K), any = false, self = this;
+    C.forEach(function (c) {
+      c.alts.forEach(function (aw, u) {
+        var i = self.tid.get(u); if (i === undefined) return; any = true;
+        var w = aw * self.idf[i] * (c.w ? 1 : 0);
+        for (var d = 0; d < K; d++) q[d] += w * self.U[i * K + d];
+      });
+    });
+    var out = new Map(); if (!any) return out;
+    var s = 0, d; for (d = 0; d < K; d++) s += q[d] * q[d]; s = Math.sqrt(s) || 1; for (d = 0; d < K; d++) q[d] /= s;
+    var PV = this.PV, all = [];
+    for (var p = 0; p < this.n; p++) { var o = p * K, v = 0; for (d = 0; d < K; d++) v += q[d] * PV[o + d]; if (v > 0.18) all.push([p, v]); }
+    all.sort(function (a, b) { return b[1] - a[1]; });
+    all.slice(0, 160).forEach(function (x) { out.set(x[0], x[1]); });
+    return out;
+  };
+
+  return { norm: norm, terms: terms, stem: stem, Index: Index, LSA: LSA, SVD_SRC: SVD_SRC, hiRegex: hiRegex, hiRanges: hiRanges, expandCode: expandCode, STOP: STOP };
+})();
+
+/* ================= ИИ-поиск по всем разделам: корпус, окно поиска, переходы ================= */
+(function () {
+  'use strict';
+  if (typeof GSE === 'undefined') return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var DOCS = {
+    '2499': { code: '2499р', name: 'Дефекты рельсов' },
+    '2143': { code: '2143р', name: 'Стрелочные переводы' },
+    'odt': { code: 'ОДТ', name: 'Справочник оператора' },
+    'trn': { code: 'Тест', name: 'Тренажёр и экзамен' }
+  };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function plural(n, a, b, c) { var m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 12 || h > 14) ? b : c; }
+  function sq(s) { return String(s || '').replace(/\s+/g, ' ').trim(); }
+  function ls(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  /* ---------- извлечение текста из разметки ---------- */
+  var SKIP = 'svg,script,style,noscript,template,button,input,select,textarea,img,canvas,.kb,.hitcount,.hitnav,.xref-box,.w,.order,.crumbs,.toc,.doc-stats,.scope,.scope-scroll,.legend,.lesson-foot,.next-step,.sub-h,.cheat-h,.fig figcaption,.fig2143 figcaption,.where,.gs-skip,.lb';
+  var BLOCK = { P: 1, LI: 1, TR: 1, DT: 1, DD: 1, FIGCAPTION: 1, H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1, BLOCKQUOTE: 1, PRE: 1, DIV: 1, SUMMARY: 1, SECTION: 1, ARTICLE: 1, UL: 1, OL: 1, DL: 1, TABLE: 1, TBODY: 1, THEAD: 1, FIGURE: 1, DETAILS: 1 };
+  var HEAD = { H1: 1, H2: 1, H3: 1, H4: 1, H5: 1, H6: 1 };
+  function ownText(el) {
+    var s = '';
+    (function walk(n) {
+      for (var c = n.firstChild; c; c = c.nextSibling) {
+        if (c.nodeType === 3) { s += c.nodeValue; continue; }
+        if (c.nodeType !== 1 || c.matches(SKIP)) continue;
+        var tg = c.tagName;
+        if (tg === 'BR') { s += ' '; continue; }
+        if (tg === 'TD' || tg === 'TH') { if (sq(s)) s += ' · '; walk(c); continue; }
+        if (BLOCK[tg]) continue;
+        walk(c);
+      }
+    })(el);
+    return sq(s);
+  }
+  function cleanText(el) { return el ? ownText(el) : ''; }
+  // блоки текста в порядке документа: {el, text, head?, label?, find?}
+  function collectBlocks(root, skipEl) {
+    var out = [];
+    (function visit(el) {
+      for (var c = el.firstElementChild; c; c = c.nextElementSibling) {
+        if (c === skipEl || c.matches(SKIP)) continue;
+        if (c.matches('.cr')) { // строка «краткого ответа»: подпись + текст
+          var lb = c.querySelector('b'), sp = c.querySelector('span');
+          var t = sp ? ownText(sp) : ownText(c);
+          if (t) out.push({ el: c, text: t, label: lb ? sq(lb.textContent) : '' });
+          continue;
+        }
+        if (c.tagName === 'TR' && c.closest('table.k') && c.querySelector('th') && c.querySelector('td')) {
+          var th = c.querySelector('th'), td = c.querySelector('td'), t2 = ownText(td);
+          if (t2) out.push({ el: c, text: t2, label: sq(th.textContent) });
+          continue;
+        }
+        if (c.matches('.kv')) { // пары «параметр — значение»
+          var ch = c.children, pairs = [];
+          for (var i = 0; i + 1 < ch.length; i += 2) pairs.push(sq(ch[i].textContent) + ' — ' + sq(ch[i + 1].textContent));
+          if (pairs.length) out.push({ el: c, text: pairs.join('; '), find: ch[0] ? sq(ch[0].textContent) : '' });
+          continue;
+        }
+        if (BLOCK[c.tagName]) {
+          var tx = ownText(c);
+          if (tx.length > 1) out.push({ el: c, text: tx, head: !!HEAD[c.tagName] || c.matches('.h1,.h2,.h3') });
+        }
+        visit(c);
+      }
+    })(root);
+    return out;
+  }
+
+  /* ---------- корпус ---------- */
+  var targets = [], passages = [];
+  function addTarget(T, blocks) {
+    T.ps = []; T.ti = targets.length; targets.push(T);
+    var cur = null, head = '';
+    function flush() { if (cur && cur.blocks.length) { cur.text = cur.blocks.map(function (b) { return b.text; }).join(' '); T.ps.push(passages.length); passages.push(cur); } cur = null; }
+    function start(label) { cur = { t: T.ti, blocks: [], len: 0, head: head, label: label || '', ttl: sq(T.title + ' ' + (T.code || '') + ' ' + (T.path || '').replace(/^\S+\s·\s/, '') + ' ' + head + ' ' + (label || '')) }; }
+    blocks.forEach(function (b) {
+      if (b.head) { flush(); head = b.text; start(''); cur.blocks.push(b); cur.len += b.text.length; return; }
+      if (b.label) { flush(); start(b.label); cur.blocks.push(b); flush(); return; }
+      if (!cur || (cur.len + b.text.length > 560 && cur.len > 140)) { flush(); start(''); }
+      cur.blocks.push(b); cur.len += b.text.length;
+    });
+    flush();
+    if (!T.ps.length) { start(''); cur.blocks.push({ el: T.el || null, text: T.title }); cur.len = 1; flush(); }
+    return T;
+  }
+  function groupName(sub, sel) {
+    var g = sub.closest(sel); if (!g) return '';
+    var sm = g.querySelector(':scope > summary'); return sm ? cleanText(sm) : '';
+  }
+  // разделы документа вне карточек: заголовки h2, лид, термины
+  function docSections(doc, sec, skipSel) {
+    var h1 = sec.querySelector(':scope > h1'), title = h1 ? sq(h1.textContent) : DOCS[doc].name;
+    var curT = { doc: doc, kind: 'sec', title: 'О документе: ' + title, path: DOCS[doc].code, el: h1 || sec }, curB = [];
+    function close() { if (curB.length) addTarget(curT, curB); curB = []; }
+    Array.prototype.forEach.call(sec.children, function (c) {
+      if (c.tagName === 'H1' || c.matches(skipSel)) return;
+      if (c.tagName === 'H2') { close(); curT = { doc: doc, kind: 'sec', title: sq(c.textContent), path: DOCS[doc].code, el: c }; return; }
+      if (c.tagName === 'DL') { // термины — каждый отдельным результатом
+        $$(':scope > dt', c).forEach(function (dt) {
+          var dd = dt.nextElementSibling; if (!dd || dd.tagName !== 'DD') return;
+          addTarget({ doc: doc, kind: 'term', title: sq(dt.textContent), path: DOCS[doc].code + ' · ' + (curT.title || 'Термины'), el: dt }, [{ el: dd, text: ownText(dd) }]);
+        });
+        return;
+      }
+      var bl = collectBlocks(c);
+      if (!bl.length && ownText(c)) bl = [{ el: c, text: ownText(c) }];
+      curB = curB.concat(bl);
+    });
+    close();
+  }
+  function cards(doc, rootSel, groupSel) {
+    $$(rootSel + ' details.sub').forEach(function (sub) {
+      var sm = sub.querySelector(':scope > summary'); if (!sm) return;
+      var codes = [], title = '';
+      if (doc === 'odt') { var on = sm.querySelector('.onum'); title = sq((on ? on.textContent + ' ' : '') + (sm.querySelector('.st') || sm).textContent); }
+      else {
+        codes = (sub.dataset.code || $$('code', sm).map(function (c) { return c.textContent; }).join(',')).split(/[\s,]+/)
+          .map(function (x) { return sq(x); }).filter(Boolean);
+        var st = sm.querySelector('.st'); title = st ? sq(st.textContent) : cleanText(sm);
+      }
+      var body = sub.querySelector(':scope > .details-body > .details-content') || sub;
+      addTarget({ doc: doc, kind: doc === 'odt' ? 'odt' : 'card', title: title, code: codes.join(', '), codes: codes, path: DOCS[doc].code + ' · ' + groupName(sub, groupSel), el: sub }, collectBlocks(body, sm));
+    });
+  }
+  /* «Тест»: уроки, страницы, словарь, вопросы — из данных модуля */
+  var INERT = document.implementation.createHTMLDocument('');
+  function parseHtml(html) { var d = INERT.createElement('div'); d.innerHTML = html; return d; }
+  function strip(html) { return sq(parseHtml(html).textContent); }
+  function lessonHtml(l, ORDERS) {
+    return l.blocks.map(function (b) {
+      var x = b.x;
+      switch (b.t) {
+        case 'p': case 'formula': return '<p>' + x + '</p>';
+        case 'h': return '<h3>' + x + '</h3>';
+        case 'ul': case 'ol': return '<ul>' + x.map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>';
+        case 'note': return '<div>' + x + '</div>';
+        case 'fix': return '<div>Уточнение к конспекту: ' + x + '</div>';
+        case 'kv': return '<div class="kv">' + x.map(function (p) { return '<div>' + p[0] + '</div><div>' + p[1] + '</div>'; }).join('') + '</div>';
+        case 'img': return '<figure><figcaption>' + esc(b.cap || '') + '</figcaption></figure>';
+        case 'imgs': return x.map(function (p) { return '<figure><figcaption>' + esc(p[1]) + '</figcaption></figure>'; }).join('');
+        case 'table': return '<table><tr>' + b.head.map(function (h) { return '<th>' + h + '</th>'; }).join('') + '</tr>' + b.rows.map(function (r) { return '<tr>' + r.map(function (c) { return '<td>' + c + '</td>'; }).join('') + '</tr>'; }).join('') + '</table>';
+        case 'cmp': return x.map(function (r) { return '<p>' + r.join(' · ') + '</p>'; }).join('');
+        case 'cls': return x.map(function (r) { return '<h4>' + r[0] + '</h4><ul>' + r[1].map(function (i) { return '<li>' + i + '</li>'; }).join('') + '</ul>'; }).join('');
+        case 'steps': return x.map(function (r) { return '<p>' + r[0] + '. ' + r[1] + '</p>'; }).join('');
+        case 'timeline': return x.map(function (r) { return '<p>' + (r[0] ? r[0] + ' ' : '') + r[1] + '</p>'; }).join('');
+        case 'order': var o = ORDERS && ORDERS[b.id]; return o ? '<p data-sel=\'.order[data-order="' + b.id + '"]\'>По порядку · ' + esc(o.title) + ': ' + o.items.map(function (it, i) { return (i + 1) + ') ' + esc(it); }).join('; ') + '</p>' : '';
+        default: return '';
+      }
+    }).join('');
+  }
+  function trnBlocks(html) {
+    return collectBlocks(parseHtml(html)).map(function (b) {
+      var sel = b.el.getAttribute && b.el.getAttribute('data-sel'), fd = b.el.getAttribute && b.el.getAttribute('data-find');
+      return { text: b.text, head: b.head, label: b.label, find: fd || b.find || b.text, sel: sel || '' };
+    });
+  }
+  // «Тест» собирается в три этапа: уроки, страницы, словарь с вопросами
+  function trainer(part) {
+    var api = window.__trnSearch; if (!api) return;
+    var D = api.data(), P = 'Тест · ';
+    if (part === 1) {
+      D.LESSONS.forEach(function (l) {
+        addTarget({ doc: 'trn', kind: 'lesson', title: l.title, path: P + 'Технология контроля', nav: { sec: 'tech', extra: { id: l.id } } }, trnBlocks(lessonHtml(l, D.ORDERS)));
+      });
+      return;
+    }
+    if (part === 2) {
+      [['so3r', null, 'Настройка на образце СО-3Р'], ['read', null, 'Как читать Б-развёртку'], ['calc', null, 'Расчёты ультразвукового контроля'], ['tech', { sub: 'dev' }, 'Дефектоскопы']].forEach(function (p) {
+        var html = api.html(p[0], p[1]); if (!html) return;
+        addTarget({ doc: 'trn', kind: 'page', title: p[2], path: P + (p[0] === 'tech' ? 'Технология контроля' : 'Изучить'), nav: { sec: p[0], extra: p[1] || {} } }, trnBlocks(html));
+      });
+      return;
+    }
+    D.GLOSS.forEach(function (g) {
+      addTarget({ doc: 'trn', kind: 'term', title: g[0] + ' — ' + g[1], path: P + 'Словарь · ' + (D.GLG[g[3]] || ''), nav: { sec: 'gloss', extra: {} }, find: g[0] }, [{ text: g[2] || g[1], find: g[0], dt: g[0] }]);
+    });
+    D.QBANK.forEach(function (q) {
+      var qt = strip(q.q), a = strip(q.o[0]), ex = strip(q.ex || '');
+      addTarget({ doc: 'trn', kind: 'q', title: qt, path: P + (D.TOPICS[q.tp] || ''), answer: a, ex: ex, tp: q.tp, kw: 0.9 }, [{ text: a }, { text: ex }]);
+    });
+    D.NUMS.forEach(function (n) {
+      addTarget({ doc: 'trn', kind: 'fact', title: strip(n[0]), path: P + 'Числа, допуски и сроки', answer: strip(n[1]), kw: 0.88 }, [{ text: strip(n[1]) }]);
+    });
+  }
+  // корпус собирается по этапам: документ за документом, затем индекс порциями
+  function stagesList() {
+    targets = []; passages = [];
+    var d2499 = document.getElementById('doc-2499'), d2143 = document.getElementById('doc-2143'), dodt = document.getElementById('doc-odt'), L = [];
+    if (d2499) L.push(function () { cards('2499', '#groups', '#groups > details'); docSections('2499', d2499, '.doc-stats,.source,.toolbar,.decoder,.calc,#groups,script'); });
+    if (d2143) L.push(function () { cards('2143', '#groups2143', '#groups2143 > details'); docSections('2143', d2143, '.doc-stats,.source,.toolbar,.decoder,.calc,#groups2143,script'); });
+    if (dodt) L.push(function () { cards('odt', '#groupsOdt', '#groupsOdt > details'); docSections('odt', dodt, '.doc-stats,.source,.toolbar,#groupsOdt,script,h2'); });
+    [1, 2, 3].forEach(function (k) { L.push(function () { try { trainer(k); } catch (e) { if (window.console) console.warn('[ИИ-поиск] Тест:', e); } }); });
+    L.push(function () { IX = new GSE.Index(targets, passages); });
+    return L;
+  }
+
+  /* ---------- индекс: готовится в фоне, смысловая модель обучается в отдельном потоке ---------- */
+  var IX = null, stages = null, tBuild = 0, buildMs = 0, lsaState = 'off', lsaMs = 0, lsaVia = '', onLsa = [];
+  function stepBuild(budget) { // true — индекс готов
+    if (IX && IX.ready) return true;
+    var t = Date.now();
+    if (!stages) { stages = stagesList(); tBuild = 0; }
+    while (stages.length) { stages.shift()(); if (budget && Date.now() - t > budget) { tBuild += Date.now() - t; return false; } }
+    var done = IX.step(budget ? Math.max(6, budget - (Date.now() - t)) : 0);
+    tBuild += Date.now() - t;
+    if (done) { buildMs = tBuild; lsaState = 'wait'; status(); setTimeout(trainLsa, 80); }
+    return done;
+  }
+  function ensure() { stepBuild(0); return IX; }
+  function bgBuild() { if (!stepBuild(28)) setTimeout(bgBuild, 16); }
+  function lsaDone(L, t0, ok) {
+    if (ok) { IX.lsa = L; lsaState = 'ready'; } else lsaState = 'fail';
+    lsaMs = Math.round(performance.now() - t0);
+    status(); onLsa.splice(0).forEach(function (f) { f(); });
+    // пересчитываем выдачу, только если человек сейчас не листает и не нажимает её
+    if (isOpen() && inp.value.trim() && Date.now() - touchAt > 2000 && list.scrollTop < 4) run(true);
+  }
+  function trainLsa() {
+    if (!IX || !IX.ready || lsaState === 'ready' || lsaState === 'busy') return;
+    lsaState = 'busy'; status();
+    var t0 = performance.now(), L, fin = false;
+    try { L = new GSE.LSA(IX, 72); } catch (e) { lsaDone(null, t0, false); return; }
+    function main() { // запасной путь — в основном потоке
+      if (fin) return; fin = true;
+      lsaVia = 'main';
+      setTimeout(function () { try { L.train(); lsaDone(L, t0, true); } catch (e) { if (window.console) console.warn('[ИИ-поиск] LSA:', e); lsaDone(null, t0, false); } }, 30);
+    }
+    try {
+      var url = URL.createObjectURL(new Blob([GSE.SVD_SRC], { type: 'text/javascript' })), w = new Worker(url), M = L.M;
+      var stop = function () { try { w.terminate(); } catch (e) {} try { URL.revokeObjectURL(url); } catch (e) {} };
+      w.onmessage = function (e) {
+        stop(); if (fin) return;
+        if (e.data && e.data.U) { fin = true; lsaVia = 'worker'; try { L.finish({ U: e.data.U, k: e.data.k }); lsaDone(L, t0, true); } catch (x) { lsaDone(null, t0, false); } }
+        else main();
+      };
+      w.onerror = function (ev) { if (ev && ev.preventDefault) ev.preventDefault(); stop(); main(); };
+      w.postMessage({ m: M.m, n: M.n, cp: M.cp, ri: M.ri, va: M.va, k: M.k });
+      setTimeout(function () { if (!fin) { stop(); main(); } }, 25000);
+    } catch (e) { main(); }
+  }
+  // индекс готовится заранее, пока страница простаивает
+  function idle(f) { if (window.requestIdleCallback) requestIdleCallback(f, { timeout: 4000 }); else setTimeout(f, 1200); }
+  setTimeout(function () { idle(bgBuild); }, 2500);
+
+  /* ---------- окно поиска ---------- */
+  var ICO = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg>';
+  var box = document.createElement('div');
+  box.id = 'gs'; box.className = 'gs'; box.hidden = true;
+  box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', 'ИИ-поиск по всем разделам');
+  box.innerHTML = '<div class="gs-back" data-gs-x></div><div class="gs-panel">'
+    + '<div class="gs-head"><label class="gs-field">' + ICO + '<input id="gsq" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" placeholder="Опишите, что ищете" aria-label="Запрос" aria-controls="gsList" aria-autocomplete="list"><span class="gs-ai" title="Поиск по смыслу">ИИ</span></label>'
+    + '<button type="button" class="gs-x" data-gs-x aria-label="Закрыть поиск">Закрыть</button></div>'
+    + '<div class="gs-chips" role="group" aria-label="Где искать"></div>'
+    + '<div class="gs-why" aria-live="polite"></div>'
+    + '<div class="gs-list" id="gsList" role="listbox" aria-label="Результаты"></div>'
+    + '<div class="gs-foot"><span class="gs-st"></span><span class="gs-keys"><kbd>↑</kbd><kbd>↓</kbd> выбор · <kbd>Enter</kbd> открыть · <kbd>Esc</kbd> закрыть</span></div>'
+    + '</div>';
+  document.body.appendChild(box);
+  var inp = $('#gsq', box), list = $('.gs-list', box), chipsEl = $('.gs-chips', box), whyEl = $('.gs-why', box), stEl = $('.gs-st', box);
+  var filt = 'all', last = null, act = -1, timer = null, lastFocus = null;
+
+  function isOpen() { return !box.hidden; }
+  function status() {
+    if (!stEl) return;
+    var n = passages.length, txt = IX && IX.ready ? n.toLocaleString('ru-RU') + ' ' + plural(n, 'фрагмент', 'фрагмента', 'фрагментов') + ' во всех разделах' : 'Готовлю индекс…';
+    var m = lsaState === 'ready' ? 'ИИ-модель готова' : lsaState === 'busy' || lsaState === 'wait' ? 'ИИ-модель обучается…' : lsaState === 'fail' ? 'поиск по словам' : '';
+    stEl.innerHTML = '<i class="gs-dot gs-' + lsaState + '"></i>' + esc(txt) + (m ? ' · ' + esc(m) : '');
+  }
+
+  /* история: «Назад» на телефоне закрывает окно поиска, а не уводит со страницы */
+  // обработчик «Назад» на сайте сначала спрашивает window.__trnPop — встраиваемся в эту цепочку
+  var swallow = 0, afterPop = null;
+  function gsPop() {
+    if (swallow > 0) { swallow--; var f = afterPop; afterPop = null; if (f) setTimeout(f, 0); return true; }
+    if (isOpen()) { hide(); return true; }
+    return false;
+  }
+  var prevPop = window.__trnPop;
+  window.__trnPop = function (e) { if (gsPop(e)) return true; return typeof prevPop === 'function' ? prevPop(e) : false; };
+
+  function open(q) {
+    lastFocus = document.activeElement;
+    if (!isOpen()) {
+      box.hidden = false; document.documentElement.classList.add('gs-lock');
+      try { history.pushState({ gs: 1, prev: history.state }, ''); } catch (e) {}
+      requestAnimationFrame(function () { box.classList.add('on'); });
+    }
+    if (typeof q === 'string' && q.trim()) inp.value = q.trim();
+    inp.focus();
+    status();
+    if (IX && IX.ready) run(true);
+    else { // окно уже на экране, индекс достраиваем следующим кадром
+      if (inp.value.trim()) list.innerHTML = '<div class="gs-none"><b>Готовлю индекс…</b><span>Это происходит один раз за сеанс.</span></div>'; else renderEmpty();
+      setTimeout(function () { ensure(); status(); run(true); }, 40);
+    }
+    setTimeout(function () { try { inp.select(); } catch (e) {} }, 30);
+  }
+  function hide() {
+    box.classList.remove('on'); box.hidden = true; document.documentElement.classList.remove('gs-lock');
+    if (lastFocus && lastFocus.focus && document.contains(lastFocus)) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
+  }
+  // закрыть окно; then — что сделать после возврата в историю
+  function close(then) {
+    if (!isOpen()) { if (then) then(); return; }
+    hide();
+    if (history.state && history.state.gs) {
+      // свой шаг истории убираем; переход выполняем после него (или по таймеру, если браузер не ответил)
+      var done = false, fire = function () { if (done) return; done = true; if (then) then(); };
+      swallow++; afterPop = fire;
+      history.back();
+      setTimeout(fire, 600);
+      setTimeout(function () { if (swallow > 0) swallow--; }, 2500);
+    } else if (then) then();
+  }
+
+  /* ---------- поиск и отрисовка ---------- */
+  function run(now) {
+    clearTimeout(timer);
+    if (!now) { timer = setTimeout(function () { run(true); }, 90); return; }
+    var q = inp.value;
+    if (!q.trim()) { last = null; renderEmpty(); return; }
+    var t0 = performance.now();
+    last = ensure().search(q, { limit: 60 });
+    last.ms = performance.now() - t0;
+    render();
+  }
+  function counts(items) { var c = { all: items.length, '2499': 0, '2143': 0, odt: 0, trn: 0 }; items.forEach(function (it) { c[it.t.doc]++; }); return c; }
+  function renderChips(c) {
+    var defs = [['all', 'Все'], ['2499', '2499р'], ['2143', '2143р'], ['odt', 'ОДТ'], ['trn', 'Тест']];
+    chipsEl.innerHTML = defs.map(function (d) {
+      var n = c ? c[d[0]] : null;
+      return '<button type="button" class="gs-chip gs-c-' + d[0] + '" data-f="' + d[0] + '" aria-pressed="' + (filt === d[0]) + '"' + (c && !n && d[0] !== 'all' ? ' disabled' : '') + '>' + d[1] + (n != null ? '<b>' + n + '</b>' : '') + '</button>';
+    }).join('');
+  }
+  function word(stem) { return IX.surf.get(stem) || stem; }
+  function renderWhy(p) {
+    var parts = [];
+    p.concepts.forEach(function (c) {
+      var main = [], syn = [];
+      c.alts.forEach(function (w, u) { if (w >= 0.75) main.push(u); else if (w >= 0.55 && main.indexOf(u) < 0) syn.push(u); });
+      var s = '';
+      if (c.how === 'typo' || c.how === 'layout') s = '<s>' + esc(c.src) + '</s> → <b>' + esc(word(main[0] || syn[0])) + '</b>';
+      else if (c.how === 'prefix') s = '<b>' + esc(c.src) + '…</b> → ' + esc(main.slice(0, 2).map(word).join(', '));
+      else s = '<b>' + esc(c.src) + '</b>';
+      var sy = [], roots = [word(c.stem).slice(0, 5)];
+      syn.filter(function (u) { return main.indexOf(u) < 0; }).map(word).forEach(function (x) { var r = x.slice(0, 5); if (roots.indexOf(r) < 0 && sy.length < 3) { roots.push(r); sy.push(x); } });
+      if (sy.length) s += ' <span class="gs-syn">≈ ' + esc(sy.join(', ')) + '</span>';
+      parts.push('<span class="gs-tag">' + s + '</span>');
+    });
+    p.codes.forEach(function (c) { parts.push('<span class="gs-tag gs-tag-code">код <b>' + esc(c.toUpperCase()) + '</b></span>'); });
+    p.notes.forEach(function (n) { parts.push('<span class="gs-tag gs-tag-no" title="Этого слова нет в справочнике">' + esc(n.w) + ' — нет в тексте</span>'); });
+    whyEl.innerHTML = parts.length ? '<span class="gs-why-l">Понял так:</span>' + parts.join('') : '';
+  }
+  function snippet(it, re) {
+    var p = passages[it.pid]; if (!p) return { html: '', label: '', block: null };
+    // лучший блок внутри фрагмента — где больше разных слов запроса
+    var best = null, bs = -1;
+    p.blocks.forEach(function (b, i) {
+      var r = GSE.hiRanges(b.text, re), seen = new Set();
+      r.forEach(function (x) { seen.add(GSE.norm(b.text.slice(x[0], x[1])).slice(0, 5)); });
+      var s = seen.size * 10 + Math.min(r.length, 4) - i * 0.01 - (b.head ? 25 : 0);
+      if (s > bs) { bs = s; best = b; }
+    });
+    var text = best.text, rs = GSE.hiRanges(text, re), L = 210, a = 0;
+    if (text.length > L && rs.length) {
+      // окно, где совпадений больше всего
+      var bestA = 0, bestN = -1;
+      rs.forEach(function (r) { var st = Math.max(0, r[0] - 50), n = rs.filter(function (x) { return x[0] >= st && x[1] <= st + L; }).length; if (n > bestN) { bestN = n; bestA = st; } });
+      a = bestA;
+      if (a > 0) { var sp = text.lastIndexOf(' ', a + 1); if (sp > a - 25 && sp >= 0) a = sp + 1; }
+    }
+    var b = Math.min(text.length, a + L);
+    if (b < text.length) { var sp2 = text.indexOf(' ', b); if (sp2 > 0 && sp2 - b < 20) b = sp2; }
+    var html = '', pos = a;
+    rs.forEach(function (r) { if (r[0] < a || r[1] > b) return; html += esc(text.slice(pos, r[0])) + '<mark>' + esc(text.slice(r[0], r[1])) + '</mark>'; pos = r[1]; });
+    html += esc(text.slice(pos, b));
+    var lab = best.label || p.label || (best.head ? '' : p.head) || '';
+    if (GSE.norm(lab) === GSE.norm(targets[p.t].title)) lab = '';
+    return { html: (a > 0 ? '…' : '') + html + (b < text.length ? '…' : ''), label: lab, block: best };
+  }
+  function hl(text, re) {
+    var rs = GSE.hiRanges(text, re), h = '', pos = 0;
+    rs.forEach(function (r) { h += esc(text.slice(pos, r[0])) + '<mark>' + esc(text.slice(r[0], r[1])) + '</mark>'; pos = r[1]; });
+    return h + esc(text.slice(pos));
+  }
+  var KIND = { card: 'Карточка', odt: 'Раздел', sec: 'Раздел', term: 'Термин', lesson: 'Урок', page: 'Страница', q: 'Вопрос из теста', fact: 'Число и срок' };
+  function render() {
+    var items = last.items, c = counts(items);
+    if (filt !== 'all' && !c[filt]) filt = 'all';
+    renderChips(c); renderWhy(last.parsed);
+    var re = GSE.hiRegex(last.parsed);
+    var shown = items.filter(function (it) { return filt === 'all' || it.t.doc === filt; });
+    act = shown.length ? 0 : -1;
+    if (!shown.length) {
+      list.innerHTML = '<div class="gs-none"><b>Ничего похожего не нашлось.</b><span>Попробуйте описать иначе или короче: «трещина в шейке», «настройка 70°», «износ остряка».</span></div>';
+      return;
+    }
+    list.innerHTML = shown.map(function (it, i) {
+      var T = it.t, sn = snippet(it, re), pct = Math.round(it.sim * 100);
+      it.block = sn.block;
+      var code = T.code ? '<code>' + esc(T.code) + '</code> ' : '';
+      var ans = '';
+      if (T.kind === 'q' || T.kind === 'fact') {
+        ans = '<span class="gs-ans"><b>Ответ:</b> ' + hl(T.answer, re) + '</span>' + (T.ex ? '<span class="gs-ex">' + hl(T.ex, re) + '</span>' : '');
+      }
+      return '<div class="gs-r gs-d-' + T.doc + (i === 0 ? ' is-act' : '') + '" role="option" id="gsr' + i + '" data-i="' + i + '" tabindex="-1" aria-selected="' + (i === 0) + '">'
+        + '<span class="gs-r-top"><span class="gs-doc">' + DOCS[T.doc].code + '</span><span class="gs-kind">' + (KIND[T.kind] || '') + '</span><span class="gs-path">' + esc(T.path.replace(/^\S+\s·\s?/, '')) + '</span>'
+        + '<span class="gs-sim" title="Насколько фрагмент похож на запрос"><i style="--p:' + pct + '%"></i>' + pct + '%</span></span>'
+        + '<span class="gs-r-title">' + code + hl(T.title, re) + '</span>'
+        + (ans || ((sn.label ? '<span class="gs-lab">' + esc(sn.label) + '</span>' : '') + (sn.html ? '<span class="gs-snip">' + sn.html + '</span>' : '')))
+        + (T.kind === 'q' || T.kind === 'fact' ? '<span class="gs-acts"><span class="gs-mini gs-src">Где это в справочнике →</span>' + (T.kind === 'q' ? '<button type="button" class="gs-mini" data-quiz="' + esc(T.tp) + '">Тест по этой теме →</button>' : '') + '</span>' : '')
+        + '</div>';
+    }).join('');
+    list._shown = shown;
+    list.scrollTop = 0;
+  }
+  function renderEmpty() {
+    renderChips(null); whyEl.innerHTML = '';
+    var rec = []; try { rec = JSON.parse(ls('gs.recent') || '[]'); } catch (e) {}
+    var ex = ['рельс лопнул в болтовом стыке', 'трещина в шейке у отверстия', 'что делать при остродефектном рельсе', 'как проверить мёртвую зону датчика', 'скорость звука в стали', 'износ остряка Р65', 'nhtobyf в подошве', '53.1'];
+    list.innerHTML = '<div class="gs-hello">'
+      + '<p class="gs-hello-t">Ищет по смыслу сразу в 2499р, 2143р, справочнике ОДТ и «Тесте»: понимает формы слов, опечатки, неправильную раскладку и синонимы, а похожие по теме фрагменты находит, даже если слова в них другие.</p>'
+      + (rec.length ? '<div class="gs-hello-h">Недавние</div><div class="gs-ex-row">' + rec.map(function (r) { return '<button type="button" class="gs-exq gs-rec" data-q="' + esc(r) + '">' + esc(r) + '</button>'; }).join('') + '</div>' : '')
+      + '<div class="gs-hello-h">Например</div><div class="gs-ex-row">' + ex.map(function (r) { return '<button type="button" class="gs-exq" data-q="' + esc(r) + '">' + esc(r) + '</button>'; }).join('') + '</div></div>';
+    list._shown = [];
+  }
+  function remember(q) {
+    q = sq(q); if (q.length < 2) return;
+    var rec = []; try { rec = JSON.parse(ls('gs.recent') || '[]'); } catch (e) {}
+    rec = [q].concat(rec.filter(function (x) { return x.toLowerCase() !== q.toLowerCase(); })).slice(0, 6);
+    ls('gs.recent', JSON.stringify(rec));
+  }
+  // scroll — только для стрелок с клавиатуры; при наведении мышью список не двигается
+  function setAct(i, scroll) {
+    var rows = $$('.gs-r', list); if (!rows.length) return;
+    act = (i + rows.length) % rows.length;
+    rows.forEach(function (r, k) { r.classList.toggle('is-act', k === act); r.setAttribute('aria-selected', k === act ? 'true' : 'false'); });
+    if (scroll) rows[act].scrollIntoView({ block: 'nearest' });
+    inp.setAttribute('aria-activedescendant', rows[act].id);
+  }
+
+  inp.addEventListener('input', function () { run(false); });
+  inp.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setAct(act + 1, true); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setAct(act - 1, true); }
+    else if (e.key === 'Enter') { e.preventDefault(); if (timer) run(true); if (act >= 0 && list._shown && list._shown[act]) choose(list._shown[act]); }
+  });
+  box.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { e.preventDefault(); close(); }
+    if (e.key === 'Tab') { // фокус не уходит из окна
+      var f = $$('input,button:not([disabled])', box).filter(function (x) { return x.offsetParent !== null; });
+      if (!f.length) return; var a = f[0], z = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+    }
+  });
+  box.addEventListener('click', function (e) {
+    if (e.target.closest('[data-gs-x]')) { close(); return; }
+    var ch = e.target.closest('.gs-chip'); if (ch) { filt = ch.dataset.f; if (last) render(); inp.focus({ preventScroll: true }); return; }
+    var exq = e.target.closest('.gs-exq'); if (exq) { inp.value = exq.dataset.q; run(true); inp.focus(); return; }
+    var qz = e.target.closest('[data-quiz]'); if (qz) { remember(inp.value); var tp = qz.dataset.quiz; close(function () { showDoc('trn', function () { var api = window.__trnSearch; if (api) api.quiz(tp); }); }); return; }
+    var r = e.target.closest('.gs-r'); if (r && list._shown) { var it = list._shown[+r.dataset.i]; if (it) { setAct(+r.dataset.i); choose(it); } }
+  });
+  // подсветка строки под курсором — только для настоящей мыши: на телефоне эмулированные события мыши
+  // приходят перед нажатием и не должны ничего менять в списке
+  list.addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    var r = e.target.closest('.gs-r'); if (r && +r.dataset.i !== act) setAct(+r.dataset.i);
+  });
+  var touchAt = 0;
+  list.addEventListener('pointerdown', function () { touchAt = Date.now(); });
+  list.addEventListener('scroll', function () { touchAt = Date.now(); }, { passive: true });
+
+  /* ---------- переход к найденному ---------- */
+  function curDoc() {
+    var tr = document.getElementById('doc-trn'); if (tr && !tr.hidden) return 'trn';
+    var o = document.getElementById('doc-odt'), t = document.getElementById('doc-2143');
+    return o && !o.hidden ? 'odt' : t && !t.hidden ? '2143' : '2499';
+  }
+  function landingOpen() { var l = document.getElementById('landing'); return !!l && !l.classList.contains('is-hidden'); }
+  function showDoc(d, then) {
+    if (curDoc() !== d || landingOpen()) { var b = document.querySelector('.sitem[data-doc="' + d + '"]') || document.querySelector('.lcard[data-doc="' + d + '"]'); if (b) b.click(); }
+    var n = 0;
+    (function wait() { var s = document.getElementById('doc-' + d); if ((s && !s.hidden) || n++ > 40) { if (then) setTimeout(then, 30); } else setTimeout(wait, 40); })();
+  }
+  function openChain(el) {
+    for (var d = el && el.closest ? el.closest('details') : null; d; d = d.parentElement ? d.parentElement.closest('details') : null) {
+      if (!d.classList.contains('is-open') || !d.hasAttribute('open')) { d.setAttribute('open', ''); d.classList.add('is-open'); }
+    }
+  }
+  var SEARCH_IN = { '2499': 'qi', '2143': 'qi2143', 'odt': 'qiOdt' };
+  function unfilter(doc, el) {
+    var qi = document.getElementById(SEARCH_IN[doc]);
+    if (qi && qi.value) { qi.value = ''; qi.dispatchEvent(new Event('input', { bubbles: true })); qi.dispatchEvent(new Event('search', { bubbles: true })); }
+    var hidden = false; for (var e = el; e && e.id !== 'doc-' + doc; e = e.parentElement) if (e.style && e.style.display === 'none') hidden = true;
+    if (hidden) { var all = document.querySelector('#doc-' + doc + ' .toolbar .chip[data-f="all"]'); if (all) all.click(); }
+  }
+  function scrollTo(el) {
+    var r = el.getBoundingClientRect(), off = Math.max(96, Math.min(innerHeight * 0.24, 200));
+    window.scrollTo({ top: Math.max(0, window.scrollY + r.top - off), behavior: 'smooth' });
+  }
+  var marks = [];
+  function clearMarks() {
+    marks.forEach(function (m) { var p = m.parentNode; if (!p) return; p.replaceChild(document.createTextNode(m.textContent), m); p.normalize(); });
+    marks = [];
+  }
+  function markIn(el, re, doc) {
+    if (!re || !el) return;
+    var w = (doc || document).createTreeWalker(el, NodeFilter.SHOW_TEXT, { acceptNode: function (n) { var p = n.parentNode; if (!p || (p.closest && p.closest('svg,script,style,mark,button,input,textarea'))) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; } });
+    var nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+    nodes.forEach(function (n) {
+      var t = n.nodeValue, rs = GSE.hiRanges(t, re); if (!rs.length) return;
+      var f = n.ownerDocument.createDocumentFragment(), pos = 0;
+      rs.forEach(function (r) { f.appendChild(n.ownerDocument.createTextNode(t.slice(pos, r[0]))); var m = n.ownerDocument.createElement('mark'); m.className = 'gsx'; m.textContent = t.slice(r[0], r[1]); f.appendChild(m); marks.push(m); pos = r[1]; });
+      f.appendChild(n.ownerDocument.createTextNode(t.slice(pos)));
+      n.parentNode.replaceChild(f, n);
+    });
+  }
+  function flash(el) {
+    el.classList.remove('gs-flash'); void el.offsetWidth; el.classList.add('gs-flash');
+    clearTimeout(el.__gsT); el.__gsT = setTimeout(function () { el.classList.remove('gs-flash'); }, 2600);
+  }
+  // для вопроса из теста — место в справочнике, где это объяснено
+  function sourceOf(T) {
+    var r = ensure().search(T.title + ' ' + (T.answer || '') + ' ' + (T.ex || ''), { limit: 15 });
+    for (var i = 0; i < r.items.length; i++) {
+      var x = r.items[i]; if (x.t.kind === 'q' || x.t.kind === 'fact' || x.t === T) continue;
+      x.block = snippet(x, GSE.hiRegex(r.parsed)).block; return x;
+    }
+    return null;
+  }
+  function choose(it) {
+    remember(inp.value);
+    var T = it.t, re = GSE.hiRegex(last.parsed), blk = it.block;
+    if (T.kind === 'q' || T.kind === 'fact') {
+      var src = sourceOf(T);
+      if (src) close(function () { go(src.t, src.block, re); });
+      return;
+    }
+    close(function () { go(T, blk, re); });
+  }
+  function go(T, blk, re) {
+    try { go2(T, blk, re); }
+    catch (e) { // запасной путь: хотя бы открыть раздел и карточку
+      if (window.console) console.warn('[ИИ-поиск] переход:', e);
+      if (T.doc !== 'trn') showDoc(T.doc, function () { if (T.el) { openChain(T.el); scrollTo(T.el); flash(T.el); } });
+    }
+  }
+  function go2(T, blk, re) {
+    clearMarks();
+    if (T.doc === 'trn') {
+      showDoc('trn', function () {
+        var api = window.__trnSearch; if (!api) return;
+        api.open(T.nav.sec, T.nav.extra);
+        setTimeout(function () { locateTrn(api.root, T, blk, re); }, 60);
+      });
+      return;
+    }
+    showDoc(T.doc, function () {
+      var el = blk && blk.el && blk.el.isConnected ? blk.el : T.el;
+      unfilter(T.doc, T.el);
+      openChain(T.el); openChain(el);
+      setTimeout(function () {
+        scrollTo(el); markIn(el, re);
+        if (T.kind === 'term' && T.el && T.el !== el) { markIn(T.el, re); flash(T.el); }
+        flash(el);
+      }, 80);
+    });
+  }
+  function shadowCss(root) {
+    if (!root || root.getElementById('gs-shadow-css')) return;
+    var s = document.createElement('style'); s.id = 'gs-shadow-css';
+    s.textContent = 'mark.gsx{background:color-mix(in srgb,#ffd54a 75%,transparent);color:inherit;border-radius:3px;padding:0 1px;box-shadow:0 0 0 1px color-mix(in srgb,#e0a800 55%,transparent)}'
+      + '.gs-flash{animation:gsFlash 2.4s ease}@keyframes gsFlash{0%,35%{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent,#1f5c7a) 55%,transparent);background-color:color-mix(in srgb,var(--accent,#1f5c7a) 9%,transparent)}100%{box-shadow:0 0 0 0 transparent}}';
+    root.appendChild(s);
+  }
+  function locateTrn(root, T, blk, re) {
+    if (!root) return;
+    shadowCss(root);
+    var view = root.getElementById ? root.getElementById('view') : root.querySelector('#view'); if (!view) return;
+    var el = null;
+    if (blk && blk.sel) el = view.querySelector(blk.sel);
+    if (!el && blk && blk.dt) { el = $$('.gi', view).filter(function (g) { var dt = g.querySelector('dt'); return dt && sq(dt.textContent) === blk.dt; })[0] || null; }
+    if (!el && blk) {
+      var key = GSE.norm(sq(blk.find || blk.text)).slice(0, 70), bestL = 1e9;
+      $$('p,li,tr,dt,dd,div,figcaption,h2,h3,h4,td,th', view).forEach(function (e) {
+        var t = GSE.norm(sq(e.textContent)); if (t.indexOf(key) < 0) return;
+        if (t.length < bestL) { bestL = t.length; el = e; }
+      });
+    }
+    if (!el) el = view.querySelector('h2,.h1') || view;
+    var blockEl = el.closest('p,li,tr,.kv,.note,.fix,figure,dt,dd,.gi,.dev,h2,h3,h4,.order,.card,.calc-sec') || el;
+    scrollTo(blockEl); markIn(blockEl, re, document); flash(blockEl);
+  }
+
+  /* ---------- кнопки входа ---------- */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-gs-open],.tb[data-act="gsearch"]'); if (!b) return;
+    e.preventDefault();
+    var src = b.getAttribute('data-gs-open'), q = '';
+    if (src && document.getElementById(src)) q = document.getElementById(src).value || '';
+    open(q);
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key === 'k' || e.key === 'K' || e.key === 'л' || e.key === 'Л')) { e.preventDefault(); if (isOpen()) inp.focus(); else open(); return; }
+    if (e.key === '/' && !isOpen() && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      var t = e.composedPath ? e.composedPath()[0] : e.target;
+      if (t && (/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable)) return;
+      e.preventDefault(); open();
+    }
+  });
+  // подсветку поиска убираем, когда начинают искать внутри документа
+  ['qi', 'qi2143', 'qiOdt'].forEach(function (id) { var q = document.getElementById(id); if (q) q.addEventListener('input', function () { if (q.value) clearMarks(); }); });
+
+  window.__gs = { open: open, close: close, ensure: ensure, search: function (q, o) { return ensure().search(q, o); }, state: function () { return { lsa: lsaState, lsaVia: lsaVia, lsaMs: lsaMs, buildMs: buildMs, targets: targets.length, passages: passages.length, vocab: IX && IX.ready ? IX.vocab.length : 0 }; }, targets: function () { return targets; }, passages: function () { return passages; }, trainLsa: trainLsa, onLsa: function (f) { if (lsaState === 'ready') f(); else onLsa.push(f); } };
 })();
 </script>
 </body>
