@@ -102,7 +102,7 @@ var CSS = [
 '.tb-chat .chat-badge{top:2px;right:calc(50% - 25px);min-width:18px;height:18px;padding:0 5px;font-size:10px;line-height:18px}',
 '.tb-chat .chat-badge.dot{width:10px;height:10px;min-width:0;padding:0;top:6px;right:calc(50% - 16px)}',
 
-'.chat{position:fixed;right:24px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:900;width:min(392px,calc(100vw - 48px));height:min(640px,calc(100vh - 176px));min-height:320px;display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-lg,18px);box-shadow:var(--sh-3,0 16px 40px rgba(0,0,0,.22)),0 30px 60px -30px rgba(0,0,0,.35);overflow:hidden;font:400 15px/1.45 var(--sans);opacity:0;transform:translateY(14px) scale(.97);transform-origin:calc(100% - 30px) 100%;transition:opacity .2s ease,transform .3s cubic-bezier(.22,1,.36,1)}',
+'.chat{box-sizing:border-box;position:fixed;right:24px;bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:900;width:min(392px,calc(100vw - 48px));height:min(640px,calc(100vh - 176px));min-height:320px;display:flex;flex-direction:column;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r-lg,18px);box-shadow:var(--sh-3,0 16px 40px rgba(0,0,0,.22)),0 30px 60px -30px rgba(0,0,0,.35);overflow:hidden;font:400 15px/1.45 var(--sans);opacity:0;transform:translateY(14px) scale(.97);transform-origin:calc(100% - 30px) 100%;transition:opacity .2s ease,transform .3s cubic-bezier(.22,1,.36,1)}',
 '.chat[hidden]{display:none}',
 '.chat.on{opacity:1;transform:none}',
 '.chat *,.chat *::before,.chat *::after{box-sizing:border-box}',
@@ -224,7 +224,7 @@ var CSS = [
 '.cs-ok[hidden]{display:none}',
 
 '@media (max-width:760px){',
-'  .chat{left:0;right:0;top:0;bottom:auto;width:100%;height:100%;min-height:0;border:0;border-radius:0;box-shadow:none;padding-top:env(safe-area-inset-top,0px);transform:translateY(28px)}',
+'  .chat{left:0;right:0;top:0;bottom:0;width:auto;height:auto;max-height:none;min-height:0;border:0;border-radius:0;box-shadow:none;padding-top:env(safe-area-inset-top,0px);transform:translateY(28px)}',
 '  .chat.on{transform:none}',
 '  .chat-head{padding:10px 10px 9px 16px}',
 '  .chat-foot{padding-bottom:calc(8px + env(safe-area-inset-bottom,0px))}',
@@ -233,6 +233,7 @@ var CSS = [
 '  .chat-fab{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:54px;height:54px}',
 '  body:not(.landing-open) .chat-fab{display:none}',
 '  html.chat-lock,html.chat-lock body{overflow:hidden}',
+'  html.chat-lock .tabbar,html.chat-lock .chat-fab{visibility:hidden}',
 '  .tabbar.has-chat{grid-template-columns:repeat(6,1fr)}',
 '  .tabbar.has-chat.no-calc{grid-template-columns:repeat(5,1fr)}',
 '  html.has-chat .landing{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}',
@@ -469,7 +470,7 @@ function hide() {
   ui.p.classList.remove('on');
   ui.fab.classList.remove('is-open'); ui.fab.setAttribute('aria-expanded', 'false');
   R.classList.remove('chat-lock');
-  setTimeout(function () { if (!isOpen) { ui.p.hidden = true; ui.p.style.height = ''; ui.p.style.top = ''; } }, reduce ? 0 : 260);
+  setTimeout(function () { if (!isOpen) { ui.p.hidden = true; ui.p.style.paddingTop = ''; ui.p.style.paddingBottom = ''; } }, reduce ? 0 : 260);
   badge();
   if (lastFocus && lastFocus.focus && D.contains(lastFocus) && lastFocus !== D.body) { try { lastFocus.focus({ preventScroll: true }); } catch (e) {} }
 }
@@ -496,11 +497,14 @@ window.__trnPop = function (e) {
 };
 /* клавиатура телефона не должна закрывать поле ввода */
 function fit() {
+  /* панель всегда занимает весь экран, а видимую часть (над клавиатурой и системной панелью) задают отступы */
   var p = ui.p, vv = window.visualViewport;
-  if (!isOpen || !mqM.matches || !vv) { p.style.height = ''; p.style.top = ''; return; }
+  if (!isOpen || !mqM.matches || !vv) { p.style.paddingTop = ''; p.style.paddingBottom = ''; return; }
   var stick = nearBottom();
-  p.style.height = Math.round(vv.height) + 'px';
-  p.style.top = Math.round(vv.offsetTop) + 'px';
+  var top = Math.max(0, Math.round(vv.offsetTop));
+  var bottom = Math.max(0, Math.round(p.getBoundingClientRect().height - vv.offsetTop - vv.height));
+  p.style.paddingTop = top > 1 ? 'calc(env(safe-area-inset-top,0px) + ' + top + 'px)' : '';
+  p.style.paddingBottom = bottom > 1 ? bottom + 'px' : '';
   if (stick) ui.list.scrollTop = ui.list.scrollHeight;
 }
 
