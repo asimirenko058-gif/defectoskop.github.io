@@ -12546,5 +12546,7 @@ var GSE = (function () {
   window.__gs = { open: open, close: close, ensure: ensure, search: function (q, o) { return ensure().search(q, o); }, state: function () { return { lsa: lsaState, lsaVia: lsaVia, lsaMs: lsaMs, buildMs: buildMs, targets: targets.length, passages: passages.length, vocab: IX && IX.ready ? IX.vocab.length : 0 }; }, targets: function () { return targets; }, passages: function () { return passages; }, trainLsa: trainLsa, onLsa: function (f) { if (lsaState === 'ready') f(); else onLsa.push(f); } };
 })();
 </script>
+<!-- общий чат посетителей: настройки — в файле chat.js -->
+<script src="chat.js" defer></script>
 </body>
 </html>
