@@ -12,13 +12,13 @@
 
 // ▼▼▼ ВСТАВЬТЕ СЮДА СВОЙ БЛОК firebaseConfig ИЗ КОНСОЛИ FIREBASE (заменить целиком) ▼▼▼
 const firebaseConfig = {
-  apiKey: "ВСТАВЬТЕ_СЮДА",
-  authDomain: "",
-  databaseURL: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyApYBd9ehE_ysLI_W-AnolGpQzgrESvJ9E",
+  authDomain: "defecty.firebaseapp.com",
+  databaseURL: "https://defecty-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "defecty",
+  storageBucket: "defecty.firebasestorage.app",
+  messagingSenderId: "409064853773",
+  appId: "1:409064853773:web:80c1a20d21ffbc71a56044"
 };
 // ▲▲▲ ДАЛЬШЕ НИЧЕГО МЕНЯТЬ НЕ НУЖНО ▲▲▲
 
