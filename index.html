@@ -636,15 +636,15 @@ details.sub > summary code{margin-right:6px}
 @media (max-width:760px){.tabbar{grid-template-columns:repeat(4,1fr)}.tabbar.no-calc{grid-template-columns:repeat(3,1fr)}}
 .tb[hidden]{display:none!important}
 /* справочник ОДТ в стиле сайта */
-#groupsOdt>details{border-left:4px solid var(--group-color,var(--line));animation:cardIn .4s cubic-bezier(.22,1,.36,1) backwards}
-#groupsOdt>details:nth-child(1){--group-color:var(--g1)}#groupsOdt>details:nth-child(2){--group-color:var(--g2)}
-#groupsOdt>details:nth-child(3){--group-color:var(--g3)}#groupsOdt>details:nth-child(4){--group-color:var(--g4)}
-#groupsOdt>details:nth-child(5){--group-color:var(--g5)}#groupsOdt>details:nth-child(6){--group-color:var(--g6)}
-#groupsOdt details.sub summary .onum{font:600 .9rem var(--mono);color:var(--group-color,var(--accent));margin-right:4px}
-#groupsOdt details.sub summary .st{font-weight:500}
-#groupsOdt .odt-body h3{font-size:1rem;margin:1.1em 0 .35em}
-#doc-odt .odt-warn{border-left:3px solid var(--odr);background:color-mix(in srgb,var(--odr) 6%,transparent);padding:8px 12px;border-radius:0 8px 8px 0;max-width:72ch;font-size:.92rem}
-#doc-odt figure svg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px}
+#groupsOdt>details,#groupsChp>details{border-left:4px solid var(--group-color,var(--line));animation:cardIn .4s cubic-bezier(.22,1,.36,1) backwards}
+#groupsOdt>details:nth-child(1),#groupsChp>details:nth-child(1){--group-color:var(--g1)}#groupsOdt>details:nth-child(2),#groupsChp>details:nth-child(2){--group-color:var(--g2)}
+#groupsOdt>details:nth-child(3),#groupsChp>details:nth-child(3){--group-color:var(--g3)}#groupsOdt>details:nth-child(4),#groupsChp>details:nth-child(4){--group-color:var(--g4)}
+#groupsOdt>details:nth-child(5),#groupsChp>details:nth-child(5){--group-color:var(--g5)}#groupsOdt>details:nth-child(6),#groupsChp>details:nth-child(6){--group-color:var(--g6)}
+#groupsOdt details.sub summary .onum,#groupsChp details.sub summary .onum{font:600 .9rem var(--mono);color:var(--group-color,var(--accent));margin-right:4px}
+#groupsOdt details.sub summary .st,#groupsChp details.sub summary .st{font-weight:500}
+#groupsOdt .odt-body h3,#groupsChp .odt-body h3{font-size:1rem;margin:1.1em 0 .35em}
+#doc-odt .odt-warn,#doc-chp .odt-warn{border-left:3px solid var(--odr);background:color-mix(in srgb,var(--odr) 6%,transparent);padding:8px 12px;border-radius:0 8px 8px 0;max-width:72ch;font-size:.92rem}
+#doc-odt figure svg,#doc-chp figure svg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px}
 a.xref{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1.5px solid color-mix(in srgb,var(--accent) 45%,transparent);white-space:nowrap;cursor:pointer}
 a.xref:hover{border-bottom-color:var(--accent)}
 a.xref::after{content:"↗";font-size:.72em;margin-left:1px;opacity:.7}
@@ -688,11 +688,11 @@ body{background:radial-gradient(1200px 420px at 50% -120px,color-mix(in srgb,var
 ::selection{background:color-mix(in srgb,var(--accent) 28%,transparent)}
 
 /* заголовок документа: надзаголовок с номером распоряжения */
-#doc-2499>h1::before,#doc-2143>h1::before,#doc-odt>h1::before,#doc-trn>h1::before{display:block;width:max-content;max-width:100%;margin-bottom:10px;font:600 .74rem/1 var(--mono);letter-spacing:.04em;padding:6px 10px;border-radius:999px;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
+#doc-2499>h1::before,#doc-2143>h1::before,#doc-odt>h1::before,#doc-trn>h1::before,#doc-chp>h1::before{display:block;width:max-content;max-width:100%;margin-bottom:10px;font:600 .74rem/1 var(--mono);letter-spacing:.04em;padding:6px 10px;border-radius:999px;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent)}
 #doc-2499>h1::before{content:"Распоряжение № 2499р · 2014"}
 #doc-2143>h1::before{content:"Распоряжение № 2143/р · 2019";color:var(--c2);background:color-mix(in srgb,var(--c2) 10%,transparent);border-color:color-mix(in srgb,var(--c2) 30%,transparent)}
-#doc-odt>h1::before{content:"Учебное пособие · 1999";color:var(--g3);background:color-mix(in srgb,var(--g3) 10%,transparent);border-color:color-mix(in srgb,var(--g3) 30%,transparent)}
-#doc-2499>h1,#doc-2143>h1,#doc-odt>h1,#doc-trn>h1{letter-spacing:-.015em;line-height:1.12;margin-top:28px}
+#doc-odt>h1::before,#doc-chp>h1::before{content:"Учебное пособие · 1999";color:var(--g3);background:color-mix(in srgb,var(--g3) 10%,transparent);border-color:color-mix(in srgb,var(--g3) 30%,transparent)}
+#doc-2499>h1,#doc-2143>h1,#doc-odt>h1,#doc-trn>h1,#doc-chp>h1{letter-spacing:-.015em;line-height:1.12;margin-top:28px}
 .lead{max-width:62ch}
 
 /* заголовки разделов: короткая планка над текстом, без двойных полос */
@@ -700,12 +700,12 @@ h2{padding-left:0;letter-spacing:-.005em;margin-top:2.2em}
 h2::before{position:static;display:block;width:28px;height:3px;border-radius:2px;margin-bottom:10px;opacity:1;background:linear-gradient(90deg,var(--accent),color-mix(in srgb,var(--accent) 30%,transparent))}
 
 /* группы: карточка с цветным краем; открытая — мягкая подложка вместо рамки-в-рамке */
-#groups>details,#groups2143>details,#groupsOdt>details{border-radius:var(--r-md);border:1px solid var(--hair);border-left:4px solid var(--group-color,var(--line));background:var(--surface);box-shadow:var(--sh-1);margin:10px 0}
-#groups>details:hover,#groups2143>details:hover,#groupsOdt>details:hover{box-shadow:var(--sh-2);transform:none}
-#groups>details>summary,#groups2143>details>summary,#groupsOdt>details>summary{font-weight:600;padding-top:14px;padding-bottom:14px}
-#groups>details.is-open,#groups2143>details.is-open,#groupsOdt>details.is-open{background:color-mix(in srgb,var(--group-color,var(--accent)) 4%,var(--bg));box-shadow:var(--sh-2)}
-#groups>details.is-open>summary,#groups2143>details.is-open>summary,#groupsOdt>details.is-open>summary{border-bottom:1px solid var(--hair)}
-#groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content{padding:4px 10px 10px}
+#groups>details,#groups2143>details,#groupsOdt>details,#groupsChp>details{border-radius:var(--r-md);border:1px solid var(--hair);border-left:4px solid var(--group-color,var(--line));background:var(--surface);box-shadow:var(--sh-1);margin:10px 0}
+#groups>details:hover,#groups2143>details:hover,#groupsOdt>details:hover,#groupsChp>details:hover{box-shadow:var(--sh-2);transform:none}
+#groups>details>summary,#groups2143>details>summary,#groupsOdt>details>summary,#groupsChp>details>summary{font-weight:600;padding-top:14px;padding-bottom:14px}
+#groups>details.is-open,#groups2143>details.is-open,#groupsOdt>details.is-open,#groupsChp>details.is-open{background:color-mix(in srgb,var(--group-color,var(--accent)) 4%,var(--bg));box-shadow:var(--sh-2)}
+#groups>details.is-open>summary,#groups2143>details.is-open>summary,#groupsOdt>details.is-open>summary,#groupsChp>details.is-open>summary{border-bottom:1px solid var(--hair)}
+#groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content,#groupsChp>details>.details-body>.details-content{padding:4px 10px 10px}
 
 /* карточки дефектов: белый лист с тенью, тонкий цветной край */
 details.sub{background:var(--surface);border:1px solid var(--hair);border-left:3px solid color-mix(in srgb,var(--group-color,var(--accent)) 70%,transparent);border-radius:var(--r-sm);box-shadow:var(--sh-1);margin:8px 0}
@@ -732,7 +732,7 @@ table.k th{background:transparent;color:var(--muted);font:600 .74rem/1.35 var(--
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='10.5' cy='10.5' r='6.5' fill='none' stroke='%2378909c' stroke-width='2'/%3E%3Cpath d='M15.5 15.5L20 20' stroke='%2378909c' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")}
 .chip,.btn{box-shadow:var(--sh-1);font-weight:600}
 .chip[aria-pressed=true]{box-shadow:0 2px 8px color-mix(in srgb,var(--accent) 35%,transparent)}
-#cnt,#cnt2143,#cntOdt{margin-left:auto;font:600 .74rem var(--mono);letter-spacing:.04em;color:var(--muted)}
+#cnt,#cnt2143,#cntOdt,#cntChp{margin-left:auto;font:600 .74rem var(--mono);letter-spacing:.04em;color:var(--muted)}
 
 /* калькуляторы: приподнятая карточка с акцентной кромкой */
 .calc{border-radius:var(--r-lg);border:1px solid var(--hair);box-shadow:var(--sh-2);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 5%,var(--surface)),var(--surface) 90px);position:relative;overflow:visible}
@@ -757,17 +757,17 @@ table.dt th{font-size:.8rem}
 
 @media (max-width:760px){
   .side-panel{border-radius:20px 20px 0 0}
-  #groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content{padding:2px 6px 8px}
+  #groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content,#groupsChp>details>.details-body>.details-content{padding:2px 6px 8px}
   table.k th,table.k td{display:block;width:auto;border-top:0;padding:8px 10px 2px}
   table.k td{padding:2px 10px 10px;border-bottom:1px solid var(--hair)}
   table.k tr:last-child td{border-bottom:0}
-  #doc-2499>h1,#doc-2143>h1,#doc-odt>h1,#doc-trn>h1{margin-top:18px}
+  #doc-2499>h1,#doc-2143>h1,#doc-odt>h1,#doc-trn>h1,#doc-chp>h1{margin-top:18px}
   .toolbar::after{left:-16px;right:-16px}
 }
-@media (prefers-reduced-motion:reduce){#groups>details,#groups2143>details,#groupsOdt>details,details.sub{transition:none}}
+@media (prefers-reduced-motion:reduce){#groups>details,#groups2143>details,#groupsOdt>details,details.sub,#groupsChp>details{transition:none}}
 
 @media (max-width:760px){
-  #groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content{padding:2px 4px 6px}
+  #groups>details>.details-body>.details-content,#groups2143>details>.details-body>.details-content,#groupsOdt>details>.details-body>.details-content,#groupsChp>details>.details-body>.details-content{padding:2px 4px 6px}
   details.sub .in{padding:0 0 6px}
   details.sub>summary{padding-left:12px}
   details.sub>.details-body>.details-content{padding-left:10px;padding-right:10px}
@@ -823,20 +823,20 @@ table.dt th{font-size:.8rem}
 :root.px h2{font-family:var(--head);font-weight:400;font-size:clamp(.82rem,2.4vw,1.02rem);line-height:1.5;letter-spacing:0}
 :root.px h2::before{width:42px;height:6px;background:repeating-linear-gradient(90deg,var(--accent) 0 6px,transparent 6px 9px)}
 :root.px h3{font-weight:700}
-:root.px #doc-2499>h1::before,:root.px #doc-2143>h1::before,:root.px #doc-odt>h1::before,:root.px #doc-trn>h1::before{font-family:var(--sans);font-weight:700;font-size:.8rem;border-width:2px;box-shadow:3px 3px 0 0 currentColor}
+:root.px #doc-2499>h1::before,:root.px #doc-2143>h1::before,:root.px #doc-odt>h1::before,:root.px #doc-trn>h1::before,:root.px #doc-chp>h1::before{font-family:var(--sans);font-weight:700;font-size:.8rem;border-width:2px;box-shadow:3px 3px 0 0 currentColor}
 :root.px .landing-kicker{font-family:var(--head);font-size:.62rem;letter-spacing:.06em}
 
 /* пиксельная рамка: тёмный контур + жёсткая тень */
 :root.px #groups>details,:root.px #groups2143>details,:root.px #groupsOdt>details,
 :root.px details.sub,:root.px .calc,:root.px .lcard,:root.px .sitem,:root.px .cheat,
 :root.px .toolbar input[type=search],:root.px .dd-btn,:root.px .calc select,:root.px .calc input[type=number],
-:root.px .chip,:root.px .btn,:root.px .doc-stats button,:root.px .menu-btn,:root.px .side-close,:root.px .wrap,:root.px .spt-wrap{
+:root.px .chip,:root.px .btn,:root.px .doc-stats button,:root.px .menu-btn,:root.px .side-close,:root.px .wrap,:root.px .spt-wrap,:root.px #groupsChp>details{
   border:var(--pxd) solid var(--line)}
-:root.px #groups>details,:root.px #groups2143>details,:root.px #groupsOdt>details{border-left-width:10px;border-left-color:var(--group-color,var(--line));box-shadow:var(--sh-2)}
+:root.px #groups>details,:root.px #groups2143>details,:root.px #groupsOdt>details,:root.px #groupsChp>details{border-left-width:10px;border-left-color:var(--group-color,var(--line));box-shadow:var(--sh-2)}
 :root.px details.sub{border-width:2px;border-left-width:7px;border-left-color:var(--group-color,var(--accent));box-shadow:var(--sh-1)}
 :root.px details.sub.is-open{box-shadow:var(--sh-2)}
-:root.px #groups>details:hover,:root.px #groups2143>details:hover,:root.px #groupsOdt>details:hover{transform:translate(-2px,-2px);box-shadow:var(--sh-3)}
-:root.px #groups>details.is-open>summary,:root.px #groups2143>details.is-open>summary,:root.px #groupsOdt>details.is-open>summary{border-bottom:var(--pxd) dashed var(--hair)}
+:root.px #groups>details:hover,:root.px #groups2143>details:hover,:root.px #groupsOdt>details:hover,:root.px #groupsChp>details:hover{transform:translate(-2px,-2px);box-shadow:var(--sh-3)}
+:root.px #groups>details.is-open>summary,:root.px #groups2143>details.is-open>summary,:root.px #groupsOdt>details.is-open>summary,:root.px #groupsChp>details.is-open>summary{border-bottom:var(--pxd) dashed var(--hair)}
 :root.px details>summary::after{font-family:var(--head);font-size:.8rem}
 :root.px .cheat{border-width:2px;border-style:dashed;border-color:var(--hair);background:color-mix(in srgb,var(--group-color,var(--accent)) 8%,var(--surface))}
 :root.px .cheat .cr{border-left-width:6px}
@@ -853,7 +853,7 @@ table.dt th{font-size:.8rem}
 :root.px .chip[aria-pressed=true]{background:var(--accent);color:var(--surface);box-shadow:var(--sh-1)}
 :root.px .toolbar input[type=search]{box-shadow:inset 3px 3px 0 0 color-mix(in srgb,var(--ink) 12%,transparent);font-size:16px}
 :root.px .toolbar::after{height:3px;background:repeating-linear-gradient(90deg,var(--hair) 0 6px,transparent 6px 12px)}
-:root.px #cnt,:root.px #cnt2143,:root.px #cntOdt{font-family:var(--sans);font-weight:700}
+:root.px #cnt,:root.px #cnt2143,:root.px #cntOdt,:root.px #cntChp{font-family:var(--sans);font-weight:700}
 
 /* значки и метки */
 :root.px .kb,:root.px .zb,:root.px .stag,:root.px .verdict,:root.px .lcard-cnt,:root.px .sitem-tag,:root.px .tb-code{border-width:2px;font-family:var(--sans);font-weight:700}
@@ -914,8 +914,8 @@ table.dt th{font-size:.8rem}
 :root.px a.xref{border-bottom:3px solid color-mix(in srgb,var(--accent) 50%,transparent)}
 :root.px .xref-box{border:2px dashed var(--g3)}
 :root.px p.note{border-left:6px solid color-mix(in srgb,var(--accent) 45%,transparent)}
-:root.px #doc-odt figure svg{border:3px solid var(--line);box-shadow:var(--sh-1)}
-:root.px #doc-odt .odt-warn{border-left-width:8px}
+:root.px #doc-odt figure svg,:root.px #doc-chp figure svg{border:3px solid var(--line);box-shadow:var(--sh-1)}
+:root.px #doc-odt .odt-warn,:root.px #doc-chp .odt-warn{border-left-width:8px}
 :root.px .fig2143 img,:root.px .fig-img img{border:3px solid var(--line)}
 
 /* полосы прокрутки */
@@ -959,7 +959,7 @@ table.dt th{font-size:.8rem}
   :root.px .zt thead th{font-size:.66rem;padding:2px 1px}
   :root.px .wrap,:root.px .spt-wrap{border-width:2px}
   :root.px details.sub{border-left-width:5px}
-  :root.px #groups>details,:root.px #groups2143>details,:root.px #groupsOdt>details{border-left-width:7px}
+  :root.px #groups>details,:root.px #groups2143>details,:root.px #groupsOdt>details,:root.px #groupsChp>details{border-left-width:7px}
 }
 .side-sec .sitem-theme{width:100%;margin-bottom:10px}
 
@@ -967,7 +967,7 @@ table.dt th{font-size:.8rem}
 :root.px body{font-family:'PX Body','PX Sans',ui-monospace,monospace;font-size:20px;line-height:1.5;font-weight:500;letter-spacing:.015em}
 :root.px b,:root.px strong,:root.px th,:root.px summary{font-weight:600}
 :root.px details>summary,:root.px .lead,:root.px p,:root.px li,:root.px td,:root.px dd,:root.px .cheat .cr span{font-family:'PX Body','PX Sans',monospace}
-:root.px details.sub>summary code,:root.px #groups>details>summary,:root.px #groups2143>details>summary,:root.px #groupsOdt>details>summary{font-family:var(--sans)}
+:root.px details.sub>summary code,:root.px #groups>details>summary,:root.px #groups2143>details>summary,:root.px #groupsOdt>details>summary,:root.px #groupsChp>details>summary{font-family:var(--sans)}
 :root.px .lead{font-size:1.3rem}
 :root.px table.k td{font-size:1.15rem}
 :root.px p.note,:root.px .zt-note,:root.px .tnote{font-size:1.1rem}
@@ -999,7 +999,7 @@ table.dt th{font-size:.8rem}
 :root.px .sub-h,:root.px p.cap,:root.px .cheat-h b{font-size:.95rem;letter-spacing:.08em;font-weight:700}
 :root.px .cheat .cr b{font-size:1.05rem;font-weight:700}
 :root.px details>summary::after{font-size:1.3rem}
-:root.px #groups>details>summary,:root.px #groups2143>details>summary,:root.px #groupsOdt>details>summary{font-size:1.2rem;font-weight:700}
+:root.px #groups>details>summary,:root.px #groups2143>details>summary,:root.px #groupsOdt>details>summary,:root.px #groupsChp>details>summary{font-size:1.2rem;font-weight:700}
 :root.px details.sub>summary{font-size:1.15rem}
 :root.px details.sub>summary code{font-size:1.15rem;font-weight:700}
 :root.px .chip,:root.px .btn,:root.px .doc-stats button{font-size:1.1rem;font-weight:700}
@@ -1014,14 +1014,14 @@ table.dt th{font-size:.8rem}
 :root.px .schedule-message{font-size:clamp(1.3rem,4vw,1.9rem);font-weight:700;letter-spacing:.08em}
 :root.px .schedule-board .board-head{font-size:.9rem}
 :root.px .landing-now{font-size:1rem}
-:root.px #doc-2499>h1::before,:root.px #doc-2143>h1::before,:root.px #doc-odt>h1::before,:root.px #doc-trn>h1::before{font-size:.95rem;text-shadow:none}
+:root.px #doc-2499>h1::before,:root.px #doc-2143>h1::before,:root.px #doc-odt>h1::before,:root.px #doc-trn>h1::before,:root.px #doc-chp>h1::before{font-size:.95rem;text-shadow:none}
 :root.px .calc label,:root.px .cf-lab,:root.px .calc .cfield>span{font-family:var(--sans);font-size:1rem}
 :root.px table.k th{font-size:1rem}
 :root.px .zt td{font-size:1rem}
 :root.px .zt tbody th,:root.px .zt thead th{font-size:1rem}
 :root.px .sgn b{font-size:1rem}
 :root.px .stag{font-size:.85rem}
-:root.px #cnt,:root.px #cnt2143,:root.px #cntOdt{font-size:1rem}
+:root.px #cnt,:root.px #cnt2143,:root.px #cntOdt,:root.px #cntChp{font-size:1rem}
 @media (max-width:760px){
   :root.px .chip,:root.px .btn{font-size:1rem}
   :root.px .zt td{font-size:.85rem}:root.px .zt tbody th{font-size:.85rem}:root.px .zt thead th{font-size:.8rem}
@@ -1153,17 +1153,17 @@ mark.hit.cur{background:#ffb300;box-shadow:0 0 0 2px #e08600}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 @media (max-width:760px){
   main{padding:12px 10px 18px}
-  #doc-2499>h1,#doc-2143>h1,#doc-odt>h1,#doc-trn>h1{margin-top:6px;font-size:1.5rem}
-  #doc-2499>h1::before,#doc-2143>h1::before,#doc-odt>h1::before,#doc-trn>h1::before{margin-bottom:6px}
+  #doc-2499>h1,#doc-2143>h1,#doc-odt>h1,#doc-trn>h1,#doc-chp>h1{margin-top:6px;font-size:1.5rem}
+  #doc-2499>h1::before,#doc-2143>h1::before,#doc-odt>h1::before,#doc-trn>h1::before,#doc-chp>h1::before{margin-bottom:6px}
   h2{margin-top:1.35em;margin-bottom:.45em}
   h2::before{margin-bottom:6px}
   p,ul,ol{margin-top:.45em;margin-bottom:.45em}
   .lead{margin-bottom:6px}
   .doc-stats{margin:4px 0 2px}
   .toolbar{padding:6px 0 8px;margin:4px 0 8px}
-  #groups>details,#groups2143>details,#groupsOdt>details{margin:7px 0}
+  #groups>details,#groups2143>details,#groupsOdt>details,#groupsChp>details{margin:7px 0}
   details.sub{margin:6px 0}
-  #groups>details>summary,#groups2143>details>summary,#groupsOdt>details>summary{padding-top:11px;padding-bottom:11px}
+  #groups>details>summary,#groups2143>details>summary,#groupsOdt>details>summary,#groupsChp>details>summary{padding-top:11px;padding-bottom:11px}
   details.sub>summary{padding-top:10px;padding-bottom:10px}
   .calc{padding:12px}
   .wrap,.spt-wrap{margin:4px 0 8px}
@@ -1233,8 +1233,8 @@ html,body{overflow-x:clip}
 :root:not(.px) p{max-width:70ch}
 
 /* заголовки */
-:root:not(.px) #doc-2499>h1,:root:not(.px) #doc-2143>h1,:root:not(.px) #doc-odt>h1,:root:not(.px) #doc-trn>h1{font-size:clamp(1.75rem,4.6vw,2.6rem);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin:24px 0 12px}
-:root:not(.px) #doc-2499>h1::before,:root:not(.px) #doc-2143>h1::before,:root:not(.px) #doc-odt>h1::before,:root:not(.px) #doc-trn>h1::before{font:600 .78rem/1 var(--sans);letter-spacing:0;text-transform:none;padding:7px 12px;border-radius:999px;border:0;margin-bottom:14px;background:var(--accent-soft);color:var(--accent)}
+:root:not(.px) #doc-2499>h1,:root:not(.px) #doc-2143>h1,:root:not(.px) #doc-odt>h1,:root:not(.px) #doc-trn>h1,:root:not(.px) #doc-chp>h1{font-size:clamp(1.75rem,4.6vw,2.6rem);font-weight:700;letter-spacing:-.025em;line-height:1.1;margin:24px 0 12px}
+:root:not(.px) #doc-2499>h1::before,:root:not(.px) #doc-2143>h1::before,:root:not(.px) #doc-odt>h1::before,:root:not(.px) #doc-trn>h1::before,:root:not(.px) #doc-chp>h1::before{font:600 .78rem/1 var(--sans);letter-spacing:0;text-transform:none;padding:7px 12px;border-radius:999px;border:0;margin-bottom:14px;background:var(--accent-soft);color:var(--accent)}
 :root:not(.px) h2{font-size:1.35rem;font-weight:700;letter-spacing:-.015em;margin:2.6em 0 .7em;padding:0}
 :root:not(.px) h2::before{display:none}
 :root:not(.px) h3{font-weight:650;letter-spacing:-.01em}
@@ -1245,7 +1245,7 @@ html,body{overflow-x:clip}
 :root:not(.px) p.note{border:0;background:var(--surface);border-radius:var(--r-md);padding:12px 16px;color:var(--muted);box-shadow:var(--sh-1);font-size:.92rem}
 :root:not(.px) .tnote{font-size:.82rem}
 :root:not(.px) .tnote.approx{border-left:0;background:color-mix(in srgb,var(--warn) 10%,transparent);border-radius:10px;padding:8px 12px}
-:root:not(.px) .disclaimer,:root:not(.px) #doc-odt .odt-warn{border:0;border-radius:var(--r-md);background:color-mix(in srgb,var(--odr) 8%,var(--surface));padding:14px 16px;color:var(--ink)}
+:root:not(.px) .disclaimer,:root:not(.px) #doc-odt .odt-warn,:root:not(.px) #doc-chp .odt-warn{border:0;border-radius:var(--r-md);background:color-mix(in srgb,var(--odr) 8%,var(--surface));padding:14px 16px;color:var(--ink)}
 :root:not(.px) .doc-stats button{background:var(--surface);border:1px solid var(--line);border-radius:999px;font:500 .82rem var(--sans);padding:8px 14px;box-shadow:var(--sh-1)}
 :root:not(.px) .doc-stats button b{font-weight:700}
 :root:not(.px) ol.parts{background:var(--surface);border-radius:var(--r-md);padding:14px 16px 14px 36px;box-shadow:var(--sh-1)}
@@ -1295,14 +1295,14 @@ html,body{overflow-x:clip}
 :root:not(.px) .hitnav button{border-color:var(--line);background:var(--surface)}
 
 /* --- группы дефектов: карточка с цветной точкой --- */
-:root:not(.px) #groups>details,:root:not(.px) #groups2143>details,:root:not(.px) #groupsOdt>details{border:0;border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-1);margin:12px 0}
-:root:not(.px) #groups>details:hover,:root:not(.px) #groups2143>details:hover,:root:not(.px) #groupsOdt>details:hover{box-shadow:var(--sh-2);transform:none}
-:root:not(.px) #groups>details.is-open,:root:not(.px) #groups2143>details.is-open,:root:not(.px) #groupsOdt>details.is-open{background:var(--surface);box-shadow:var(--sh-2)}
-:root:not(.px) #groups>details>summary,:root:not(.px) #groups2143>details>summary,:root:not(.px) #groupsOdt>details>summary{padding:18px 56px 18px 46px;font-weight:650;font-size:1.02rem;line-height:1.4;border-radius:var(--r-lg)}
-:root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before{content:"";position:absolute;left:18px;top:22px;width:14px;height:14px;border-radius:5px;background:var(--group-color,var(--accent));box-shadow:0 0 0 4px color-mix(in srgb,var(--group-color,var(--accent)) 16%,transparent)}
-:root:not(.px) #groups>details.is-open>summary,:root:not(.px) #groups2143>details.is-open>summary,:root:not(.px) #groupsOdt>details.is-open>summary{border-bottom:0}
+:root:not(.px) #groups>details,:root:not(.px) #groups2143>details,:root:not(.px) #groupsOdt>details,:root:not(.px) #groupsChp>details{border:0;border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--sh-1);margin:12px 0}
+:root:not(.px) #groups>details:hover,:root:not(.px) #groups2143>details:hover,:root:not(.px) #groupsOdt>details:hover,:root:not(.px) #groupsChp>details:hover{box-shadow:var(--sh-2);transform:none}
+:root:not(.px) #groups>details.is-open,:root:not(.px) #groups2143>details.is-open,:root:not(.px) #groupsOdt>details.is-open,:root:not(.px) #groupsChp>details.is-open{background:var(--surface);box-shadow:var(--sh-2)}
+:root:not(.px) #groups>details>summary,:root:not(.px) #groups2143>details>summary,:root:not(.px) #groupsOdt>details>summary,:root:not(.px) #groupsChp>details>summary{padding:18px 56px 18px 46px;font-weight:650;font-size:1.02rem;line-height:1.4;border-radius:var(--r-lg)}
+:root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before,:root:not(.px) #groupsChp>details>summary::before{content:"";position:absolute;left:18px;top:22px;width:14px;height:14px;border-radius:5px;background:var(--group-color,var(--accent));box-shadow:0 0 0 4px color-mix(in srgb,var(--group-color,var(--accent)) 16%,transparent)}
+:root:not(.px) #groups>details.is-open>summary,:root:not(.px) #groups2143>details.is-open>summary,:root:not(.px) #groupsOdt>details.is-open>summary,:root:not(.px) #groupsChp>details.is-open>summary{border-bottom:0}
 :root:not(.px) summary .where{display:block;font-weight:400;font-size:.84rem;margin-top:2px}
-:root:not(.px) #groups>details>.details-body>.details-content,:root:not(.px) #groups2143>details>.details-body>.details-content,:root:not(.px) #groupsOdt>details>.details-body>.details-content{padding:0 14px 14px}
+:root:not(.px) #groups>details>.details-body>.details-content,:root:not(.px) #groups2143>details>.details-body>.details-content,:root:not(.px) #groupsOdt>details>.details-body>.details-content,:root:not(.px) #groupsChp>details>.details-body>.details-content{padding:0 14px 14px}
 :root:not(.px) summary:hover{background:transparent}
 
 /* шеврон вместо плюса */
@@ -1316,7 +1316,7 @@ html,body{overflow-x:clip}
 :root:not(.px) details.sub.is-open{background:var(--surface);border-color:var(--line);box-shadow:var(--sh-2)}
 :root:not(.px) details.sub>summary{padding:14px 48px 14px 16px;font-weight:500;line-height:1.45}
 :root:not(.px) details.sub>summary code{display:inline-block;font-size:.84rem;font-weight:600;padding:3px 8px;border-radius:8px;color:var(--group-color,var(--accent));background:color-mix(in srgb,var(--group-color,var(--accent)) 12%,transparent);margin-right:6px}
-:root:not(.px) #groupsOdt details.sub summary .onum{display:inline-block;font:600 .84rem var(--mono);padding:3px 8px;border-radius:8px;background:color-mix(in srgb,var(--group-color,var(--accent)) 12%,transparent)}
+:root:not(.px) #groupsOdt details.sub summary .onum,:root:not(.px) #groupsChp details.sub summary .onum{display:inline-block;font:600 .84rem var(--mono);padding:3px 8px;border-radius:8px;background:color-mix(in srgb,var(--group-color,var(--accent)) 12%,transparent)}
 :root:not(.px) .kb{border:0;border-radius:999px;padding:4px 9px;font:600 .7rem var(--sans)}
 :root:not(.px) .k-odr{background:color-mix(in srgb,var(--odr) 13%,transparent)}
 :root:not(.px) .k-dr{background:color-mix(in srgb,var(--dr) 15%,transparent)}
@@ -1341,7 +1341,7 @@ html,body{overflow-x:clip}
 :root:not(.px) .zt td,:root:not(.px) .spt td{border-radius:8px}
 :root:not(.px) .sgn{border-radius:8px}
 :root:not(.px) .fig2143,:root:not(.px) .fig-img img{border-radius:var(--r-sm)}
-:root:not(.px) #doc-odt figure svg{border-radius:var(--r-md);border:1px solid var(--hair)}
+:root:not(.px) #doc-odt figure svg,:root:not(.px) #doc-chp figure svg{border-radius:var(--r-md);border:1px solid var(--hair)}
 :root:not(.px) .odt .odt-note{border-left:0;border-radius:var(--r-sm);background:var(--accent-soft);padding:10px 14px}
 :root:not(.px) .odt .odt-easy{border:0;border-radius:var(--r-sm);background:color-mix(in srgb,var(--c2) 9%,transparent);padding:10px 14px}
 :root:not(.px) .xref-box{border:0;border-radius:var(--r-sm);background:color-mix(in srgb,var(--g3) 9%,transparent)}
@@ -1389,9 +1389,9 @@ html,body{overflow-x:clip}
   :root:not(.px) .tb.is-on{background:var(--accent-soft);color:var(--accent)}
   :root:not(.px) .tb-code{border-radius:8px;font-family:var(--sans)}
   :root:not(.px) .side-panel{border-radius:24px 24px 0 0}
-  :root:not(.px) #groups>details>summary,:root:not(.px) #groups2143>details>summary,:root:not(.px) #groupsOdt>details>summary{padding:16px 48px 16px 42px}
-  :root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before{left:16px;top:20px}
-  :root:not(.px) #groups>details>.details-body>.details-content,:root:not(.px) #groups2143>details>.details-body>.details-content,:root:not(.px) #groupsOdt>details>.details-body>.details-content{padding:0 8px 10px}
+  :root:not(.px) #groups>details>summary,:root:not(.px) #groups2143>details>summary,:root:not(.px) #groupsOdt>details>summary,:root:not(.px) #groupsChp>details>summary{padding:16px 48px 16px 42px}
+  :root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before,:root:not(.px) #groupsChp>details>summary::before{left:16px;top:20px}
+  :root:not(.px) #groups>details>.details-body>.details-content,:root:not(.px) #groups2143>details>.details-body>.details-content,:root:not(.px) #groupsOdt>details>.details-body>.details-content,:root:not(.px) #groupsChp>details>.details-body>.details-content{padding:0 8px 10px}
   :root:not(.px) details.sub>.details-body>.details-content{padding:0 12px 12px}
   :root:not(.px) .decoder,:root:not(.px) .calc{padding:16px;border-radius:var(--r-md)}
   :root:not(.px) .lcard{padding:18px}
@@ -1501,15 +1501,15 @@ body.landing-open .wow-prog{opacity:0}
 
 /* ---------- прожектор под курсором на группах, декодере, калькуляторе ---------- */
 @media (hover:hover) and (pointer:fine){
-  :root:not(.px) #groups>details,:root:not(.px) #groups2143>details,:root:not(.px) #groupsOdt>details,:root:not(.px) .decoder,:root:not(.px) .calc{background-image:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--group-color,var(--accent)) var(--wow-spot),transparent),transparent 55%);transition:--wow-spot .6s ease,transform .22s var(--wow-ease),box-shadow .35s ease,border-color .2s ease,background-color .3s ease}
-  :root:not(.px) #groups>details:hover,:root:not(.px) #groups2143>details:hover,:root:not(.px) #groupsOdt>details:hover{--wow-spot:9%}
+  :root:not(.px) #groups>details,:root:not(.px) #groups2143>details,:root:not(.px) #groupsOdt>details,:root:not(.px) .decoder,:root:not(.px) .calc,:root:not(.px) #groupsChp>details{background-image:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--group-color,var(--accent)) var(--wow-spot),transparent),transparent 55%);transition:--wow-spot .6s ease,transform .22s var(--wow-ease),box-shadow .35s ease,border-color .2s ease,background-color .3s ease}
+  :root:not(.px) #groups>details:hover,:root:not(.px) #groups2143>details:hover,:root:not(.px) #groupsOdt>details:hover,:root:not(.px) #groupsChp>details:hover{--wow-spot:9%}
   :root:not(.px) .decoder:hover,:root:not(.px) .calc:hover{--wow-spot:7%}
 }
 
 /* ---------- группы: точка-маркер, шеврон, карточки ---------- */
-:root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before{transition:transform .6s var(--wow-spring),border-radius .4s ease,box-shadow .4s ease}
-:root:not(.px) #groups>details:hover>summary::before,:root:not(.px) #groups2143>details:hover>summary::before,:root:not(.px) #groupsOdt>details:hover>summary::before{transform:scale(1.18)}
-:root:not(.px) #groups>details.is-open>summary::before,:root:not(.px) #groups2143>details.is-open>summary::before,:root:not(.px) #groupsOdt>details.is-open>summary::before{transform:rotate(45deg) scale(.9);border-radius:4px}
+:root:not(.px) #groups>details>summary::before,:root:not(.px) #groups2143>details>summary::before,:root:not(.px) #groupsOdt>details>summary::before,:root:not(.px) #groupsChp>details>summary::before{transition:transform .6s var(--wow-spring),border-radius .4s ease,box-shadow .4s ease}
+:root:not(.px) #groups>details:hover>summary::before,:root:not(.px) #groups2143>details:hover>summary::before,:root:not(.px) #groupsOdt>details:hover>summary::before,:root:not(.px) #groupsChp>details:hover>summary::before{transform:scale(1.18)}
+:root:not(.px) #groups>details.is-open>summary::before,:root:not(.px) #groups2143>details.is-open>summary::before,:root:not(.px) #groupsOdt>details.is-open>summary::before,:root:not(.px) #groupsChp>details.is-open>summary::before{transform:rotate(45deg) scale(.9);border-radius:4px}
 :root:not(.px) details>summary::after{transition:transform .5s var(--wow-spring),margin .35s var(--wow-ease),opacity .3s}
 :root:not(.px) details.sub{transition:border-color .25s ease,box-shadow .4s var(--wow-ease),background-color .3s ease,transform .25s var(--wow-ease)}
 :root:not(.px) details.sub:not(.is-open):hover{box-shadow:inset 3px 0 0 var(--group-color,var(--accent)),var(--sh-1)}
@@ -1611,7 +1611,7 @@ html.wow-vt-theme *,html.wow-vt-theme *::before,html.wow-vt-theme *::after,html.
   :root:not(.px) h1.wow-h1::before{animation:wowBadge .8s var(--wow-spring) backwards}
 
   /* группы: импульс точки, каскад карточек внутри */
-  :root:not(.px) #groups>details.is-open>summary::before,:root:not(.px) #groups2143>details.is-open>summary::before,:root:not(.px) #groupsOdt>details.is-open>summary::before{animation:wowPing 1s ease-out}
+  :root:not(.px) #groups>details.is-open>summary::before,:root:not(.px) #groups2143>details.is-open>summary::before,:root:not(.px) #groupsOdt>details.is-open>summary::before,:root:not(.px) #groupsChp>details.is-open>summary::before{animation:wowPing 1s ease-out}
   :root:not(.px) details.is-open>.details-body>.details-content>.codes>details.sub,
   :root:not(.px) details.is-open>.details-body>.details-content>details.sub{animation:wowSubIn .65s var(--wow-ease) backwards}
   :root:not(.px) :is(.codes,.details-content)>details.sub:nth-child(1){animation-delay:.06s}
@@ -1879,6 +1879,13 @@ body.landing-open .gs-fab{display:none}
   <span class="lcard-note">Уроки по конспектам, чтение Б-развёртки, настройка на СО-3Р — и экзамен по всем темам</span>
   <span class="lcard-open">Открыть →</span>
 </button>
+<button type="button" class="lcard lc-chp" data-doc="chp">
+  <span class="lcard-ico" aria-hidden="true"><svg class="ico-smooth" viewBox="0 0 40 40"><circle cx="20" cy="8.5" r="4" fill="currentColor"/><path d="M20 14v11M13 18.5h14M20 25l-5.5 7.5M20 25l5.5 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 36h30" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><svg class="ico-px" viewBox="0 0 9 11" shape-rendering="crispEdges" aria-hidden="true" focusable="false"><rect x="3" y="0" width="3" height="1" fill="currentColor"/><rect x="3" y="1" width="3" height="1" fill="currentColor"/><rect x="4" y="2" width="1" height="1" fill="currentColor"/><rect x="1" y="3" width="7" height="1" fill="currentColor"/><rect x="4" y="4" width="1" height="1" fill="currentColor"/><rect x="4" y="5" width="1" height="1" fill="currentColor"/><rect x="3" y="6" width="1" height="1" fill="currentColor"/><rect x="5" y="6" width="1" height="1" fill="currentColor"/><rect x="2" y="7" width="1" height="1" fill="currentColor"/><rect x="6" y="7" width="1" height="1" fill="currentColor"/><rect x="2" y="8" width="1" height="1" fill="currentColor"/><rect x="6" y="8" width="1" height="1" fill="currentColor"/><rect x="0" y="10" width="9" height="1" fill="currentColor"/></svg></span>
+  <span class="lcard-code">ЧнП <span class="lcard-cnt" data-cnt="chp"></span></span>
+  <span class="lcard-title">Система информации «Человек на пути»</span>
+  <span class="lcard-note">Распоряжение ОАО «РЖД» от 14.12.2022 № 3308р · охрана труда на путях</span>
+  <span class="lcard-open">Открыть →</span>
+</button>
     </div>
   </div>
 </div>
@@ -1923,6 +1930,11 @@ body.landing-open .gs-fab{display:none}
 <button type="button" class="sitem" data-doc="trn">
   <span class="sitem-code">Тест</span>
   <span class="sitem-title">Тренажёр и экзамен оператора</span>
+  <span class="sitem-tag">Открыть</span>
+</button>
+<button type="button" class="sitem" data-doc="chp">
+  <span class="sitem-code">ЧнП</span>
+  <span class="sitem-title">Система информации «Человек на пути»</span>
   <span class="sitem-tag">Открыть</span>
 </button>
   </nav>
@@ -3707,6 +3719,440 @@ body.landing-open .gs-fab{display:none}
   </div>
 </section>
 
+<section id="doc-chp" class="odt" hidden>
+  <h1>Система информации «Человек на пути»</h1>
+  <p class="lead">Как локомотивные бригады сообщают о нарушениях правил нахождения на железнодорожных путях, кто эти сообщения разбирает, в какие сроки и что считается нарушением. По Положению, утверждённому распоряжением ОАО «РЖД» от 14.12.2022 № 3308р (действует с 01.01.2023).</p>
+  <div class="odt-warn"><strong>Важно.</strong> Полный текст 3308р в открытом доступе найти не удалось. Перечень нарушений, сроки и размеры трафаретов даны по предыдущему Положению «Работник на пути» (распоряжение 2374р, 2014). В 3308р они в основном сохранены, но перед применением сверяйте с действующей редакцией и документами своей дороги.</div>
+  <p class="source">Источники: распоряжения ОАО «РЖД» № 3308р от 14.12.2022, № 410р от 14.03.2016, № 1372/р от 29.06.2018, № 2374р от 06.11.2013, № 1361р от 25.06.2010; Правила по безопасному нахождению работников ОАО «РЖД» на железнодорожных путях; статья Дирекции тяги «Роль системы информации „Человек на пути“ в профилактике наездов подвижного состава», журнал «Локомотив», 2018, № 10.</p>
+  <h2>Разделы</h2>
+  <div class="toolbar" role="search">
+    <input type="search" id="qiChp" placeholder="Поиск: 400 м, формальный ответ, ДУ-46, сигналист…" aria-label="Поиск по разделу «Человек на пути»">
+    <button type="button" class="btn gs-tbtn" data-gs-open="qiChp" title="Искать по смыслу во всех разделах"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg>Везде</button>
+    <button class="btn" id="expbChp" type="button">Раскрыть всё</button>
+    <span id="cntChp" aria-live="polite"></span>
+  </div>
+  <div id="groupsChp">
+
+<details class="ogroup">
+<summary>1 — Суть и документы <span class="where">(зачем система и чем она установлена)</span></summary>
+
+<details class="sub" id="chp-1" data-chp="1"><summary><span class="onum">1.1</span> <span class="st">Что такое система «Человек на пути»</span></summary>
+<div class="odt-body">
+<p>Это порядок, по которому любой, кто увидел опасное нахождение людей на путях, сообщает об этом, а подразделение нарушителей обязано нарушение устранить и разобрать. Цель: не допустить наезда подвижного состава на работников и граждан и держать под контролем соблюдение правил нахождения на путях.</p>
+<div class="odt-easy">машинист увидел, что люди стоят в междупутье под проходящим поездом, сообщил по радио, а начальник их дистанции через три дня отчитался, что разобрал случай и наказал виновных.</div>
+<h3>Кто участвует</h3>
+<ul>
+<li><b>Локомотивные бригады и бригады ССПС</b> — главное звено: они видят нарушения на пути и сообщают о них.</li>
+<li><b>Дежурные по станциям и поездные диспетчеры</b> принимают сообщения и передают их по принадлежности.</li>
+<li><b>Дежурные и руководители подразделений</b>, чьи работники нарушили правила, устраняют нарушение и разбирают его.</li>
+<li><b>Службы охраны труда</b> следят за тем, чтобы замечания не терялись и ответы не были формальными.</li>
+</ul>
+<h3>На кого распространяется</h3>
+<p>На филиалы ОАО «РЖД», занятые в перевозочном процессе, на подрядчиков и ДЗО, которые работают на путях ОАО «РЖД», и на работников, контролирующих охрану труда на путях.</p>
+<div class="odt-note">Система работает в обе стороны: работники на пути тоже сообщают о нарушениях локомотивных бригад, например о неподаче оповестительного сигнала (раздел 2.5).</div>
+</div>
+</details>
+
+<details class="sub" id="chp-2" data-chp="2"><summary><span class="onum">1.2</span> <span class="st">Как менялись документы</span></summary>
+<div class="odt-body">
+<p>Положение о системе переиздавалось несколько раз. В 2014–2016 годах она называлась «Работник на пути».</p>
+<div class="odt-tw"><table>
+<tr><th>Распоряжение</th><th>Дата</th><th>Что изменилось</th></tr>
+<tr><td>№ 1361р</td><td>25.06.2010</td><td>Первое Положение о системе «Человек на пути». Утратило силу с 01.01.2014.</td></tr>
+<tr><td>№ 2374р</td><td>06.11.2013, с 01.01.2014</td><td>Система переименована в «Работник на пути», добавлены перечень из 30 нарушений, сроки разбора и знаки принадлежности на жилетах.</td></tr>
+<tr><td>№ 410р</td><td>14.03.2016</td><td>Возвращено название «Человек на пути», новое Положение.</td></tr>
+<tr><td>№ 1372/р</td><td>29.06.2018</td><td>Из перечня исключена «работа без выдачи предупреждений на поезда» (с 03.07.2018); теперь это учитывается только в книге замечаний машиниста.</td></tr>
+<tr><td><b>№ 3308р</b></td><td><b>14.12.2022, с 01.01.2023</b></td><td><b>Действующее Положение.</b> Отдельный раздел о нарушениях работников подрядных организаций, акт о вине подрядчика и возмещении потерь.</td></tr>
+</table></div>
+</div>
+</details>
+
+<details class="sub" id="chp-3" data-chp="3"><summary><span class="onum">1.3</span> <span class="st">Структура Положения 3308р</span></summary>
+<div class="odt-body">
+<p>Девять разделов и четыре приложения.</p>
+<ol>
+<li>Область применения</li>
+<li>Общие положения</li>
+<li>Действия локомотивных бригад и бригад ССПС</li>
+<li>Действия дежурно-диспетчерского персонала</li>
+<li>Организация работы по системе в структурных подразделениях</li>
+<li>Рассмотрение нарушений, допущенных работниками ОАО «РЖД»</li>
+<li>Рассмотрение нарушений, допущенных работниками подрядных организаций</li>
+<li>Контроль за действиями системы</li>
+<li>Знаки принадлежности к линейным структурным подразделениям</li>
+</ol>
+<div class="odt-tw"><table>
+<tr><th>Приложение</th><th>Содержание</th></tr>
+<tr><td>1</td><td>Перечень нарушений требований безопасности при нахождении на железнодорожных путях</td></tr>
+<tr><td>2</td><td>Журнал регистрации переданных нарушений по системе «Человек на пути»</td></tr>
+<tr><td>3</td><td>Дополнение к договорам, заключаемым с подрядными организациями</td></tr>
+<tr><td>4</td><td>Акт по установлению вины работника подрядной организации и возмещению потерь</td></tr>
+</table></div>
+</div>
+</details>
+</details>
+
+<details class="ogroup">
+<summary>2 — Порядок работы <span class="where">(кто кому сообщает и что делает)</span></summary>
+
+<details class="sub" id="chp-4" data-chp="4"><summary><span class="onum">2.1</span> <span class="st">Путь одного замечания: от машиниста до ответа</span></summary>
+<div class="odt-body">
+<figure>
+<svg viewBox="0 0 640 400" role="img" aria-label="Схема передачи сообщения о нарушении">
+<rect class="blk" x="20" y="10" width="400" height="58" rx="8"/>
+<text class="b" x="36" y="34">1. Машинист или помощник</text>
+<text class="sm" x="36" y="54">увидел нарушение · сигналы · при угрозе наезда торможение</text>
+<rect class="blk" x="20" y="88" width="400" height="58" rx="8"/>
+<text class="b" x="36" y="112">2. ДСП ближайшей станции или ДНЦ при ДЦ</text>
+<text class="sm" x="36" y="132">устанавливает, чьи работники · запись в журнале</text>
+<rect class="blk" x="20" y="166" width="400" height="58" rx="8"/>
+<text class="b" x="36" y="190">3. Дежурный (диспетчер) подразделения</text>
+<text class="sm" x="36" y="210">указание руководителю работ · доклад руководству</text>
+<rect class="blk" x="20" y="244" width="400" height="58" rx="8"/>
+<text class="b" x="36" y="268">4. Руководитель подразделения</text>
+<text class="sm" x="36" y="288">разбор · меры к нарушителям · протокол и приказ</text>
+<rect class="blk" x="20" y="322" width="400" height="58" rx="8"/>
+<text class="b" x="36" y="346">5. Ответ в депо через АСУ</text>
+<text class="sm" x="36" y="366">депо подтверждает ответ или признаёт формальным</text>
+<path class="a" d="M220 68v16M220 146v16M220 224v16M220 302v16"/>
+<path class="af" d="M214 80h12l-6 8zM214 158h12l-6 8zM214 236h12l-6 8zM214 314h12l-6 8z"/>
+<rect class="scr" x="450" y="10" width="172" height="58" rx="8"/>
+<text class="b at" x="462" y="34">Встречный поезд</text>
+<text class="sm" x="462" y="54">его машинист узнаёт первым</text>
+<path class="dash" d="M420 39h30"/>
+<rect class="scr" x="450" y="322" width="172" height="58" rx="8"/>
+<text class="b at" x="462" y="346">Журнал в депо</text>
+<text class="sm" x="462" y="366">по прибытии; в АСУ за 24 ч</text>
+<path class="dash" d="M420 351h30"/>
+</svg>
+<figcaption>Основная цепочка слева, параллельные действия справа.</figcaption>
+</figure>
+<ol>
+<li><b>Машинист</b> подаёт оповестительные сигналы, при угрозе наезда тормозит и немедленно сообщает по поездной радиосвязи дежурному по ближайшей станции, а на участках с диспетчерской централизацией поездному диспетчеру.</li>
+<li><b>ДСП или ДНЦ</b> по журналу ДУ-46 и полученным предупреждениям определяет, чьи это работники, передаёт сообщение дежурному (диспетчеру) этого подразделения и записывает в журнал регистрации переданных нарушений (приложение 2).</li>
+<li><b>Дежурный подразделения</b> при наличии связи с местом работ даёт руководителю работ указание немедленно устранить нарушение, докладывает руководителю подразделения и инженеру по охране труда. Если нарушили подрядчики, информирует диспетчера региональной дирекции.</li>
+<li><b>Руководитель подразделения</b> расследует случай, принимает меры к нарушителям и их непосредственному руководителю, оформляет протокол и приказ, проводит внеплановый инструктаж.</li>
+<li><b>Депо</b> получает ответ о принятых мерах в АСУ, подтверждает его или, если ответ формальный, направляет повторную телеграмму.</li>
+</ol>
+<div class="odt-note">При экстренном торможении поездной диспетчер отмечает случай на графике исполненного движения и сообщает диспетчеру региональной дирекции по принадлежности.</div>
+</div>
+</details>
+
+<details class="sub" id="chp-5" data-chp="5"><summary><span class="onum">2.2</span> <span class="st">Что сообщает машинист: тренажёр сообщения</span></summary>
+<div class="odt-body">
+<p>В сообщении дежурному по станции или поездному диспетчеру указывают:</p>
+<ul>
+<li>точное время;</li>
+<li>место: станция, перегон, путь, километр, пикет, стрелочный перевод;</li>
+<li>число работающих (по возможности) и характер нарушения;</li>
+<li>подразделение, ДЗО или подрядчика, чьи работники нарушили правила (по трафарету на жилете);</li>
+<li>номер поезда и локомотива, свою фамилию.</li>
+</ul>
+<p>Заполните поля, чтобы потренироваться. Текст сообщения соберётся ниже.</p>
+<div class="calc chp-msg">
+  <div class="calc-row">
+    <label>Кому<select id="chpTo"><option value="dsp">Дежурному по станции</option><option value="dnc">Поездному диспетчеру (ДЦ)</option></select></label>
+    <label>Станция ДСП<input type="text" id="chpSt" value="Лесная"></label>
+  </div>
+  <div class="calc-row">
+    <label>Перегон или станция<input type="text" id="chpPlace" value="перегон Лесная — Озёрная"></label>
+    <label>Путь<input type="text" id="chpTrack" value="второй путь"></label>
+  </div>
+  <div class="calc-row">
+    <label>Километр<input type="number" id="chpKm" value="214" min="0"></label>
+    <label>Пикет<input type="number" id="chpPk" value="6" min="1" max="10"></label>
+    <label>Работающих<input type="number" id="chpN" value="3" min="1"></label>
+    <label>Время<input type="time" id="chpTime" value="14:32"></label>
+  </div>
+  <div class="calc-row">
+    <label>Характер нарушения<select id="chpWhat">
+      <option>нахождение в междупутье во время прохода поезда по смежному пути</option>
+      <option>несвоевременный уход с пути, менее чем за 400 м до поезда</option>
+      <option>работа без ограждения места работ, нет сигналистов</option>
+      <option>сидят на рельсах или на концах шпал</option>
+      <option>передвижение внутри колеи в попутном направлении</option>
+      <option>работа без сигнальных жилетов</option>
+      <option>переход через путь перед близко идущим поездом</option>
+    </select></label>
+  </div>
+  <div class="calc-row">
+    <label>Трафарет на жилете<input type="text" id="chpOrg" value="ПЧ-12"></label>
+    <label>Экстренное торможение<select id="chpEb"><option value="">Не применялось</option><option value="1">Применено</option></select></label>
+  </div>
+  <div class="calc-row">
+    <label>Поезд №<input type="number" id="chpTrain" value="2041" min="1"></label>
+    <label>Локомотив<input type="text" id="chpLoco" value="2ЭС6-512"></label>
+    <label>Фамилия<input type="text" id="chpName" value="Петров"></label>
+  </div>
+  <div class="calc-out">
+    <div class="chp-out" id="chpOut" aria-live="polite"></div>
+    <button type="button" class="btn" id="chpCopy">Скопировать текст</button>
+    <span class="chp-copied" id="chpCopied"></span>
+    <p>Станция, номера и фамилия в примере вымышлены.</p>
+  </div>
+</div>
+<div class="odt-note">В пути замечания помечают на обороте бланка предупреждений ДУ-61. По прибытии в депо машинист записывает их в журнал регистрации нарушений у дежурного; если лично записать нельзя, передаёт по телефону с отметкой «Принято по телефону».</div>
+</div>
+</details>
+
+<details class="sub" id="chp-6" data-chp="6"><summary><span class="onum">2.3</span> <span class="st">Действия машиниста при приближении к людям на пути</span></summary>
+<div class="odt-body">
+<h3>Когда подавать оповестительные сигналы</h3>
+<ul>
+<li>С километра, предшествующего указанному в предупреждении о работах, независимо от переносных сигналов.</li>
+<li>При следовании по неправильному пути, в туман, дождь, снегопад, метель и при плохой освещённости.</li>
+<li>У кривых с плохой видимостью, выемок, тоннелей, переездов, сигнальных знаков «С», съёмных подвижных единиц.</li>
+<li>При приближении к людям: до тех пор, пока путь не освобождён и люди не ушли в безопасное место.</li>
+</ul>
+<h3>Если путь не освобождён</h3>
+<ul>
+<li>Принять меры к остановке поезда, при необходимости экстренное торможение.</li>
+<li>Немедленно сообщить ДСП ближайшей станции или ДНЦ при ДЦ о нарушении и о каждом экстренном торможении.</li>
+<li>Если люди не ушли с соседнего пути (кроме работ в «окно» или под ограждением сигналами остановки), сначала предупредить по радиосвязи машиниста встречного поезда с точным местом. Он чаще подаёт сигналы большой громкости, снижает скорость, а если расстояние меньше тормозного пути, экстренно останавливается.</li>
+</ul>
+<h3>Скоростные и высокоскоростные линии</h3>
+<p>Машинист сообщает о каждом случае нахождения работников ближе 5 м от крайнего рельса при пропуске поездов со скоростью свыше 140 км/ч.</p>
+</div>
+</details>
+
+<details class="sub" id="chp-7" data-chp="7"><summary><span class="onum">2.4</span> <span class="st">Маневровая работа</span></summary>
+<div class="odt-body">
+<ul>
+<li>Перед осаживанием вагонами вперёд машинист сообщает составителю о местах работ по маршруту и убеждается, что тот понял.</li>
+<li>При нарушении, которое может привести к наезду, машинист прекращает маневры, а при движении вагонами вперёд составитель останавливает состав.</li>
+<li>О нарушении машинист сообщает по станционной или поездной радиосвязи: на станционных путях дежурному по станции или маневровому диспетчеру, на путях локомотивного депо дежурному по депо, на путях вагонного депо, дистанции пути, ПМС дежурному по станции.</li>
+<li>Машинисты на маневрах записывают замечания в журнал у дежурного по станции лично или по радиосвязи.</li>
+</ul>
+</div>
+</details>
+
+<details class="sub" id="chp-8" data-chp="8"><summary><span class="onum">2.5</span> <span class="st">Если нарушение допустила локомотивная бригада</span></summary>
+<div class="odt-body">
+<p>Работник, заметивший нарушение со стороны бригады (несвоевременная подача оповестительных сигналов, движение с выключенным прожектором или буферными фонарями), сразу сообщает дежурному ближайшей станции, а на участках с ДЦ поездному диспетчеру:</p>
+<ul>
+<li>дату, время и место (километр, пикет, путь);</li>
+<li>свою фамилию и характер нарушения;</li>
+<li>фамилию принявшего сообщение — подтверждение приёма обязательно.</li>
+</ul>
+<p>ДСП (ДНЦ) передаёт информацию в депо. Руководитель депо в 10-дневный срок проводит разбор и сообщает о мерах заявителю и в региональную дирекцию.</p>
+</div>
+</details>
+</details>
+
+<details class="ogroup">
+<summary>3 — Нарушения <span class="where">(перечень и знаки принадлежности)</span></summary>
+
+<details class="sub" id="chp-9" data-chp="9"><summary><span class="onum">3.1</span> <span class="st">Перечень нарушений требований безопасности на путях</span></summary>
+<div class="odt-body">
+<p>Типовые нарушения, о которых сообщают по системе. Перечень приведён по приложению 1 к Положению 2014 года; пункт 11 исключён в 2018 году.</p>
+<div class="calc chp-vf">
+  <div class="calc-row">
+    <label>Группа нарушений<select id="chpVCat">
+      <option value="all">Все группы (30)</option>
+      <option value="path">Нахождение на путях</option>
+      <option value="org">Организация и ограждение работ</option>
+      <option value="shunt">Составители и осмотрщики вагонов</option>
+      <option value="cat">Контактная сеть, изолирующая вышка</option>
+      <option value="scb">СЦБ, светофоры, кабель</option>
+    </select></label>
+  </div>
+</div>
+<ol class="chp-vlist" id="chpVList"></ol>
+</div>
+</details>
+
+<details class="sub" id="chp-10" data-chp="10"><summary><span class="onum">3.2</span> <span class="st">Знаки принадлежности на сигнальных жилетах</span></summary>
+<div class="odt-body">
+<p>Машинист может сообщить о нарушении, только если видно, чей это работник. Поэтому на жилеты наносят трафареты, хорошо различимые с движущегося поезда. Замечания на работников в жилетах без маркировки часто отклоняют: принадлежность не установить.</p>
+<figure>
+<svg viewBox="0 0 640 210" role="img" aria-label="Расположение трафаретов на сигнальном жилете">
+<path class="blk" d="M70 20h30q22 18 44 0h30l40 40-14 24-2 112H46L44 84 30 60z"/>
+<text class="b" x="122" y="118" text-anchor="middle" style="font-size:26px">ПЧ-12</text>
+<path class="dash" d="M206 100h40"/>
+<text class="b" x="122" y="186" text-anchor="middle">спина</text>
+<path class="blk" d="M330 20h30q22 18 44 0h30l40 40-14 24-2 112H306L304 84l-14-24z"/>
+<path class="th" d="M382 34v162"/>
+<text class="b" x="352" y="62" text-anchor="middle" style="font-size:13px">ДИ</text>
+<text class="b" x="382" y="186" text-anchor="middle">грудь</text>
+<text class="b at" x="250" y="96">15–20 см</text>
+<text class="sm" x="250" y="114">подразделение</text>
+<text class="b at" x="490" y="58">7–10 см</text>
+<text class="sm" x="490" y="76">дирекция (хозяйство)</text>
+<path class="dash" d="M372 58h112"/>
+</svg>
+<figcaption>Чёрные буквы и цифры. Пример трафаретов условный.</figcaption>
+</figure>
+<div class="odt-tw"><table>
+<tr><th>Где</th><th>Высота</th><th>Что указывает</th></tr>
+<tr><td>Спина</td><td>15–20 см</td><td>Структурное подразделение</td></tr>
+<tr><td>Грудь, вверху</td><td>7–10 см</td><td>Региональная дирекция (хозяйство дирекции инфраструктуры)</td></tr>
+</table></div>
+<ul>
+<li>Для работников всех железнодорожных станций применяется трафарет «ДС».</li>
+<li>Сигналисты дополнительно носят сигнальные нарукавники; их отсутствие само по себе нарушение (пункт 30 перечня).</li>
+<li>Работники подрядных организаций используют жилеты жёлтого цвета второго класса защиты.</li>
+</ul>
+</div>
+</details>
+</details>
+
+<details class="ogroup">
+<summary>4 — Сроки и контроль <span class="where">(кто, что и когда обязан сделать)</span></summary>
+
+<details class="sub" id="chp-11" data-chp="11"><summary><span class="onum">4.1</span> <span class="st">Сроки рассмотрения замечаний</span></summary>
+<div class="odt-body">
+<div class="odt-tw"><table>
+<tr><th>Срок</th><th>Что сделать</th><th>Кто</th></tr>
+<tr><td class="chp-term">сразу</td><td>Передать сообщение в подразделение нарушителей; при связи с местом работ дать указание устранить нарушение</td><td>ДСП, ДНЦ, дежурный подразделения</td></tr>
+<tr><td class="chp-term">24 ч</td><td>Внести замечание из журнала в АСУ; выявленные в выходные и праздники — в первый рабочий день</td><td>Ответственный в депо</td></tr>
+<tr><td class="chp-term">1 сутки</td><td>Направить сведения о нарушениях и экстренных торможениях причастным руководителям, в дирекцию, службу охраны труда дороги</td><td>Начальник депо</td></tr>
+<tr><td class="chp-term">1 сутки</td><td>Отклонить в АСУ замечание, ошибочно направленное в подразделение, с обоснованием</td><td>Руководитель подразделения</td></tr>
+<tr><td class="chp-term">3 суток</td><td>Расследовать случай, принять меры к нарушителям и их руководителю; провести внеочередную проверку знаний</td><td>Руководитель подразделения</td></tr>
+<tr><td class="chp-term">3 дня</td><td>Письменно сообщить в депо и дирекцию о принятых мерах; оформить протокол и приказ; провести внеплановый инструктаж</td><td>Руководитель подразделения</td></tr>
+<tr><td class="chp-term">10 дней</td><td>Рассмотреть экстренные торможения и нарушения при пропуске скоростных поездов</td><td>Региональная дирекция</td></tr>
+<tr><td class="chp-term">10 дней</td><td>Если ответа нет, сообщить в службу охраны труда дороги и дирекцию</td><td>Руководство депо</td></tr>
+</table></div>
+<div class="odt-warn"><strong>Формальный ответ</strong> — ответ, в котором не указан предполагаемый виновник, нет сведений о разборе и принятых мерах. На него депо направляет повторную телеграмму с копией в службу охраны труда и региональные дирекции.</div>
+<p>Нарушения работников подрядчика руководитель разбирает в 3-суточный срок с приглашением их представителей; материалы идут в региональную дирекцию для решения по договору. В 3308р для этого есть акт о вине работника подрядчика и возмещении потерь (приложение 4).</p>
+</div>
+</details>
+
+<details class="sub" id="chp-12" data-chp="12"><summary><span class="onum">4.2</span> <span class="st">Кто контролирует работу системы</span></summary>
+<div class="odt-body">
+<h3>В депо</h3>
+<ul>
+<li>Начальник депо ежемесячно рассматривает итоги работы по системе и принимает решения по её улучшению; результат оформляется протоколом, при необходимости приказом.</li>
+<li>Вопросы системы включаются в план технической учёбы локомотивных бригад.</li>
+<li>Заместитель начальника по эксплуатации следит за правильностью ввода в АСУ и своевременностью ответов.</li>
+<li>Инженер по охране труда регулярно проверяет журнал; машинисты-инструкторы контролируют работу по системе при проверках.</li>
+</ul>
+<h3>В подразделениях и дирекциях</h3>
+<ul>
+<li>Дежурно-диспетчерский персонал ведёт журнал регистрации переданных нарушений (приложение 2).</li>
+<li>Руководители ежемесячно рассматривают эффективность с приглашением подразделений и подрядчиков, допустивших нарушения.</li>
+<li>Контроль включается во все виды проверок по охране труда.</li>
+</ul>
+<h3>На уровне филиала и дороги</h3>
+<ul>
+<li>Главный инженер филиала, занятого в перевозочном процессе, ежеквартально рассматривает работу системы (п. 8.7 Положения 3308р).</li>
+<li>Спорные замечания рассматривает заместитель главного инженера дороги по региону, при несогласии — главный инженер дороги.</li>
+</ul>
+</div>
+</details>
+</details>
+
+<details class="ogroup">
+<summary>5 — Правила нахождения на путях <span class="where">(расстояния и запреты)</span></summary>
+
+<details class="sub" id="chp-13" data-chp="13"><summary><span class="onum">5.1</span> <span class="st">Цифры, которые нужно помнить</span></summary>
+<div class="odt-body">
+<div class="odt-tw"><table>
+<tr><th>Значение</th><th>Правило</th></tr>
+<tr><td class="chp-term">400 м</td><td>Работники должны уйти с пути не позднее, чем поезд подойдёт на 400 м</td></tr>
+<tr><td class="chp-term">2 м</td><td>Минимальное расстояние от крайнего рельса в сторону обочины при пропуске поезда</td></tr>
+<tr><td class="chp-term">5 м</td><td>От крайнего рельса при пропуске поездов со скоростью свыше 140 км/ч; от автосцепки при обходе стоящего состава</td></tr>
+<tr><td class="chp-term">10 м</td><td>Минимальный разрыв между автосцепками расцепленных вагонов для прохода между ними</td></tr>
+<tr><td class="chp-term">50 м</td><td>Шаг убежищ с каждой стороны пути в шахматном порядке, где они предусмотрены</td></tr>
+<tr><td class="chp-term">4 чел.</td><td>Не менее стольких работников у съёмной изолирующей вышки, включая руководителя работ</td></tr>
+</table></div>
+</div>
+</details>
+
+<details class="sub" id="chp-14" data-chp="14"><summary><span class="onum">5.2</span> <span class="st">Запреты и действия в опасной ситуации</span></summary>
+<div class="odt-body">
+<h3>Запрещено</h3>
+<ul>
+<li>Переходить пути перед движущимся составом или сразу за ним, не убедившись, что по соседнему пути нет встречного поезда.</li>
+<li>Пролезать под вагонами и протаскивать под ними инструмент.</li>
+<li>Сидеть на рельсах, концах шпал, напольных устройствах.</li>
+<li>Находиться в междупутье при проходе поездов по смежным путям.</li>
+</ul>
+<h3>Если оказался между поездами</h3>
+<p>При вынужденном нахождении между движущимися по соседним путям поездами нужно сразу присесть или лечь на землю параллельно путям. При пропуске подвижного состава все работники должны находиться по одну сторону от пути.</p>
+<div class="odt-easy">поезд тормозит сотни метров. Если вас видно с 400 м и вы ещё на пути, машинист уже не успеет остановиться.</div>
+</div>
+</details>
+</details>
+
+<details class="ogroup">
+<summary>6 — Эффективность <span class="where">(статистика, коэффициенты, премии)</span></summary>
+
+<details class="sub" id="chp-15" data-chp="15"><summary><span class="onum">6.1</span> <span class="st">Сколько замечаний и почему их меньше</span></summary>
+<div class="odt-body">
+<p>Данные Дирекции тяги за 8 месяцев 2017 и 2018 годов (публикация 2018 года). Полоса 2017 года принята за 100%.</p>
+<div class="chp-legend"><span><i class="l-all"></i>выявлено</span><span><i class="l-acc"></i>принято к учёту</span></div>
+<h3>Замечания машинистов</h3>
+<div class="chp-bars">
+<div class="chp-bar"><span class="y">2017</span><span class="tr"><i class="all" style="width:100%"></i><i class="acc" style="width:62.9%"></i><b>7901 / 4972</b></span></div>
+<div class="chp-bar"><span class="y">2018</span><span class="tr"><i class="all" style="width:68.4%"></i><i class="acc" style="width:40%"></i><b>5408 / 3158</b></span></div>
+</div>
+<h3>Экстренные торможения для предотвращения наезда</h3>
+<div class="chp-bars">
+<div class="chp-bar"><span class="y">2017</span><span class="tr"><i class="all" style="width:100%"></i><i class="acc" style="width:73.1%"></i><b>67 / 49</b></span></div>
+<div class="chp-bar"><span class="y">2018</span><span class="tr"><i class="all" style="width:71.6%"></i><i class="acc" style="width:59.7%"></i><b>48 / 40</b></span></div>
+</div>
+<h3>Почему машинисты сообщают реже</h3>
+<p>Опрос 1871 работника локомотивных бригад Юго-Восточной дирекции тяги:</p>
+<div class="odt-tw"><table>
+<tr><th>Доля</th><th>Причина</th></tr>
+<tr><td class="chp-term">29%</td><td>Передача и регистрация отнимают время и отвлекают от управления</td></tr>
+<tr><td class="chp-term">23%</td><td>Недостаточное премирование</td></tr>
+<tr><td class="chp-term">19%</td><td>Сочувствие к нарушителям</td></tr>
+<tr><td class="chp-term">16%</td><td>Отклонение замечаний смежными службами</td></tr>
+</table></div>
+<p>Частые причины отклонения: замечание не относится к системе (пал травы, оборванная струна контактной сети), не соответствует классификатору, нельзя установить принадлежность работника, ответ дан формально.</p>
+</div>
+</details>
+
+<details class="sub" id="chp-16" data-chp="16"><summary><span class="onum">6.2</span> <span class="st">Коэффициенты оценки и премирование</span></summary>
+<div class="odt-body">
+<div class="odt-tw"><table>
+<tr><th>Коэффициент</th><th>Как считают</th><th>Что показывает</th></tr>
+<tr><td>Ка, активность</td><td><code>замечания / явочная численность бригад × 1000</code></td><td>Сколько замечаний на тысячу работников. Рост — бригады активнее.</td></tr>
+<tr><td>Кэ, эффективность</td><td>динамика замечаний против динамики экстренных торможений</td><td>Замечаний меньше, а торможений больше — работа неудовлетворительная.</td></tr>
+<tr><td>Кг, грамотность</td><td><code>принятые к учёту / поступившие</code></td><td>Доля замечаний, утверждённых службой охраны труда; чем ближе к 100%, тем лучше.</td></tr>
+</table></div>
+<h3>Премирование</h3>
+<p>По распоряжению № 1800р (2016): 2000 руб. за каждый подтверждённый случай с применением экстренного торможения и 1000 руб. без него, без учёта районного коэффициента. Выплата — с окончательным расчётом за месяц, следующий за отчётным. Действующие суммы уточняйте в депо.</p>
+</div>
+</details>
+</details>
+
+<details class="ogroup">
+<summary>7 — Самопроверка и словарь <span class="where">(тест и сокращения)</span></summary>
+
+<details class="sub" id="chp-17" data-chp="17"><summary><span class="onum">7.1</span> <span class="st">Проверьте себя: 6 вопросов</span></summary>
+<div class="odt-body">
+<p class="chp-score" id="chpScore">Отвечено: 0 из 6</p>
+<div class="chp-quiz" id="chpQuiz"></div>
+<button type="button" class="btn" id="chpQReset">Начать заново</button>
+</div>
+</details>
+
+<details class="sub" id="chp-18" data-chp="18"><summary><span class="onum">7.2</span> <span class="st">Сокращения</span></summary>
+<div class="odt-body">
+<dl class="odt-gl">
+<dt>ЧнП</dt><dd>Система информации «Человек на пути».</dd>
+<dt>ДСП</dt><dd>Дежурный по железнодорожной станции.</dd>
+<dt>ДНЦ</dt><dd>Поездной диспетчер.</dd>
+<dt>ДЦ</dt><dd>Диспетчерская централизация.</dd>
+<dt>ССПС</dt><dd>Специальный самоходный подвижной состав.</dd>
+<dt>ДЗО</dt><dd>Дочерние и зависимые общества ОАО «РЖД».</dd>
+<dt>АСУ ЗМ</dt><dd>Система «Замечания машинистов», куда вносятся нарушения.</dd>
+<dt>ДУ-46</dt><dd>Журнал осмотра путей, стрелочных переводов, устройств СЦБ, связи и контактной сети.</dd>
+<dt>ДУ-61</dt><dd>Бланк предупреждений на поезд.</dd>
+<dt>ПЧ, ШЧ, ЭЧ</dt><dd>Дистанции пути; сигнализации, централизации и блокировки; электроснабжения.</dd>
+<dt>ПМС</dt><dd>Путевая машинная станция.</dd>
+<dt>ТЧЭ</dt><dd>Эксплуатационное локомотивное депо.</dd>
+<dt>НБТ</dt><dd>Служба охраны труда и промышленной безопасности дороги.</dd>
+</dl>
+</div>
+</details>
+</details>
+
+  </div>
+</section>
+
 <section id="doc-trn" class="trn-doc" hidden>
   <h1>Тренажёр и экзамен оператора</h1>
   <p class="lead">Учебный раздел по конспектам курса: сначала изучите тему, затем проверьте себя тестом или пробным экзаменом. Сокращения в текстах подчёркнуты пунктиром — нажмите на слово, чтобы увидеть расшифровку.</p>
@@ -4851,14 +5297,15 @@ document.addEventListener('click',function(e){
   var t=e.target.closest('[data-doc]');
   if(!t||t.disabled)return;
   var doc = t.getAttribute('data-doc');
-  if(doc === '2499' || doc === '2143' || doc === 'odt' || doc === 'trn'){
+  if(doc === '2499' || doc === '2143' || doc === 'odt' || doc === 'trn' || doc === 'chp'){
     enter();
     closeMenu();
     document.getElementById('doc-2499').hidden = (doc !== '2499');
     document.getElementById('doc-2143').hidden = (doc !== '2143');
     document.getElementById('doc-odt').hidden = (doc !== 'odt');
     var dtr = document.getElementById('doc-trn'); if (dtr) dtr.hidden = (doc !== 'trn');
-    document.title = doc === 'trn' ? 'Тренажёр и экзамен оператора дефектоскопной тележки' : doc === '2143' ? 'Дефекты стрелочных переводов — распоряжение 2143р' : doc === 'odt' ? 'Справочник оператора дефектоскопной тележки' : 'Дефекты рельсов: коды и группы — распоряжение 2499р';
+    var dchp = document.getElementById('doc-chp'); if (dchp) dchp.hidden = (doc !== 'chp');
+    document.title = doc === 'chp' ? 'Система информации «Человек на пути» — распоряжение 3308р' : doc === 'trn' ? 'Тренажёр и экзамен оператора дефектоскопной тележки' : doc === '2143' ? 'Дефекты стрелочных переводов — распоряжение 2143р' : doc === 'odt' ? 'Справочник оператора дефектоскопной тележки' : 'Дефекты рельсов: коды и группы — распоряжение 2499р';
     // Обновить активный пункт меню
     document.querySelectorAll('.sitem[data-doc]').forEach(function(s){
       var on = s.getAttribute('data-doc') === doc;
@@ -8179,19 +8626,19 @@ document.addEventListener('click',function(e){
 <script>
 /* ---------- Оформление и мобильная навигация ---------- */
 (function(){
-  function cur(){ var tr=document.getElementById('doc-trn'); if(tr&&!tr.hidden)return 'trn'; return !document.getElementById('doc-odt').hidden ? 'odt' : document.getElementById('doc-2143').hidden ? '2499' : '2143'; }
+  function cur(){ var ch=document.getElementById('doc-chp'); if(ch&&!ch.hidden)return 'chp'; var tr=document.getElementById('doc-trn'); if(tr&&!tr.hidden)return 'trn'; return !document.getElementById('doc-odt').hidden ? 'odt' : document.getElementById('doc-2143').hidden ? '2499' : '2143'; }
   function plural(n,a,b,c){var m=n%10,h=n%100;return (m===1&&h!==11)?a:(m>=2&&m<=4&&(h<12||h>14))?b:c;}
   /* счётчики на старте и в шапке документа */
   function stats(){
-    [['2499','#groups'],['2143','#groups2143'],['odt','#groupsOdt']].forEach(function(d){
+    [['2499','#groups'],['2143','#groups2143'],['odt','#groupsOdt'],['chp','#groupsChp']].forEach(function(d){
       var cards=document.querySelectorAll(d[1]+' details.sub').length, groups=document.querySelectorAll(d[1]+' > details').length;
       var c=document.querySelector('.lcard-cnt[data-cnt="'+d[0]+'"]');
-      if(c&&cards)c.textContent=cards+' '+(d[0]==='odt'?plural(cards,'раздел','раздела','разделов'):plural(cards,'дефект','дефекта','дефектов'));
+      if(c&&cards)c.textContent=cards+' '+((d[0]==='odt'||d[0]==='chp')?plural(cards,'раздел','раздела','разделов'):plural(cards,'дефект','дефекта','дефектов'));
       var sec=document.getElementById('doc-'+d[0]);
       if(sec&&cards&&!sec.querySelector('.doc-stats')){
         var lead=sec.querySelector('.lead'); if(!lead)return;
         var box=document.createElement('div');box.className='doc-stats';
-        box.innerHTML=d[0]==='odt'
+        box.innerHTML=(d[0]==='odt'||d[0]==='chp')
           ?'<button type="button" data-jump="list"><b>'+cards+'</b> '+plural(cards,'раздел','раздела','разделов')+' · '+groups+' '+plural(groups,'тема','темы','тем')+' →</button>'
           :'<button type="button" data-jump="list"><b>'+cards+'</b> '+plural(cards,'карточка','карточки','карточек')+' · '+groups+' '+plural(groups,'группа','группы','групп')+' →</button><button type="button" data-jump="calc">Калькулятор →</button>';
         lead.insertAdjacentElement('afterend',box);
@@ -8216,19 +8663,19 @@ document.addEventListener('click',function(e){
   function target(act){
     var d=cur();
     if(act==='list')return d==='trn'?document.getElementById('trn-host'):document.querySelector('#doc-'+d+' .toolbar');
-    if(act==='calc'){if(d==='odt')return null;if(d==='trn')return document.getElementById('trn-host');var c=document.getElementById(d==='2143'?'calc2143':'calc');var h=c&&c.previousElementSibling;while(h&&h.tagName!=='H2')h=h.previousElementSibling;return h||c;}
+    if(act==='calc'){if(d==='odt'||d==='chp')return null;if(d==='trn')return document.getElementById('trn-host');var c=document.getElementById(d==='2143'?'calc2143':'calc');var h=c&&c.previousElementSibling;while(h&&h.tagName!=='H2')h=h.previousElementSibling;return h||c;}
   }
   function go(el){if(!el)return;var y=el.getBoundingClientRect().top+window.scrollY-8;window.scrollTo({top:y,behavior:'smooth'});}
   function syncDocBtn(){
     if(!bar)return;var d=cur();
-    bar.querySelector('.tb-doc .tb-code').textContent=d==='odt'?'ОДТ':d==='trn'?'Тест':d+'р';
-    var calc=bar.querySelector('.tb[data-act="calc"]');calc.hidden=(d==='odt');
-    bar.classList.toggle('no-calc',d==='odt');
-    bar.querySelector('.tb[data-act="list"] span').textContent=(d==='odt'||d==='trn')?'Разделы':'Дефекты';
+    bar.querySelector('.tb-doc .tb-code').textContent=d==='chp'?'ЧнП':d==='odt'?'ОДТ':d==='trn'?'Тест':d+'р';
+    var calc=bar.querySelector('.tb[data-act="calc"]');calc.hidden=(d==='odt'||d==='chp');
+    bar.classList.toggle('no-calc',d==='odt'||d==='chp');
+    bar.querySelector('.tb[data-act="list"] span').textContent=(d==='odt'||d==='trn'||d==='chp')?'Разделы':'Дефекты';
   }
   function syncActive(){
     if(!bar)return;var vh=window.innerHeight,on=null;
-    var l=target('list'),c=(cur()==='odt'||cur()==='trn')?null:document.getElementById(cur()==='2143'?'calc2143':'calc');
+    var l=target('list'),c=(cur()==='odt'||cur()==='trn'||cur()==='chp')?null:document.getElementById(cur()==='2143'?'calc2143':'calc');
     if(cur()==='trn'){var ts=window.__trnSec?window.__trnSec():'';on=ts==='home'?'list':ts==='calc'?'calc':null;}else if(l&&l.getBoundingClientRect().top<vh*0.45)on='list';
     else if(c){var r=c.getBoundingClientRect();if(r.top<vh*0.7&&r.bottom>0)on='calc';}
     bar.querySelectorAll('.tb[data-act]').forEach(function(b){b.classList.toggle('is-on',b.dataset.act===on);});
@@ -8246,7 +8693,7 @@ document.addEventListener('click',function(e){
   document.addEventListener('click',function(e){
     var t=e.target.closest('[data-doc]');if(!t||t.disabled)return;
     var d=t.getAttribute('data-doc');
-    if(d==='2499'||d==='2143'||d==='odt'||d==='trn'){remember(d);setTimeout(function(){syncDocBtn();syncActive();},0);}
+    if(d==='2499'||d==='2143'||d==='odt'||d==='trn'||d==='chp'){remember(d);setTimeout(function(){syncDocBtn();syncActive();},0);}
   });
   document.addEventListener('click',function(e){var j=e.target.closest('[data-jump]');if(j)go(target(j.dataset.jump));});
   /* название дефекта — отдельным блоком, чтобы на телефоне шло под кодом */
@@ -8357,7 +8804,7 @@ document.addEventListener('click',function(e){
 <script>
 /* ---------- Подсветка найденного текста в карточках (все три документа) ---------- */
 (function(){
-  var SETS=[['qi','groups','cnt'],['qi2143','groups2143','cnt2143'],['qiOdt','groupsOdt','cntOdt']];
+  var SETS=[['qi','groups','cnt'],['qi2143','groups2143','cnt2143'],['qiOdt','groupsOdt','cntOdt'],['qiChp','groupsChp','cntChp']];
   function esc(x){return x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
   function rx(q){var r='';for(var i=0;i<q.length;i++){var c=q[i].toLowerCase();r+=(c==='е'||c==='ё')?'[её]':esc(q[i]);}return new RegExp(r,'gi');}
   function vis(el,root){for(var e=el;e&&e!==root;e=e.parentElement){if(e.style&&e.style.display==='none')return false;}return true;}
@@ -10888,7 +11335,7 @@ function $$(s,c){return Array.prototype.slice.call((c||document).querySelectorAl
 function raf(f){return requestAnimationFrame(f);}
 function safe(name,fn){try{fn();}catch(e){if(window.console)console.warn('[wow] '+name,e);}}
 function landingOpen(){return !!landing&&!landing.classList.contains('is-hidden');}
-function curDoc(){var tr=document.getElementById('doc-trn');if(tr&&!tr.hidden)return 'trn';var o=document.getElementById('doc-odt'),t=document.getElementById('doc-2143');return o&&!o.hidden?'odt':t&&!t.hidden?'2143':'2499';}
+function curDoc(){var ch=document.getElementById('doc-chp');if(ch&&!ch.hidden)return 'chp';var tr=document.getElementById('doc-trn');if(tr&&!tr.hidden)return 'trn';var o=document.getElementById('doc-odt'),t=document.getElementById('doc-2143');return o&&!o.hidden?'odt':t&&!t.hidden?'2143':'2499';}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 var EASE='cubic-bezier(.22,1,.36,1)',EASE_IO='cubic-bezier(.76,0,.24,1)';
 
@@ -11154,7 +11601,7 @@ safe('vt-click',function(){
     else if(t.id==='pxToggle')kind='px';
     else if(t.matches('a[data-to2499],a[data-toodt]'))kind='xref';
     else{
-      var d=t.getAttribute('data-doc');if(d!=='2499'&&d!=='2143'&&d!=='odt'&&d!=='trn')return;
+      var d=t.getAttribute('data-doc');if(d!=='2499'&&d!=='2143'&&d!=='odt'&&d!=='trn'&&d!=='chp')return;
       if(landingOpen()){kind='open';info.rect=r;info.rad=getComputedStyle(t).borderRadius;}
       else{if(d===curDoc())return;kind='swap';}
     }
@@ -11233,7 +11680,7 @@ safe('doc-watch',function(){
   }
   function queue(){if(!q){q=true;raf(check);}}
   if(landing)new MutationObserver(queue).observe(landing,{attributes:true,attributeFilter:['class']});
-  ['doc-2499','doc-2143','doc-odt','doc-trn'].forEach(function(id){var el=document.getElementById(id);if(el)new MutationObserver(queue).observe(el,{attributes:true,attributeFilter:['hidden']});});
+  ['doc-2499','doc-2143','doc-odt','doc-trn','doc-chp'].forEach(function(id){var el=document.getElementById(id);if(el)new MutationObserver(queue).observe(el,{attributes:true,attributeFilter:['hidden']});});
   if(!landingOpen())queue();
 });
 
@@ -11246,7 +11693,7 @@ safe('spot',function(){
   var tgt=null,cx=0,cy=0,id=0;
   document.addEventListener('pointermove',function(e){
     if(e.pointerType!=='mouse'||px())return;
-    var t=e.target&&e.target.closest&&e.target.closest('#groups>details,#groups2143>details,#groupsOdt>details,.decoder,.calc');
+    var t=e.target&&e.target.closest&&e.target.closest('#groups>details,#groups2143>details,#groupsOdt>details,#groupsChp>details,.decoder,.calc');
     if(!t)return;tgt=t;cx=e.clientX;cy=e.clientY;
     if(!id)id=raf(function(){id=0;if(!tgt)return;var r=tgt.getBoundingClientRect();
       tgt.style.setProperty('--mx',(cx-r.left).toFixed(0)+'px');tgt.style.setProperty('--my',(cy-r.top).toFixed(0)+'px');});
@@ -11379,7 +11826,184 @@ function go(){if(started)return;started=true;safe('intro',function(){playLanding
 try{if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go,go);setTimeout(go,600);}else go();}catch(e){go();}
 })();
 </script>
-<style id="dd-css">.calc label .dd-sel{font:400 1rem/1.4 var(--sans);color:var(--ink);letter-spacing:normal;text-transform:none}</style>
+<style id="dd-css">.calc label .dd-sel{font:400 1rem/1.4 var(--sans);color:var(--ink);letter-spacing:normal;text-transform:none}
+/* ======================= «Человек на пути» (doc-chp) — только токены сайта ======================= */
+#doc-chp>h1::before{content:"Распоряжение № 3308р · 2022";color:var(--g2);background:color-mix(in srgb,var(--g2) 10%,transparent);border-color:color-mix(in srgb,var(--g2) 30%,transparent)}
+.lcard.lc-chp{--lc:var(--g2)}
+.lcard:nth-child(5){animation-delay:.2s}
+@media (min-width:900px){
+  .landing-cards{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .landing-cards>.lcard{grid-column:span 2}
+  .landing-cards>.lcard:nth-child(n+4){grid-column:span 3}
+}
+#doc-chp .chp-msg .calc-row>label{flex:1 1 160px;min-width:0}
+#doc-chp .chp-msg .calc-row>label .dd{min-width:0}
+#doc-chp .calc input[type=text],#doc-chp .calc input[type=time]{height:44px;width:100%;min-width:0;padding:0 12px;font:500 1rem var(--sans);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm,8px);box-shadow:var(--sh-1,none);transition:border-color .2s,box-shadow .2s}
+#doc-chp .calc input[type=number]{width:100%;min-width:0}
+#doc-chp .calc input[type=text]:focus,#doc-chp .calc input[type=time]:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)}
+:root:not(.px) #doc-chp .calc input[type=text],:root:not(.px) #doc-chp .calc input[type=time]{height:48px;background:var(--surface-2,var(--surface));box-shadow:none}
+:root:not(.px) #doc-chp .calc input[type=text]:focus,:root:not(.px) #doc-chp .calc input[type=time]:focus{box-shadow:0 0 0 4px var(--accent-soft,transparent)}
+#doc-chp .chp-out{flex-basis:100%;font:500 .95rem/1.6 var(--mono);white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--g2);border-radius:var(--r-sm,8px);padding:12px 14px}
+#doc-chp .chp-copied{font:600 .74rem var(--mono);color:var(--c2)}
+#doc-chp .chp-vf .calc-row>label{flex:1 1 260px}
+#doc-chp ol.chp-vlist{list-style:none;padding:0;margin:.6em 0;border:1px solid var(--line);border-radius:var(--r-sm,8px);background:var(--surface);overflow:hidden}
+#doc-chp .chp-vlist li{display:grid;grid-template-columns:2.4em 1fr;gap:4px 10px;padding:10px 12px;margin:0;border-top:1px solid var(--line)}
+#doc-chp .chp-vlist li:first-child{border-top:0}
+#doc-chp .chp-vlist .n{font:600 .9rem var(--mono);color:var(--g2);font-variant-numeric:tabular-nums}
+#doc-chp .chp-vlist .t{min-width:0}
+#doc-chp .chp-vlist .c{grid-column:2;font:600 .7rem var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+#doc-chp .chp-vlist li.ex .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--odr)}
+#doc-chp td.chp-term{font:600 .95rem var(--mono);color:var(--g2);white-space:nowrap;font-variant-numeric:tabular-nums}
+#doc-chp .chp-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--muted);margin:.4em 0}
+#doc-chp .chp-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+#doc-chp .l-all,#doc-chp .chp-bar .all{background:color-mix(in srgb,var(--muted) 30%,var(--surface))}
+#doc-chp .l-acc,#doc-chp .chp-bar .acc{background:var(--g2)}
+#doc-chp .chp-bars{display:flex;flex-direction:column;gap:8px;margin:.4em 0 1em}
+#doc-chp .chp-bar{display:grid;grid-template-columns:3.4em 1fr;gap:10px;align-items:center}
+#doc-chp .chp-bar .y{font:600 .8rem var(--mono);color:var(--muted)}
+#doc-chp .chp-bar .tr{position:relative;display:block;height:28px;background:var(--bg);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+#doc-chp .chp-bar .tr i{position:absolute;top:0;bottom:0;left:0}
+#doc-chp .chp-bar .tr b{position:absolute;top:0;bottom:0;right:8px;display:flex;align-items:center;font:600 .78rem var(--mono);color:var(--ink);font-variant-numeric:tabular-nums}
+#doc-chp .chp-score{font:600 .85rem var(--mono);color:var(--muted)}
+#doc-chp .chp-quiz{display:flex;flex-direction:column;gap:12px;margin:.6em 0 1em}
+#doc-chp .chp-q{border:1px solid var(--line);border-radius:var(--r-sm,8px);background:var(--surface);padding:12px 14px}
+#doc-chp .chp-q h3{margin:0 0 .6em;font-size:1rem}
+#doc-chp .chp-opts{display:flex;flex-direction:column;gap:6px}
+#doc-chp .chp-opts button{font:inherit;text-align:left;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:var(--r-sm,8px);padding:9px 12px;cursor:pointer;transition:border-color .2s,background .2s}
+#doc-chp .chp-opts button:hover:not(:disabled){border-color:var(--accent)}
+#doc-chp .chp-opts button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+#doc-chp .chp-opts button:disabled{cursor:default}
+#doc-chp .chp-opts button.ok{border-color:var(--c2);background:color-mix(in srgb,var(--c2) 12%,var(--surface))}
+#doc-chp .chp-opts button.no{border-color:var(--odr);background:color-mix(in srgb,var(--odr) 10%,var(--surface))}
+#doc-chp .chp-expl{margin:.6em 0 0;font-size:.9rem;color:var(--muted)}
+:root.px #doc-chp .chp-q,:root.px #doc-chp ol.chp-vlist,:root.px #doc-chp .chp-out{border-width:var(--pxd,2px);border-radius:0;box-shadow:var(--sh-1)}
+:root.px #doc-chp .chp-opts button,:root.px #doc-chp .calc input[type=text],:root.px #doc-chp .calc input[type=time]{border-width:var(--pxd,2px);border-radius:0;box-shadow:inset 3px 3px 0 0 color-mix(in srgb,var(--ink) 10%,transparent)}
+:root.px #doc-chp .chp-bar .tr{border-radius:0}
+</style>
+<script id="chp-js">
+/* ---------- «Человек на пути»: поиск, «Раскрыть всё», выпадающие списки, тренажёр сообщения, перечень, самопроверка ---------- */
+(function(){
+  var root=document.getElementById('groupsChp');if(!root)return;
+  var qi=document.getElementById('qiChp'),expb=document.getElementById('expbChp'),cnt=document.getElementById('cntChp');
+  function op(d){d.setAttribute('open','');d.classList.add('is-open');}
+  function cl(d){d.classList.remove('is-open');d.removeAttribute('open');}
+  function groups(){return Array.prototype.filter.call(root.children,function(g){return g.tagName==='DETAILS'&&g.style.display!=='none';});}
+  function sync(){var gs=groups();expb.textContent=(gs.length&&gs.every(function(g){return g.classList.contains('is-open');}))?'Свернуть всё':'Раскрыть всё';}
+  expb.addEventListener('click',function(){var gs=groups(),all=gs.length&&gs.every(function(g){return g.classList.contains('is-open');});
+    gs.forEach(function(g){if(all){cl(g);g.querySelectorAll('details').forEach(cl);}else op(g);});sync();});
+  new MutationObserver(sync).observe(root,{subtree:true,attributes:true,attributeFilter:['class','open','style']});
+  function norm(s){return s.toLowerCase().replace(/ё/g,'е');}
+  function filter(){
+    var q=norm(qi.value.trim()),n=0;
+    Array.prototype.forEach.call(root.children,function(g){
+      if(g.tagName!=='DETAILS')return;
+      var any=0;g.querySelectorAll('details.sub').forEach(function(c){var hit=!q||norm(c.textContent).indexOf(q)!==-1;c.style.display=hit?'':'none';if(hit)any++;});
+      g.style.display=any?'':'none';n+=any;if(q&&any)op(g);
+    });
+    cnt.textContent='Найдено: '+n;sync();
+  }
+  qi.addEventListener('input',filter);qi.addEventListener('search',filter);
+
+  /* выпадающие списки в стиле сайта */
+  var sec=document.getElementById('doc-chp');
+  if(window.__ddSelect)sec.querySelectorAll('select').forEach(function(s){try{window.__ddSelect(s);}catch(e){}});
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  /* перечень нарушений (прил. 1 к Положению 2014 г.) */
+  var V=[
+    [1,'path','Несвоевременный уход работающих с пути на безопасное расстояние (ближе 2 м от крайнего рельса и менее чем за 400 м до поезда), в том числе при проходе поезда по соседнему пути, если место работ не ограждено сигналами остановки'],
+    [2,'path','Сидение на рельсах, концах шпал, напольных и наземных устройствах, пирамидах покилометрового запаса рельсов'],
+    [3,'path','Спрыгивание со стоящего подвижного состава в междупутье при проходе поезда по смежному пути'],
+    [4,'path','Передвижение внутри рельсовой колеи в попутном направлении движения поездов на перегоне (на двухпутном участке)'],
+    [5,'path','Нахождение в междупутье во время прохода поездов по смежным путям'],
+    [6,'path','Переход через путь перед близко идущим поездом на станции (менее чем за 400 м)'],
+    [7,'path','Подлезание под вагоны стоящего состава'],
+    [8,'path','Протаскивание рабочих инструментов под вагонами (кроме осмотрщиков вагонов под ограждённым поездом)'],
+    [9,'path','Работа на пути без сигнального жилета или в жилете без светоотражающих вставок и обозначения принадлежности'],
+    [10,'path','Нахождение в колее соседнего пути при проходе поезда и ближе 2 м от крайнего рельса со стороны обочины (кроме ограждённых работ и бригад со съёмной вышкой)'],
+    [11,'org','Работа без выдачи предупреждений на поезда об особой бдительности. Исключено из перечня с 03.07.2018, учитывается в книге замечаний машиниста',1],
+    [12,'org','Работа без ограждения места работ установленным порядком: нет сигналистов, переносных сигналов, ограждение неполное или неправильное'],
+    [13,'org','Непрекращение работ на соседнем пути в «окно» при проходе поезда'],
+    [14,'org','Работа на пути в одно лицо (кроме обходчиков, дежурных по переездам, бригадира или мастера при промерах пути)'],
+    [15,'org','Отсутствие сигналиста в группе работающих на станции'],
+    [16,'org','Перевозка инструмента и материалов на однорельсовых или одноосных тележках без сопровождения не менее чем двумя монтёрами пути'],
+    [17,'org','Неограждение дефектоскопной тележки или тележки с материалами с обеих сторон сигналистами с красными флажками'],
+    [18,'shunt','Проезд составителя поездов на подножке вагона в негабаритном месте'],
+    [19,'shunt','Переход составителя через путь перед вагонами при роспуске или толчках, вход между вагонами после начала их движения'],
+    [20,'shunt','Проезд составителя на автосцепке, стоя на платформе, на её бортах, на раме вагона, под ними или на них'],
+    [21,'shunt','Нахождение осмотрщика вагонов, принимающего поезд «с ходу», вне зоны «островка безопасности»'],
+    [22,'cat','Неограждение бригад со съёмной изолирующей вышкой сигналистами'],
+    [23,'cat','Менее 4 человек у съёмной изолирующей вышки при работе на пути (включая руководителя и работающих наверху)'],
+    [24,'cat','Более 2 человек на рабочей площадке съёмной изолирующей вышки'],
+    [25,'cat','Снятие съёмной изолирующей вышки на соседний путь при пропуске поезда'],
+    [26,'cat','Более одного исполнителя на изолированной приставной лестнице при работе на контактной сети'],
+    [27,'scb','Нет наблюдающего в бригаде или работа в одно лицо при обслуживании устройств СЦБ, средств контроля подвижного состава на ходу, устройств сортировочных горок'],
+    [28,'scb','Работа на светофорах (мостиках, консолях) во время движения поездов по пути, к которому относится светофор, и по смежным путям на перегоне'],
+    [29,'scb','Неограждение мест ремонта кабеля на перегонах при пересечении путей и прокладке в теле земляного полотна'],
+    [30,'org','Отсутствие сигнальных нарукавников на сигналистах']
+  ];
+  var CN={path:'Нахождение на путях',org:'Организация работ',shunt:'Составители и осмотрщики',cat:'Контактная сеть',scb:'СЦБ и кабель'};
+  var vSel=document.getElementById('chpVCat'),vList=document.getElementById('chpVList');
+  function renderV(){
+    var c=vSel.value;
+    vList.innerHTML=V.filter(function(v){return c==='all'||v[1]===c;}).map(function(v){
+      return '<li'+(v[3]?' class="ex"':'')+'><span class="n">'+v[0]+'</span><span class="t">'+esc(v[2])+'</span><span class="c">'+CN[v[1]]+'</span></li>';}).join('');
+  }
+  vSel.addEventListener('change',renderV);renderV();
+
+  /* тренажёр сообщения машиниста */
+  function g(id){var e=document.getElementById(id);return e?String(e.value||'').trim():'';}
+  function people(n){var w={'1':'один человек','2':'двое','3':'трое','4':'четверо','5':'пятеро','6':'шестеро'};return w[n]||(n?n+' чел.':'—');}
+  function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+  var out=document.getElementById('chpOut');
+  function buildMsg(){
+    var head=g('chpTo')==='dnc'?'Поездной диспетчер':('Дежурный по станции '+(g('chpSt')||'…'));
+    var t=head+', я машинист поезда '+(g('chpTrain')||'…')+', локомотив '+(g('chpLoco')||'…')+', '+(g('chpName')||'…')+'.\n'
+      +'Время '+(g('chpTime')||'…')+'. '+cap(g('chpPlace')||'…')+', '+(g('chpKm')||'…')+' км пк '+(g('chpPk')||'…')+', '+(g('chpTrack')||'…')+'.\n'
+      +'Нарушение: '+g('chpWhat')+'. Работающих: '+people(g('chpN'))+'.\n'
+      +'Принадлежность по трафарету: '+(g('chpOrg')||'не установлена')+'.';
+    if(g('chpEb'))t+='\nПрименено экстренное торможение для предотвращения наезда.';
+    out.textContent=t;
+  }
+  var box=sec.querySelector('.chp-msg');
+  box.addEventListener('input',buildMsg);box.addEventListener('change',buildMsg);buildMsg();
+  var copied=document.getElementById('chpCopied');
+  document.getElementById('chpCopy').addEventListener('click',function(){
+    function sel(){var r=document.createRange();r.selectNodeContents(out);var s=window.getSelection();s.removeAllRanges();s.addRange(r);copied.textContent='Текст выделен — скопируйте вручную';}
+    try{navigator.clipboard.writeText(out.textContent).then(function(){copied.textContent='Скопировано';},sel);}catch(e){sel();}
+  });
+
+  /* самопроверка */
+  var Q=[
+    {q:'Кто главное функциональное звено системы «Человек на пути»?',o:['Инженеры по охране труда','Локомотивные бригады и бригады ССПС','Дежурные по станциям','Руководители дистанций пути'],a:1,e:'Именно машинисты видят нарушения на пути и сообщают о них.'},
+    {q:'Кому машинист сообщает о нарушении в пути следования?',o:['Начальнику депо по телефону','Дежурному по ближайшей станции или поездному диспетчеру при ДЦ','Только записывает в журнал в депо','Руководителю работ на месте'],a:1,e:'Сообщение передаётся немедленно по поездной радиосвязи; запись в журнал делается по прибытии в депо.'},
+    {q:'Какое распоряжение утверждает действующее Положение?',o:['№ 1361р от 25.06.2010','№ 2374р от 06.11.2013','№ 410р от 14.03.2016','№ 3308р от 14.12.2022'],a:3,e:'Положение по 3308р действует с 1 января 2023 года.'},
+    {q:'Не позднее какого расстояния до поезда работники должны уйти с пути?',o:['100 м','200 м','400 м','1000 м'],a:2,e:'Уход менее чем за 400 м до поезда — нарушение из перечня.'},
+    {q:'Люди не ушли с соседнего пути. Кого машинист предупреждает первым?',o:['Машиниста встречного поезда','Дежурного по депо','Начальника станции','Энергодиспетчера'],a:0,e:'Наезд грозит встречному поезду, поэтому его машинист узнаёт первым, с точным местом.'},
+    {q:'Когда ответ подразделения на замечание признаётся формальным?',o:['Если дан позже 3 суток','Если в нём нет виновника, сведений о разборе и принятых мерах','Если передан телефонограммой','Если замечание отклонено'],a:1,e:'На формальный ответ депо направляет повторную телеграмму с копией в службу охраны труда.'}
+  ];
+  var qz=document.getElementById('chpQuiz'),qs=document.getElementById('chpScore'),done=0,right=0;
+  function renderQ(){
+    done=0;right=0;qs.textContent='Отвечено: 0 из '+Q.length;
+    qz.innerHTML=Q.map(function(x,i){
+      return '<div class="chp-q" data-i="'+i+'"><h3>'+(i+1)+'. '+esc(x.q)+'</h3><div class="chp-opts">'+x.o.map(function(o,j){return '<button type="button" data-j="'+j+'">'+esc(o)+'</button>';}).join('')+'</div><p class="chp-expl" hidden></p></div>';
+    }).join('');
+  }
+  qz.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b||b.disabled)return;
+    var card=b.closest('.chp-q'),x=Q[+card.dataset.i],j=+b.dataset.j;
+    card.querySelectorAll('button').forEach(function(bt,k){bt.disabled=true;if(k===x.a)bt.classList.add('ok');});
+    if(j!==x.a)b.classList.add('no');else right++;
+    done++;
+    var ex=card.querySelector('.chp-expl');ex.textContent=(j===x.a?'Верно. ':'Неверно. ')+x.e;ex.hidden=false;
+    qs.textContent=done<Q.length?('Отвечено: '+done+' из '+Q.length):('Результат: '+right+' из '+Q.length);
+  });
+  document.getElementById('chpQReset').addEventListener('click',renderQ);
+  renderQ();
+  filter();
+})();
+</script>
 <script id="dd-js">
 /* калькулятор 2143р: «Группа или класс пути» — тоже выпадающий список в стиле сайта */
 (function(){var c=document.getElementById('calc2143');if(!c||!window.__ddSelect)return;
@@ -11938,7 +12562,8 @@ var GSE = (function () {
     '2499': { code: '2499р', name: 'Дефекты рельсов' },
     '2143': { code: '2143р', name: 'Стрелочные переводы' },
     'odt': { code: 'ОДТ', name: 'Справочник оператора' },
-    'trn': { code: 'Тест', name: 'Тренажёр и экзамен' }
+    'trn': { code: 'Тест', name: 'Тренажёр и экзамен' },
+    'chp': { code: 'ЧнП', name: 'Человек на пути' }
   };
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function plural(n, a, b, c) { var m = n % 10, h = n % 100; return m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 12 || h > 14) ? b : c; }
@@ -12044,14 +12669,14 @@ var GSE = (function () {
     $$(rootSel + ' details.sub').forEach(function (sub) {
       var sm = sub.querySelector(':scope > summary'); if (!sm) return;
       var codes = [], title = '';
-      if (doc === 'odt') { var on = sm.querySelector('.onum'); title = sq((on ? on.textContent + ' ' : '') + (sm.querySelector('.st') || sm).textContent); }
+      if (doc === 'odt' || doc === 'chp') { var on = sm.querySelector('.onum'); title = sq((on ? on.textContent + ' ' : '') + (sm.querySelector('.st') || sm).textContent); }
       else {
         codes = (sub.dataset.code || $$('code', sm).map(function (c) { return c.textContent; }).join(',')).split(/[\s,]+/)
           .map(function (x) { return sq(x); }).filter(Boolean);
         var st = sm.querySelector('.st'); title = st ? sq(st.textContent) : cleanText(sm);
       }
       var body = sub.querySelector(':scope > .details-body > .details-content') || sub;
-      addTarget({ doc: doc, kind: doc === 'odt' ? 'odt' : 'card', title: title, code: codes.join(', '), codes: codes, path: DOCS[doc].code + ' · ' + groupName(sub, groupSel), el: sub }, collectBlocks(body, sm));
+      addTarget({ doc: doc, kind: (doc === 'odt' || doc === 'chp') ? 'odt' : 'card', title: title, code: codes.join(', '), codes: codes, path: DOCS[doc].code + ' · ' + groupName(sub, groupSel), el: sub }, collectBlocks(body, sm));
     });
   }
   /* «Тест»: уроки, страницы, словарь, вопросы — из данных модуля */
@@ -12121,6 +12746,8 @@ var GSE = (function () {
     if (d2499) L.push(function () { cards('2499', '#groups', '#groups > details'); docSections('2499', d2499, '.doc-stats,.source,.toolbar,.decoder,.calc,#groups,script'); });
     if (d2143) L.push(function () { cards('2143', '#groups2143', '#groups2143 > details'); docSections('2143', d2143, '.doc-stats,.source,.toolbar,.decoder,.calc,#groups2143,script'); });
     if (dodt) L.push(function () { cards('odt', '#groupsOdt', '#groupsOdt > details'); docSections('odt', dodt, '.doc-stats,.source,.toolbar,#groupsOdt,script,h2'); });
+    var dchp = document.getElementById('doc-chp');
+    if (dchp) L.push(function () { cards('chp', '#groupsChp', '#groupsChp > details'); docSections('chp', dchp, '.doc-stats,.source,.toolbar,#groupsChp,script,h2'); });
     [1, 2, 3].forEach(function (k) { L.push(function () { try { trainer(k); } catch (e) { if (window.console) console.warn('[ИИ-поиск] Тест:', e); } }); });
     L.push(function () { IX = new GSE.Index(targets, passages); });
     return L;
@@ -12256,9 +12883,9 @@ var GSE = (function () {
     last.ms = performance.now() - t0;
     render();
   }
-  function counts(items) { var c = { all: items.length, '2499': 0, '2143': 0, odt: 0, trn: 0 }; items.forEach(function (it) { c[it.t.doc]++; }); return c; }
+  function counts(items) { var c = { all: items.length, '2499': 0, '2143': 0, odt: 0, chp: 0, trn: 0 }; items.forEach(function (it) { c[it.t.doc]++; }); return c; }
   function renderChips(c) {
-    var defs = [['all', 'Все'], ['2499', '2499р'], ['2143', '2143р'], ['odt', 'ОДТ'], ['trn', 'Тест']];
+    var defs = [['all', 'Все'], ['2499', '2499р'], ['2143', '2143р'], ['odt', 'ОДТ'], ['chp', 'ЧнП'], ['trn', 'Тест']];
     chipsEl.innerHTML = defs.map(function (d) {
       var n = c ? c[d[0]] : null;
       return '<button type="button" class="gs-chip gs-c-' + d[0] + '" data-f="' + d[0] + '" aria-pressed="' + (filt === d[0]) + '"' + (c && !n && d[0] !== 'all' ? ' disabled' : '') + '>' + d[1] + (n != null ? '<b>' + n + '</b>' : '') + '</button>';
@@ -12405,6 +13032,7 @@ var GSE = (function () {
   /* ---------- переход к найденному ---------- */
   function curDoc() {
     var tr = document.getElementById('doc-trn'); if (tr && !tr.hidden) return 'trn';
+    var ch = document.getElementById('doc-chp'); if (ch && !ch.hidden) return 'chp';
     var o = document.getElementById('doc-odt'), t = document.getElementById('doc-2143');
     return o && !o.hidden ? 'odt' : t && !t.hidden ? '2143' : '2499';
   }
@@ -12419,7 +13047,7 @@ var GSE = (function () {
       if (!d.classList.contains('is-open') || !d.hasAttribute('open')) { d.setAttribute('open', ''); d.classList.add('is-open'); }
     }
   }
-  var SEARCH_IN = { '2499': 'qi', '2143': 'qi2143', 'odt': 'qiOdt' };
+  var SEARCH_IN = { '2499': 'qi', '2143': 'qi2143', 'odt': 'qiOdt', 'chp': 'qiChp' };
   function unfilter(doc, el) {
     var qi = document.getElementById(SEARCH_IN[doc]);
     if (qi && qi.value) { qi.value = ''; qi.dispatchEvent(new Event('input', { bubbles: true })); qi.dispatchEvent(new Event('search', { bubbles: true })); }
