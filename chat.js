@@ -203,6 +203,17 @@ var CSS = [
 '.chat-btn.ghost{color:var(--accent);background:transparent;border:1px solid var(--line)}',
 '.chat-join p{flex-basis:100%;margin:0;font-size:.74rem;line-height:1.4;color:var(--muted);max-width:none}',
 
+'.chat-tpb{flex:none;width:40px;height:40px;font:700 1.05rem var(--mono)}',
+'.chat-tp{display:flex;flex-direction:column;padding:12px 12px 14px}',
+'.chat-tp[hidden]{display:none}',
+'.tp-head{display:flex;gap:8px;align-items:center;margin:0 0 8px}',
+'.tp-list{flex:1;min-height:0;overflow-y:auto;margin:0 -4px;padding:0 4px}',
+'.tp-g{margin:10px 0 4px;font:600 .68rem/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}',
+'.tp-i{display:flex;gap:10px;align-items:baseline;width:100%;padding:8px 8px;border:0;border-radius:8px;background:none;color:var(--ink);font:400 .86rem/1.35 var(--sans);text-align:left;cursor:pointer}',
+'.tp-i:hover,.tp-i:focus-visible{background:color-mix(in srgb,var(--accent) 10%,transparent);outline:0}',
+'.tp-i code{flex:none;min-width:5.6em;font:600 .8rem var(--mono);color:var(--accent)}',
+'.tp-none{padding:16px 8px;color:var(--muted);font-size:.85rem}',
+'.tp-hint{margin:8px 0 0;font-size:.75rem;color:var(--muted)}',
 '.chat-sheet{position:absolute;inset:0;z-index:4;overflow-y:auto;background:var(--surface);padding:16px 16px 20px;opacity:0;transform:translateY(8px);transition:opacity .18s ease,transform .22s cubic-bezier(.22,1,.36,1)}',
 '.chat-sheet[hidden]{display:none}',
 '.chat-sheet.on{opacity:1;transform:none}',
@@ -307,17 +318,40 @@ function knownCodes() {
   return CODES;
 }
 function codeOk(c) { var S = knownCodes(); return S.full.has(c) || S.short.has((expand(c) || [])[0]); }
-function addCodes(node, s) {
-  if (!s) return;
-  var re = /(^|[^\d.,])(\d{2}\.\d(?:-\d)?)(?!\d|\.\d)/g, last = 0, m;
+/* шифры тем сайта: ОДТ 2.3, ЧнП 5.1, 2499р §2, ДО.11.2, Урок 5, Тест 1 — список и переход даёт поиск сайта (window.__gs) */
+var TRE = null;
+function gs() { return window.__gs && window.__gs.topic ? window.__gs : null; }
+function topicRe() {
+  var g = gs(); if (!g || !g.topicRe) return null;
+  if (!TRE) TRE = new RegExp('(^|[^0-9A-Za-zА-Яа-яЁё.])(' + g.topicRe + ')', 'gi');
+  TRE.lastIndex = 0; return TRE;
+}
+function findLinks(s) {
+  var out = [], re = /(^|[^\d.,])(\d{2}\.\d(?:-\d)?)(?!\d|\.\d)/g, m;
+  var tr = topicRe(), g = gs();
+  if (tr) while ((m = tr.exec(s))) {
+    var t = g.topic(m[2]); if (!t) continue;
+    var st = m.index + m[1].length; out.push({ s: st, e: st + m[2].length, topic: t });
+  }
   while ((m = re.exec(s))) {
     var code = m[2], start = m.index + m[1].length;
     if (!codeOk(code)) continue;
-    if (start > last) node.appendChild(D.createTextNode(s.slice(last, start)));
-    var a = el('a', 'cm-code'); a.href = '#' + code; a.dataset.code = code; a.textContent = code; a.title = 'Открыть карточку дефекта ' + code;
-    node.appendChild(a);
-    last = start + code.length;
+    if (out.some(function (x) { return start < x.e && start + code.length > x.s; })) continue;
+    out.push({ s: start, e: start + code.length, code: code });
   }
+  return out.sort(function (a, b) { return a.s - b.s; });
+}
+function addCodes(node, s) {
+  if (!s) return;
+  var last = 0;
+  findLinks(s).forEach(function (x) {
+    if (x.s < last) return;
+    if (x.s > last) node.appendChild(D.createTextNode(s.slice(last, x.s)));
+    var txt = s.slice(x.s, x.e), a = el('a', 'cm-code');
+    if (x.topic) { a.href = '#'; a.dataset.topic = x.topic.code; a.title = x.topic.code + ' — ' + x.topic.title; }
+    else { a.href = '#' + x.code; a.dataset.code = x.code; a.title = 'Открыть карточку дефекта ' + x.code; }
+    a.textContent = txt; node.appendChild(a); last = x.e;
+  });
   if (last < s.length) node.appendChild(D.createTextNode(s.slice(last)));
 }
 function rich(node, text) {
@@ -336,6 +370,7 @@ function rich(node, text) {
 /* переход к карточке так же, как это делает поиск сайта */
 function curDoc() {
   var tr = D.getElementById('doc-trn'); if (tr && !tr.hidden) return 'trn';
+  var ch = D.getElementById('doc-chp'); if (ch && !ch.hidden) return 'chp';
   var o = D.getElementById('doc-odt'), t = D.getElementById('doc-2143');
   return o && !o.hidden ? 'odt' : t && !t.hidden ? '2143' : '2499';
 }
@@ -359,6 +394,44 @@ function openCode(code) {
     });
   };
   if (mqM.matches) close(go); else go();
+}
+
+function openTopic(code) {
+  var go = function () { var g = gs(); if (!g || !g.goTopic(code)) toast('Не нашёл раздел ' + code); };
+  if (mqM.matches) close(go); else go();
+}
+
+/* ---------- список шифров: выбрать тему и вставить её шифр в сообщение ---------- */
+function tpRender() {
+  var g = gs(), q = ui.tpQ.value.trim().toLowerCase().replace(/ё/g, 'е'), L = g ? g.topics() : [];
+  var f = L.filter(function (t) { return !q || (t.code + ' ' + t.title + ' ' + t.group).toLowerCase().replace(/ё/g, 'е').indexOf(q) >= 0; });
+  ui.tpList.textContent = '';
+  if (!f.length) { ui.tpList.appendChild(el('div', 'tp-none', g ? 'Ничего не нашлось' : 'Список тем ещё загружается')); return; }
+  var grp = '';
+  f.forEach(function (t) {
+    if (t.group !== grp) { grp = t.group; ui.tpList.appendChild(el('div', 'tp-g', '')).textContent = grp; }
+    var b = el('button', 'tp-i'); b.type = 'button'; b.dataset.code = t.code;
+    var c = el('code'); c.textContent = t.code; var sp = el('span'); sp.textContent = t.title;
+    b.appendChild(c); b.appendChild(sp); ui.tpList.appendChild(b);
+  });
+}
+function tpOpen() {
+  closeSheet();
+  ui.tpQ.value = ''; tpRender();
+  ui.tp.hidden = false; requestAnimationFrame(function () { ui.tp.classList.add('on'); });
+  if (!isTouch) setTimeout(function () { try { ui.tpQ.focus(); } catch (e) {} }, 30);
+}
+function tpClose() { if (!ui.tp) return; ui.tp.classList.remove('on'); ui.tp.hidden = true; }
+function tpInsert(code) {
+  tpClose();
+  if (ui.form.hidden || ui.in.disabled) { openTopic(code); return; }
+  var t = ui.in, v = t.value, a = t.selectionStart == null ? v.length : t.selectionStart, b = t.selectionEnd == null ? a : t.selectionEnd;
+  var pre = v.slice(0, a), post = v.slice(b);
+  var ins = (pre && !/\s$/.test(pre) ? ' ' : '') + code + (post && /^\s/.test(post) ? '' : ' ');
+  t.value = (pre + ins + post).slice(0, MAX_LEN);
+  var pos = Math.min(t.value.length, (pre + ins).length);
+  try { t.focus(); t.setSelectionRange(pos, pos); } catch (e) {}
+  autosize(); syncSend();
 }
 
 /* ---------- разметка ---------- */
@@ -407,10 +480,16 @@ function build() {
           '<p>Имя увидят все участники. Регистрация не нужна — читать можно и без имени.</p>' +
         '</form>' +
         '<form class="chat-form" hidden>' +
+          '<button type="button" class="chat-ib chat-tpb" aria-label="Шифры тем" title="Шифры тем — вставить ссылку на раздел">#</button>' +
           '<textarea class="chat-field chat-in" rows="1" maxlength="' + MAX_LEN + '" placeholder="Сообщение" enterkeyhint="send" aria-label="Текст сообщения"></textarea>' +
           '<button type="submit" class="chat-send" aria-label="Отправить" title="Отправить" disabled>' + IC.send + '</button>' +
         '</form>' +
         '<span class="chat-cnt" hidden></span>' +
+      '</div>' +
+      '<div class="chat-sheet chat-tp" hidden role="dialog" aria-label="Шифры тем">' +
+        '<div class="tp-head"><input class="chat-field tp-q" type="search" placeholder="Найти тему или шифр" aria-label="Найти тему" autocomplete="off"><button type="button" class="chat-ib tp-x" aria-label="Закрыть" title="Закрыть">' + IC.x + '</button></div>' +
+        '<div class="tp-list"></div>' +
+        '<p class="tp-hint">Нажмите на тему — её шифр появится в сообщении и станет ссылкой.</p>' +
       '</div>' +
       '<div class="chat-sheet" hidden>' +
         '<div class="cs-sec">' +
@@ -421,6 +500,8 @@ function build() {
         '<div class="cs-sec">' +
           '<span class="cs-h">Как пользоваться</span>' +
           '<p class="cs-p">Коды дефектов в сообщениях — например, <b>21.1-2</b> — становятся ссылками на карточку в распоряжении 2499р. Своё сообщение можно удалить: нажмите на него.</p>' +
+          '<p class="cs-p">Шифры тем тоже становятся ссылками: <b>ОДТ 2.3</b>, <b>ЧнП 5.1</b>, <b>2499р §2</b>, <b>ДО.11.2</b> (2143р), <b>Урок 5</b>, <b>Тест 1</b>. Все шифры — под кнопкой <b>#</b> у поля ввода.</p>' +
+          '<button type="button" class="chat-btn ghost cs-tp">Все шифры тем</button>' +
         '</div>' +
         '<div class="cs-sec cs-own">' +
           '<button type="button" class="cs-tog" aria-expanded="false">Для владельца сайта: модерация</button>' +
@@ -444,6 +525,7 @@ function build() {
   ui.form = q('.chat-form'); ui.in = q('.chat-in'); ui.send = q('.chat-send'); ui.cnt = q('.chat-cnt');
   ui.sheet = q('.chat-sheet'); ui.csName = q('.cs-name'); ui.csId = q('.cs-id'); ui.csTog = q('.cs-tog'); ui.csOwn = q('.cs-ownb');
   ui.csRules = q('.cs-rules'); ui.csOk = q('.cs-ok');
+  ui.tp = q('.chat-tp'); ui.tpQ = q('.tp-q'); ui.tpList = q('.tp-list'); ui.tpBtn = q('.chat-tpb');
 }
 
 /* ---------- открыть / закрыть ---------- */
@@ -466,7 +548,7 @@ function open() {
 }
 function hide() {
   if (!isOpen) return;
-  isOpen = false; closeSheet();
+  isOpen = false; closeSheet(); tpClose();
   ui.p.classList.remove('on');
   ui.fab.classList.remove('is-open'); ui.fab.setAttribute('aria-expanded', 'false');
   R.classList.remove('chat-lock');
@@ -510,6 +592,7 @@ function fit() {
 
 /* ---------- настройки ---------- */
 function openSheet() {
+  tpClose();
   ui.csName.value = me.name;
   ui.csId.textContent = me.uid || 'появится после подключения';
   ui.sheet.hidden = false;
@@ -857,6 +940,12 @@ function wire() {
   });
   p_on(ui.csTog, 'click', function () { var o = ui.csOwn.hidden; ui.csOwn.hidden = !o; ui.csTog.setAttribute('aria-expanded', String(o)); });
   p_on(ui.sheet.querySelector('.cs-copy'), 'click', copyRules);
+  p_on(ui.sheet.querySelector('.cs-tp'), 'click', tpOpen);
+  p_on(ui.tpBtn, 'click', function () { if (ui.tp.hidden) tpOpen(); else tpClose(); });
+  p_on(ui.tp.querySelector('.tp-x'), 'click', tpClose);
+  p_on(ui.tpQ, 'input', tpRender);
+  p_on(ui.tpQ, 'keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); var b = ui.tpList.querySelector('.tp-i'); if (b) tpInsert(b.dataset.code); } });
+  p_on(ui.tpList, 'click', function (e) { var b = e.target.closest('.tp-i'); if (b) tpInsert(b.dataset.code); });
   ui.join.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!setName(ui.nameIn.value)) { ui.nameIn.focus(); toast('Введите имя — его увидят другие участники'); return; }
@@ -872,13 +961,14 @@ function wire() {
   ui.list.addEventListener('scroll', function () { if (!ui.jump.hidden && nearBottom()) ui.jump.hidden = true; }, { passive: true });
   ui.list.addEventListener('click', function (e) {
     var a = e.target.closest('a');
-    if (a) { if (a.dataset.code) { e.preventDefault(); openCode(a.dataset.code); } return; }
+    if (a) { if (a.dataset.topic) { e.preventDefault(); openTopic(a.dataset.topic); } else if (a.dataset.code) { e.preventDefault(); openCode(a.dataset.code); } return; }
     var b = e.target.closest('.cm-act'); if (b) { doAct(b); return; }
     var bub = e.target.closest('.cm-b');
     if (bub) { var sel = window.getSelection && String(window.getSelection()); if (!sel) toggleSel(bub.closest('.cmw')); }
   });
   D.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape' || !isOpen) return;
+    if (ui.tp && !ui.tp.hidden) { tpClose(); return; }
     if (!ui.sheet.hidden) { closeSheet(); return; }
     if (mqM.matches || ui.p.contains(D.activeElement)) { e.stopPropagation(); close(); }
   });

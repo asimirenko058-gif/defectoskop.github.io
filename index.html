@@ -14020,7 +14020,73 @@ var GSE = (function () {
   // подсветку поиска убираем, когда начинают искать внутри документа
   ['qi', 'qi2143', 'qiOdt'].forEach(function (id) { var q = document.getElementById(id); if (q) q.addEventListener('input', function () { if (q.value) clearMarks(); }); });
 
-  window.__gs = { open: open, close: close, ensure: ensure, search: function (q, o) { return ensure().search(q, o); }, state: function () { return { lsa: lsaState, lsaVia: lsaVia, lsaMs: lsaMs, buildMs: buildMs, targets: targets.length, passages: passages.length, vocab: IX && IX.ready ? IX.vocab.length : 0 }; }, targets: function () { return targets; }, passages: function () { return passages; }, trainLsa: trainLsa, onLsa: function (f) { if (lsaState === 'ready') f(); else onLsa.push(f); } };
+  /* ---------- шифры тем: короткие коды, по которым чат (и кто угодно) открывает нужный раздел ----------
+     ОДТ 2.3 · ЧнП 5.1 — разделы справочников; 2499р §2 · 2143р §3 — разделы распоряжений;
+     ДО.11.2 — карточки 2143р; Урок 5 — уроки «Теста»; Тест 1…7 — страницы «Теста» */
+  var TPAGES = [['so3r', {}, 'Настройка на образце СО-3Р'], ['read', {}, 'Как читать Б-развёртку'], ['calc', {}, 'Расчёты ультразвукового контроля'],
+    ['gloss', {}, 'Словарь терминов'], ['bscan', {}, 'Тренажёр Б-развёртки'], ['topics', {}, 'Тесты по темам'], ['cards', {}, 'Карточки']];
+  var TOP = null, TOPN = 0;
+  function tkey(s) { // «одт 2.3», «ОДТ-2.3», «2499 р § 2», «урок №5» → один ключ
+    return String(s || '').toUpperCase().replace(/Ё/g, 'Е').replace(/\/Р/g, 'Р').replace(/[\s №§-]+/g, '');
+  }
+  function topicsBuild() {
+    var list = [], seen = {};
+    function add(t) { var k = tkey(t.code); if (seen[k]) return; seen[k] = 1; t.key = k; list.push(t); }
+    [['2499', '2499р'], ['2143', '2143р']].forEach(function (d) {
+      var sec = document.getElementById('doc-' + d[0]); if (!sec) return; var n = 0;
+      $$(':scope > h2', sec).forEach(function (h) { n++; add({ code: d[1] + ' §' + n, title: sq(h.textContent), group: DOCS[d[0]].code, doc: d[0], el: h }); });
+    });
+    $$('#groups2143 details.sub').forEach(function (sub) {
+      var sm = sub.querySelector(':scope > summary'); if (!sm) return;
+      var st = sm.querySelector('.st'), title = st ? sq(st.textContent) : sq(sm.textContent);
+      (sub.dataset.code || $$('code', sm).map(function (c) { return c.textContent; }).join(',')).split(/[\s,]+/).forEach(function (c) {
+        c = sq(c); if (/^[А-ЯЁ]{1,4}\.\d+\.\d$/.test(c)) add({ code: c, title: title, group: '2143р · карточки', doc: '2143', el: sub });
+      });
+    });
+    [['odt', '#groupsOdt', 'ОДТ'], ['chp', '#groupsChp', 'ЧнП']].forEach(function (d) {
+      $$(d[1] + ' details.sub').forEach(function (sub) {
+        var on = sub.querySelector(':scope > summary .onum'); if (!on) return;
+        var st = sub.querySelector(':scope > summary .st');
+        add({ code: d[2] + ' ' + sq(on.textContent), title: st ? sq(st.textContent) : sq(sub.querySelector('summary').textContent).replace(sq(on.textContent), '').trim(), group: DOCS[d[0]].code, doc: d[0], el: sub });
+      });
+    });
+    var api = window.__trnSearch, D = null; try { D = api && api.data(); } catch (e) {}
+    if (D && D.LESSONS) {
+      var ls = D.LESSONS.filter(function (l) { return l.sec === 'tech'; });
+      ls.forEach(function (l, i) { add({ code: 'Урок ' + (i + 1), title: l.title, group: 'Тест · уроки', doc: 'trn', nav: { sec: 'tech', extra: { id: l.id } } }); });
+      add({ code: 'Урок ' + (ls.length + 1), title: 'Дефектоскопы', group: 'Тест · уроки', doc: 'trn', nav: { sec: 'tech', extra: { sub: 'dev' } } });
+      TPAGES.forEach(function (p, i) { add({ code: 'Тест ' + (i + 1), title: p[2], group: 'Тест · страницы', doc: 'trn', nav: { sec: p[0], extra: p[1] } }); });
+    }
+    return list;
+  }
+  function topics() {
+    var n = document.querySelectorAll('#groups2143 details.sub, #groupsOdt details.sub, #groupsChp details.sub').length + (window.__trnSearch ? 1 : 0);
+    if (!TOP || n !== TOPN) { TOP = topicsBuild(); TOPN = n; TOP.byKey = {}; TOP.forEach(function (t) { TOP.byKey[t.key] = t; }); }
+    return TOP;
+  }
+  function topic(raw) { var L = topics(); return L.byKey[tkey(raw)] || null; }
+  function goTopic(raw) {
+    var t = topic(raw); if (!t) return false;
+    clearMarks();
+    if (t.doc === 'trn') {
+      showDoc('trn', function () {
+        var api = window.__trnSearch; if (!api) return;
+        api.open(t.nav.sec, t.nav.extra);
+        setTimeout(function () { var v = api.root && (api.root.getElementById ? api.root.getElementById('view') : api.root.querySelector('#view')); if (!v) return; shadowCss(api.root); var h = v.querySelector('h2,.h1') || v; scrollTo(h); }, 80);
+      });
+      return true;
+    }
+    showDoc(t.doc, function () {
+      var el = t.el && t.el.isConnected ? t.el : (topics(), (topic(raw) || {}).el); if (!el) return;
+      unfilter(t.doc, el); openChain(el);
+      setTimeout(function () { scrollTo(el); flash(el); }, 80);
+    });
+    return true;
+  }
+  // шаблон для поиска шифров в тексте; совпадение проверяется через topic()
+  var TOPIC_RE = '(?:ОДТ|ЧнП)\\s*-?\\s*\\d{1,2}\\.\\d{1,2}(?![\\d.]*\\d)|(?:2499|2143)\\s*\\/?\\s*р\\s*(?:§|-)\\s*\\d{1,2}(?!\\d)|урок\\s*№?\\s*\\d{1,2}(?!\\d)|тест\\s*№?\\s*\\d(?!\\d)|[А-ЯЁ]{1,4}\\.\\d{1,2}\\.\\d(?![\\d.]*\\d)';
+
+  window.__gs = { open: open, close: close, ensure: ensure, topics: topics, topic: topic, goTopic: goTopic, topicRe: TOPIC_RE, search: function (q, o) { return ensure().search(q, o); }, state: function () { return { lsa: lsaState, lsaVia: lsaVia, lsaMs: lsaMs, buildMs: buildMs, targets: targets.length, passages: passages.length, vocab: IX && IX.ready ? IX.vocab.length : 0 }; }, targets: function () { return targets; }, passages: function () { return passages; }, trainLsa: trainLsa, onLsa: function (f) { if (lsaState === 'ready') f(); else onLsa.push(f); } };
 })();
 </script>
 <script>window.__ld&&__ld.end()</script>
