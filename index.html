@@ -12,7 +12,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<script>try{var th0=localStorage.getItem('theme');if(th0==='light'||th0==='dark'||th0==='amoled')document.documentElement.setAttribute('data-theme',th0);var st0=localStorage.getItem('st');if(st0==='st-sign'||st0==='st-draw')document.documentElement.classList.add(st0);else if(localStorage.getItem('px')==='1')document.documentElement.classList.add('px');else if(localStorage.getItem('bw')==='1')document.documentElement.classList.add('bw');}catch(e){}if(/median|gonative/i.test(navigator.userAgent))document.documentElement.classList.add('is-app');document.documentElement.classList.add('landing-lock');</script>
+<script>/* Lite: облегчённый режим для слабых устройств — без анимаций, размытия и фоновых эффектов.
+   Включается в «Оформление → Стиль → Lite»; если человек стиль не выбирал, включается сам на слабом устройстве. */
+(function(){var r=document.documentElement,lt=null;try{lt=localStorage.getItem('lite');}catch(e){}
+var n=navigator,weak=(n.deviceMemory&&n.deviceMemory<=2)||(n.hardwareConcurrency&&n.hardwareConcurrency<=2)||(n.connection&&n.connection.saveData);
+var chosen=false;try{chosen=!!(localStorage.getItem('st')||localStorage.getItem('px')==='1'||localStorage.getItem('bw')==='1');}catch(e){}
+if(lt==='1'||(lt===null&&!chosen&&weak)){r.classList.add('lite');window.__lite=true;
+ /* все скрипты сайта уже умеют работать без движения при prefers-reduced-motion — в Lite отвечаем им «да» */
+ var mm=window.matchMedia;if(mm){window.matchMedia=function(q){q=String(q);
+  if(/prefers-reduced-motion/.test(q)){var m=/reduce/.test(q);return{matches:m,media:q,onchange:null,addListener:function(){},removeListener:function(){},addEventListener:function(){},removeEventListener:function(){},dispatchEvent:function(){return false;}};}
+  return mm.call(window,q);};}}})();
+try{var th0=localStorage.getItem('theme');if(th0==='light'||th0==='dark'||th0==='amoled')document.documentElement.setAttribute('data-theme',th0);var st0=localStorage.getItem('st');if(window.__lite){}else if(st0==='st-sign'||st0==='st-draw')document.documentElement.classList.add(st0);else if(localStorage.getItem('px')==='1')document.documentElement.classList.add('px');else if(localStorage.getItem('bw')==='1')document.documentElement.classList.add('bw');}catch(e){}if(/median|gonative/i.test(navigator.userAgent))document.documentElement.classList.add('is-app');document.documentElement.classList.add('landing-lock');</script>
 <style>
 :root{--bg:#f2f4f5;--surface:#fff;--ink:#14232b;--muted:#53656e;--line:#cbd5d9;--accent:#1f5c7a;--c1:#1f5c7a;--c2:#2e7d5b;--c3:#8a5a00;--odr:#b3261e;--dr:#8a5a00;--warn:#8a5a00;--g1:#1f5c7a;--g2:#b3261e;--g3:#6a4c93;--g4:#a05a00;--g5:#28745b;--g6:#007c91;--g7:#8b3a62;--g8:#53656e;--g9:#7a6b2b;
 --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -1895,6 +1905,25 @@ body.landing-open:not(.main-warm) main{display:none}
   .ld-fill,.ld-run{transition-duration:.15s}.ld{transition-duration:.2s}
 }
 </style>
+<style id="lite-css">
+/* ===== Lite: без анимаций, размытия и декора — для слабых телефонов и старых ПК ===== */
+:root.lite *,:root.lite *::before,:root.lite *::after{animation-duration:0s!important;animation-delay:0s!important;animation-iteration-count:1!important;transition:none!important;scroll-behavior:auto!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;will-change:auto!important}
+:root.lite{scroll-behavior:auto!important}
+:root.lite .landing{background:var(--bg)!important}
+:root.lite .toolbar{background:var(--bg)!important}
+:root.lite .tabbar{background:var(--surface)!important}
+:root.lite .side-back,:root.lite .gs-back{background:rgba(0,0,0,.5)!important}
+:root.lite .px-scene,:root.lite .wow-cur,:root.lite .wcur,:root.lite .wb{display:none!important}
+:root.lite .lcard,:root.lite .tile,:root.lite .sitem{transform:none!important}
+:root.lite img{image-rendering:auto}
+/* табло: вместо бегущей строки — статичный текст в две строки */
+:root.lite .schedule-track{white-space:normal;padding:6px 14px 9px;min-height:0;background:none}
+:root.lite .schedule-message{display:block;padding-left:0;animation:none!important;transform:none!important;font-size:clamp(.82rem,3.2vw,1.1rem);line-height:1.35;text-shadow:none}
+:root.lite .schedule-message .schedule-text{display:block;padding:0}
+:root.lite .schedule-message .schedule-text[aria-hidden]{display:none}
+:root.lite .schedule-board:after{display:none}
+:root.lite .schedule-board{box-shadow:none}
+</style>
 </head>
 <body class="landing-open">
 <div id="ld" class="ld">
@@ -2115,6 +2144,7 @@ body.landing-open:not(.main-warm) main{display:none}
       <button type="button" class="sopt" role="radio" aria-checked="false" data-style="st-draw"><span class="sw sw-draw" aria-hidden="true"><svg class="uv-ck" viewBox="0 0 24 24"><path d="M4.1 12.7 9 17.6 20.3 6.3"/></svg></span><span class="sn">Чертёж</span></button>
       <button type="button" class="sopt" role="radio" aria-checked="false" data-style="px"><span class="sw sw-px" aria-hidden="true"><svg class="uv-ck" viewBox="0 0 24 24"><path d="M4.1 12.7 9 17.6 20.3 6.3"/></svg></span><span class="sn">Пиксель</span></button>
       <button type="button" class="sopt" role="radio" aria-checked="false" data-style="bw"><span class="sw sw-bw" aria-hidden="true"><svg class="uv-ck" viewBox="0 0 24 24"><path d="M4.1 12.7 9 17.6 20.3 6.3"/></svg></span><span class="sn">Строгий ч/б</span></button>
+      <button type="button" class="sopt" role="radio" aria-checked="false" data-style="lite"><span class="sw sw-lite" aria-hidden="true"><svg class="uv-ck" viewBox="0 0 24 24"><path d="M4.1 12.7 9 17.6 20.3 6.3"/></svg></span><span class="sn">Lite</span></button>
     </div>
     <button class="sitem sitem-theme" id="sndToggle" type="button" aria-pressed="true">
       <span class="sitem-theme-row"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="sitem-title">Звук за 3 мин до звонка</span><span class="sitem-tag uv-sr" id="sndLabel">Вкл</span><span class="uv-sw" aria-hidden="true"></span></span>
@@ -5381,25 +5411,27 @@ var SPECS={
   var weekdayNames=['ВОСКРЕСЕНЬЕ','ПОНЕДЕЛЬНИК','ВТОРНИК','СРЕДА','ЧЕТВЕРГ','ПЯТНИЦА','СУББОТА'];
   // Индексы: 0=воскресенье, 1=понедельник ... 6=суббота.
   var rooms={
-    1:{1:'42',2:'42',3:'42'},
+    1:{2:'46',3:'46',4:'44',5:'44'},
     2:{1:'46',2:'46',3:'46',4:'46'},
-    3:{1:'46',2:'46',3:'46',4:'46'},
-    4:{1:'11',2:'11',3:'11',4:'11'},
-    5:{1:'46',2:'46',3:'24',4:'24'}
+    3:{1:'46',2:'24',3:'24',4:'24'},
+    4:{1:'46',2:'46',3:'46',4:'46'},
+    5:{1:'46',2:'46',3:'46',4:'46'}
   };
-  // Названия пар по таблице на изображении (неделя 19.10–23.10.2026).
+  // Названия пар по таблице на изображении (неделя 26.10–30.10.2026).
   // Если название изменится — правьте только этот блок.
-  var US='Средства ультразвукового';
+  var US='Средства ультразвукового контроля рельсов';
+  var PTE='ПТЭ, инструкции и безопасность движения';
+  var STM='СТМ1. БМПВР';
   var FS='Формирование сигналов «В»';
   var TU='Технология ультразвукового';
   var BP='Безопасность производства';
   var PB='Пожарная безопасность';
   var subjects={
-    1:{1:US,2:US,3:US},
-    2:{1:US,2:US,3:US,4:US},
-    3:{1:US,2:US,3:FS,4:FS},
-    4:{1:FS,2:FS,3:FS,4:FS},
-    5:{1:TU,2:TU,3:BP,4:PB}
+    1:{2:US,3:US,4:PTE,5:PTE},
+    2:{1:TU,2:US,3:US,4:US},
+    3:{1:TU,2:PB,3:STM,4:STM},
+    4:{1:TU,2:TU,3:TU,4:TU},
+    5:{1:TU,2:TU,3:TU,4:TU}
   };
   function classDetails(day,num){
     var room=rooms[day]&&rooms[day][num];
@@ -5407,9 +5439,9 @@ var SPECS={
     return weekdayNames[day]+' · ПАРА '+num+(subj?' · '+subj.toUpperCase():'')+(room?' · КАБИНЕТ '+room:' · КАБИНЕТ НЕ УКАЗАН');
   }
   // Полное расписание (раскрывается по нажатию на бегущую строку).
-  var GR='Григорьев Б.Г.',MT='Матвеев Э.В.';
-  var teachers={1:{1:GR,2:GR,3:GR},2:{1:GR,2:GR,3:GR,4:GR},3:{1:GR,2:GR,3:GR,4:GR},4:{1:GR,2:GR,3:GR,4:GR},5:{1:GR,2:GR,3:MT,4:MT}};
-  var dayDates={1:'19.10',2:'20.10',3:'21.10',4:'22.10',5:'23.10'};
+  var GR='Григорьев Б.Г.',MT='Матвеев Э.В.',AB='Абакумов В.В.';
+  var teachers={1:{2:GR,3:GR,4:AB,5:AB},2:{1:GR,2:GR,3:GR,4:GR},3:{1:GR,2:MT,3:MT,4:MT},4:{1:GR,2:GR,3:GR,4:GR},5:{1:GR,2:GR,3:GR,4:GR}};
+  var dayDates={1:'26.10',2:'27.10',3:'28.10',4:'29.10',5:'30.10'};
   function hm(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
   var panel=document.getElementById('schedulePanel'),track=document.getElementById('scheduleTrack'),head=board.querySelector('.board-head');
   function esc2(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -5461,10 +5493,10 @@ var SPECS={
   function tick(){
     var now=new Date(Date.now()+clockSkewMs),minute=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
     clock.textContent=pad(now.getHours())+':'+pad(now.getMinutes())+':'+pad(now.getSeconds());
-    var today=now.getDay(),lastNumToday=0;
-    events.forEach(function(x){if(x.type==='class'&&subjects[today]&&subjects[today][x.num])lastNumToday=x.num;});
-    var dayEnd=0;events.forEach(function(x){if(x.type==='class'&&x.num===lastNumToday)dayEnd=x.end;});
-    var ev=lastNumToday?events.find(function(x){return minute>=x.start&&minute<x.end&&x.end<=dayEnd;}):null;
+    var today=now.getDay(),lastNumToday=0,firstNumToday=0;
+    events.forEach(function(x){if(x.type==='class'&&subjects[today]&&subjects[today][x.num]){lastNumToday=x.num;if(!firstNumToday)firstNumToday=x.num;}});
+    var dayEnd=0,dayStart=8*60;events.forEach(function(x){if(x.type==='class'&&x.num===lastNumToday)dayEnd=x.end;if(x.type==='class'&&x.num===firstNumToday)dayStart=x.start;});
+    var ev=lastNumToday?events.find(function(x){return minute>=x.start&&minute<x.end&&x.start>=dayStart&&x.end<=dayEnd;}):null;
     board.classList.remove('is-class','is-break','is-idle');
     var nowNum=(ev&&ev.type==='class')?ev.num:0;if(now.getDay()!==lastDay||nowNum!==lastNum)markNow(now.getDay(),nowNum);
     if(ev){
@@ -5474,8 +5506,8 @@ var SPECS={
       else{board.classList.add('is-break');setText('ПЕРЕМЕНА · ДО КОНЦА '+fmt(endToday-now));}
     }else if(!lastNumToday){
       board.classList.add('is-idle');setText('СЕГОДНЯ ЗАНЯТИЙ НЕТ');
-    }else if(minute<8*60){
-      board.classList.add('is-idle');var startToday=new Date(now);startToday.setHours(8,0,0,0);setText('ЗАНЯТИЯ НАЧНУТСЯ ЧЕРЕЗ '+fmt(startToday-now));
+    }else if(minute<dayStart){
+      board.classList.add('is-idle');var startToday=new Date(now);startToday.setHours(Math.floor(dayStart/60),dayStart%60,0,0);setText('ЗАНЯТИЯ НАЧНУТСЯ ЧЕРЕЗ '+fmt(startToday-now));
     }else{board.classList.add('is-idle');setText('УЧЕБНЫЙ ДЕНЬ ЗАВЕРШЁН · ДО ЗАВТРА');}
   }
   tick();window.setInterval(tick,1000);
@@ -9046,15 +9078,18 @@ document.addEventListener('click',function(e){
 (function(){
   var r=document.documentElement,btn=document.getElementById('styleBtn'),list=document.getElementById('styleList'),lab=document.getElementById('styleLabel'),
       mt=document.querySelector('meta[name="theme-color"]'),mt0=mt?mt.content:'',
-      ALL=['px','bw','st-sign','st-draw'],NAME={'':'Обычный','st-sign':'Указатель','st-draw':'Чертёж','px':'Пиксель','bw':'Строгий ч/б'};
+      ALL=['px','bw','st-sign','st-draw','lite'],NAME={'':'Обычный','st-sign':'Указатель','st-draw':'Чертёж','px':'Пиксель','bw':'Строгий ч/б','lite':'Lite'};
   function cur(){for(var i=0;i<ALL.length;i++)if(r.classList.contains(ALL[i]))return ALL[i];return '';}
-  function save(k){try{localStorage.setItem('px',k==='px'?'1':'0');localStorage.setItem('bw',k==='bw'?'1':'0');localStorage.setItem('st',k.indexOf('st-')===0?k:'');}catch(e){}}
+  function save(k){try{localStorage.setItem('lite',k==='lite'?'1':'0');localStorage.setItem('px',k==='px'?'1':'0');localStorage.setItem('bw',k==='bw'?'1':'0');localStorage.setItem('st',k.indexOf('st-')===0?k:'');}catch(e){}}
   function show(){
     var k=cur();if(lab)lab.textContent=NAME[k];
     if(list)list.querySelectorAll('[data-style]').forEach(function(b){b.setAttribute('aria-checked',b.getAttribute('data-style')===k?'true':'false');});
     if(mt)mt.content=(k&&k!=='px')?(getComputedStyle(r).getPropertyValue('--bg').trim()||mt0):mt0;
   }
-  function set(k){ALL.forEach(function(c){r.classList.toggle(c,c===k);});save(k);show();}
+  function set(k){
+    var was=r.classList.contains('lite');
+    if(was||k==='lite'){save(k);try{location.reload();}catch(e){}return;} /* эффекты запускаются при загрузке — Lite включаем и выключаем перезагрузкой */
+    ALL.forEach(function(c){r.classList.toggle(c,c===k);});save(k);show();}
   window.__setStyle=set;
   if(btn&&list)btn.addEventListener('click',function(){var open=list.hidden;list.hidden=!open;btn.setAttribute('aria-expanded',open?'true':'false');});
   if(list)list.addEventListener('click',function(e){var b=e.target.closest('[data-style]');if(!b)return;var k=b.getAttribute('data-style');if(k!==cur())set(k);});
@@ -12532,6 +12567,8 @@ html:root.st-draw.st-draw:not(.px)[data-theme="amoled"]{--bg:#000;--surface:#081
 .sopt .sw-draw{background-color:#EBEDE7;background-image:linear-gradient(rgba(27,43,75,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(27,43,75,.5) 1px,transparent 1px);background-size:5px 5px;border-color:#1B2B4B}
 .sopt .sw-px{background:repeating-conic-gradient(#ff9500 0 25%,#111 0 50%) 0 0/8px 8px}
 .sopt .sw-bw{background:linear-gradient(135deg,#000 0 50%,#fff 50% 100%)}
+.sw-lite{background:var(--surface);box-shadow:inset 0 0 0 2px var(--line)}
+.sw-lite::before{content:"L";font:700 13px/1 var(--sans);color:var(--accent)}
 .sopt .sn{min-width:0;overflow:hidden;text-overflow:ellipsis}
 :root.px .sopt,:root.px .sopt .sw{border-radius:0}
 :root.px .sopt{border-width:var(--pxd,2px)}
@@ -13611,7 +13648,7 @@ var GSE = (function () {
     while (stages.length) { stages.shift()(); if (budget && Date.now() - t > budget) { tBuild += Date.now() - t; return false; } }
     var done = IX.step(budget ? Math.max(6, budget - (Date.now() - t)) : 0);
     tBuild += Date.now() - t;
-    if (done) { buildMs = tBuild; lsaState = 'wait'; status(); setTimeout(trainLsa, 80); }
+    if (done) { buildMs = tBuild; if (window.__lite) { lsaState = 'off'; status(); } else { lsaState = 'wait'; status(); setTimeout(trainLsa, 80); } }
     return done;
   }
   function ensure() { stepBuild(0); return IX; }
@@ -13648,7 +13685,7 @@ var GSE = (function () {
   }
   // индекс готовится заранее, пока страница простаивает
   function idle(f) { if (window.requestIdleCallback) requestIdleCallback(f, { timeout: 4000 }); else setTimeout(f, 1200); }
-  setTimeout(function () { idle(bgBuild); }, 2500);
+  setTimeout(function () { idle(bgBuild); }, window.__lite ? 9000 : 2500);
 
   /* ---------- окно поиска ---------- */
   var ICO = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.2 15.2 20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M10.5 7.4l.8 2.3 2.3.8-2.3.8-.8 2.3-.8-2.3-2.3-.8 2.3-.8z" fill="currentColor"/></svg>';
